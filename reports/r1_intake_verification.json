@@ -3,7 +3,15 @@
   "verified_source_count": 25,
   "raw_reference_mapping": "PASS",
   "required_raw_count": 840,
-  "unresolved_raw_folder_count": 48,
+  "raw_hashes_verified_this_run": 0,
+  "verified_by_source_kind": {
+    "original_fresh": 0,
+    "supplementary": 0,
+    "historical_reuse": 0
+  },
+  "historical_unresolved_folder_count": 48,
+  "missing_raw_count": 840,
+  "bundle_checks": [],
   "full_raw_admission": "BLOCKED",
   "parser_voter_replay": "NOT_RUN",
   "runtime_GT_isolation_tests": "NOT_RUN",
@@ -11,5 +19,7 @@
   "GT_decoded": false,
   "provider_calls": 0,
   "training_runs": 0,
-  "native_exit_code": 2
+  "next_action": "RECOVER_AND_VERIFY_REMAINING_RAW_BYTES",
+  "missing_raw_files_manifest": "manifests/raw_response_requirements.json",
+  "missing_raw_reason": "NO_RAW_INPUT_BYTES_PROVIDED_THIS_RUN"
 }

@@ -1,0 +1,23 @@
+{
+  "initial_commit": "b0249a829e31e32ad6c90bc56779d6a9c1cea0ce",
+  "initial_commit_verified": true,
+  "initial_tree_clean_before_changes": true,
+  "committed_files_reviewed": 40,
+  "credential_pattern_hits": 0,
+  "credential_literal_review": [],
+  "unwanted_dataset_checkpoint_archive_count": 0,
+  "private_destination": {
+    "proposed": "parand1khalili/llm-gnn-sara",
+    "exists": "UNKNOWN",
+    "visibility": "UNVERIFIED",
+    "created_by_agent": false
+  },
+  "push_performed": false,
+  "authentication_changed": false,
+  "drive_discovery": {
+    "pages_completed": 21,
+    "page_search_matches": 0,
+    "exact_48_name_search_matches": 0,
+    "conclusion": "UNRESOLVED_ACCESS_NOT_PROVEN_MISSING"
+  }
+}

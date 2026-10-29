@@ -46,6 +46,7 @@ Applies throughout this project. Respond primarily in Persian; write code, docum
 - R1 authorizes local pre-Codex source recovery, integration and offline tests only. No paid inference, provider calls, GCN training, GT decoding, unpickling of untrusted data, historical Drive writes, startup.py execution, or imports of unreviewed historical scripts.
 - Stop reconstruction and report on historical hash conflicts, unreconciled source/label mappings, failed GT isolation, unavailable raw responses required for the chosen replay, or unexpected network/deletion/training attempts. Do not substitute generated labels or parsed frozen answers for missing raw responses.
 - Do not implement SARA-2 or SARA-3 until baseline replay passes and the user reviews the results. Historical artifacts remain read-only; use Git for active source evolution.
+- Raw-response recovery and admission tooling is authorized, including a user-run official Colab mount and local ZIP validation. Full input admission must STOP for user approval before pure parser/voter implementation or replay. Never infer byte verification from valid manifest references or bundle report claims.
 
 ## Durable state and efficient work
 - Maintain concise `PROJECT_STATE.md` at significant milestones: objective, implementation, latest verified experiment/baselines, architecture, blockers, next approved action, latest Git commit/tag, verified Drive backup, unrecovered artifacts, and scientific limitations. Record the referenced commit accurately; avoid circular claims that the document contains its own commit SHA.

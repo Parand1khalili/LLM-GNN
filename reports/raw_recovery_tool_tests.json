@@ -1,0 +1,17 @@
+{
+  "scope": "synthetic recovery/admission tooling only; NOT historical parser/voter replay",
+  "tests_run": 26,
+  "passed": 25,
+  "failures": 0,
+  "errors": 0,
+  "skipped": [
+    {
+      "test": "test_real_filesystem_symlink_rejected (test_raw_recovery.BundleAndAdmissionTests.test_real_filesystem_symlink_rejected)",
+      "reason": "OS account cannot create symbolic links; ZIP symlink rejection is tested separately"
+    }
+  ],
+  "successful": true,
+  "command": "python -B -m unittest discover -s tests -v",
+  "real_historical_raw_hashes_verified_by_these_tests": 0,
+  "actual_Colab_interactive_mount_tested": false
+}
