@@ -1,0 +1,217 @@
+{
+  "schema": "sara.drive_backup_plan.v1",
+  "status": "PLANNED_NOT_UPLOADED",
+  "historical_archive": "Prnd-project (read-only)",
+  "destination": {
+    "proposed_name": "SARA-recovery-backups",
+    "parent": "separate from historical Prnd-project archive",
+    "approved": false,
+    "drive_folder_id": null
+  },
+  "scope": "One initial small recovery-intake milestone bundle plus provenance; no repeated full source-tree copies, datasets, model weights or environment tarballs. Code remote backup remains user-managed GitHub.",
+  "files": [
+    {
+      "local_path": ".gitattributes",
+      "bytes": 190,
+      "sha256": "cc97af6a9c4f03d3430e96ecab26912035c27bbe456ab4c1f67e1a7feab8731d"
+    },
+    {
+      "local_path": ".gitignore",
+      "bytes": 185,
+      "sha256": "d85a1547ab97d8816fa94829b5a085e86891668c9328d9a7c73f217cb9fa01d7"
+    },
+    {
+      "local_path": "AGENTS.md",
+      "bytes": 12150,
+      "sha256": "7b9dd74da5bf7d61f1e5a49cd9945129870b41bd2eab9981449a4b5c73fbe8ae"
+    },
+    {
+      "local_path": "configs/historical_successful_environment.json",
+      "bytes": 428,
+      "sha256": "73ed5e2920c6178f4fba7e7857316db0f3fa4a278857b632dc592dd4da0a826d"
+    },
+    {
+      "local_path": "docs/R1_PLAN.md",
+      "bytes": 3185,
+      "sha256": "7c2cb1885fc7c00911a6dd7506f7334a021ead94adaaa4e5969e139bdc485d42"
+    },
+    {
+      "local_path": "EXPERIMENT_REGISTRY.jsonl",
+      "bytes": 507,
+      "sha256": "f33bd4bddd8b4198d8a677cd01fdc5c10d5463544752a1db31e618eb209f8589"
+    },
+    {
+      "local_path": "manifests/raw_response_requirements.json",
+      "bytes": 410413,
+      "sha256": "ed36032ebae148010dc283072df47223155b375829b34e757f1124ae001cf6f9"
+    },
+    {
+      "local_path": "manifests/recovered_sources.json",
+      "bytes": 15942,
+      "sha256": "f560c9b9986df1a17b7bf567d4d885c8d0ba21c3ac6ce07d7c3d36b92fdc4ff5"
+    },
+    {
+      "local_path": "manifests/unresolved_raw_responses.json",
+      "bytes": 21869,
+      "sha256": "ae2ec282194a315453fcef30a6c8ae96bd78346263ba6bd3b9081522e72b5f2e"
+    },
+    {
+      "local_path": "PROJECT_STATE.md",
+      "bytes": 2818,
+      "sha256": "04ef15d6951bfd2188601550c108e6bacac28ec808bc3e226242239722112ff1"
+    },
+    {
+      "local_path": "README.md",
+      "bytes": 3264,
+      "sha256": "027309a6dd766bbc1dbdaf07834be1b89f6a6e543085abc9676d94310740e82f"
+    },
+    {
+      "local_path": "recovered_sources/experiments/matched_cora/featprop_downstream_primary_ps_selection_001/ps_selection_runner_source.py",
+      "bytes": 46151,
+      "sha256": "00f846cc3c53d5f3f42c12142129890bed56d98bb9d0c0d6da6eae3ccdd5b102"
+    },
+    {
+      "local_path": "recovered_sources/experiments/matched_cora/featprop_downstream_sensitivity_ps_selection_001/ps_selection_runner_source.py",
+      "bytes": 62381,
+      "sha256": "491a7ea84280030843294fcd506aae9d944d22087d047421995132eb4ffab5fe"
+    },
+    {
+      "local_path": "recovered_sources/experiments/matched_cora/featprop_parser_vote_001/parser_vote_freezer_source.py",
+      "bytes": 25799,
+      "sha256": "ec8018498e06a7abbc98ed84048dcb90b3bf07a96377e46a587e54bcd7a3daac"
+    },
+    {
+      "local_path": "recovered_sources/experiments/matched_cora/run_matched.py",
+      "bytes": 49778,
+      "sha256": "ff85112696f0db2ece46db37f13609cb3ffbb57c68f7a9bb48f539942a4f7a72"
+    },
+    {
+      "local_path": "recovered_sources/experiments/narrative_v1/run_v1.py",
+      "bytes": 50589,
+      "sha256": "b67684075146731246c4a9c4b2927056647d4b08f3679ed4e0b5c62cf111b928"
+    },
+    {
+      "local_path": "recovered_sources/README.md",
+      "bytes": 921,
+      "sha256": "8fd9e603dc8b2ce1342e53974837d656626468391118dc58ab6fe90a72f9eae4"
+    },
+    {
+      "local_path": "recovered_sources/src/helper/active.py",
+      "bytes": 55064,
+      "sha256": "09edc2b0966370e95ad4202e633d8ab99b5b8c6e353e87ae0199a32d747df05f"
+    },
+    {
+      "local_path": "recovered_sources/src/helper/args.py",
+      "bytes": 4840,
+      "sha256": "5e4c653b58c79fc4d6c222611ed3205640ac135e8f4913042b74509758850192"
+    },
+    {
+      "local_path": "recovered_sources/src/helper/data.py",
+      "bytes": 37834,
+      "sha256": "7906eeabd9685e5aa000f96f6780b18d494d0c0d78949daf3d3ed122ed78f988"
+    },
+    {
+      "local_path": "recovered_sources/src/helper/post_filter_label_free.py",
+      "bytes": 6319,
+      "sha256": "cc51c446a2bd1806a4d271f476b595e921542e5a7afeb980f333bb78316eefa5"
+    },
+    {
+      "local_path": "recovered_sources/src/llm.py",
+      "bytes": 63126,
+      "sha256": "483e7a1b7d445801edf1ee5e8251187807663e47dac940e4b24efcf06250ecce"
+    },
+    {
+      "local_path": "recovered_sources/src/main.py",
+      "bytes": 16163,
+      "sha256": "91676fa4f6958f6688786e1a9b2d8d128228df354de4745312e7db4549970f57"
+    },
+    {
+      "local_path": "recovered_sources/src/models/nn.py",
+      "bytes": 27062,
+      "sha256": "5d00c347e5a6aa504de9bf8c5abbd6e084efa1302e004c142567b9dc364b4b9b"
+    },
+    {
+      "local_path": "recovered_sources/src/openail/utils.py",
+      "bytes": 43482,
+      "sha256": "c6cff1b47d7e8a14aa53077340f9eece2e0affbb2e3d9d177ab170f3b70860c9"
+    },
+    {
+      "local_path": "recovered_sources/src/structure/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "local_path": "recovered_sources/src/structure/m4_path_prompt_builder.py",
+      "bytes": 3889,
+      "sha256": "f61f03c51fe5d3752f50ff293bd16307cd538ae4f132f8ab354d30a59a13533b"
+    },
+    {
+      "local_path": "recovered_sources/src/structure/m4_path_selector.py",
+      "bytes": 4335,
+      "sha256": "c9ea4c1782fa7521f68abe37ea8d4e0f71f069eb6bb9466af2718ec8ed0acc0e"
+    },
+    {
+      "local_path": "recovered_sources/src/structure/m4_r1_manifest_context.py",
+      "bytes": 9654,
+      "sha256": "066a8e60d1b53482bb1a500ad5743aa4515c504afab0568b3b47225c3f335584"
+    },
+    {
+      "local_path": "recovered_sources/src/structure/m4_r1_path_selector.py",
+      "bytes": 4208,
+      "sha256": "9421eeb429be894836b9e90a7cb8f79aff4ad069aacdc5c10e43b06143d5c6b6"
+    },
+    {
+      "local_path": "recovered_sources/src/structure/manifest_context.py",
+      "bytes": 5854,
+      "sha256": "236a8372a8f18369f0ccbc5ba42d55bd7482e8249eeae0a9fedfbfb605e75ecb"
+    },
+    {
+      "local_path": "recovered_sources/src/structure/narrative_topology_v0.py",
+      "bytes": 15551,
+      "sha256": "6fbad422911ba0fc13c6b4df6235fadb68e9dac7b92221cb50c010aa7d07f3d1"
+    },
+    {
+      "local_path": "recovered_sources/src/structure/narrative_topology_v1.py",
+      "bytes": 9981,
+      "sha256": "f188deaf8b2b20550f2f81d1b774512e08ed9aa7db12d74555556b6e1404ca8f"
+    },
+    {
+      "local_path": "recovered_sources/src/structure/narrative_topology_v2.py",
+      "bytes": 7704,
+      "sha256": "9ab34c3d39f4c6518f17a83fea97b2fdc92727dd4f60a637674c853dcbeef50a"
+    },
+    {
+      "local_path": "recovered_sources/src/structure/prompt_builder.py",
+      "bytes": 5547,
+      "sha256": "fffbc78c364bb9a367c640e7f69196c8640b0f48eb67e0a336152942de6cde7e"
+    },
+    {
+      "local_path": "recovered_sources/src/structure/selector.py",
+      "bytes": 3164,
+      "sha256": "52be8f75854bf4f7208d82d4fac71954a0002146685c823a77508f2d7471c859"
+    },
+    {
+      "local_path": "recovered_sources/startup.py",
+      "bytes": 6815,
+      "sha256": "c4dc7c37eb5aebd56d3e5e29b75b7cadaf5c5affd1d280f5111dbcc0d0279c73"
+    },
+    {
+      "local_path": "reports/r1_intake_verification.json",
+      "bytes": 423,
+      "sha256": "cf9a4dadd045b861bcb6773a4ea91ed84df0e6485fd9ada965393020358cbb6c"
+    },
+    {
+      "local_path": "scripts/verify_intake.py",
+      "bytes": 2569,
+      "sha256": "f518e742970dc92b7ebbf7804fc6fd80ca8fe4cd04efb8c1df4e25654230551b"
+    }
+  ],
+  "total_bytes": 1040154,
+  "verification_required": [
+    "Approved destination ID and write permission",
+    "Upload only approved incremental contents",
+    "Read back metadata and bytes where possible",
+    "Record remote IDs and checksums; never infer remote success from local sync"
+  ],
+  "remote_verified": false
+}

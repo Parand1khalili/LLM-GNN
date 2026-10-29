@@ -1,0 +1,441 @@
+{
+  "schema": "sara.unresolved_raw_responses.v1",
+  "status": "UNRESOLVED_ACCESS_NOT_PROVEN_MISSING",
+  "count": 48,
+  "reason": "The connected Drive folder listing exposes at most 1000 historical request folders; targeted searches return no match. Missing folder IDs prevent direct content readback for these selected responses.",
+  "required_action": "Provide these exact files with preserved relative paths and bytes, or restore a complete readable folder listing. No annotation rerun.",
+  "files": [
+    {
+      "target_id": 1118,
+      "arm": "b1",
+      "sample_index": 0,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0300_b1_1118_0/response.json",
+      "source_response_sha256": "adafc4050554476214d38ea705fce8bf7f182ebb461cda35b515ff7a8d507416",
+      "prompt_sha256": "ecdff928836b447dfcd8945a23bfa889ae1e10be40050d74d18589d54f32f21d"
+    },
+    {
+      "target_id": 1118,
+      "arm": "b1",
+      "sample_index": 1,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0305_b1_1118_1/response.json",
+      "source_response_sha256": "71895dd876a8a933319be1358016147398d4180b2c7d083dd0dde12a6154b3cb",
+      "prompt_sha256": "ecdff928836b447dfcd8945a23bfa889ae1e10be40050d74d18589d54f32f21d"
+    },
+    {
+      "target_id": 1118,
+      "arm": "b1",
+      "sample_index": 2,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0310_b1_1118_2/response.json",
+      "source_response_sha256": "8cf41e5c48858e29cd7ede395837ca2999acdfaf97bd9628221c679bd193b9c0",
+      "prompt_sha256": "ecdff928836b447dfcd8945a23bfa889ae1e10be40050d74d18589d54f32f21d"
+    },
+    {
+      "target_id": 1528,
+      "arm": "b1",
+      "sample_index": 0,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0510_b1_1528_0/response.json",
+      "source_response_sha256": "79fcf2333ac161445c656c4d721e3f7afcd77a312867ac406614f7594478b13d",
+      "prompt_sha256": "ee8967453fd2f28dd966c389d1407cfc2943f43d2c7483f3a239a2dd0b4b638b"
+    },
+    {
+      "target_id": 1528,
+      "arm": "b1",
+      "sample_index": 1,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0515_b1_1528_1/response.json",
+      "source_response_sha256": "c91903bad3ba2dd840a0758b0afefac8312ba98e3c251d8d29d3e46f029be8d2",
+      "prompt_sha256": "ee8967453fd2f28dd966c389d1407cfc2943f43d2c7483f3a239a2dd0b4b638b"
+    },
+    {
+      "target_id": 1528,
+      "arm": "b1",
+      "sample_index": 2,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0520_b1_1528_2/response.json",
+      "source_response_sha256": "b4f83f8f78a92f10ece9316d35df62d85bfd76c0ee67f179227f1ec05ddb4919",
+      "prompt_sha256": "ee8967453fd2f28dd966c389d1407cfc2943f43d2c7483f3a239a2dd0b4b638b"
+    },
+    {
+      "target_id": 1880,
+      "arm": "b1",
+      "sample_index": 0,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0900_b1_1880_0/response.json",
+      "source_response_sha256": "9608b2b264c3b0f9d627a0fb30eb773bb0f6569980128c54ccb1512e87170107",
+      "prompt_sha256": "71e01c10c3f2e127c5cd894c692770f57519624c5b28cef7305d6e1da1625c9a"
+    },
+    {
+      "target_id": 1880,
+      "arm": "b1",
+      "sample_index": 1,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0905_b1_1880_1/response.json",
+      "source_response_sha256": "b929527c46ceaa5c624140e628cf9d973f7b7b2ff5cdeeb306fefc3bca8aafac",
+      "prompt_sha256": "71e01c10c3f2e127c5cd894c692770f57519624c5b28cef7305d6e1da1625c9a"
+    },
+    {
+      "target_id": 1880,
+      "arm": "b1",
+      "sample_index": 2,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0910_b1_1880_2/response.json",
+      "source_response_sha256": "7e1edc7cba9d42425b3651cc1177a5361fe1c74a05829fa51fd7ef0af0b4bc7e",
+      "prompt_sha256": "71e01c10c3f2e127c5cd894c692770f57519624c5b28cef7305d6e1da1625c9a"
+    },
+    {
+      "target_id": 1926,
+      "arm": "b1",
+      "sample_index": 0,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0225_b1_1926_0/response.json",
+      "source_response_sha256": "6e84d3b89692a5a74f480a2c80906f341b2a74ceee5c1afcaf09b57571d887ed",
+      "prompt_sha256": "42e2c18cd384f225ff55383af290be4f6085be86f3c67c335f34e59aac3a0c89"
+    },
+    {
+      "target_id": 1926,
+      "arm": "b1",
+      "sample_index": 1,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0230_b1_1926_1/response.json",
+      "source_response_sha256": "95ed74a040e96a3ca8f191b231152a43bd2296dac59bbe1ab778ab89f086dad2",
+      "prompt_sha256": "42e2c18cd384f225ff55383af290be4f6085be86f3c67c335f34e59aac3a0c89"
+    },
+    {
+      "target_id": 1926,
+      "arm": "b1",
+      "sample_index": 2,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0235_b1_1926_2/response.json",
+      "source_response_sha256": "f39c8bf1115e9e4fbaf6ed9bf1f78cb35706df584b23b1295f6fd4594f3ba4ba",
+      "prompt_sha256": "42e2c18cd384f225ff55383af290be4f6085be86f3c67c335f34e59aac3a0c89"
+    },
+    {
+      "target_id": 2014,
+      "arm": "b1",
+      "sample_index": 0,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0795_b1_2014_0/response.json",
+      "source_response_sha256": "ed4adad83fb33be8666d80114609b9a374a80b90dc53603128c8d0cd44e23963",
+      "prompt_sha256": "03ba3de68e7ee4a5e003c86f325418d08dac2390930cf0ac8d7b19a356b58b42"
+    },
+    {
+      "target_id": 2014,
+      "arm": "b1",
+      "sample_index": 1,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0800_b1_2014_1/response.json",
+      "source_response_sha256": "cd117c38a88ee93db24da0be32974160e4ffc6310c539ebac62144647a16f0bf",
+      "prompt_sha256": "03ba3de68e7ee4a5e003c86f325418d08dac2390930cf0ac8d7b19a356b58b42"
+    },
+    {
+      "target_id": 2014,
+      "arm": "b1",
+      "sample_index": 2,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0805_b1_2014_2/response.json",
+      "source_response_sha256": "873609de54866821ae3af4b901ed60ea8865fe9d97238168bca47990d1ef42bd",
+      "prompt_sha256": "03ba3de68e7ee4a5e003c86f325418d08dac2390930cf0ac8d7b19a356b58b42"
+    },
+    {
+      "target_id": 2319,
+      "arm": "b1",
+      "sample_index": 0,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0285_b1_2319_0/response.json",
+      "source_response_sha256": "b97c98b19b8702088e50735d318d748f8a8b8c740e9c8c109478942f423bc972",
+      "prompt_sha256": "1651a8430537995b9a50ae67e28b54d95eecc65a4c3080bc8effd723c18fd3f5"
+    },
+    {
+      "target_id": 2319,
+      "arm": "b1",
+      "sample_index": 1,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0290_b1_2319_1/response.json",
+      "source_response_sha256": "a00466f77376c2499cccfa8345190bd3db25956b0e977a6454eacffc7a5207a6",
+      "prompt_sha256": "1651a8430537995b9a50ae67e28b54d95eecc65a4c3080bc8effd723c18fd3f5"
+    },
+    {
+      "target_id": 2319,
+      "arm": "b1",
+      "sample_index": 2,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0295_b1_2319_2/response.json",
+      "source_response_sha256": "ded8fa4b7f15f8e04e233039fba64320d5199e0e87f1ed521f56dab63f5b35b1",
+      "prompt_sha256": "1651a8430537995b9a50ae67e28b54d95eecc65a4c3080bc8effd723c18fd3f5"
+    },
+    {
+      "target_id": 2409,
+      "arm": "b1",
+      "sample_index": 0,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_1035_b1_2409_0/response.json",
+      "source_response_sha256": "6c16a32f3cec96ddb2bbf5b04d1780f0eb0eb1e0a19172874ce1aa0091299b35",
+      "prompt_sha256": "f51a8a52352dfddebbabd8d6453513bf32203d310f96252bf604486655b68c99"
+    },
+    {
+      "target_id": 2409,
+      "arm": "b1",
+      "sample_index": 1,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_1040_b1_2409_1/response.json",
+      "source_response_sha256": "2d8c4a3e8881619eed9fc2ddae488faad79de32cdda8b6c679a9b418cbfba3ba",
+      "prompt_sha256": "f51a8a52352dfddebbabd8d6453513bf32203d310f96252bf604486655b68c99"
+    },
+    {
+      "target_id": 2409,
+      "arm": "b1",
+      "sample_index": 2,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_1045_b1_2409_2/response.json",
+      "source_response_sha256": "0341724dd285826dfdb9ad42eb67098420e4535261321c8a7bedc8cb25f14b74",
+      "prompt_sha256": "f51a8a52352dfddebbabd8d6453513bf32203d310f96252bf604486655b68c99"
+    },
+    {
+      "target_id": 2628,
+      "arm": "b1",
+      "sample_index": 0,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0030_b1_2628_0/response.json",
+      "source_response_sha256": "34df44c3c2156c2a8e9887c98d45cc1ef006aeca0b8535e9581e617752355c86",
+      "prompt_sha256": "5e4f57af97a8e376a9132f84f5b5cf421d91bd8cb02c9ee09bc6d49bd17a5d7e"
+    },
+    {
+      "target_id": 2628,
+      "arm": "b1",
+      "sample_index": 1,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0035_b1_2628_1/response.json",
+      "source_response_sha256": "e44bf8ddea8cd00633ba31afa37eddc64844def75803aedf302531394f23210a",
+      "prompt_sha256": "5e4f57af97a8e376a9132f84f5b5cf421d91bd8cb02c9ee09bc6d49bd17a5d7e"
+    },
+    {
+      "target_id": 2628,
+      "arm": "b1",
+      "sample_index": 2,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0040_b1_2628_2/response.json",
+      "source_response_sha256": "9d3978894ce358d707c0d5f98686b746e328028443f2cb924e16c95c359f37b3",
+      "prompt_sha256": "5e4f57af97a8e376a9132f84f5b5cf421d91bd8cb02c9ee09bc6d49bd17a5d7e"
+    },
+    {
+      "target_id": 1118,
+      "arm": "narrative_v0",
+      "sample_index": 0,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0302_narrative_v0_1118_0/response.json",
+      "source_response_sha256": "e0609e73147964659dbd5e7800cf37715877c5cc2f929a1632bda55665d9ee7a",
+      "prompt_sha256": "7261474ee6ea47cd768547825497902113786e57c090940ab4d3b61e0bea8f2c"
+    },
+    {
+      "target_id": 1118,
+      "arm": "narrative_v0",
+      "sample_index": 1,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0307_narrative_v0_1118_1/response.json",
+      "source_response_sha256": "cc1d52e765da22c786c82e136672af4b33f0bddb1f00e1dbe6261d1a96d5718f",
+      "prompt_sha256": "7261474ee6ea47cd768547825497902113786e57c090940ab4d3b61e0bea8f2c"
+    },
+    {
+      "target_id": 1118,
+      "arm": "narrative_v0",
+      "sample_index": 2,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0312_narrative_v0_1118_2/response.json",
+      "source_response_sha256": "40c2af74113e009cf6e1382514abeeaad007187e62a26cf99233c7ac18a3d0c5",
+      "prompt_sha256": "7261474ee6ea47cd768547825497902113786e57c090940ab4d3b61e0bea8f2c"
+    },
+    {
+      "target_id": 1528,
+      "arm": "narrative_v0",
+      "sample_index": 0,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0512_narrative_v0_1528_0/response.json",
+      "source_response_sha256": "ef629a8ba60d46d3c7a3345929e6891505100609900f784c22ecbf1a571e98c4",
+      "prompt_sha256": "169788a2d2de0d5a92e79b63b214381d16659b536420e8826a8a85a915447c70"
+    },
+    {
+      "target_id": 1528,
+      "arm": "narrative_v0",
+      "sample_index": 1,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0517_narrative_v0_1528_1/response.json",
+      "source_response_sha256": "a20124391de92741b7e06197ba62eab82b0d12d57af08223fdc904d8da6d2605",
+      "prompt_sha256": "169788a2d2de0d5a92e79b63b214381d16659b536420e8826a8a85a915447c70"
+    },
+    {
+      "target_id": 1528,
+      "arm": "narrative_v0",
+      "sample_index": 2,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0522_narrative_v0_1528_2/response.json",
+      "source_response_sha256": "6f813bfc7e04eb6404d0e39198cea03d52750127cbb6dc0f24c9eb45b2f8073b",
+      "prompt_sha256": "169788a2d2de0d5a92e79b63b214381d16659b536420e8826a8a85a915447c70"
+    },
+    {
+      "target_id": 1880,
+      "arm": "narrative_v0",
+      "sample_index": 0,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0902_narrative_v0_1880_0/response.json",
+      "source_response_sha256": "578efecbb865e102b7f786766e4a00919d25560d32d1d051daf16e861aee8b3e",
+      "prompt_sha256": "77c531620819b0d7380424666015cd1b3e358b170e92bdcf3bfeb2669e539419"
+    },
+    {
+      "target_id": 1880,
+      "arm": "narrative_v0",
+      "sample_index": 1,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0907_narrative_v0_1880_1/response.json",
+      "source_response_sha256": "9b7f8a13eb93745c3e8c3d59bcec08f7d85315db527b8c787281b57f90c486e7",
+      "prompt_sha256": "77c531620819b0d7380424666015cd1b3e358b170e92bdcf3bfeb2669e539419"
+    },
+    {
+      "target_id": 1880,
+      "arm": "narrative_v0",
+      "sample_index": 2,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0912_narrative_v0_1880_2/response.json",
+      "source_response_sha256": "737e7262c7e8bf686e96f9c1460ccba49774452ad741138d1e1ceae37d26ec32",
+      "prompt_sha256": "77c531620819b0d7380424666015cd1b3e358b170e92bdcf3bfeb2669e539419"
+    },
+    {
+      "target_id": 1926,
+      "arm": "narrative_v0",
+      "sample_index": 0,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0227_narrative_v0_1926_0/response.json",
+      "source_response_sha256": "10464c85b37cac1ae6550666dc1632835f9a12c508f0d5b652a60b7beafe1d2c",
+      "prompt_sha256": "0e23c94688db2af288ce225cea1a42087971f7cb28b49a5acf99de7e1444e101"
+    },
+    {
+      "target_id": 1926,
+      "arm": "narrative_v0",
+      "sample_index": 1,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0232_narrative_v0_1926_1/response.json",
+      "source_response_sha256": "f93dd6e587cc43347673f3b808389b4270e39aa79abceeb55b832c8219cf6722",
+      "prompt_sha256": "0e23c94688db2af288ce225cea1a42087971f7cb28b49a5acf99de7e1444e101"
+    },
+    {
+      "target_id": 1926,
+      "arm": "narrative_v0",
+      "sample_index": 2,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0237_narrative_v0_1926_2/response.json",
+      "source_response_sha256": "0820e3a4f7de984d4493dd30cb29d6e0cb15550de8ecfeab6ad4786a6ef03bfb",
+      "prompt_sha256": "0e23c94688db2af288ce225cea1a42087971f7cb28b49a5acf99de7e1444e101"
+    },
+    {
+      "target_id": 2014,
+      "arm": "narrative_v0",
+      "sample_index": 0,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0797_narrative_v0_2014_0/response.json",
+      "source_response_sha256": "46b5ea035e1926439e9ec2d690b058ef49bc2728704093a0b4c4b6814f58e635",
+      "prompt_sha256": "2f14d4d22ebf9e6060acab0d588e6319c640bc63ccdd48140dbd72420022f01f"
+    },
+    {
+      "target_id": 2014,
+      "arm": "narrative_v0",
+      "sample_index": 1,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0802_narrative_v0_2014_1/response.json",
+      "source_response_sha256": "bc2f255a8a8e3c0acb524b307625dea2e471d385958d551d2f3b5a4d6ab63fce",
+      "prompt_sha256": "2f14d4d22ebf9e6060acab0d588e6319c640bc63ccdd48140dbd72420022f01f"
+    },
+    {
+      "target_id": 2014,
+      "arm": "narrative_v0",
+      "sample_index": 2,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0807_narrative_v0_2014_2/response.json",
+      "source_response_sha256": "83ea085549f9376f50d004f21f018502ff95ed91137783be6bdfafd631d3e340",
+      "prompt_sha256": "2f14d4d22ebf9e6060acab0d588e6319c640bc63ccdd48140dbd72420022f01f"
+    },
+    {
+      "target_id": 2319,
+      "arm": "narrative_v0",
+      "sample_index": 0,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0287_narrative_v0_2319_0/response.json",
+      "source_response_sha256": "c40ad1c4f39d7ef43bf5932248a6445b6d34c0bb80e5f18882adc99bf017bd98",
+      "prompt_sha256": "c396453110bbefcba4e8739f34c0417f2edc72e53b05137778d48a3bda793d5e"
+    },
+    {
+      "target_id": 2319,
+      "arm": "narrative_v0",
+      "sample_index": 1,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0292_narrative_v0_2319_1/response.json",
+      "source_response_sha256": "fdcbdaad7256283494f1bf45aa2779575425d0c62c53aeb513bcb7b614187b7c",
+      "prompt_sha256": "c396453110bbefcba4e8739f34c0417f2edc72e53b05137778d48a3bda793d5e"
+    },
+    {
+      "target_id": 2319,
+      "arm": "narrative_v0",
+      "sample_index": 2,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0297_narrative_v0_2319_2/response.json",
+      "source_response_sha256": "17b9895e5ee85a724e26ae023552b6297c8ed6e0f325df9346873ab36e8880c8",
+      "prompt_sha256": "c396453110bbefcba4e8739f34c0417f2edc72e53b05137778d48a3bda793d5e"
+    },
+    {
+      "target_id": 2409,
+      "arm": "narrative_v0",
+      "sample_index": 0,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_1037_narrative_v0_2409_0/response.json",
+      "source_response_sha256": "0c7acb7e7d75840aa1bf6c091c9c9c853c44334925ac1fb477d8e328191579fd",
+      "prompt_sha256": "14eef40e0beff437f0d2b00dbe0910e3345f8148b69731f75421863359b3410d"
+    },
+    {
+      "target_id": 2409,
+      "arm": "narrative_v0",
+      "sample_index": 1,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_1042_narrative_v0_2409_1/response.json",
+      "source_response_sha256": "a8371b24e30e577e0b82e738c48d3bd9b6d21932f58826a8f2dd02ec4e4b98a8",
+      "prompt_sha256": "14eef40e0beff437f0d2b00dbe0910e3345f8148b69731f75421863359b3410d"
+    },
+    {
+      "target_id": 2409,
+      "arm": "narrative_v0",
+      "sample_index": 2,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_1047_narrative_v0_2409_2/response.json",
+      "source_response_sha256": "35e69fb309038a3fed7054853e92e616fe46ffc64554a4f91b74a19bfac3c345",
+      "prompt_sha256": "14eef40e0beff437f0d2b00dbe0910e3345f8148b69731f75421863359b3410d"
+    },
+    {
+      "target_id": 2628,
+      "arm": "narrative_v0",
+      "sample_index": 0,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0032_narrative_v0_2628_0/response.json",
+      "source_response_sha256": "49d613798492afe8863c9b6888db4c5d20e30be3f641028471c842d764fb6838",
+      "prompt_sha256": "847d1a1335414b89200809ce6f312d0cac8ec2d7d03a4aba483a9d924759ebf1"
+    },
+    {
+      "target_id": 2628,
+      "arm": "narrative_v0",
+      "sample_index": 1,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0037_narrative_v0_2628_1/response.json",
+      "source_response_sha256": "9a5795b45fe66550a119675991e6eb85155c6a5fce2b253d50ac5f7aff66f435",
+      "prompt_sha256": "847d1a1335414b89200809ce6f312d0cac8ec2d7d03a4aba483a9d924759ebf1"
+    },
+    {
+      "target_id": 2628,
+      "arm": "narrative_v0",
+      "sample_index": 2,
+      "source_kind": "historical_reuse",
+      "source_response_path": "experiments/matched_cora/matched_infer_003/requests/primary_0042_narrative_v0_2628_2/response.json",
+      "source_response_sha256": "25674bd94101477b9dbeb7fe9bbb919651a085ce80f08f30299c71ab19619d7e",
+      "prompt_sha256": "847d1a1335414b89200809ce6f312d0cac8ec2d7d03a4aba483a9d924759ebf1"
+    }
+  ]
+}

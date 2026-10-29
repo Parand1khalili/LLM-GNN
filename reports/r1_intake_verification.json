@@ -1,0 +1,15 @@
+{
+  "source_integrity": "PASS",
+  "verified_source_count": 25,
+  "raw_reference_mapping": "PASS",
+  "required_raw_count": 840,
+  "unresolved_raw_folder_count": 48,
+  "full_raw_admission": "BLOCKED",
+  "parser_voter_replay": "NOT_RUN",
+  "runtime_GT_isolation_tests": "NOT_RUN",
+  "recovered_code_executed": false,
+  "GT_decoded": false,
+  "provider_calls": 0,
+  "training_runs": 0,
+  "native_exit_code": 2
+}

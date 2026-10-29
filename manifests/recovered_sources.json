@@ -1,0 +1,283 @@
+{
+  "schema": "sara.recovered_sources.v1",
+  "upstream_reference": "CurryTang/LLMGNN",
+  "upstream_commit": "1f60eedb1452cdd997be18b5dd932a02666ee57e",
+  "count_correction": "43 src files = 25 identical + 6 modified + 12 added; startup.py outside src adds the 13th research addition.",
+  "files": [
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/main.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/main.py",
+      "drive_file_id": "1oq7OCKb_TqhAYKwfw_2Dqg-KCiElAgwJ",
+      "drive_url": "https://drive.google.com/file/d/1oq7OCKb_TqhAYKwfw_2Dqg-KCiElAgwJ/view",
+      "sha256": "91676fa4f6958f6688786e1a9b2d8d128228df354de4745312e7db4549970f57",
+      "size_bytes": 16163,
+      "relation_to_upstream": "RESEARCH_MODIFIED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/llm.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/llm.py",
+      "drive_file_id": "17kaEMxlxMixIBe3jKHnWXAxKq1hnjlo7",
+      "drive_url": "https://drive.google.com/file/d/17kaEMxlxMixIBe3jKHnWXAxKq1hnjlo7/view",
+      "sha256": "483e7a1b7d445801edf1ee5e8251187807663e47dac940e4b24efcf06250ecce",
+      "size_bytes": 63126,
+      "relation_to_upstream": "RESEARCH_MODIFIED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/structure/m4_r1_manifest_context.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/structure/m4_r1_manifest_context.py",
+      "drive_file_id": "1sDHu0ZtxfD6V6ai7etQlLBlmYiGkY5d3",
+      "drive_url": "https://drive.google.com/file/d/1sDHu0ZtxfD6V6ai7etQlLBlmYiGkY5d3/view",
+      "sha256": "066a8e60d1b53482bb1a500ad5743aa4515c504afab0568b3b47225c3f335584",
+      "size_bytes": 9654,
+      "relation_to_upstream": "RESEARCH_ADDED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/structure/m4_r1_path_selector.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/structure/m4_r1_path_selector.py",
+      "drive_file_id": "1dff1-quHFWDdz8bLg_FEs_31J63YMW11",
+      "drive_url": "https://drive.google.com/file/d/1dff1-quHFWDdz8bLg_FEs_31J63YMW11/view",
+      "sha256": "9421eeb429be894836b9e90a7cb8f79aff4ad069aacdc5c10e43b06143d5c6b6",
+      "size_bytes": 4208,
+      "relation_to_upstream": "RESEARCH_ADDED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/structure/narrative_topology_v1.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/structure/narrative_topology_v1.py",
+      "drive_file_id": "1z6MSjkEh8Ja_0uLRPoQvtSp7ErOWqOwi",
+      "drive_url": "https://drive.google.com/file/d/1z6MSjkEh8Ja_0uLRPoQvtSp7ErOWqOwi/view",
+      "sha256": "f188deaf8b2b20550f2f81d1b774512e08ed9aa7db12d74555556b6e1404ca8f",
+      "size_bytes": 9981,
+      "relation_to_upstream": "RESEARCH_ADDED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/structure/narrative_topology_v2.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/structure/narrative_topology_v2.py",
+      "drive_file_id": "1PyVZTAZjpDPeBQ6IMWoZvQyJdaf47Yvz",
+      "drive_url": "https://drive.google.com/file/d/1PyVZTAZjpDPeBQ6IMWoZvQyJdaf47Yvz/view",
+      "sha256": "9ab34c3d39f4c6518f17a83fea97b2fdc92727dd4f60a637674c853dcbeef50a",
+      "size_bytes": 7704,
+      "relation_to_upstream": "RESEARCH_ADDED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/structure/narrative_topology_v0.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/structure/narrative_topology_v0.py",
+      "drive_file_id": "1gZ8HHrTGMZJb1jX7sRO2QFG3nW2DAV6k",
+      "drive_url": "https://drive.google.com/file/d/1gZ8HHrTGMZJb1jX7sRO2QFG3nW2DAV6k/view",
+      "sha256": "6fbad422911ba0fc13c6b4df6235fadb68e9dac7b92221cb50c010aa7d07f3d1",
+      "size_bytes": 15551,
+      "relation_to_upstream": "RESEARCH_ADDED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/structure/__init__.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/structure/__init__.py",
+      "drive_file_id": "1iILF2vFUr_LZJadQdT_uR2Yr61gb6hlh",
+      "drive_url": "https://drive.google.com/file/d/1iILF2vFUr_LZJadQdT_uR2Yr61gb6hlh/view",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "relation_to_upstream": "RESEARCH_ADDED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/structure/selector.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/structure/selector.py",
+      "drive_file_id": "1R9orR6aNRdjCUlzk8-KWmL1nkOST86G6",
+      "drive_url": "https://drive.google.com/file/d/1R9orR6aNRdjCUlzk8-KWmL1nkOST86G6/view",
+      "sha256": "52be8f75854bf4f7208d82d4fac71954a0002146685c823a77508f2d7471c859",
+      "size_bytes": 3164,
+      "relation_to_upstream": "RESEARCH_ADDED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/structure/m4_path_selector.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/structure/m4_path_selector.py",
+      "drive_file_id": "1Q5YjdV4ekaEgw-Yph9Vjm52XiuYClaA1",
+      "drive_url": "https://drive.google.com/file/d/1Q5YjdV4ekaEgw-Yph9Vjm52XiuYClaA1/view",
+      "sha256": "c9ea4c1782fa7521f68abe37ea8d4e0f71f069eb6bb9466af2718ec8ed0acc0e",
+      "size_bytes": 4335,
+      "relation_to_upstream": "RESEARCH_ADDED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/helper/args.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/helper/args.py",
+      "drive_file_id": "1hXKM3hEXhoEkwKWl3jaX8SITLhyfOFyI",
+      "drive_url": "https://drive.google.com/file/d/1hXKM3hEXhoEkwKWl3jaX8SITLhyfOFyI/view",
+      "sha256": "5e4c653b58c79fc4d6c222611ed3205640ac135e8f4913042b74509758850192",
+      "size_bytes": 4840,
+      "relation_to_upstream": "RESEARCH_MODIFIED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/structure/m4_path_prompt_builder.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/structure/m4_path_prompt_builder.py",
+      "drive_file_id": "1EMfjXp_Oj_bpdQPaSqKq8BugVPg7WLDL",
+      "drive_url": "https://drive.google.com/file/d/1EMfjXp_Oj_bpdQPaSqKq8BugVPg7WLDL/view",
+      "sha256": "f61f03c51fe5d3752f50ff293bd16307cd538ae4f132f8ab354d30a59a13533b",
+      "size_bytes": 3889,
+      "relation_to_upstream": "RESEARCH_ADDED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/structure/prompt_builder.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/structure/prompt_builder.py",
+      "drive_file_id": "1Sckjgm2Kv99AywMEVTVwGQAX-Z_JAmmF",
+      "drive_url": "https://drive.google.com/file/d/1Sckjgm2Kv99AywMEVTVwGQAX-Z_JAmmF/view",
+      "sha256": "fffbc78c364bb9a367c640e7f69196c8640b0f48eb67e0a336152942de6cde7e",
+      "size_bytes": 5547,
+      "relation_to_upstream": "RESEARCH_ADDED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/helper/post_filter_label_free.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/helper/post_filter_label_free.py",
+      "drive_file_id": "1KikVEcIKrcmxT1rjGmO1YI7ghQzgAW_T",
+      "drive_url": "https://drive.google.com/file/d/1KikVEcIKrcmxT1rjGmO1YI7ghQzgAW_T/view",
+      "sha256": "cc51c446a2bd1806a4d271f476b595e921542e5a7afeb980f333bb78316eefa5",
+      "size_bytes": 6319,
+      "relation_to_upstream": "RESEARCH_ADDED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/structure/manifest_context.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/structure/manifest_context.py",
+      "drive_file_id": "17zrovyUO331FR0qUZlYE7rKDpBZCmjly",
+      "drive_url": "https://drive.google.com/file/d/17zrovyUO331FR0qUZlYE7rKDpBZCmjly/view",
+      "sha256": "236a8372a8f18369f0ccbc5ba42d55bd7482e8249eeae0a9fedfbfb605e75ecb",
+      "size_bytes": 5854,
+      "relation_to_upstream": "RESEARCH_ADDED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/helper/active.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/helper/active.py",
+      "drive_file_id": "1wnEYy6CmDOiaMoDbLaWrEY_RyYACoUHy",
+      "drive_url": "https://drive.google.com/file/d/1wnEYy6CmDOiaMoDbLaWrEY_RyYACoUHy/view",
+      "sha256": "09edc2b0966370e95ad4202e633d8ab99b5b8c6e353e87ae0199a32d747df05f",
+      "size_bytes": 55064,
+      "relation_to_upstream": "RESEARCH_MODIFIED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/helper/data.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/helper/data.py",
+      "drive_file_id": "1xHyLNT1-txbmJN_uwXDsxQ7-YsziB0o0",
+      "drive_url": "https://drive.google.com/file/d/1xHyLNT1-txbmJN_uwXDsxQ7-YsziB0o0/view",
+      "sha256": "7906eeabd9685e5aa000f96f6780b18d494d0c0d78949daf3d3ed122ed78f988",
+      "size_bytes": 37834,
+      "relation_to_upstream": "RESEARCH_MODIFIED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/openail/utils.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/openail/utils.py",
+      "drive_file_id": "1cC8oDTXlvm8sUqSOmkxKrrKm8R32b3BJ",
+      "drive_url": "https://drive.google.com/file/d/1cC8oDTXlvm8sUqSOmkxKrrKm8R32b3BJ/view",
+      "sha256": "c6cff1b47d7e8a14aa53077340f9eece2e0affbb2e3d9d177ab170f3b70860c9",
+      "size_bytes": 43482,
+      "relation_to_upstream": "RESEARCH_MODIFIED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/src/models/nn.py",
+      "original_path": "Prnd-project/LLMGNN_reference/src/models/nn.py",
+      "drive_file_id": "1wEJiv9-nRYJUukiEIJ-HATufGZnoUN1a",
+      "drive_url": "https://drive.google.com/file/d/1wEJiv9-nRYJUukiEIJ-HATufGZnoUN1a/view",
+      "sha256": "5d00c347e5a6aa504de9bf8c5abbd6e084efa1302e004c142567b9dc364b4b9b",
+      "size_bytes": 27062,
+      "relation_to_upstream": "UPSTREAM_IDENTICAL"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/startup.py",
+      "original_path": "Prnd-project/startup.py",
+      "drive_file_id": "1Lom2XPKAtMRC86qbvYpAyJBHTcYUXS1U",
+      "drive_url": "https://drive.google.com/file/d/1Lom2XPKAtMRC86qbvYpAyJBHTcYUXS1U/view",
+      "sha256": "c4dc7c37eb5aebd56d3e5e29b75b7cadaf5c5affd1d280f5111dbcc0d0279c73",
+      "size_bytes": 6815,
+      "relation_to_upstream": "RESEARCH_ADDED"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/experiments/matched_cora/featprop_parser_vote_001/parser_vote_freezer_source.py",
+      "original_path": "Prnd-project/LLMGNN_reference/experiments/matched_cora/featprop_parser_vote_001/parser_vote_freezer_source.py",
+      "drive_file_id": "13ID-ZIB6HdTsmfvf1l0xJ2nK72fG6dlX",
+      "drive_url": "https://drive.google.com/file/d/13ID-ZIB6HdTsmfvf1l0xJ2nK72fG6dlX/view",
+      "sha256": "ec8018498e06a7abbc98ed84048dcb90b3bf07a96377e46a587e54bcd7a3daac",
+      "size_bytes": 25799,
+      "relation_to_upstream": "FROZEN_RESEARCH_SOURCE"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/experiments/matched_cora/run_matched.py",
+      "original_path": "Prnd-project/LLMGNN_reference/experiments/matched_cora/run_matched.py",
+      "drive_file_id": "18p7RiMQuoBVukH-vSouvLPAXfW-HmCUI",
+      "drive_url": "https://drive.google.com/file/d/18p7RiMQuoBVukH-vSouvLPAXfW-HmCUI/view",
+      "sha256": "ff85112696f0db2ece46db37f13609cb3ffbb57c68f7a9bb48f539942a4f7a72",
+      "size_bytes": 49778,
+      "relation_to_upstream": "FROZEN_RESEARCH_SOURCE"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/experiments/narrative_v1/run_v1.py",
+      "original_path": "Prnd-project/LLMGNN_reference/experiments/narrative_v1/run_v1.py",
+      "drive_file_id": "1T8rnUXM5o8zeR3lLlJnyK24ZWfQHc7aB",
+      "drive_url": "https://drive.google.com/file/d/1T8rnUXM5o8zeR3lLlJnyK24ZWfQHc7aB/view",
+      "sha256": "b67684075146731246c4a9c4b2927056647d4b08f3679ed4e0b5c62cf111b928",
+      "size_bytes": 50589,
+      "relation_to_upstream": "FROZEN_RESEARCH_SOURCE"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/experiments/matched_cora/featprop_downstream_primary_ps_selection_001/ps_selection_runner_source.py",
+      "original_path": "Prnd-project/LLMGNN_reference/experiments/matched_cora/featprop_downstream_primary_ps_selection_001/ps_selection_runner_source.py",
+      "drive_file_id": "17Ta-eHWbkd6p5mUgD5Vk59kSScNosIEl",
+      "drive_url": "https://drive.google.com/file/d/17Ta-eHWbkd6p5mUgD5Vk59kSScNosIEl/view",
+      "sha256": "00f846cc3c53d5f3f42c12142129890bed56d98bb9d0c0d6da6eae3ccdd5b102",
+      "size_bytes": 46151,
+      "relation_to_upstream": "FROZEN_RESEARCH_SOURCE"
+    },
+    {
+      "status": "RECOVERED_EXACT",
+      "scope": "byte match to accepted pre-Codex audit, not executable validation",
+      "local_path": "recovered_sources/experiments/matched_cora/featprop_downstream_sensitivity_ps_selection_001/ps_selection_runner_source.py",
+      "original_path": "Prnd-project/LLMGNN_reference/experiments/matched_cora/featprop_downstream_sensitivity_ps_selection_001/ps_selection_runner_source.py",
+      "drive_file_id": "1_tboNvoFKGyQPRuUEqCN_n8iTvxd21sO",
+      "drive_url": "https://drive.google.com/file/d/1_tboNvoFKGyQPRuUEqCN_n8iTvxd21sO/view",
+      "sha256": "491a7ea84280030843294fcd506aae9d944d22087d047421995132eb4ffab5fe",
+      "size_bytes": 62381,
+      "relation_to_upstream": "FROZEN_RESEARCH_SOURCE"
+    }
+  ]
+}
