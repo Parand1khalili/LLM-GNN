@@ -1,0 +1,50 @@
+name: GraphScope Pages (manual publication)
+
+# This file prepares publication; it does not deploy on push.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: graphscope-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web/graphscope
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install pinned frontend package manager
+        run: npm install --global pnpm@11.25.0
+      - name: Install frontend only
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Validate reviewed static data
+        run: pnpm test
+      - name: Typecheck, build and inspect public files
+        run: pnpm build
+      - name: Upload sanitized frontend only
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: web/graphscope/dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish reviewed frontend
+        id: deployment
+        uses: actions/deploy-pages@v4

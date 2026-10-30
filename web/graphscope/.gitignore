@@ -1,0 +1,5 @@
+node_modules/
+dist/
+.qa/
+*.local
+scripts/__pycache__/

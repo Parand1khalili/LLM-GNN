@@ -3,6 +3,12 @@
 Date: 2026-10-30 (America/Los_Angeles).
 
 - Objective: defensible ground-truth-free annotation and downstream GCN research.
+- GraphScope v2: isolated static React/TypeScript atlas in web/graphscope/;
+  follows research commit 3e56105d51017bcd19729b417bf3eea3987c0c11.
+  Six sections inspect 478 recorded nodes/525 edges, 280 frozen annotations and
+  160 saved historical FeatProp GCN fits. Offline routing flags are distinct
+  from verifier judgments. No new science execution or public deployment.
+  See web/graphscope/VERIFICATION.md for checks, limits and publication steps.
 - Authorization: owner-approved V2 Scientific Handoff; offline implementation and
   frozen parsed-sample replay on existing main are approved without all840 raw
   bodies. No live APIs, real training, GT decoding, Drive writes or GitHub actions.
