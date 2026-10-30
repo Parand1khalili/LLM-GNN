@@ -8,47 +8,48 @@
     "approved": false,
     "drive_folder_id": null
   },
-  "scope": "One initial small recovery-intake milestone bundle plus provenance; no repeated full source-tree copies, datasets, model weights or environment tarballs. Code remote backup remains user-managed GitHub.",
+  "scope": "Incremental milestone reports, provenance manifests, environment and durable state; no raw bodies, weights, source-tree duplicates or local credentials",
+  "code_backup": {
+    "method": "Owner-managed private GitHub push",
+    "status": "PUSH_PENDING",
+    "verified_implementation_commit": "c3a4e00b03ad8260e3f2d3be28bec1a976301b56",
+    "remote_verified": false
+  },
   "files": [
-    {
-      "local_path": ".gitattributes",
-      "bytes": 190,
-      "sha256": "cc97af6a9c4f03d3430e96ecab26912035c27bbe456ab4c1f67e1a7feab8731d"
-    },
-    {
-      "local_path": ".gitignore",
-      "bytes": 185,
-      "sha256": "d85a1547ab97d8816fa94829b5a085e86891668c9328d9a7c73f217cb9fa01d7"
-    },
-    {
-      "local_path": "AGENTS.md",
-      "bytes": 12465,
-      "sha256": "b18c83b360a64d51e73d239d0235320a94fd35f9cf9ad6ccc686de7fec5a202e"
-    },
     {
       "local_path": "configs/historical_successful_environment.json",
       "bytes": 428,
       "sha256": "73ed5e2920c6178f4fba7e7857316db0f3fa4a278857b632dc592dd4da0a826d"
     },
     {
-      "local_path": "docs/MANUAL_GITHUB_BACKUP.md",
-      "bytes": 3663,
-      "sha256": "c7a6a5e30acda5f697d6a8f90493015525093007381a82f8c9298427681f949c"
+      "local_path": "configs/offline_cpu_requirements.txt",
+      "bytes": 775,
+      "sha256": "2e7b6570e7d54f046ed101983a3461b59453cfca7ab918607c4708591dee16c0"
     },
     {
-      "local_path": "docs/R1_PLAN.md",
-      "bytes": 3185,
-      "sha256": "7c2cb1885fc7c00911a6dd7506f7334a021ead94adaaa4e5969e139bdc485d42"
+      "local_path": "configs/offline_tested_environment.json",
+      "bytes": 1130,
+      "sha256": "20cc49c3f8137a6a7ad1ae3b0b3a317c57f2d094ebc0a1ab6574df4709dc18bd"
     },
     {
-      "local_path": "docs/RAW_RESPONSE_RECOVERY.md",
-      "bytes": 4820,
-      "sha256": "6265f10808d8b35ed367fe2a58135f5191c7cc1b73b9e121b1f958c993be1916"
+      "local_path": "docs/SCIENTIFIC_PROTOCOL.md",
+      "bytes": 7188,
+      "sha256": "a41b565bf459a03eae5538b0a52f13caf6025e51e59a84c90cc60a3cec2b8284"
     },
     {
       "local_path": "EXPERIMENT_REGISTRY.jsonl",
-      "bytes": 1048,
-      "sha256": "444207bd75c215a224c96f9982ee843ec1a997e7c4ac07a190c531549b803e92"
+      "bytes": 2061,
+      "sha256": "301746d7a3e962339a2079435a9bf4ad9ee95422a9ca3a34af468ea89470b90d"
+    },
+    {
+      "local_path": "manifests/frozen_artifacts.json",
+      "bytes": 3252,
+      "sha256": "3aa7334249e5a490248e92455b1de8e9cf7956a4cb296490f8d1de5f011d0223"
+    },
+    {
+      "local_path": "manifests/implementation_lineage.json",
+      "bytes": 3658,
+      "sha256": "7a74bbc5e5b61a2743a1f64723d98d3d6c72706b71497ac150529e6627bc3f97"
     },
     {
       "local_path": "manifests/raw_response_requirements.json",
@@ -67,148 +68,23 @@
     },
     {
       "local_path": "PROJECT_STATE.md",
-      "bytes": 3980,
-      "sha256": "9e525a5193a928cf48c440d96f236fa3fd6f6e84a46cbe12892b832ea6253729"
-    },
-    {
-      "local_path": "README.md",
-      "bytes": 3954,
-      "sha256": "acc6b6777e423fdd5e6e48a923c1b5595e07544c48421e1184a8b08f0e5952c8"
-    },
-    {
-      "local_path": "recovered_sources/experiments/matched_cora/featprop_downstream_primary_ps_selection_001/ps_selection_runner_source.py",
-      "bytes": 46151,
-      "sha256": "00f846cc3c53d5f3f42c12142129890bed56d98bb9d0c0d6da6eae3ccdd5b102"
-    },
-    {
-      "local_path": "recovered_sources/experiments/matched_cora/featprop_downstream_sensitivity_ps_selection_001/ps_selection_runner_source.py",
-      "bytes": 62381,
-      "sha256": "491a7ea84280030843294fcd506aae9d944d22087d047421995132eb4ffab5fe"
-    },
-    {
-      "local_path": "recovered_sources/experiments/matched_cora/featprop_parser_vote_001/parser_vote_freezer_source.py",
-      "bytes": 25799,
-      "sha256": "ec8018498e06a7abbc98ed84048dcb90b3bf07a96377e46a587e54bcd7a3daac"
-    },
-    {
-      "local_path": "recovered_sources/experiments/matched_cora/run_matched.py",
-      "bytes": 49778,
-      "sha256": "ff85112696f0db2ece46db37f13609cb3ffbb57c68f7a9bb48f539942a4f7a72"
-    },
-    {
-      "local_path": "recovered_sources/experiments/narrative_v1/run_v1.py",
-      "bytes": 50589,
-      "sha256": "b67684075146731246c4a9c4b2927056647d4b08f3679ed4e0b5c62cf111b928"
-    },
-    {
-      "local_path": "recovered_sources/README.md",
-      "bytes": 921,
-      "sha256": "8fd9e603dc8b2ce1342e53974837d656626468391118dc58ab6fe90a72f9eae4"
-    },
-    {
-      "local_path": "recovered_sources/src/helper/active.py",
-      "bytes": 55064,
-      "sha256": "09edc2b0966370e95ad4202e633d8ab99b5b8c6e353e87ae0199a32d747df05f"
-    },
-    {
-      "local_path": "recovered_sources/src/helper/args.py",
-      "bytes": 4840,
-      "sha256": "5e4c653b58c79fc4d6c222611ed3205640ac135e8f4913042b74509758850192"
-    },
-    {
-      "local_path": "recovered_sources/src/helper/data.py",
-      "bytes": 37834,
-      "sha256": "7906eeabd9685e5aa000f96f6780b18d494d0c0d78949daf3d3ed122ed78f988"
-    },
-    {
-      "local_path": "recovered_sources/src/helper/post_filter_label_free.py",
-      "bytes": 6319,
-      "sha256": "cc51c446a2bd1806a4d271f476b595e921542e5a7afeb980f333bb78316eefa5"
-    },
-    {
-      "local_path": "recovered_sources/src/llm.py",
-      "bytes": 63126,
-      "sha256": "483e7a1b7d445801edf1ee5e8251187807663e47dac940e4b24efcf06250ecce"
-    },
-    {
-      "local_path": "recovered_sources/src/main.py",
-      "bytes": 16163,
-      "sha256": "91676fa4f6958f6688786e1a9b2d8d128228df354de4745312e7db4549970f57"
-    },
-    {
-      "local_path": "recovered_sources/src/models/nn.py",
-      "bytes": 27062,
-      "sha256": "5d00c347e5a6aa504de9bf8c5abbd6e084efa1302e004c142567b9dc364b4b9b"
-    },
-    {
-      "local_path": "recovered_sources/src/openail/utils.py",
-      "bytes": 43482,
-      "sha256": "c6cff1b47d7e8a14aa53077340f9eece2e0affbb2e3d9d177ab170f3b70860c9"
-    },
-    {
-      "local_path": "recovered_sources/src/structure/__init__.py",
-      "bytes": 0,
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "local_path": "recovered_sources/src/structure/m4_path_prompt_builder.py",
-      "bytes": 3889,
-      "sha256": "f61f03c51fe5d3752f50ff293bd16307cd538ae4f132f8ab354d30a59a13533b"
-    },
-    {
-      "local_path": "recovered_sources/src/structure/m4_path_selector.py",
-      "bytes": 4335,
-      "sha256": "c9ea4c1782fa7521f68abe37ea8d4e0f71f069eb6bb9466af2718ec8ed0acc0e"
-    },
-    {
-      "local_path": "recovered_sources/src/structure/m4_r1_manifest_context.py",
-      "bytes": 9654,
-      "sha256": "066a8e60d1b53482bb1a500ad5743aa4515c504afab0568b3b47225c3f335584"
-    },
-    {
-      "local_path": "recovered_sources/src/structure/m4_r1_path_selector.py",
-      "bytes": 4208,
-      "sha256": "9421eeb429be894836b9e90a7cb8f79aff4ad069aacdc5c10e43b06143d5c6b6"
-    },
-    {
-      "local_path": "recovered_sources/src/structure/manifest_context.py",
-      "bytes": 5854,
-      "sha256": "236a8372a8f18369f0ccbc5ba42d55bd7482e8249eeae0a9fedfbfb605e75ecb"
-    },
-    {
-      "local_path": "recovered_sources/src/structure/narrative_topology_v0.py",
-      "bytes": 15551,
-      "sha256": "6fbad422911ba0fc13c6b4df6235fadb68e9dac7b92221cb50c010aa7d07f3d1"
-    },
-    {
-      "local_path": "recovered_sources/src/structure/narrative_topology_v1.py",
-      "bytes": 9981,
-      "sha256": "f188deaf8b2b20550f2f81d1b774512e08ed9aa7db12d74555556b6e1404ca8f"
-    },
-    {
-      "local_path": "recovered_sources/src/structure/narrative_topology_v2.py",
-      "bytes": 7704,
-      "sha256": "9ab34c3d39f4c6518f17a83fea97b2fdc92727dd4f60a637674c853dcbeef50a"
-    },
-    {
-      "local_path": "recovered_sources/src/structure/prompt_builder.py",
-      "bytes": 5547,
-      "sha256": "fffbc78c364bb9a367c640e7f69196c8640b0f48eb67e0a336152942de6cde7e"
-    },
-    {
-      "local_path": "recovered_sources/src/structure/selector.py",
-      "bytes": 3164,
-      "sha256": "52be8f75854bf4f7208d82d4fac71954a0002146685c823a77508f2d7471c859"
-    },
-    {
-      "local_path": "recovered_sources/startup.py",
-      "bytes": 6815,
-      "sha256": "c4dc7c37eb5aebd56d3e5e29b75b7cadaf5c5affd1d280f5111dbcc0d0279c73"
+      "bytes": 3713,
+      "sha256": "d4b3e11ec36b9475964878ca16c5b56afe2ffd579a28772f9a0afe6d09156db5"
     },
     {
       "local_path": "reports/backup_readiness.json",
       "bytes": 730,
       "sha256": "864da269dba6e42cfa0ef4db739d9425ac3e340fd5f8678bdcef155bcae10d08"
+    },
+    {
+      "local_path": "reports/offline_implementation_verification.json",
+      "bytes": 5785,
+      "sha256": "3a87638e5629e9761fd74f8f7eaf4c5e995241fe615721105d298d22cef3a319"
+    },
+    {
+      "local_path": "reports/offline_test_results.json",
+      "bytes": 1084,
+      "sha256": "c7056792761e92fec1a8edbb857e1bcd790cf8312fe94f7d87926d491b5ec533"
     },
     {
       "local_path": "reports/r1_intake_verification.json",
@@ -219,34 +95,27 @@
       "local_path": "reports/raw_recovery_tool_tests.json",
       "bytes": 640,
       "sha256": "dcd04a72095c809a176a26f18fefc5a7713aa7ac8ce858436a432ad2c5a2ae6e"
-    },
-    {
-      "local_path": "scripts/admission.py",
-      "bytes": 10134,
-      "sha256": "a43af065a797bf271a2fdbce503a0cf65dcc6eb6c4439363c286a025f2841ca8"
-    },
-    {
-      "local_path": "scripts/colab_recover_responses.py",
-      "bytes": 14706,
-      "sha256": "5a9683817616bc25233a3a84adbd9d35bf68d5b9b5c9d67af463e19ea637528d"
-    },
-    {
-      "local_path": "scripts/verify_intake.py",
-      "bytes": 233,
-      "sha256": "6db7b3dfe082f58222e112d71e48c42d77b89ed6f794089a4b43894ddb3c27de"
-    },
-    {
-      "local_path": "tests/test_raw_recovery.py",
-      "bytes": 17802,
-      "sha256": "f5e680cbb6caec8b1409afe071cfd2e8c3d490f03c63a1c67ec7b6322ed510de"
     }
   ],
-  "total_bytes": 1093411,
-  "verification_required": [
-    "Approved destination ID and write permission",
-    "Upload only approved incremental contents",
-    "Read back metadata and bytes where possible",
-    "Record remote IDs and checksums; never infer remote success from local sync"
+  "total_bytes": 479481,
+  "historical_artifact_references": "manifests/frozen_artifacts.json (originals remain in historical archive; no duplicate upload planned)",
+  "user_work_excluded": [
+    "docs/MANUAL_GITHUB_BACKUP.md",
+    "SARA_PROJECT_RECOVERY_HANDOFF_2026-10-29.md",
+    "SARA_RECOVERY_MASTER_PLAN_2026-10-30_FA.md"
   ],
-  "remote_verified": false
+  "excluded": [
+    ".git/",
+    ".venv/",
+    ".local_artifacts/",
+    "data/",
+    "checkpoints/",
+    "*.pt",
+    "*.zip",
+    "*.pem",
+    "private authentication files"
+  ],
+  "remote_upload_performed": false,
+  "remote_metadata_verified": false,
+  "remote_readback_verified": false
 }

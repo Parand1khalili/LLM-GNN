@@ -1,21 +1,50 @@
 # Project state
 
-Date: 2026-10-29 (user timezone: America/Los_Angeles).
+Date: 2026-10-30 (America/Los_Angeles).
 
-- **Objective:** recover and independently validate the pre-Codex B1/Narrative v0 baseline before reconstructing SARA-2 or SARA-3.
-- **Phase:** R1 approved for local recovery and offline tests; `BLOCKED_REQUIRED_RAW_RESPONSES` at full replay admission. Runtime reconstruction and parser/voter replay have not started.
-- **Exact recovery:** 25 source snapshots verified against the accepted audit SHA-256 values. Includes six modified and thirteen added research files; thirteen includes the project-root `startup.py`. No Codex-era source is recovered.
-- **Evidence baseline:** canonical Cora/A²X hashes; 840 consistent sample references; frozen 135/140 cohorts and 2568 common test IDs; 100 seed receipts/results and 180 weight byte hashes/ZIP CRC verified in the prior read-only audit. PS deletion orders were independently recalculated on pseudo-labels. GCN results were not re-executed.
-- **Raw replay gap:** all 840 response paths/hashes are listed. Only 84 raw files were byte-checked in the prior audit. 48 reused-response folder IDs remain unresolved because of the connector's 1000-item listing cap and empty targeted search results; existence is not disproved. The other raw files still require complete readback and validation.
-- **Current architecture:** source evidence + manifests + Colab raw-response exporter + independent offline ZIP admission and synthetic tests. Proposed runtime package is documented in `docs/R1_PLAN.md`; it has not been created.
-- **Successful historical environment (receipt-reported):** Python 3.13.16, NumPy 2.1.3, Torch 2.11.0+cpu, PyG 2.7.0. Legacy environment files differ. No dependency installation or historical environment execution occurred.
-- **Safety:** no provider calls, training, GT decoding, unsafe unpickling, historical Drive writes or recovered-script execution. Runtime GT-isolation tests are `NOT_RUN` because there is no reconstructed runtime.
-- **Git:** one local `main` repository; resolve its current commit with `git rev-parse HEAD`. Local commit author is user-supplied. No remote is configured; all local commits are `PUSH_PENDING`. The user performs pushes manually; remote backup is unverified.
-- **Drive backup:** existing historical archive read-only; no new upload. Separate destination and incremental manifest are proposed, not approved or verified.
-- **Latest discovery:** complete 21-page connector search plus exact-name search returned no usable folder matches. The 48 responses are unresolved through the connector, not proven missing. A self-contained user-run Colab exporter reads the pinned original manifests; default scope covers all 840 selected responses including all 84 reused.
-- **Tool verification:** 26 synthetic recovery/admission tests: 25 passed, one skipped because this Windows account cannot create OS symbolic links; ZIP symlink rejection passed. These are tool safety tests, not historical replay or runtime GT-isolation validation. Actual Colab interactive mounting/downloading is untested here. See `reports/raw_recovery_tool_tests.json`.
-- **Initial Git readiness:** commit `b0249a829e31e32ad6c90bc56779d6a9c1cea0ce` and clean tree verified before tooling edits. No unwanted datasets/checkpoints or high-confidence credential patterns were detected in its 40 files. Proposed manual-only private destination: `parand1khalili/llm-gnn-sara`; not created or remotely verified.
-- **Next action:** user runs `scripts/colab_recover_responses.py` in the archive-owning Colab account and provides its ZIP. Independently verify all 840 raw bytes; then STOP for user approval before any pure parser/voter implementation or replay. No genuine ZIP has been provided yet; current real-data admission remains BLOCKED.
-- **Unrecovered:** Codex-era SARA-2, E0/E1, SARA-3, P0/P1/P2 implementations/tests/ledgers; full executable checkpoint remains unknown.
-
-No annotation or GNN improvement is established by this intake.
+- Objective: defensible ground-truth-free annotation and downstream GCN research.
+- Authorization: owner-approved V2 Scientific Handoff; offline implementation and
+  frozen parsed-sample replay on existing main are approved without all840 raw
+  bodies. No live APIs, real training, GT decoding, Drive writes or GitHub actions.
+- Implementation: one installable package src/llmgnn_sara with io, selection,
+  annotation, frozen PS, reconstructed SARA2/3, downstream, isolated evaluation
+  and CLI. No historical startup/module execution or untrusted pickle loading.
+- Latest independently executed baseline: all280 frozen target-arm votes matched,
+  including class, confidence (abs1e-12) and fallback; four PS cohort-arm checks
+  matched retained/deleted order, labels and confidence. This is stored-parsed
+  replay, not raw parsing, annotation rerun or GCN result reproduction.
+- Verification: full suite92 tests,91PASS,1Windows symlink SKIP; subsequent6CLI
+  regressions PASS after Primary routing-boundary adjustment. Actual4-node GCN
+  forward and real cached cl100k_base Consensus parity/budget tests PASS.
+  See reports/offline_test_results.json and offline_implementation_verification.json.
+- Runtime: Python3.12.14, Torch2.15.0+cpu, PyG2.7.0, NumPy2.3.5, tiktoken0.14.0
+  installed locally; versions/requirements recorded in configs/. Initial TLS
+  issuer error was resolved using already-trusted OS roots, never disabling TLS.
+  This differs from the receipt-reported historical successful environment.
+- SARA limits: no recovered exact Policy002 thresholds. Defaults are explicit new,
+  unvalidated reconstruction decisions. Synthetic verifier demo works; frozen
+  real-target text/context is not yet admitted, so actual selected reviews abstain
+  with zero completed reviews. Ledger is offline/in-memory, not live-ready.
+- Downstream: matched CE/WCE-noPS plans for both arms and both cohorts preserve
+  Primary135/Sensitivity140/sharedtest2568/seeds0..9/30epochs/loss semantics.
+  Third-class proposals cannot enter training. Optimizer/training never executed.
+- Source provenance:25 original pre-Codex snapshots preserved; pure Narrative
+  module and GCN class reused. Newly reconstructed code is not recovered Codex-era
+  source. Full prompt hash parity for all140 real targets remains NOT_RUN.
+- Raw gap:840 references (726fresh/30supplementary/84reused); prior84 raw byte
+  readbacks remain prior evidence. This implementation verifies zero raw bodies.
+  48reuses remain unresolved-access, not proven missing. Colab ZIP is pending.
+- Scientific baseline: historical GCN numbers remain HISTORICAL_REPORTED; neither
+  new SARA accuracy nor downstream improvement/generalization is established.
+- Git: verified implementation commit c3a4e00b03ad8260e3f2d3be28bec1a976301b56;
+  this state/backup-record update is a later metadata commit (resolve current HEAD
+  with git rev-parse HEAD). No tags/remotes or verified remote code backup.
+  All local commits are PUSH_PENDING. Owner performs pushes manually.
+- User work preserved: docs/MANUAL_GITHUB_BACKUP.md contains x; two untracked
+  recovery handoff/master-plan documents remain excluded from agent commits.
+- Drive backup: historical archive read-only; dedicated destination unapproved,
+  no upload/readback. Updated incremental artifact plan is not a completed backup.
+- Next approved work: validate the owner's Colab ZIP when supplied; admit pinned
+  GT-free real target text/context for offline verifier integration; resolve exact
+  Policy002 specification before any historical equivalence claim. Real inference,
+  GT evaluation and GCN training still require separate explicit approval.
