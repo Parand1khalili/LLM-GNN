@@ -1,44 +1,122 @@
-# LLM-GNN / SARA recovery
+# LLM-GNN / SARA
 
-One continuously maintained local repository for controlled recovery of the pre-Codex research baseline.
+One evolving research repository for the pre-Codex B1/Narrative baseline and
+explicitly reconstructed SARA extensions. Historical artifacts remain read-only.
+Live inference and real training are not authorized.
 
-**R1 status: BLOCKED at full raw-response replay admission.** There is no reconstructed runtime package yet. Do not run the historical source snapshots.
+## Run locally
 
-## Current contents
+Python 3.10+; the offline runtime has zero third-party dependencies.
+Without installing anything, from this repository in PowerShell:
 
-- `recovered_sources/`: 25 exact source snapshots, including all six modified and thirteen added research files (the latter count includes `Prnd-project/startup.py` outside `src`), one upstream GCN module and five frozen research scripts.
-- `manifests/recovered_sources.json`: source locations, Drive IDs, original SHA-256 values and upstream relationships.
-- `manifests/raw_response_requirements.json`: all 840 source responses needed for full historical replay.
-- `manifests/unresolved_raw_responses.json`: 48 reused-response paths not resolved through the current Drive connector listing/search; not evidence of deletion.
-- `scripts/verify_intake.py`: standard-library-only intake verification. It never imports recovered code, reads graph/model tensors, accesses providers, installs packages or trains models.
-- `scripts/colab_recover_responses.py`: one self-contained script to run manually in the archive owner's Colab account; it reads the two existing pinned manifests and exports exact selected response bytes outside Drive.
-- `scripts/admission.py` and `tests/`: offline ZIP admission with synthetic safety tests; no runtime reconstruction or parser/voter replay.
-- `PROJECT_STATE.md`, `EXPERIMENT_REGISTRY.jsonl`: durable scope and status.
+~~~powershell
+$env:PYTHONPATH = Join-Path $PWD 'src'
+python -B -m llmgnn_sara doctor
+python -B -m llmgnn_sara sara3-offline --demo
+python -B -m unittest discover -s tests -v
+~~~
 
-## Offline verification
+On this machine the available base Python is:
+C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe
 
-From this directory, with an available Python 3 interpreter:
+An editable installation was actually verified with existing build tools,
+without network access or downloaded dependencies:
 
-```text
-python -B scripts/verify_intake.py
-```
+~~~powershell
+python -m venv --system-site-packages .venv
+.\.venv\Scripts\python.exe -m pip install --no-index --no-deps --no-build-isolation -e .
+.\.venv\Scripts\python.exe -B -m llmgnn_sara doctor
+~~~
 
-Exit code 2 means full raw-response admission is blocked, code 1 means validation failed, and code 0 requires independent verification of all 840 raw files against the pinned original mapping. `--bundle` validates ZIP members without extraction; `--raw-root` can supply additional bytes. Neither folder discovery nor a bundle's own status establishes byte verification. Even admission PASS must stop for user approval before parser/voter implementation or replay. No intake result means a GCN has been reproduced.
+The install needs existing setuptools>=61. On a fresh machine use the no-install
+PYTHONPATH route or explicitly provision build tools. No application command
+installs dependencies. Optional CPU Torch, PyG and tiktoken were subsequently
+installed in .venv with the owner's permission; the tiny synthetic GCN forward
+and cached cl100k_base prompt-budget tests passed. Real training is NOT_RUN.
+Versions and the initial resolved TLS failure are recorded in
+configs/offline_tested_environment.json. This is not the historical environment.
 
-See [raw recovery instructions](docs/RAW_RESPONSE_RECOVERY.md) and [exact conditional manual GitHub commands](docs/MANUAL_GITHUB_BACKUP.md). No ZIP has been provided or Colab script executed by the agent.
+To recreate the tested optional Windows CPU environment on a fresh machine
+(these commands download official dependencies):
 
-## Recovery boundaries
+~~~powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --only-binary=:all: --index-url https://download.pytorch.org/whl/cpu 'torch==2.15.0+cpu'
+.\.venv\Scripts\python.exe -m pip install --only-binary=:all: -r configs/offline_cpu_requirements.txt
+.\.venv\Scripts\python.exe -m pip install --no-deps -e .
+~~~
 
-The historical Drive `Prnd-project` archive stays read-only. No paid inference, provider requests, GCN training, GT decoding, unsafe `.pt` loading, `startup.py` execution or imports of unreviewed historical scripts are authorized.
+The tokenizer's first explicit initialization may download its public vocabulary;
+the application never initializes it implicitly. Tests never download the cache.
 
-Historical Codex-era SARA-2, E0/E1, SARA-3 and P0/P1/P2 source remains lost. Reports are reconstruction specifications, not executable recoveries.
+## Actual frozen replay and integrated dry-run
 
-To unblock input admission, run the Colab recovery script with default `all_selected` scope and provide its downloaded ZIP. The 48 unresolved records remain listed separately, while the complete required set is 840. Earlier audit byte verification covered 84/840 only. Never substitute frozen parsed answers or new annotations for missing raw responses.
+Supply exact external artifacts under .local_artifacts/frozen/ (Git-ignored),
+or pass other read-only paths. Locations/IDs/pins are in
+manifests/frozen_artifacts.json; datasets and raw responses are not in Git.
 
-## Git and backups
+~~~powershell
+$inputs = @('--b1', '.local_artifacts/frozen/b1_final_predictions.json',
+            '--narrative', '.local_artifacts/frozen/narrative_v0_final_predictions.json',
+            '--selection', '.local_artifacts/frozen/selection_manifest.json')
+.\.venv\Scripts\python.exe -B -m llmgnn_sara replay-frozen @inputs
+.\.venv\Scripts\python.exe -B -m llmgnn_sara pipeline @inputs --cohort primary --loss wce
+.\.venv\Scripts\python.exe -B -m llmgnn_sara gcn-plan @inputs --arm both --loss ce
+~~~
 
-The user performs GitHub pushes manually, approximately daily. The agent prepares local commits only; it must never push, create a remote repository or change GitHub authentication. No private destination is approved or configured yet. No push command is valid until its destination is approved and verified. Never push to `CurryTang/LLMGNN`.
+replay-frozen re-votes 280 target-arm decisions from 840 stored parsed samples,
+comparing classes/fallbacks exactly and confidence within 1e-12. This is NOT
+raw-response parsing, complete raw recovery, GCN reproduction or improved accuracy.
+Raw provenance remains RAW_PROVENANCE_PARTIAL.
 
-`manifests/drive_backup_plan.json` describes a proposed independent milestone backup. No upload or new remote backup has occurred.
+pipeline stops on a baseline mismatch, runs the offline SARA policy and prepares
+matched B1/v0 and accepted-SARA GCN plans. Without target text, selected reviews
+abstain and completed reviews remain zero. Retained high-confidence agreements
+are policy decisions, not measured verifier corrections. The explicit synthetic
+demo exercises blind-first/comparison verification, evidence, proposals and failures.
 
-Upstream reference: `CurryTang/LLMGNN`, commit `1f60eedb1452cdd997be18b5dd932a02666ee57e`. Preserve attribution and review applicable licensing before redistribution. This repository does not claim authorship of recovered sources or an independently validated executable checkpoint.
+## Scientific boundaries
+
+Read docs/SCIENTIFIC_PROTOCOL.md for the published paper/proposal/historical/
+reconstruction lineage. FeatProp is not C-Density; B1 is not an exact paper B0
+reproduction; Uniform2Path3 is not a literal random walk. Both historical arms
+used the same underlying LLM.
+
+SARA defaults are new unvalidated decisions, not restored Policy002 thresholds
+or historical routing parity. Class semantics are public; no GT diagnostics
+enter prompts, routing, filtering or pseudo-training labels. Third-class proposals
+cannot become training labels. The offline ledger is not durable/live-ready.
+
+Exact recovered Narrative topology and the reviewed GCN class are reused.
+Frozen PS deletion orders/class guards are checked for both arms/cohorts.
+Float64 neighbor selection is not claimed identical to historical Torch float32
+near ties. Frozen FeatProp target IDs are replayed, not reselected. The historical
+wrapper is pinned; full140-target regenerated prompt hash parity is NOT_RUN.
+
+GCN plans preserve the selected140 pool, Primary135/Sensitivity140, sharedtest2568,
+pairedseeds0..9, 30epochs, no validation/early stopping and mean(CE_i*w_i).
+Selected exclusions/abstentions never become test nodes. Evaluation is a separate
+module with no runtime import edges; tests use synthetic labels only. No GT
+decoding or real training occurred. The prepared optional backend is default-denied,
+not exposed as an offline training command. Its synthetic forward is tested;
+the optimizer/training path remains unexecuted and numerically unverified.
+
+## Raw recovery and backups
+
+Use scripts/colab_recover_responses.py in the owner's fresh CPU Colab notebook;
+see docs/RAW_RESPONSE_RECOVERY.md. For package use in Colab, upload the source tree,
+put its src/ directory on sys.path and supply actual external artifact paths.
+Do not run historical startup.py or notebook cells.
+
+The former D:\SARA2 source is lost. recovered_sources/ contains pre-Codex
+evidence, not a second active implementation. Keep original hashes and attribution.
+Review applicable upstream licensing before wider redistribution.
+
+The owner performs GitHub pushes manually. No remote is configured or verified.
+The existing docs/MANUAL_GITHUB_BACKUP.md user edit is preserved; its original
+instructions remain in commit ee6dd5c. Never push to CurryTang/LLMGNN.
+Historical Drive stays read-only; independent artifact backup is proposed,
+not uploaded or verified. A local cache is not a remote backup.
+
+See PROJECT_STATE.md, EXPERIMENT_REGISTRY.jsonl, reports/, and
+manifests/implementation_lineage.json.

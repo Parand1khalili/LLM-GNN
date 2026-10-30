@@ -1,0 +1,28 @@
+{
+  "scope": "Final offline regression: real cached tokenizer, tiny synthetic GCN forward, synthetic safety and recovered-frozen tests; no raw parsing or real training",
+  "python": "3.12.14",
+  "command": ".venv/Scripts/python.exe -B -m unittest discover -s tests -v",
+  "tests_run": 92,
+  "passed": 91,
+  "failures": 0,
+  "errors": 0,
+  "skipped": [
+    {
+      "test": "test_real_filesystem_symlink_rejected (test_raw_recovery.BundleAndAdmissionTests.test_real_filesystem_symlink_rejected)",
+      "reason": "OS account cannot create symbolic links; ZIP symlink rejection is tested separately"
+    }
+  ],
+  "successful": true,
+  "elapsed_seconds": 93.578,
+  "syntax_files_checked": 35,
+  "provider_calls": 0,
+  "GT_decoded": false,
+  "training_runs": 0,
+  "followup_after_full_suite": {
+    "change": "Primary routing excludes all five non-Primary selected nodes before review-budget allocation",
+    "command": ".venv/Scripts/python.exe -B -m unittest discover -s tests -p test_cli.py -v",
+    "tests_run": 6,
+    "passed": 6,
+    "exit_code": 0
+  }
+}

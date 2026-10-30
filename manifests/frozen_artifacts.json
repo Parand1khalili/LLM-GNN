@@ -1,0 +1,66 @@
+{
+  "schema": "sara.frozen_artifacts.v1",
+  "files": [
+    {
+      "role": "b1",
+      "status": "HASH_VERIFIED",
+      "scope": "frozen_artifact_not_raw_body",
+      "suggested_local_path": ".local_artifacts/frozen/b1_final_predictions.json",
+      "original_path": "Prnd-project/LLMGNN_reference/experiments/matched_cora/featprop_parser_vote_001/b1/final_predictions.json",
+      "drive_file_id": "1vg_4v9n9vL6EiE2CKlqEcJg5jzCWUZJc",
+      "sha256": "c6bc236ac5f8c1615067a10750cb150ecaf54fbe458afd4df7e750f92ce4b141",
+      "size_bytes": 883603
+    },
+    {
+      "role": "narrative_v0",
+      "status": "HASH_VERIFIED",
+      "scope": "frozen_artifact_not_raw_body",
+      "suggested_local_path": ".local_artifacts/frozen/narrative_v0_final_predictions.json",
+      "original_path": "Prnd-project/LLMGNN_reference/experiments/matched_cora/featprop_parser_vote_001/narrative_v0/final_predictions.json",
+      "drive_file_id": "1D6dLuEL27s1W9RR93zqwKB9NX8r1IAV-",
+      "sha256": "181806c4622449c8f9cdc9bdabb725232666fdc95394b3a8d7b78067b385ff02",
+      "size_bytes": 893449
+    },
+    {
+      "role": "selection",
+      "status": "HASH_VERIFIED",
+      "scope": "frozen_artifact_not_raw_body",
+      "suggested_local_path": ".local_artifacts/frozen/selection_manifest.json",
+      "original_path": "Prnd-project/LLMGNN_reference/experiments/matched_cora/featprop_selection_001/selection_manifest.json",
+      "drive_file_id": "1nDz5YcqLtkBa16ZUJamac4YucrPaREj2",
+      "sha256": "dc8260974c7c0ca2e828f2d069e2896e9bcf2c363b15ca81d9f09d2803c9b12c",
+      "size_bytes": 3462
+    },
+    {
+      "role": "preparation",
+      "status": "HASH_VERIFIED",
+      "scope": "frozen_artifact_not_raw_body",
+      "suggested_local_path": ".local_artifacts/frozen/preparation_receipt.json",
+      "original_path": "Prnd-project/LLMGNN_reference/experiments/matched_cora/offline_matched_prep_001/preparation_receipt.json",
+      "drive_file_id": "15rGv2twLrJHOzDBqna12U6arHGS3VMPZ",
+      "sha256": "fb6777e8dec547b2aee5ca664ffa566f9148a944c7ee6065072df9fb1b4ad4ab",
+      "size_bytes": 16455
+    },
+    {
+      "role": "ps_primary",
+      "status": "HASH_VERIFIED",
+      "scope": "frozen_artifact_not_raw_body",
+      "suggested_local_path": ".local_artifacts/frozen/ps_primary.json",
+      "original_path": "Prnd-project/LLMGNN_reference/experiments/matched_cora/featprop_downstream_primary_ps_selection_001/ps_selection_manifest.json",
+      "drive_file_id": "15v6JIqB7eqXnxvRXl6yw3GlPwQemZzZc",
+      "sha256": "fa0a8c79b3c657371dd7cf7417a57174e20ce92b03c50df845873367005eeeed",
+      "size_bytes": 63518
+    },
+    {
+      "role": "ps_sensitivity",
+      "status": "HASH_VERIFIED",
+      "scope": "frozen_artifact_not_raw_body",
+      "suggested_local_path": ".local_artifacts/frozen/ps_sensitivity.json",
+      "original_path": "Prnd-project/LLMGNN_reference/experiments/matched_cora/featprop_downstream_sensitivity_ps_selection_001/ps_selection_manifest.json",
+      "drive_file_id": "1ou3hauJIjKqmur_14l5AFetv70K4HGeV",
+      "sha256": "8f2d4b026a27f3c01f4bfb021fe1a4b2fd84ab90858da54ec0c4fee0367d9436",
+      "size_bytes": 66351
+    }
+  ],
+  "raw_body_bytes_verified_by_this_manifest": 0
+}

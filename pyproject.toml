@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llmgnn-sara"
+version = "0.1.0"
+description = "Offline reconstruction of the pre-Codex LLM-GNN baseline and SARA research extensions"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+gcn = ["torch>=2.0", "torch-geometric==2.7.0", "numpy>=2.0"]
+tokenizer = ["tiktoken>=0.7"]
+
+[project.scripts]
+sara = "llmgnn_sara.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

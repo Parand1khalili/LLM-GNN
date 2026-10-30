@@ -1,0 +1,71 @@
+{
+  "schema": "sara.implementation_lineage.v1",
+  "source_reference": "CurryTang/LLMGNN plus pre-Codex project modifications",
+  "codex_era_source_recovered": false,
+  "components": [
+    {
+      "active_path": "src/llmgnn_sara/annotation/_narrative_v0.py",
+      "status": "RECOVERED_EXACT",
+      "original_snapshot": "recovered_sources/src/structure/narrative_topology_v0.py",
+      "original_sha256": "6fbad422911ba0fc13c6b4df6235fadb68e9dac7b92221cb50c010aa7d07f3d1",
+      "original_drive_file_id": "1gZ8HHrTGMZJb1jX7sRO2QFG3nW2DAV6k",
+      "active_sha256": "6fbad422911ba0fc13c6b4df6235fadb68e9dac7b92221cb50c010aa7d07f3d1",
+      "scope": "Reviewed pure module copied byte-for-byte"
+    },
+    {
+      "active_path": "src/llmgnn_sara/annotation/voting.py",
+      "status": "RECONSTRUCTED",
+      "original_snapshot": "recovered_sources/src/llm.py",
+      "original_sha256": "483e7a1b7d445801edf1ee5e8251187807663e47dac940e4b24efcf06250ecce",
+      "original_drive_file_id": "17kaEMxlxMixIBe3jKHnWXAxKq1hnjlo7",
+      "active_sha256": "b5a2c183ad59e4e4286945620932931e700dc0c24c5a8895701d44a18f654686",
+      "scope": "Only reviewed historical eval_result vote loop; no GT/tensor/save/provider logic"
+    },
+    {
+      "active_path": "src/llmgnn_sara/annotation/prompts.py",
+      "status": "RECONSTRUCTED",
+      "original_snapshot": "recovered_sources/src/structure/prompt_builder.py",
+      "original_sha256": "fffbc78c364bb9a367c640e7f69196c8640b0f48eb67e0a336152942de6cde7e",
+      "original_drive_file_id": "1Sckjgm2Kv99AywMEVTVwGQAX-Z_JAmmF",
+      "active_sha256": "a9d1605d1c138419e96d92462c25e7cbb204923a23b253e0414d52c63ffc745e",
+      "scope": "Injected tokenizer replaces legacy top-level tokenizer initialization"
+    },
+    {
+      "active_path": "src/llmgnn_sara/selection/neighbors.py",
+      "status": "RECONSTRUCTED",
+      "original_snapshot": "recovered_sources/src/structure/selector.py",
+      "original_sha256": "52be8f75854bf4f7208d82d4fac71954a0002146685c823a77508f2d7471c859",
+      "original_drive_file_id": "1R9orR6aNRdjCUlzk8-KWmL1nkOST86G6",
+      "active_sha256": "4fe6260f5a1918686fa037670ad9eecaebe416a917131c51c9f6fae636763645",
+      "scope": "Python float64 adapter; not historical Torchfloat32 near-tie identity"
+    },
+    {
+      "active_path": "src/llmgnn_sara/filtering/ps.py",
+      "status": "RECONSTRUCTED",
+      "original_snapshot": "recovered_sources/experiments/matched_cora/featprop_downstream_primary_ps_selection_001/ps_selection_runner_source.py",
+      "original_sha256": "00f846cc3c53d5f3f42c12142129890bed56d98bb9d0c0d6da6eae3ccdd5b102",
+      "original_drive_file_id": "17Ta-eHWbkd6p5mUgD5Vk59kSScNosIEl",
+      "active_sha256": "a638eca79d25b0c7a950b9f491f48fb6df41073ebf05ae6aa44f66073e31a5cb",
+      "scope": "Pure sequential rank/COE/class guard; four frozen cohort-arm checks"
+    },
+    {
+      "active_path": "src/llmgnn_sara/downstream/model.py",
+      "status": "RECONSTRUCTED",
+      "original_snapshot": "recovered_sources/src/models/nn.py",
+      "original_sha256": "5d00c347e5a6aa504de9bf8c5abbd6e084efa1302e004c142567b9dc364b4b9b",
+      "original_drive_file_id": "1wEJiv9-nRYJUukiEIJ-HATufGZnoUN1a",
+      "active_sha256": "5a2f685d43a4ede3cab1bb61c41f3b7a904a86e46bc2210e7bb4dfdb13ce51b3",
+      "scope": "Exact GCN class AST with lazy reviewed imports; no whole historical module import"
+    }
+  ],
+  "new_components": [
+    "io/frozen.py",
+    "sara2/",
+    "sara3/",
+    "downstream/plan.py",
+    "evaluation/",
+    "cli.py"
+  ],
+  "policy_002_equivalence": false,
+  "raw_parsing_implemented": false
+}

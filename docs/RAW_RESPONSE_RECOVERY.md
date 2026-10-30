@@ -1,5 +1,11 @@
 # R1 raw-response recovery and input admission
 
+**2026-10-30 authorization update:** V2 offline implementation and replay from
+hash-verified stored parsed samples are now approved without full raw admission.
+The workflow below still applies to raw bytes; it does not block the new
+`llmgnn_sara replay-frozen` command. Never describe frozen re-voting as raw-response
+parsing or complete byte-level historical reproduction.
+
 ## Current evidence
 
 The initial commit `b0249a829e31e32ad6c90bc56779d6a9c1cea0ce` and clean working tree were verified before this change. Its 40 committed files had no detected high-confidence credential pattern or unwanted dataset/checkpoint/archive. This is a bounded review, not a guarantee that arbitrary future files contain no secrets.

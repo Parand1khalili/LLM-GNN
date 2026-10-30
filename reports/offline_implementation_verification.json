@@ -1,0 +1,210 @@
+{
+  "schema": "sara.offline_implementation_verification.v1",
+  "authorization": "Owner-approved V2 Scientific Handoff, offline only",
+  "slices_done": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "scope": "Engineering slices only; not thesis scientific completion",
+  "frozen_replay": {
+    "schema": "sara.frozen_sample_replay.v1",
+    "status": "PASS",
+    "scope": "STORED_PARSED_SAMPLES_ONLY",
+    "evidence": "OFFLINE_REPLAYED",
+    "input_evidence": "HASH_VERIFIED",
+    "target_count": 140,
+    "predictions_checked": 280,
+    "predictions_matched": 280,
+    "confidence_abs_tolerance": 1e-12,
+    "mismatches": [],
+    "artifact_sha256": {
+      "b1": "c6bc236ac5f8c1615067a10750cb150ecaf54fbe458afd4df7e750f92ce4b141",
+      "narrative_v0": "181806c4622449c8f9cdc9bdabb725232666fdc95394b3a8d7b78067b385ff02",
+      "selection": "dc8260974c7c0ca2e828f2d069e2896e9bcf2c363b15ca81d9f09d2803c9b12c"
+    },
+    "raw_response_provenance": "RAW_PROVENANCE_PARTIAL",
+    "raw_hashes_verified_by_this_replay": 0,
+    "raw_response_parsing": "NOT_RUN",
+    "GT_accessed": false,
+    "provider_calls": 0,
+    "training_runs": 0
+  },
+  "frozen_ps_comparisons": {
+    "status": "PASS",
+    "cohort_arm_comparisons": 4,
+    "fields": [
+      "removed order",
+      "retained order",
+      "labels",
+      "confidence"
+    ]
+  },
+  "prompt_wrapper": {
+    "status": "HASH_VERIFIED_AND_TESTED",
+    "receipt_sha256": "fb6777e8dec547b2aee5ca664ffa566f9148a944c7ee6065072df9fb1b4ad4ab",
+    "actual_140_target_prompt_hash_parity": "NOT_RUN"
+  },
+  "offline_pipeline_runs": [
+    {
+      "cohort": "primary",
+      "loss": "ce",
+      "exit_code": 0,
+      "baseline_train_counts": {
+        "b1": 135,
+        "narrative_v0": 135
+      },
+      "common_test_count": 2568,
+      "paired_seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "sara_target_count": 135,
+      "sara_accepted_count": 89,
+      "sara_eligible_retention": 0.6592592592592592,
+      "sara_class_coverage": 1.0,
+      "sara_selected_for_review": 10,
+      "sara_completed_reviews": 0,
+      "target_text_status": "UNAVAILABLE_NO_SUPPORTED_TARGET_TEXT",
+      "new_gt_or_model_results": false
+    },
+    {
+      "cohort": "primary",
+      "loss": "wce",
+      "exit_code": 0,
+      "baseline_train_counts": {
+        "b1": 135,
+        "narrative_v0": 135
+      },
+      "common_test_count": 2568,
+      "paired_seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "sara_target_count": 135,
+      "sara_accepted_count": 89,
+      "sara_eligible_retention": 0.6592592592592592,
+      "sara_class_coverage": 1.0,
+      "sara_selected_for_review": 10,
+      "sara_completed_reviews": 0,
+      "target_text_status": "UNAVAILABLE_NO_SUPPORTED_TARGET_TEXT",
+      "new_gt_or_model_results": false
+    },
+    {
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "exit_code": 0,
+      "baseline_train_counts": {
+        "b1": 140,
+        "narrative_v0": 140
+      },
+      "common_test_count": 2568,
+      "paired_seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "sara_target_count": 140,
+      "sara_accepted_count": 93,
+      "sara_eligible_retention": 0.6642857142857143,
+      "sara_class_coverage": 1.0,
+      "sara_selected_for_review": 10,
+      "sara_completed_reviews": 0,
+      "target_text_status": "UNAVAILABLE_NO_SUPPORTED_TARGET_TEXT",
+      "new_gt_or_model_results": false
+    },
+    {
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "exit_code": 0,
+      "baseline_train_counts": {
+        "b1": 140,
+        "narrative_v0": 140
+      },
+      "common_test_count": 2568,
+      "paired_seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "sara_target_count": 140,
+      "sara_accepted_count": 93,
+      "sara_eligible_retention": 0.6642857142857143,
+      "sara_class_coverage": 1.0,
+      "sara_selected_for_review": 10,
+      "sara_completed_reviews": 0,
+      "target_text_status": "UNAVAILABLE_NO_SUPPORTED_TARGET_TEXT",
+      "new_gt_or_model_results": false
+    }
+  ],
+  "synthetic_sara_demo": {
+    "status": "OFFLINE_TESTED",
+    "exit_code": 0,
+    "targets": 3,
+    "accepted": 2,
+    "completed_reviews": 2,
+    "mock_calls": 4,
+    "live_calls": 0
+  },
+  "gcn_synthetic_forward": {
+    "forward": "PASS",
+    "shape": [
+      4,
+      2
+    ],
+    "training_runs": 0,
+    "GT_accessed": false
+  },
+  "policy_002_equivalence": false,
+  "tests_report": "reports/offline_test_results.json",
+  "environment": "configs/offline_tested_environment.json",
+  "limitations": [
+    "All840 raw-byte admission incomplete; no raw parsing",
+    "Historical exact Policy002 thresholds unavailable; defaults are unvalidated reconstruction decisions",
+    "Frozen real-target text/context absent from this runtime intake; no completed real-target verification",
+    "Neighbor adapter float64 is not historicalTorchfloat32 identity near ties",
+    "Full real-target prompt parity not executed",
+    "GCN optimizer/training and real evaluation not executed",
+    "Offline ledger is not durable or live-ready",
+    "No improved accuracy or generalization established"
+  ],
+  "historical_artifacts_modified": false,
+  "provider_calls": 0,
+  "real_training_runs": 0,
+  "GT_decoded": false,
+  "github": "PUSH_PENDING_NO_REMOTE",
+  "drive_backup": "NOT_UPLOADED"
+}

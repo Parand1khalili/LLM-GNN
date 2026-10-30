@@ -1,0 +1,30 @@
+{
+  "python": "3.12.14",
+  "environment": "local .venv, system-site-packages for existing build/runtime prerequisites",
+  "versions": {
+    "torch": "2.15.0+cpu",
+    "torch-geometric": "2.7.0",
+    "tiktoken": "0.14.0",
+    "numpy": "2.3.5",
+    "setuptools": "84.2.1",
+    "pip": "25.0.1",
+    "typing_extensions": "4.16.0"
+  },
+  "optional_cpu_backend_installed": true,
+  "install_sources": [
+    "https://download.pytorch.org/whl/cpu",
+    "https://pypi.org/simple"
+  ],
+  "tls": "Initial issuer-certificate failure resolved using existing Windows-trusted CA roots plus certifi in a venv-local bundle; verification never disabled",
+  "first_torch_install_exit_code": 1,
+  "successful_cpu_install_exit_code": 0,
+  "pyg_install_exit_code": 0,
+  "tiktoken_install_exit_code": 0,
+  "dependency_consistency": "pip check: No broken requirements found",
+  "historical_environment_reproduced": false,
+  "public_tokenizer": "cl100k_base",
+  "public_tokenizer_sha256": "223921b76ee99bde995b7ff738513eef100fb51d18c93597a113bcffe865b2a7",
+  "provider_calls": 0,
+  "training_runs": 0,
+  "GT_decoded": false
+}
