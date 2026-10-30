@@ -21,7 +21,7 @@ const source = readFileSync(resolve(dirname(resolve(manifestPath)),manifest.sour
 assert.ok(source.length < 10000000, 'Oversized topology source');
 assert.equal(hash(source),manifest.sha256,'Topology source hash conflict');
 const raw = JSON.parse(source);
-assert.deepEqual(Object.keys(raw).sort(), ['nodes','edges']);
+assert.deepEqual(Object.keys(raw).sort(), ['edges','nodes']);
 assert.equal(raw.edges.length,manifest.rawEdgeCount);
 const canonical = new Map();
 for (const pair of raw.edges) {

@@ -1,3 +1,4 @@
+import type { Topology } from './topology';
 import { TOPOLOGY_SHA256 } from './topology-pin';
 import { validateTopology, topologyAtlas } from './topology';
 import { useEffect, useState } from 'react';
@@ -40,10 +41,12 @@ export function Overview({ data, selected, onSelect, navigate }: SelectionProps 
 
 export function Explore({ data, selected, onSelect, navigate }: SelectionProps & { navigate: (page: string) => void }) {
   const [query, setQuery] = useState('');
+  const [listLimit, setListLimit] = useState(100);
   const [filter, setFilter] = useState('all');
   const [view, setView] = useState(() => window.matchMedia('(max-width: 640px)').matches ? 'list' : 'graph');
   const [scope, setScope] = useState('evidence');
   const [full, setFull] = useState<Atlas | null>(null);
+  const [topologyInfo, setTopologyInfo] = useState<Topology | null>(null);
   const [topologyError, setTopologyError] = useState('');
   const [focus, setFocus] = useState(false);
   useEffect(() => {
@@ -54,7 +57,9 @@ export function Explore({ data, selected, onSelect, navigate }: SelectionProps &
       const bytes = await response.arrayBuffer();
       const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(v=>v.toString(16).padStart(2,'0')).join('');
       if (digest !== TOPOLOGY_SHA256) throw new Error('Topology checksum conflict');
-      setFull(topologyAtlas(validateTopology(JSON.parse(new TextDecoder().decode(bytes)),data),data));
+      const topology = validateTopology(JSON.parse(new TextDecoder().decode(bytes)),data);
+      setTopologyInfo(topology);
+      setFull(topologyAtlas(topology,data));
     }).catch(e=>{ if(e.name!=='AbortError') setTopologyError(e.message); });
     return ()=>controller.abort();
   },[data]);
@@ -63,7 +68,7 @@ export function Explore({ data, selected, onSelect, navigate }: SelectionProps &
   const displayData = focus && selected !== null ? {...graphData, nodes:graphData.nodes.filter(n=>n.id===selected||adjacent.includes(n.id)), edges:graphData.edges.filter(e=>(e.source===selected||adjacent.includes(e.source))&&(e.target===selected||adjacent.includes(e.target)))} : graphData;
   const matches = searchNodes(displayData, query, filter);
   const node = data.nodes.find(n => n.id === selected);
-  return <><PageHeading number="01" title="A closer look at" italic="the evidence.">A partial network. A traceable record.<br />Select a node to follow what the study actually captured.</PageHeading>
+  return <><PageHeading number="01" title="A closer look at" italic="the evidence.">Full topology. Selected research evidence.<br />Choose a view, then follow its source trail.</PageHeading>
     <div className="method-filters" aria-label="Graph scope"><button aria-pressed={scope==='evidence'} onClick={()=>setScope('evidence')}>Research Evidence</button><button aria-pressed={scope==='full'} onClick={()=>setScope('full')}>Full Cora Graph</button><button aria-pressed={focus} onClick={()=>setFocus(!focus)}>Selected node + neighbors</button></div>
     {scope==='full' && !full && <section className="unavailable" role="status"><h2>Full topology unavailable</h2><p>{topologyError || (TOPOLOGY_SHA256 ? 'Loading and validating admitted topology…' : 'No verified full topology has been admitted. Missing: cora_topology.json, containing all canonical global node IDs and edges, plus its reviewed manifest and node-ID mapping evidence. Pickle and .pt files are not opened.')}</p><p>The Research Evidence subgraph remains available below; it is not the full Cora graph.</p></section>}
     {scope==='full' && full && <p className="unavailable">Full admitted topology · {full.nodes.length} nodes · {full.edges.length} unique undirected edges. Full-topology adjacency is separate from the selected prompt evidence in the research inspector.</p>}
@@ -75,11 +80,12 @@ export function Explore({ data, selected, onSelect, navigate }: SelectionProps &
     <div className={`atlas-workspace ${view === 'list' ? 'list-view' : ''}`}><div className="atlas-main">
       {view === 'graph' && <><Graph data={displayData} selected={selected} onSelect={onSelect} visible={matches.map(n => n.id)} /><div className="graph-legend"><span><i className="dot target" />Annotation target</span><span><i className="dot" />Recorded context</span><span><i className="dot focus" />Selected node</span><span>— Recorded edge</span></div></>}
       <div className={`node-browser ${view === 'graph' ? 'graph-alternative' : ''}`}><div className="node-list-heading"><span className="eyebrow">ACCESSIBLE NODE INDEX</span><span>{matches.length} records</span></div>
-        {matches.length === 0 ? <div className="empty-state"><h3>No recorded matches</h3><p>Try a global node ID or a shorter text fragment.</p><button className="text-button" onClick={() => { setQuery(''); setFilter('all'); }}>Clear search and filter</button></div> : <div className="node-list" role="group" aria-label="Recorded nodes">{matches.map(n => <button key={n.id} aria-pressed={selected === n.id} onClick={() => onSelect(n.id)}><span className={`dot ${n.target ? 'target' : ''}`} /><strong>#{n.id}</strong><span>{n.text ? n.text.slice(0, 105) : 'Context node · article text unavailable'}</span><small>{n.target ? 'Target' : 'Context'}</small></button>)}</div>}
+        {matches.length === 0 ? <div className="empty-state"><h3>No recorded matches</h3><p>Try a global node ID or a shorter text fragment.</p><button className="text-button" onClick={() => { setQuery(''); setFilter('all'); }}>Clear search and filter</button></div> : <div className="node-list" role="group" aria-label="Recorded nodes">{matches.slice(0,listLimit).map(n => <button key={n.id} aria-pressed={selected === n.id} onClick={() => onSelect(n.id)}><span className={`dot ${n.target ? 'target' : ''}`} /><strong>#{n.id}</strong><span>{n.text ? n.text.slice(0, 105) : 'Context node · article text unavailable'}</span><small>{n.target ? 'Target' : 'Context'}</small></button>)}</div>}{matches.length>listLimit && <button className="button full" onClick={()=>setListLimit(listLimit+100)}>Show more nodes ({Math.min(listLimit,matches.length)} of {matches.length} shown)</button>}
       </div>
-      <div className="atlas-footnote">Position is a display layout, not a measurement. Displayed connections do not establish complete 1-hop or 2-hop neighborhoods.</div>
+      <div className="atlas-footnote">Position is a display layout, not a measurement. {scope==='full' && full ? 'Full source adjacency is admitted; focus and search may show only a subset.' : 'Displayed research connections do not establish complete neighborhoods.'}</div>
     </div><div>{scope==='full' && full && selected!==null && <section className="inspector"><h2>Topology node #{selected}</h2><p>{adjacent.length} authentic full-topology neighbors. Research annotations exist only for the frozen target cohort.</p><div className="node-chips">{adjacent.map(id=><button key={id} onClick={()=>onSelect(id)}>#{id}</button>)}</div></section>}<Inspector data={data} node={node} onSelect={onSelect} onDesk={() => navigate('desk')} /></div></div>
     <details className="source-trail"><summary>Coverage, graph identity & keyboard access</summary><p>Hover highlights only recorded neighbors and incident edges. Search highlights matches without changing topology. Use Node list for keyboard or mobile exploration; each record is a button. On the graph, + / − zoom, Home fits, and left / right select a recorded adjacent node.</p><p className="small">Graph fingerprint, recorded by source artifacts:</p><code className="hash">{data.graphHash}</code><p>Text excerpts exist for 140 targets only. Canonical titles, checkpoint weights, complete graph bytes and raw model responses are not shipped.</p></details>
+    {scope==='full' && topologyInfo && <details className="source-trail"><summary>Full topology provenance & duplicate accounting</summary><p>Exact original Cora graph bytes matched the historical SHA-256. Canonical row indices were preserved; all 140 target texts/degrees and 525 research edges matched. No GT tensor was decoded.</p><p>{topologyInfo.rawEdgeCount} original directed entries; {topologyInfo.edges.length} unique undirected edges. {topologyInfo.duplicatesRemoved} reverse/repeated entries coalesced for display; no edges inferred.</p><p className="small">Original graph SHA-256</p><code className="hash">{topologyInfo.graphHash}</code><p className="small">Sanitized source JSON SHA-256</p><code className="hash">{topologyInfo.sourceHash}</code><p className="small">Reviewed admission manifest SHA-256</p><code className="hash">{topologyInfo.manifestHash}</code></details>}
     <SourceTrail data={data} filter="authentic/neighborhoods.json" />
   </>;
 }

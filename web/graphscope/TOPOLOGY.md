@@ -1,5 +1,9 @@
 # Topology coverage and admission
 
+**Current status:** exact historical topology is now admitted: 2,708 nodes and
+5,278 unique undirected edges. See [recovery evidence and commands](TOPOLOGY_RECOVERY.md).
+The earlier missing-source investigation below describes the pre-recovery state.
+
 The current 478 nodes / 525 unique undirected edges are the union of the 140
 FeatProp targets, their recorded selected neighbors (at most three each), and
 explicitly connected pairs among those neighbors. The exporter sorts endpoints
@@ -66,4 +70,4 @@ Search/filter and selected-node focus work on the active topology. Focus is
 explicitly a subset. Large graphs use deterministic display positions rather than
 an expensive force layout; edges are hidden during viewport movement. Positions
 have no scientific meaning. Non-research nodes have no invented article text,
-annotation or verifier evidence. No full topology was admitted in this milestone.
+annotation or verifier evidence. The initial UI milestone had no admitted full topology; the subsequent recovery milestone now does.

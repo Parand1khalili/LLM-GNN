@@ -85,7 +85,7 @@ export function Graph({ data, selected, onSelect, visible, compact = false }: Pr
       }} />
     {!ready && !failed && <div className="graph-message" role="status">Arranging recorded evidence…</div>}
     {failed && <div className="graph-message" role="alert">Graph could not load. Use the node list to inspect all recorded evidence.</div>}
-    <div className="graph-watermark"><span>CORA / FEATPROP</span><span>RECORDED TOPOLOGY</span></div>
+    <div className="graph-watermark"><span>CORA / GLOBAL NODE IDS</span><span>DISPLAY LAYOUT</span></div>
     <div className="graph-controls" aria-label="Graph controls">
       <button aria-label="Zoom in" onClick={() => cy.current?.zoom(cy.current.zoom() * 1.3)}>+</button>
       <button aria-label="Zoom out" onClick={() => cy.current?.zoom(cy.current.zoom() / 1.3)}>−</button>

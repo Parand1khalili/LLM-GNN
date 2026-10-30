@@ -1,5 +1,11 @@
 # GraphScope v2 verification
 
+Subsequent topology milestone: see [TOPOLOGY_RECOVERY.md](TOPOLOGY_RECOVERY.md).
+The original graph is now hash-admitted through non-executing static ZIP extraction:
+2,708 nodes and 5,278 unique undirected edges. Updated checks: 14 JavaScript and
+four Python tests PASS, TypeScript/build PASS; seven public files. Earlier numbers
+below describe the initial research-subgraph UI milestone.
+
 Date: 2026-10-30, America/Los_Angeles. Engineering milestone, not a scientific run.
 Research base: `3e56105d51017bcd19729b417bf3eea3987c0c11` on existing `main`.
 

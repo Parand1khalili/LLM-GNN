@@ -53,7 +53,9 @@ Hash routes preserve section, selected global node ID and experiment condition.
 
 ## Versioned data and scientific boundaries
 
-`public/data/atlas.v2.json` is the only public data file. Its reviewed digest is
+`public/data/atlas.v2.json` contains the research evidence. The separately pinned
+`public/data/full-topology.json` now provides the exact original Cora topology:
+2,708 nodes and 5,278 unique undirected edges. See [recovery evidence](TOPOLOGY_RECOVERY.md). Its reviewed digest is
 in `src/data-pin.ts`. Both browser and tests verify the checksum and strict schema.
 The frontend works from a checkout without the private recovery archive.
 
@@ -77,8 +79,9 @@ statistics from saved values; no LLM or GCN experiment is reproduced here.
 
 The topology is partial. Missing edges are not inferred. Source-reported degree
 and displayed degree are separate. Canonical titles are unavailable; excerpts
-are never split into inferred titles. The original graph tensor was not opened;
-graph identity follows pinned source records. No untrusted pickle, GT tensor,
+are never split into inferred titles. The research-subgraph exporter does not open the original graph tensor;
+its graph identity follows pinned source records. Full-topology recovery independently
+hash-verifies the original archive and reads only its edge storage without unpickling. No untrusted pickle, GT tensor,
 raw response body or historical script is loaded.
 
 B1 is a local paper-inspired baseline, not exact paper B0. Both annotation arms
@@ -93,7 +96,7 @@ not a calibrated probability. GCN snapshots never enter verifier preview inputs.
 
 Missing data: PageRank2 source cohort/results; canonical titles; context-node
 article text and LLM annotations; genuine verifier/arbitration/abstention outputs;
-SARA GCN outcomes; checkpoint weights, probabilities and original full graph.
+SARA GCN outcomes; checkpoint weights, probabilities and original graph tensor in the public bundle. Full sanitized topology is available separately.
 
 The foundational paper and supplied proposal were inspected as PDF text, alongside
 `docs/SCIENTIFIC_PROTOCOL.md`. Published method, proposal, historical protocol and
