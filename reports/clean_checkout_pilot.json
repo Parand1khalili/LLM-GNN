@@ -1,0 +1,42 @@
+{
+  "scope": "Final staged-source clean checkout snapshot without .git, branch or remote creation",
+  "snapshot_path": "C:\\Users\\Admin\\Documents\\ChatGPT\\llm-gnn\\.local_artifacts\\pilot-clean-ueizmcov",
+  "files_materialized": 102,
+  "module_import_from_snapshot": true,
+  "stdlib_mode_disables_site_packages": true,
+  "runs": [
+    {
+      "mode": "stdlib",
+      "exit_code": 0,
+      "target_count": 140,
+      "pilot_nodes": [
+        637,
+        1243,
+        130,
+        682,
+        2396,
+        653
+      ],
+      "pilot_manifest_sha256": "9d3198fc334614a2a0dec8976c6e4bb29b0244bfba0d0e8a74d4b954d7987357",
+      "artifact_manifest_sha256": "55be9c3f2519eb9953d915c74e7d891769729e71a6f1d3eb9a8e276bd9d3eb3c"
+    },
+    {
+      "mode": "tokenized",
+      "exit_code": 0,
+      "target_count": 140,
+      "pilot_nodes": [
+        637,
+        1243,
+        130,
+        682,
+        2396,
+        653
+      ],
+      "pilot_manifest_sha256": "9fd65d82e3cab296afc503813b97b0c0af9e8f4dcb41cd0be1aa20ac34ef1f96",
+      "artifact_manifest_sha256": "29fa95c7d34f5826b628509e6bad2baced83ac986ebfbc7cadc4bb36d4c31b41"
+    }
+  ],
+  "provider_calls": 0,
+  "training_runs": 0,
+  "GT_decoded": false
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "sara.authentic_inputs.v1",
+  "status": "HASH_VERIFIED_FROZEN_TEXT_AND_NEIGHBORHOODS",
+  "files": [
+    {
+      "local_path": ".local_artifacts/authentic/b1_prompts.json",
+      "original_path": "Prnd-project/LLMGNN_reference/experiments/matched_cora/featprop_prompts_001/b1/complete_prompts.json",
+      "drive_file_id": "1u8rJJYuUK-5oxHtHig-pSbvTZnfxlD8v",
+      "sha256": "d7416cb83070b4a5d1ceaee061fe3fb81b6646abcee5cdabe58db33c5b8fdf29",
+      "size_bytes": 212605
+    },
+    {
+      "local_path": ".local_artifacts/authentic/narrative_prompts.json",
+      "original_path": "Prnd-project/LLMGNN_reference/experiments/matched_cora/featprop_prompts_001/narrative_v0/complete_prompts.json",
+      "drive_file_id": "1x7Eohkao8YM_2yoYdOo8fTNIvSVyqevj",
+      "sha256": "cc8b51db94ecf9c8f4d37a8a2ace2746ec0805cb0b3fd44cc8eac54088a7f8ed",
+      "size_bytes": 405405
+    },
+    {
+      "local_path": ".local_artifacts/authentic/neighborhoods.json",
+      "original_path": "Prnd-project/LLMGNN_reference/experiments/matched_cora/featprop_prompts_001/target_diagnostics.json",
+      "drive_file_id": "1FXR8ZmBSVJSLilzGXTRT2MIPdPpgpEJh",
+      "sha256": "1bd0be9dba2760159f30d72f77dc6036729b2ff10182d220f7673823af95f56e",
+      "size_bytes": 278310
+    },
+    {
+      "local_path": ".local_artifacts/authentic/prompt_receipt.json",
+      "original_path": "Prnd-project/LLMGNN_reference/experiments/matched_cora/featprop_prompts_001/freeze_receipt.json",
+      "drive_file_id": "1KGiZ1NUZ0ww9UdOR2CAhTnUXYmJjQ8xt",
+      "sha256": "bdd95ba25cacc20efe94567317c1fb747e565218273351d2520a54ca02f2ab19",
+      "size_bytes": 1961
+    },
+    {
+      "local_path": ".local_artifacts/authentic/request_manifest.json",
+      "original_path": "Prnd-project/LLMGNN_reference/experiments/matched_cora/featprop_prompts_001/request_manifest.json",
+      "drive_file_id": "1P57zkpDBf1PzlEftdWXMvp9Nc1EFZURq",
+      "sha256": "7a0266129f99ef87fd3e715ab68c015176b48b90bb8b2955c65285aac5492ab1",
+      "size_bytes": 285214
+    }
+  ],
+  "canonical_graph_recomputed": false,
+  "raw_response_hashes_verified": 0
+}

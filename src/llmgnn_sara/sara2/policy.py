@@ -7,6 +7,7 @@ choices, not fitted to historical route counts or ground-truth diagnostics.
 from dataclasses import dataclass
 import math
 from typing import Iterable
+from ..io.evidence import NeighborhoodEvidence
 
 
 CLASSES = ("rule_learning", "neural_networks", "case_based", "genetic_algorithms",
@@ -38,6 +39,7 @@ class Pair:
     b1: Annotation
     narrative_v0: Annotation
     text: str = ""
+    neighborhood: NeighborhoodEvidence | None = None
 
     def __post_init__(self):
         if type(self.b1) is not Annotation or type(self.narrative_v0) is not Annotation:
@@ -46,6 +48,9 @@ class Pair:
             raise ValueError("Annotation node IDs differ")
         if type(self.text) is not str:
             raise TypeError("Text must be a string")
+        if self.neighborhood is not None and (type(self.neighborhood) is not NeighborhoodEvidence
+                or self.neighborhood.target_id != self.node_id):
+            raise ValueError("Neighborhood target differs from annotations")
 
     @property
     def node_id(self):

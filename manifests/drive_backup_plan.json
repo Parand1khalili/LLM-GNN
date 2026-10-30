@@ -8,14 +8,174 @@
     "approved": false,
     "drive_folder_id": null
   },
-  "scope": "Incremental milestone reports, provenance manifests, environment and durable state; no raw bodies, weights, source-tree duplicates or local credentials",
+  "scope": "Curated milestone metadata and the sealed authentic pilot artifacts only; no historical raw responses, weights, credential files or source-tree duplicates",
   "code_backup": {
     "method": "Owner-managed private GitHub push",
     "status": "PUSH_PENDING",
-    "verified_implementation_commit": "c3a4e00b03ad8260e3f2d3be28bec1a976301b56",
+    "parent_before_authentic_milestone": "e8cb5839e891465d9e6c0d459b992b95440e3cda",
     "remote_verified": false
   },
   "files": [
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/dry_run_r0.json",
+      "bytes": 367844,
+      "sha256": "487846415f5228b781b1fea33e5bc5f59f1b72e971fb51f1f8f63984b3f92721"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/dry_run_semantic.json",
+      "bytes": 394549,
+      "sha256": "b7017704df8c7e71279c78e4dffa494f39e5d46eb3cd659d2949d0e8e5c85bc4"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/gapapi/blind-1243.json",
+      "bytes": 4888,
+      "sha256": "b00871963a5243434973cca42177885f7af22a61a3b1fd815dc832a3a6028859"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/gapapi/blind-130.json",
+      "bytes": 5609,
+      "sha256": "bdeef5c4da17554752de3e0502d7683a22de134bd31b00d768f41b6c9c225a2d"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/gapapi/blind-2396.json",
+      "bytes": 3925,
+      "sha256": "058b8f0f31363ada6d91d0d8d8f0ffee3fe84971fd5cd6086f83930bd3447011"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/gapapi/blind-637.json",
+      "bytes": 3231,
+      "sha256": "40d018fb63e7e9a1b411bc250afacf09438e79ed15fea97f7570ca54e0a5bd95"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/gapapi/blind-653.json",
+      "bytes": 4879,
+      "sha256": "508d1ef7ac9a1e25933a26c2891784b34b0b3cd7911bbb22a8b362f83627b031"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/gapapi/blind-682.json",
+      "bytes": 5944,
+      "sha256": "11e4520df872b0e4412297860fad739588fe05515df45c3fe152af8b22395da0"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/gapapi/compare-template-1243.json",
+      "bytes": 5206,
+      "sha256": "5c40349233f1d64ca5152bf74138f0cbb6e9967e1cb86108a90e9faff382d8d0"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/gapapi/compare-template-130.json",
+      "bytes": 5927,
+      "sha256": "7eb76cd866adb36124c630e42a5bfe2b4069b598db40af1a991b4e92b1145930"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/gapapi/compare-template-2396.json",
+      "bytes": 4243,
+      "sha256": "50f33952512f5483ff348b13107af9a4636a19e1df8122df0e3a9cd98e8c8374"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/gapapi/compare-template-637.json",
+      "bytes": 3549,
+      "sha256": "176de18f055aa42ea5e88607bad9ef2335cd75e9e75c819d2a22f8124f593bfc"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/gapapi/compare-template-653.json",
+      "bytes": 5195,
+      "sha256": "9ed297ac6bc4d6cb0f5b8584f7a85df2be99469d3e26f469e07401d615d560d8"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/gapapi/compare-template-682.json",
+      "bytes": 6262,
+      "sha256": "59d005a374e566137c42c1eb0a7d302b3027f038bfaf4f66a92cb6fa9c3eb574"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/gcn_plans.json",
+      "bytes": 299782,
+      "sha256": "36f80439e3ec558b697de9f1241bb330bd510959a4665d9aa599ff5e3d91de23"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/pilot/pilot_protocol.json",
+      "bytes": 4048,
+      "sha256": "00629e8c0a77e68374405bb51581f1d114906e70a8f7d27fd19c4f2eb161c39a"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/pilot/requests/blind-1243.json",
+      "bytes": 4611,
+      "sha256": "0e1c51d807f507aeb812133fb0a9503ae62bf1f6d8e51c5782ab0709702aeaab"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/pilot/requests/blind-130.json",
+      "bytes": 5328,
+      "sha256": "af984f4b69c633909b2d77979bfc827a1db11b088148a5cc9ae1ff07961da8e2"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/pilot/requests/blind-2396.json",
+      "bytes": 3648,
+      "sha256": "f0f3d38d0e7c8bed034c8abb1db8ef8bc12b8bb1cf4c13dbcd205c9470ec1d5e"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/pilot/requests/blind-637.json",
+      "bytes": 2954,
+      "sha256": "e270bffcd2eaa229d722f98a4c6e5c1bed739f1240f92cb82b791f10842f2547"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/pilot/requests/blind-653.json",
+      "bytes": 4602,
+      "sha256": "559c5295e0de043ce56f42792759d12c7c5be132f78538c0a10f55c0a60a726e"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/pilot/requests/blind-682.json",
+      "bytes": 5667,
+      "sha256": "291144497953d17a0c067510075099dab594dda6045f9ac933d2340213f9f936"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/pilot/SHA256.json",
+      "bytes": 1269,
+      "sha256": "9fd65d82e3cab296afc503813b97b0c0af9e8f4dcb41cd0be1aa20ac34ef1f96"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/pilot/templates/compare-1243.json",
+      "bytes": 4923,
+      "sha256": "313bb8c6ba4a31c6178e3b79e8a74d0d0c5b69752cba811f4eb02cc4af20edb7"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/pilot/templates/compare-130.json",
+      "bytes": 5640,
+      "sha256": "226e9fd38385aba5b149b00e3b153ac143be72a13d6120645bd02924e64ebd13"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/pilot/templates/compare-2396.json",
+      "bytes": 3960,
+      "sha256": "a6d632c22b062231b2e9fee9260bb2c8f75cc425438a9e6ce9b21aae048700b3"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/pilot/templates/compare-637.json",
+      "bytes": 3266,
+      "sha256": "a8b36933ea41fe489aa16cba1a3e0a52d9ff7ebead3d111d403212c4d76d618d"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/pilot/templates/compare-653.json",
+      "bytes": 4912,
+      "sha256": "68e9dec3d4480ff156f1d4db0ea9e1ec4cd4149c3b83049285fffadeee18719d"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/pilot/templates/compare-682.json",
+      "bytes": 5979,
+      "sha256": "456e0fd5ad4457a3eef7362c91403c7717b58d303f19a90c46b69a510fe83cc8"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/provider_compatibility.json",
+      "bytes": 722,
+      "sha256": "54767ab824cf8b4a700729b335be61af63f4f10599ff072f3dd94fdd0e6c1a92"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/SHA256.json",
+      "bytes": 3005,
+      "sha256": "29fa95c7d34f5826b628509e6bad2baced83ac986ebfbc7cadc4bb36d4c31b41"
+    },
+    {
+      "local_path": ".local_artifacts/pilot-gapapi/summary.json",
+      "bytes": 3441,
+      "sha256": "db0051389a7b640062177bf12baf619fba4fff16936f64d52092e825f33d7e7b"
+    },
     {
       "local_path": "configs/historical_successful_environment.json",
       "bytes": 428,
@@ -32,14 +192,24 @@
       "sha256": "20cc49c3f8137a6a7ad1ae3b0b3a317c57f2d094ebc0a1ab6574df4709dc18bd"
     },
     {
+      "local_path": "docs/PILOT_PROTOCOL.md",
+      "bytes": 6800,
+      "sha256": "ffe7e2b61dc8456ea387e39f71dbc229719aa1348e312479c978c47cae26fa97"
+    },
+    {
       "local_path": "docs/SCIENTIFIC_PROTOCOL.md",
       "bytes": 7188,
       "sha256": "a41b565bf459a03eae5538b0a52f13caf6025e51e59a84c90cc60a3cec2b8284"
     },
     {
       "local_path": "EXPERIMENT_REGISTRY.jsonl",
-      "bytes": 2061,
-      "sha256": "301746d7a3e962339a2079435a9bf4ad9ee95422a9ca3a34af468ea89470b90d"
+      "bytes": 2942,
+      "sha256": "dae300ac4e9abda805bd6fa457cbd557cfdb63d85f6e6e6f373ac1389b8c20b3"
+    },
+    {
+      "local_path": "manifests/authentic_inputs.json",
+      "bytes": 2099,
+      "sha256": "b0c203a1da339cd9c3229bcca5fd486e3b4181957522b4a445c7a0177412c294"
     },
     {
       "local_path": "manifests/frozen_artifacts.json",
@@ -68,13 +238,33 @@
     },
     {
       "local_path": "PROJECT_STATE.md",
-      "bytes": 3713,
-      "sha256": "d4b3e11ec36b9475964878ca16c5b56afe2ffd579a28772f9a0afe6d09156db5"
+      "bytes": 4988,
+      "sha256": "31342ca81489ce56065bbef8f16841bd47cc74f49492d06971f3272946e46463"
+    },
+    {
+      "local_path": "README.md",
+      "bytes": 7356,
+      "sha256": "27338463f0b54860035e050aaadce4e8af85500ec3d8db25dd566889abbbbb42"
+    },
+    {
+      "local_path": "reports/authentic_pilot_tests.json",
+      "bytes": 1242,
+      "sha256": "b07713f1fcfe3003fdf15ffe9cbcf34b4b579f216634cec829e3febbee710d33"
+    },
+    {
+      "local_path": "reports/authentic_pilot_verification.json",
+      "bytes": 6419,
+      "sha256": "66cccb2e871affb6bfb94dcac038f1d6e424b100cf0fea893c0dab4d15f36759"
     },
     {
       "local_path": "reports/backup_readiness.json",
       "bytes": 730,
       "sha256": "864da269dba6e42cfa0ef4db739d9425ac3e340fd5f8678bdcef155bcae10d08"
+    },
+    {
+      "local_path": "reports/clean_checkout_pilot.json",
+      "bytes": 1204,
+      "sha256": "0ffb40e084f772c86513d0409af29eaf10337106fd61dabeddc9002057e5faf2"
     },
     {
       "local_path": "reports/offline_implementation_verification.json",
@@ -97,12 +287,13 @@
       "sha256": "dcd04a72095c809a176a26f18fefc5a7713aa7ac8ce858436a432ad2c5a2ae6e"
     }
   ],
-  "total_bytes": 479481,
+  "total_bytes": 1695765,
   "historical_artifact_references": "manifests/frozen_artifacts.json (originals remain in historical archive; no duplicate upload planned)",
   "user_work_excluded": [
-    "docs/MANUAL_GITHUB_BACKUP.md",
-    "SARA_PROJECT_RECOVERY_HANDOFF_2026-10-29.md",
-    "SARA_RECOVERY_MASTER_PLAN_2026-10-30_FA.md"
+    ".github/",
+    ".pnpm-store/",
+    "web/",
+    "docs/MANUAL_GITHUB_BACKUP.md"
   ],
   "excluded": [
     ".git/",
@@ -117,5 +308,6 @@
   ],
   "remote_upload_performed": false,
   "remote_metadata_verified": false,
-  "remote_readback_verified": false
+  "remote_readback_verified": false,
+  "selected_local_artifacts_exception": "Only .local_artifacts/pilot-gapapi files explicitly listed above; other local caches/partial runs excluded"
 }

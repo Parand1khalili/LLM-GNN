@@ -42,57 +42,19 @@ def _pairs(dataset):
                  for a, b in zip(b1, narrative))
 
 
-def _plan(dataset, cohort, loss, accepted=None, arm="narrative_v0"):
-    from .downstream import GCNConfig, PseudoLabel, gcn_plan
-    # The five supplementary replacement targets are a frozen source property,
-    # not a correctness-derived exclusion or a newly tuned cohort.
-    excluded = tuple(p.target_id for p in dataset.by_arm("b1")
-                     if p.samples[0].source_kind == "supplementary")
-    records = dataset.by_arm(arm)
-    if accepted is None:
-        labels = tuple(PseudoLabel(p.target_id, p.class_index, p.confidence_percent)
-                       for p in records if cohort != "primary" or p.target_id not in excluded)
-    else:
-        candidates = {}
-        for p in dataset.predictions:
-            candidates.setdefault(p.target_id, set()).add(p.class_index)
-        converted = []
-        for d in accepted:
-            if type(d) is not dict or type(d.get("accepted")) is not bool:
-                raise ValueError("Invalid arbitration decision")
-            if not d["accepted"]:
-                if d.get("training_class_index") is not None:
-                    raise ValueError("Abstention cannot assign a training label")
-                continue
-            if (d.get("third_class_training_allowed") is not False
-                    or d.get("third_class_proposal") is not None
-                    or type(d.get("node_id")) is not int
-                    or type(d.get("training_class_index")) is not int
-                    or d["training_class_index"] not in candidates.get(d["node_id"], set())):
-                raise ValueError("Unapproved third-class training label")
-            if cohort != "primary" or d["node_id"] not in excluded:
-                converted.append(PseudoLabel(d["node_id"], d["training_class_index"],
-                                             d["label_confidence_percent"]))
-        labels = tuple(converted)
-        if not labels:
-            return {"status": "BLOCKED_NO_ACCEPTED_LABELS", "train_count": 0,
-                    "training_runs": 0, "GT_accessed": False}
-    result = gcn_plan(dataset.target_ids, labels, cohort=cohort,
-                      excluded_ids=excluded if cohort == "primary" else (),
-                      config=GCNConfig(loss=loss), allow_abstention=accepted is not None)
-    result["pseudo_label_origin"] = arm if accepted is None else "RECONSTRUCTED_SARA_OFFLINE"
-    return result
-
-
-def _baseline_plans(dataset, cohort, loss, arm):
-    arms = ("b1", "narrative_v0") if arm == "both" else (arm,)
-    return {name: _plan(dataset, cohort, loss, arm=name) for name in arms}
+from .downstream.frozen import plan_from_frozen as _plan, baseline_plans as _baseline_plans
 
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("doctor", help="Offline dependencies and execution boundaries")
+    pilot = sub.add_parser("pilot-prepare", help="Authentic140 dry-run, immutable six-node pilot; no execution")
+    pilot.add_argument("--frozen-root", type=Path, required=True)
+    pilot.add_argument("--authentic-root", type=Path, required=True)
+    pilot.add_argument("--output", type=Path, required=True)
+    pilot.add_argument("--budget", type=int, default=37)
+    pilot.add_argument("--tokenizer-cache", type=Path)
     replay = sub.add_parser("replay-frozen", help="Re-vote stored parsed samples; never raw parsing")
     _inputs(replay)
     sara = sub.add_parser("sara3-offline", help="GT-free offline policy/verifier decisions")
@@ -114,6 +76,10 @@ def main(argv=None) -> int:
     try:
         if args.command == "doctor":
             result = doctor()
+        elif args.command == "pilot-prepare":
+            from .pilot.workflow import prepare_authentic
+            result = prepare_authentic(args.frozen_root, args.authentic_root, args.output,
+                                       budget=args.budget, tokenizer_cache=args.tokenizer_cache)
         elif args.command == "replay-frozen":
             from .annotation.replay import replay_frozen
             result = replay_frozen(args.b1, args.narrative, args.selection)

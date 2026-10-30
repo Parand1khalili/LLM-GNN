@@ -104,7 +104,7 @@ class VerificationTests(unittest.TestCase):
         result = run_offline([pair()], 1, verifier=verifier)
         self.assertTrue(result["decisions"][0]["accepted"])
         self.assertEqual([c[0] for c in verifier.calls], ["blind", "compare"])
-        self.assertEqual(set(verifier.calls[0][1]), {"node_id", "text", "classes", "definitions"})
+        self.assertEqual(set(verifier.calls[0][1]), {"node_id", "text", "classes", "definitions", "neighborhood"})
         self.assertEqual(verifier.calls[1][1]["historical_candidates"], (0,))
 
     def test_third_class_is_proposal_only_not_training_label(self):

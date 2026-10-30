@@ -1,0 +1,32 @@
+{
+  "scope": "Authentic Cora inputs, pilot sealing/ledger, offline integration and existing regressions",
+  "tests_run": 102,
+  "passed": 101,
+  "errors": 0,
+  "failures": 0,
+  "skipped": [
+    {
+      "test": "test_real_filesystem_symlink_rejected (test_raw_recovery.BundleAndAdmissionTests.test_real_filesystem_symlink_rejected)",
+      "reason": "OS account cannot create symbolic links; ZIP symlink rejection is tested separately"
+    }
+  ],
+  "successful": true,
+  "elapsed_seconds": 118.047,
+  "syntax_files_checked": 44,
+  "command": ".venv/Scripts/python.exe -B -m unittest discover -s tests -v",
+  "provider_calls": 0,
+  "training_runs": 0,
+  "GT_decoded": false,
+  "resolved_initial_failures": [
+    "Existing BlindRequest schema test updated for allowed neighborhood evidence",
+    "SQLite connections explicitly closed to release Windows file locks",
+    "Moved GCN helper relative import corrected; earlier partial output was not reused"
+  ],
+  "followup_after_full_suite": {
+    "change": "Explicit evidence types and GT-free request validation at the wire boundary",
+    "command": ".venv/Scripts/python.exe -B -m unittest discover -s tests -p test_pilot.py -v",
+    "tests_run": 10,
+    "passed": 10,
+    "exit_code": 0
+  }
+}

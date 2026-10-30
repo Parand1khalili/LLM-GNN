@@ -10,6 +10,9 @@ from typing import Protocol
 from ..sara2.policy import Annotation, CLASSES, Pair, PolicyConfig, integer, route_r0, validated_pairs
 from .atlas import ATLAS, route_semantic, semantic_support
 from .ledger import OfflineLedger
+from ..io.evidence import NeighborhoodEvidence
+from .inputs import canonical_bytes, verifier_input
+import hashlib
 
 
 @dataclass(frozen=True)
@@ -19,6 +22,7 @@ class BlindRequest:
     text: str
     classes: tuple[str, ...] = CLASSES
     definitions: tuple[str, ...] = tuple(entry.definition for entry in ATLAS)
+    neighborhood: NeighborhoodEvidence | None = None
 
 
 @dataclass(frozen=True)
@@ -28,6 +32,8 @@ class ComparisonRequest:
     historical_candidates: tuple[int, ...]
     blind_class_index: int
     classes: tuple[str, ...] = CLASSES
+    definitions: tuple[str, ...] = tuple(entry.definition for entry in ATLAS)
+    neighborhood: NeighborhoodEvidence | None = None
 
 
 class OfflineVerifier(Protocol):
@@ -56,7 +62,7 @@ def validate_result(value: dict, text: str) -> dict:
     label, abstain, evidence = value["class_index"], value["abstain"], value["evidence"]
     if type(abstain) is not bool or type(evidence) is not list or len(evidence) > 4:
         raise ValueError("Invalid verifier fields")
-    if any(type(snippet) is not str or not snippet or len(snippet) > 512 or snippet not in text
+    if any(type(snippet) is not str or not snippet.strip() or len(snippet) > 512 or snippet not in text
            for snippet in evidence):
         raise ValueError("Evidence is not grounded in target text")
     if abstain:
@@ -105,13 +111,17 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
     ledger = ledger if ledger is not None else OfflineLedger()
     selected = (route_r0 if router == "r0" else route_semantic)(rows, budget)
     chosen = set(selected)
-    decisions, requests, estimated_chars = [], 0, 0
+    decisions, requests, estimated_chars, exact_inputs = [], 0, 0, []
 
     def invoke(node: int, phase: str, request):
         nonlocal requests, estimated_chars
-        payload = asdict(request)
+        payload = verifier_input(request.node_id, request.text, request.neighborhood,
+                                 candidates=request.historical_candidates if phase == "compare" else None,
+                                 blind_class=request.blind_class_index if phase == "compare" else None)
         request_id = f"offline:{node}:{phase}"
         ledger.begin(request_id, payload)
+        exact_inputs.append({"request_id": request_id, "payload": payload,
+                             "sha256": hashlib.sha256(canonical_bytes(payload)).hexdigest()})
         estimated_chars += len(str(payload))
         requests += 1
         try:
@@ -140,13 +150,13 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
             continue
         candidates = tuple(sorted({pair.b1.class_index, pair.narrative_v0.class_index}))
         try:
-            first = invoke(pair.node_id, "blind", BlindRequest(pair.node_id, pair.text))
+            first = invoke(pair.node_id, "blind", BlindRequest(pair.node_id, pair.text, neighborhood=pair.neighborhood))
             if first["abstain"]:
                 decisions.append(_decision(pair, None, "BLIND_ABSTENTION", True))
                 continue
             blind_class = first["class_index"]
             second = invoke(pair.node_id, "compare", ComparisonRequest(
-                pair.node_id, pair.text, candidates, blind_class))
+                pair.node_id, pair.text, candidates, blind_class, neighborhood=pair.neighborhood))
             proposal = blind_class if blind_class not in candidates else None
             if second["class_index"] is not None and second["class_index"] not in candidates:
                 proposal = second["class_index"]
@@ -179,6 +189,7 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
             "accepted_count": len(accepted), "abstention_count": len(rows) - len(accepted),
             "coverage": len(accepted) / len(rows) if rows else 0.0, "class_retention_counts": counts,
             "decisions": decisions, "ledger": ledger.snapshot(), "ledger_persistence": "IN_MEMORY_OFFLINE_ONLY_NOT_LIVE_READY",
+            "verifier_inputs": exact_inputs,
             "mock_verifier_calls": requests, "estimated_input_tokens_heuristic": math.ceil(estimated_chars / 4),
             "token_estimate_method": "payload_character_count_divided_by_4_NOT_PROVIDER_TOKENIZATION",
             "estimated_cost_usd": None, "cost_status": "NO_PROVIDER_PRICES_OR_LIVE_USAGE",
@@ -198,10 +209,8 @@ class LexicalFixtureVerifier:
         if not max(scores):
             return {"class_index": None, "abstain": True, "evidence": []}
         label = max(range(len(scores)), key=lambda i: (scores[i], -i))
-        # Exact original text is deliberately used as evidence in this tiny demo.
-        if len(text) > 512:
-            return {"class_index": None, "abstain": True, "evidence": []}
-        return {"class_index": label, "abstain": False, "evidence": [text]}
+        # shortcut: target-prefix quotes exercise schemas, not scientific evidence quality; replace for a live study.
+        return {"class_index": label, "abstain": False, "evidence": [text.strip()[:512]]}
 
     def blind(self, request: BlindRequest) -> dict:
         return self._result(request.text)

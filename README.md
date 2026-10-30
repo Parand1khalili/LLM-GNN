@@ -75,6 +75,25 @@ abstain and completed reviews remain zero. Retained high-confidence agreements
 are policy decisions, not measured verifier corrections. The explicit synthetic
 demo exercises blind-first/comparison verification, evidence, proposals and failures.
 
+## Authentic Cora pilot dry-run
+
+Authentic140 target texts and recorded graph-derived neighborhoods are now
+admitted from pinned project JSON, together with frozen votes and the public
+Class Atlas. No graph/model pickle or ground truth is read. See
+[pilot protocol and input restore instructions](docs/PILOT_PROTOCOL.md).
+
+```powershell
+.\.venv\Scripts\python.exe -B -m llmgnn_sara pilot-prepare --frozen-root .local_artifacts/frozen --authentic-root .local_artifacts/authentic --output .local_artifacts/pilot-gapapi --tokenizer-cache .local_artifacts/tokenizer_cache
+```
+
+The output must be new; existing seals are never overwritten. Omit the tokenizer
+flag on a standard-library-only checkout (estimates then use character counts).
+Exact fixture request inputs, routing decisions, abstentions, matched GCN plans
+and the six-node/twelve-call pilot seal are written outside Git. Fixture outputs
+are not measured scientific findings. Canonical graph adjacency is not independently
+recomputed. GapAPI/gpt-6-luna matches historical configuration; current gateway,
+output-cap support, tariff and retention need preflight and separate approval.
+
 ## Scientific boundaries
 
 Read docs/SCIENTIFIC_PROTOCOL.md for the published paper/proposal/historical/

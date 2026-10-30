@@ -116,6 +116,8 @@ def _request(value: dict, node: int, *, comparison: bool, conditional: bool = Tr
             or type(target["text"]) is not str or not target["text"].strip()
             or not isinstance(target["source_sha256"], str) or not _SHA.fullmatch(target["source_sha256"])):
         raise ValueError("Invalid target evidence or provenance")
+    if _digest(target["text"].encode("utf-8")) != target["source_sha256"]:
+        raise ValueError("Target text hash differs")
     if type(neighbors) is not dict or set(neighbors) != _NEIGHBOR_FIELDS:
         raise ValueError("Invalid neighborhood evidence fields")
     ids = neighbors["neighbor_ids"]
@@ -248,6 +250,10 @@ def seal_pilot(pairs, blind_inputs: Mapping[int, dict], comparison_templates: Ma
             raise ValueError("Required pilot node evidence unavailable")
         blind = _request(blind_inputs[node], node, comparison=False)
         compare = _request(comparison_templates[node], node, comparison=True)
+        from ..sara3.inputs import pair_inputs
+        expected_blind, expected_compare = pair_inputs(by_id[node])
+        if blind != expected_blind or compare != expected_compare:
+            raise ValueError("Pilot wire differs from admitted evidence or fixed instructions")
         if blind["target"] != compare["target"] or blind["neighborhood"] != compare["neighborhood"]:
             raise ValueError("Blind/comparison source evidence differs")
         if compare["historical_candidates"] != sorted({by_id[node].b1.class_index, by_id[node].narrative_v0.class_index}):
