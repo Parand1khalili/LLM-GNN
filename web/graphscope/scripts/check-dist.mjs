@@ -14,7 +14,7 @@ function visit(directory) {
 visit(root);
 for (const file of files) {
   const name = relative(root, file).replaceAll('\\', '/');
-  assert.ok(name === 'index.html' || name === 'data/atlas.v2.json' || /^assets\/[\w-]+\.(js|css)$/.test(name), `Unexpected public file: ${name}`);
+  assert.ok(name === 'index.html' || name === 'data/atlas.v2.json' || name === 'data/full-topology.json' || /^assets\/[\w-]+\.(js|css)$/.test(name), `Unexpected public file: ${name}`);
   const text = readFileSync(file, 'utf8');
   assert.ok(!/(?:sk-[A-Za-z0-9_-]{24,}|-----BEGIN [A-Z ]*PRIVATE KEY|Bearer\s+[A-Za-z0-9._-]{20,}|C:\\\\Users\\\\Admin|\.local_artifacts)/.test(text), `Sensitive content: ${name}`);
   assert.ok(statSync(file).size < 1_500_000, `Unexpected large public file: ${name}`);

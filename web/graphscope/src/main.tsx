@@ -52,7 +52,7 @@ function App() {
     location.hash = `${page}?${params}`;
   };
   const experimentId = data?.experiments.some(e => e.id === route.experimentId) ? route.experimentId : 'primary-ce-nops';
-  const selected = data?.nodes.some(n => n.id === route.selected) ? route.selected : null;
+  const selected = route.selected !== null && route.selected >= 0 && route.selected < 2708 ? route.selected : null;
   const props = data ? { data, selected, onSelect: (id: number) => update(route.page, id, experimentId), navigate: (page: string) => update(page, route.selected, experimentId) } : null;
   return <><a className="skip-link" href="#main" onClick={event => { event.preventDefault(); document.getElementById('main')?.focus(); }}>Skip to research content</a>
     <header className="site-header"><a className="brand" href="#overview" aria-label="GraphScope overview"><Mark /><span>GraphScope<small>A LIVING RESEARCH ATLAS <b> / V2</b></small></span></a><button className="menu-toggle" aria-expanded={menu} aria-controls="site-nav" onClick={() => setMenu(!menu)}>{menu ? 'Close' : 'Menu'} <span aria-hidden="true">{menu ? '×' : '☰'}</span></button>

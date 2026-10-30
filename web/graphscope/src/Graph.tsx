@@ -17,7 +17,7 @@ export function Graph({ data, selected, onSelect, visible, compact = false }: Pr
     if (!container.current) return;
     try {
       const graph = cytoscape({
-        container: container.current, minZoom: 0.15, maxZoom: 5,
+        container: container.current, minZoom: 0.03, maxZoom: 5, hideEdgesOnViewport: true,
         elements: [
           ...data.nodes.map((node, i) => ({ data: { id: String(node.id), target: node.target ? 1 : 0 },
             position: { x: Math.cos(i * 2.39996) * Math.sqrt(i) * 18, y: Math.sin(i * 2.39996) * Math.sqrt(i) * 18 } })),
@@ -33,7 +33,8 @@ export function Graph({ data, selected, onSelect, visible, compact = false }: Pr
           { selector: '.incident', style: { 'line-color': '#477875', width: 3.5, opacity: 1 } },
           { selector: '.focus', style: { 'background-color': '#a6402a', width: 32, height: 32, 'border-width': 6, 'border-color': '#f1d9ca', label: 'data(id)', color: '#302e29', 'font-size': 24, 'text-margin-y': -14, 'text-valign': 'top', 'text-background-color': '#f7f5ef', 'text-background-opacity': 0.9, 'text-background-padding': '3px', opacity: 1 } },
         ],
-        layout: { name: 'cose', animate: false, randomize: false, nodeRepulsion: () => 9000, idealEdgeLength: () => 65,
+        // Large topology uses deterministic display positions; avoid quadratic force-layout work.
+        layout: { name: data.nodes.length > 1000 ? 'preset' : 'cose', animate: false, randomize: false, nodeRepulsion: () => 9000, idealEdgeLength: () => 65,
           componentSpacing: 42, numIter: 500, padding: compact ? 12 : 34 },
       });
       cy.current = graph;
@@ -70,7 +71,7 @@ export function Graph({ data, selected, onSelect, visible, compact = false }: Pr
   }, [visible, data.nodes.length, ready]);
   const reset = () => { cy.current?.fit(undefined, 34); cy.current?.elements().removeClass('near incident'); };
   return <div className={`graph-frame ${compact ? 'compact' : ''}`}>
-    <div ref={container} className="graph-canvas" role="region" aria-label="Recorded partial Cora graph. Use node list for accessible selection."
+    <div ref={container} className="graph-canvas" role="region" aria-label="Cora topology graph. Use node list for accessible selection."
       tabIndex={0} onKeyDown={event => {
         if (event.key === '+' || event.key === '=') cy.current?.zoom(cy.current.zoom() * 1.2);
         if (event.key === '-') cy.current?.zoom(cy.current.zoom() / 1.2);
