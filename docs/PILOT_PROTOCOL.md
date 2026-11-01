@@ -3,6 +3,10 @@
 This is an offline engineering run on authentic inputs. Deterministic lexical
 fixtures are not LLM outputs, corrections, accuracy or independent scientific results.
 No API client or execution command is implemented.
+New offline runs use [L1 validation](L1_EVIDENCE_VALIDATION.md): reviewed candidates
+remain unaccepted pending L2, and raw responses/proposals stay in a private audit.
+Earlier sealed fixture counts remain historical engineering artifacts, not outputs
+of this tightened runtime. Do not overwrite or relabel the old seals.
 The fixture deliberately uses target keywords, not neighborhood inference; tests
 check evidence delivery, not its scientific usefulness to a future real verifier.
 

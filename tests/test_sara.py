@@ -102,7 +102,8 @@ class VerificationTests(unittest.TestCase):
     def test_first_pass_blind_then_comparison_explicit(self):
         verifier = FixtureVerifier(0, 0)
         result = run_offline([pair()], 1, verifier=verifier)
-        self.assertTrue(result["decisions"][0]["accepted"])
+        self.assertFalse(result["decisions"][0]["accepted"])
+        self.assertEqual(result["decisions"][0]["reason"], "L2_NOT_ASSESSED")
         self.assertEqual([c[0] for c in verifier.calls], ["blind", "compare"])
         self.assertEqual(set(verifier.calls[0][1]), {"node_id", "text", "classes", "definitions", "neighborhood"})
         self.assertEqual(verifier.calls[1][1]["historical_candidates"], (0,))
@@ -110,7 +111,7 @@ class VerificationTests(unittest.TestCase):
     def test_third_class_is_proposal_only_not_training_label(self):
         result = run_offline([pair(b1=0, v0=1)], 1, verifier=FixtureVerifier(6, 6))
         decision = result["decisions"][0]
-        self.assertEqual(decision["third_class_proposal"], 6)
+        self.assertIsNone(decision["third_class_proposal"])
         self.assertIsNone(decision["training_class_index"])
         self.assertFalse(decision["third_class_training_allowed"])
         self.assertEqual(result["accepted_count"], 0)
@@ -128,7 +129,7 @@ class VerificationTests(unittest.TestCase):
         report = run_offline([pair()], 1, verifier=FixtureVerifier(0, 6))
         decision = report["decisions"][0]
         self.assertEqual(decision["reason"], "VERIFIER_CONFLICT")
-        self.assertEqual(decision["third_class_proposal"], 6)
+        self.assertIsNone(decision["third_class_proposal"])
         self.assertIsNone(decision["training_class_index"])
 
     def test_timeout_is_uncertain_and_never_retried(self):
@@ -184,7 +185,7 @@ class VerificationTests(unittest.TestCase):
         with patch.object(socket.socket, "connect", side_effect=AssertionError("Network attempted")):
             result = offline_demo()
             self.assertEqual(result, offline_demo())
-        self.assertEqual(result["accepted_count"], 2)
+        self.assertEqual(result["accepted_count"], 1)
         self.assertEqual(result["mock_verifier_calls"], 4)
         self.assertEqual(result["provider_calls"], 0)
         self.assertEqual(result["training_runs"], 0)

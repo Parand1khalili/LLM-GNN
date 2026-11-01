@@ -115,7 +115,8 @@ def prepare_authentic(frozen_root, authentic_root, output_dir, *, budget=37, tok
             "target_count", "review_count", "completed_review_count", "accepted_count", "abstention_count",
             "selected_node_ids", "coverage", "class_retention_counts", "mock_verifier_calls")}
         summary["routers"][router]["decision_reasons"] = dict(Counter(d["reason"] for d in result["decisions"]))
-        summary["routers"][router]["failures"] = sum(d["reason"].startswith(("VERIFICATION_REJECTED", "TIMEOUT")) for d in result["decisions"])
+        summary["routers"][router]["failures"] = sum(d["reason"].startswith(
+            ("L1_", "AUDIT_", "VERIFIER_FAILURE", "TIMEOUT")) for d in result["decisions"])
         contents[f"dry_run_{router}.json"] = result
     contents["gcn_plans.json"] = plans
     for node in pilot["selection"]["selected_node_ids"]:

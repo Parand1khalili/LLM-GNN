@@ -1,0 +1,71 @@
+{
+  "date": "2026-10-31",
+  "status": "OFFLINE_L1_VALIDATED_L2_NOT_IMPLEMENTED",
+  "full_suite": {
+    "tests_run": 129,
+    "passed": 128,
+    "skipped": 1,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 155.511,
+    "skip_reason": "Windows account cannot create filesystem symlinks; ZIP symlink rejection tested"
+  },
+  "final_focused_suite": {
+    "tests_run": 19,
+    "passed": 19,
+    "note": "After final source/ACL/reason-code hardening; full suite preceded these small changes."
+  },
+  "syntax_files_checked": [
+    "src/llmgnn_sara/sara3/evidence.py",
+    "src/llmgnn_sara/sara3/audit.py",
+    "src/llmgnn_sara/sara3/pipeline.py",
+    "src/llmgnn_sara/downstream/frozen.py",
+    "src/llmgnn_sara/pilot/workflow.py",
+    "tests/test_evidence_l1.py",
+    "tests/test_sara.py"
+  ],
+  "frozen_inputs_hash_verified": [
+    ".local_artifacts/authentic/b1_prompts.json",
+    ".local_artifacts/authentic/narrative_prompts.json",
+    ".local_artifacts/authentic/neighborhoods.json",
+    ".local_artifacts/authentic/prompt_receipt.json",
+    ".local_artifacts/authentic/request_manifest.json",
+    ".local_artifacts/frozen/b1_final_predictions.json",
+    ".local_artifacts/frozen/narrative_v0_final_predictions.json",
+    ".local_artifacts/frozen/selection_manifest.json",
+    ".local_artifacts/frozen/preparation_receipt.json"
+  ],
+  "p0_manifest_sha256_unchanged": "7affacee222dbec3ecb5710b038968543c19d252190ee6eab76c5b03a4307410",
+  "six_node_seals": [
+    {
+      "manifest": ".local_artifacts/pilot-gapapi/SHA256.json",
+      "sha256": "29fa95c7d34f5826b628509e6bad2baced83ac986ebfbc7cadc4bb36d4c31b41",
+      "files_checked": 31,
+      "status": "PASS_UNCHANGED"
+    },
+    {
+      "manifest": ".local_artifacts/pilot-gapapi/pilot/SHA256.json",
+      "sha256": "9fd65d82e3cab296afc503813b97b0c0af9e8f4dcb41cd0be1aa20ac34ef1f96",
+      "files_checked": 13,
+      "status": "PASS_UNCHANGED"
+    }
+  ],
+  "sealed_counts_overlap": true,
+  "unchanged_policy_prompt_atlas_call_caps": [
+    "src/llmgnn_sara/sara2/policy.py",
+    "src/llmgnn_sara/sara3/inputs.py",
+    "src/llmgnn_sara/sara3/atlas.py",
+    "src/llmgnn_sara/pilot/protocol.py"
+  ],
+  "raw_audit": "PRIVATE_LOCAL_EXCLUDED_FROM_GIT_AND_PUBLIC_OUTPUT",
+  "initial_acl_self_check": "FAIL; inherited grant removal left explicit ACEs; fixed with protected current-user DACL and native checks. Final positive/unsafe-ACL tests PASS.",
+  "platform": "Windows actual native ACL tested; POSIX permissions not executed here",
+  "provider_calls": 0,
+  "token_count_calls": 0,
+  "real_training_runs": 0,
+  "real_gt_evaluation": false,
+  "historical_raw_response_bodies_read": 0,
+  "semantic_approval": "NONE; reviewed candidate agreement remains unaccepted",
+  "remote_push": "PUSH_PENDING",
+  "drive_backup": "NOT_PERFORMED"
+}

@@ -5,6 +5,11 @@ parser, transport or execution authorization is defined here. Historical source
 and P1 wire bytes remain unavailable. Requirements for a future adapter below
 are proposed safeguards, not claims that the historical code enforced them.
 
+Implementation snapshot below predates the subsequent
+[L1 validation slice](L1_EVIDENCE_VALIDATION.md): strict abstention is now enforced,
+raw responses are private, and reviewed candidate acceptance is blocked pending
+L2. Historical contract gaps remain; no lost wire/schema is recovered by that fix.
+
 ## Evidence and scope
 
 - [P0 manifest](../manifests/historical_p0.json), pinned SHA-256

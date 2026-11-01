@@ -17,6 +17,13 @@ def plan_from_frozen(dataset, cohort, loss, accepted=None, arm="narrative_v0"):
         for d in accepted:
             if type(d) is not dict or type(d.get("accepted")) is not bool:
                 raise ValueError("Invalid arbitration decision")
+            if any(k in d for k in ("accepted_label", "abstain", "evidence")):
+                if (type(d.get("abstain")) is not bool or d["abstain"] == d["accepted"]
+                        or d.get("accepted_label") != d.get("training_class_index")
+                        or d.get("evidence") != []):
+                    raise ValueError("Contradictory normalized decision")
+            if d["accepted"] and d.get("routed_for_review") is True:
+                raise ValueError("L2 semantic approval is not implemented")
             if not d["accepted"]:
                 if d.get("training_class_index") is not None:
                     raise ValueError("Abstention cannot assign a training label")

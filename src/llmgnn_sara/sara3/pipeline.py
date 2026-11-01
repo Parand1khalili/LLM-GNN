@@ -5,6 +5,8 @@ fixtures. Outputs are engineering demonstrations, never live measured results.
 """
 from dataclasses import asdict, dataclass
 import math
+import json
+from pathlib import Path
 from typing import Protocol
 
 from ..sara2.policy import Annotation, CLASSES, Pair, PolicyConfig, integer, route_r0, validated_pairs
@@ -13,6 +15,8 @@ from .ledger import OfflineLedger
 from ..io.evidence import NeighborhoodEvidence
 from .inputs import canonical_bytes, verifier_input
 import hashlib
+from .evidence import EvidenceError, validate_result
+from .audit import AuditError, PrivateAudit
 
 
 @dataclass(frozen=True)
@@ -55,43 +59,25 @@ class AbstainingVerifier:
         return {"class_index": None, "abstain": True, "evidence": []}
 
 
-def validate_result(value: dict, text: str) -> dict:
-    """Strict wire schema and exact evidence-substring validation."""
-    if type(value) is not dict or set(value) != {"class_index", "abstain", "evidence"}:
-        raise ValueError("Invalid verifier schema")
-    label, abstain, evidence = value["class_index"], value["abstain"], value["evidence"]
-    if type(abstain) is not bool or type(evidence) is not list or len(evidence) > 4:
-        raise ValueError("Invalid verifier fields")
-    if any(type(snippet) is not str or not snippet.strip() or len(snippet) > 512 or snippet not in text
-           for snippet in evidence):
-        raise ValueError("Evidence is not grounded in target text")
-    if abstain:
-        if label is not None:
-            raise ValueError("Abstention must not assign a class")
-    else:
-        integer(label, "verifier class", len(CLASSES))
-        if not evidence:
-            raise ValueError("Positive verification requires grounded evidence")
-    return {"class_index": label, "abstain": abstain, "evidence": tuple(evidence)}
-
-
 def _label_confidence(pair: Pair, label: int) -> float:
     return min(ann.confidence for ann in (pair.b1, pair.narrative_v0) if ann.class_index == label)
 
 
-def _decision(pair: Pair, label: int | None, reason: str, reviewed: bool,
-              proposal: int | None = None) -> dict:
+def _decision(pair: Pair, label: int | None, reason: str, reviewed: bool) -> dict:
     return {"node_id": pair.node_id, "training_class_index": label,
             "label_confidence_percent": _label_confidence(pair, label) if label is not None else None,
             "confidence_provenance": "historical_candidate_not_verifier_calibration",
-            "accepted": label is not None, "routed_for_review": reviewed,
-            "verification_completed": reason in {"TWO_PHASE_CANDIDATE_ACCEPTED", "THIRD_CLASS_PROPOSAL_ONLY", "VERIFIER_CONFLICT", "COMPARISON_ABSTENTION"},
+            "accepted": label is not None, "accepted_label": label,
+            "abstain": label is None, "evidence": [], "routed_for_review": reviewed,
+            "l2_status": "NOT_ASSESSED" if reviewed else "NOT_APPLICABLE_BASELINE_POLICY",
+            "verification_completed": reason in {"L2_NOT_ASSESSED", "THIRD_CLASS_PROPOSAL_ONLY", "VERIFIER_CONFLICT", "COMPARISON_ABSTENTION"},
             "reason": reason,
-            "third_class_proposal": proposal, "third_class_training_allowed": False}
+            "third_class_proposal": None, "third_class_training_allowed": False}
 
 
 def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifier | None = None,
-                config: PolicyConfig | None = None, ledger: OfflineLedger | None = None) -> dict:
+                config: PolicyConfig | None = None, ledger: OfflineLedger | None = None,
+                audit: PrivateAudit | None = None) -> dict:
     """Run GT-free frozen pairs through an explicitly offline verifier.
 
     With no text/verifier, reviewed cases abstain; no response is fabricated.
@@ -109,35 +95,63 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
     if getattr(verifier, "offline", None) is not True:
         raise ValueError("Live verifier is disabled; an offline fixture is required")
     ledger = ledger if ledger is not None else OfflineLedger()
+    if audit is not None and type(audit) is not PrivateAudit:
+        raise TypeError("PrivateAudit required")
+    audit_store, responses = audit, {}
     selected = (route_r0 if router == "r0" else route_semantic)(rows, budget)
     chosen = set(selected)
     decisions, requests, estimated_chars, exact_inputs = [], 0, 0, []
 
     def invoke(node: int, phase: str, request):
-        nonlocal requests, estimated_chars
+        nonlocal requests, estimated_chars, audit_store
         payload = verifier_input(request.node_id, request.text, request.neighborhood,
                                  candidates=request.historical_candidates if phase == "compare" else None,
                                  blind_class=request.blind_class_index if phase == "compare" else None)
+        if audit_store is None:
+            audit_store = PrivateAudit(Path(__file__).resolve().parents[3] / ".local_artifacts/private_verifier_audit")
         request_id = f"offline:{node}:{phase}"
         ledger.begin(request_id, payload)
         exact_inputs.append({"request_id": request_id, "payload": payload,
                              "sha256": hashlib.sha256(canonical_bytes(payload)).hexdigest()})
         estimated_chars += len(str(payload))
         requests += 1
+        raw = None
         try:
             response = getattr(verifier, phase)(request)
+            # Freeze decoded raw data immediately; comparison cannot mutate blind evidence.
+            raw = json.loads(canonical_bytes(response))
             validated = validate_result(response, request.text)
-        except TimeoutError:
-            ledger.settle(request_id, "UNCERTAIN")
-            raise
-        except (ValueError, TypeError, KeyError):
+        except Exception as error:
+            code = (error.code if isinstance(error, EvidenceError) else
+                    "TIMEOUT_UNCERTAIN_NO_RETRY" if isinstance(error, TimeoutError) else
+                    "VERIFIER_FAILURE_UNCERTAIN")
+            try:
+                audit_store.write({"kind": "response", "request_id": request_id,
+                                   "payload_sha256": exact_inputs[-1]["sha256"],
+                                   "raw_response": raw, "reason": code,
+                                   "l1_status": "FAIL" if code.startswith("L1_") else "NOT_ASSESSED"})
+            except AuditError:
+                ledger.settle(request_id, "REJECTED")
+                raise
+            ledger.settle(request_id, "REJECTED" if code.startswith("L1_") else "UNCERTAIN")
+            raise EvidenceError(code) from None
+        try:
+            responses[(node, phase)] = audit_store.write({"kind": "response", "request_id": request_id,
+                "payload_sha256": exact_inputs[-1]["sha256"], "raw_response": raw,
+                "validated": validated, "reason": "L1_PASS_L2_NOT_ASSESSED", "l1_status": "PASS"})
+        except AuditError:
             ledger.settle(request_id, "REJECTED")
-            raise
-        except Exception:
-            ledger.settle(request_id, "UNCERTAIN")
             raise
         ledger.settle(request_id, "COMPLETED")
         return validated
+
+    def reviewed_decision(pair, reason, proposal=None):
+        decision = _decision(pair, None, reason, True)
+        audit_store.write({"kind": "arbitration", "node_id": pair.node_id,
+                           "decision": decision, "third_class_proposal": proposal,
+                           "blind_response_sha256": responses.get((pair.node_id, "blind")),
+                           "comparison_response_sha256": responses.get((pair.node_id, "compare"))})
+        return decision
 
     for pair in rows:
         if pair.node_id not in chosen:
@@ -152,7 +166,7 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
         try:
             first = invoke(pair.node_id, "blind", BlindRequest(pair.node_id, pair.text, neighborhood=pair.neighborhood))
             if first["abstain"]:
-                decisions.append(_decision(pair, None, "BLIND_ABSTENTION", True))
+                decisions.append(reviewed_decision(pair, "BLIND_ABSTENTION"))
                 continue
             blind_class = first["class_index"]
             second = invoke(pair.node_id, "compare", ComparisonRequest(
@@ -161,18 +175,19 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
             if second["class_index"] is not None and second["class_index"] not in candidates:
                 proposal = second["class_index"]
             if second["abstain"]:
-                decisions.append(_decision(pair, None, "COMPARISON_ABSTENTION", True, proposal))
+                decisions.append(reviewed_decision(pair, "COMPARISON_ABSTENTION", proposal))
             elif second["class_index"] != blind_class:
-                decisions.append(_decision(pair, None, "VERIFIER_CONFLICT", True, proposal))
+                decisions.append(reviewed_decision(pair, "VERIFIER_CONFLICT", proposal))
             elif blind_class not in candidates:
-                decisions.append(_decision(pair, None, "THIRD_CLASS_PROPOSAL_ONLY", True, proposal))
+                decisions.append(reviewed_decision(pair, "THIRD_CLASS_PROPOSAL_ONLY", proposal))
             else:
-                decisions.append(_decision(pair, blind_class, "TWO_PHASE_CANDIDATE_ACCEPTED", True))
-        except TimeoutError:
-            decisions.append(_decision(pair, None, "TIMEOUT_UNCERTAIN_NO_RETRY", True))
-        except Exception as error:
+                decisions.append(reviewed_decision(pair, "L2_NOT_ASSESSED"))
+        except (EvidenceError, AuditError) as error:
+            code = error.code if isinstance(error, EvidenceError) else "AUDIT_UNAVAILABLE"
+            decisions.append(_decision(pair, None, code, True))
+        except Exception:
             # Exception bodies may contain payloads or credentials; never log them.
-            decisions.append(_decision(pair, None, f"VERIFICATION_REJECTED_{type(error).__name__}", True))
+            decisions.append(_decision(pair, None, "VERIFIER_FAILURE_UNCERTAIN", True))
     accepted = [d for d in decisions if d["accepted"]]
     counts = {name: sum(d["training_class_index"] == index for d in accepted)
               for index, name in enumerate(CLASSES)}
@@ -194,7 +209,9 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
             "token_estimate_method": "payload_character_count_divided_by_4_NOT_PROVIDER_TOKENIZATION",
             "estimated_cost_usd": None, "cost_status": "NO_PROVIDER_PRICES_OR_LIVE_USAGE",
             "provider_calls": 0, "training_runs": 0, "GT_accessed": False,
+            "raw_response_exported": False, "l2_semantic_validation": "NOT_IMPLEMENTED",
             "scientific_limitations": ["No measured verifier accuracy or downstream GCN improvement.",
+                                       "L1 provenance is not L2 semantic support; reviewed candidates remain unaccepted.",
                                        "No exact recovered Policy 002 threshold table.",
                                        "Lexical semantic heuristic cannot establish primary-topic correctness.",
                                        "Historical confidence attached to retained candidates is not verifier calibration."]}

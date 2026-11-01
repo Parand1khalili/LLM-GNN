@@ -2,6 +2,21 @@
 
 Date: 2026-10-31 (America/Los_Angeles).
 
+- L1/V1 slice: strict abstention/schema/source/quote validation now fails closed.
+  Private current-user ACL audit stores decoded raw responses and proposals before
+  comparison; public decisions contain no raw evidence or third-class suggestions.
+  L1 provenance is NOT semantic approval. Reviewed candidate agreement now abstains
+  with L2_NOT_ASSESSED; unreviewed baseline policy/routing/prompts/caps are unchanged.
+  Full suite129:128PASS,1Windows symlink SKIP; final focused19PASS after small
+  source/ACL hardening. Nine frozen inputs, P0 and six-node seals hash-verified
+  unchanged. See reports/l1_validation.json and docs/L1_EVIDENCE_VALIDATION.md.
+  Initial Windows ACL self-check failed, then native protected-DACL setup and
+  unsafe-ACL rejection passed. POSIX permission behavior is not tested here.
+  Parent: 803234dc20eee1748bc7c588593958539b8d6cbc on main; PUSH_PENDING.
+  No API/token-count/GT evaluation/real training or historical archive writes.
+  Next: review an offline L2 support contract with irrelevant-but-genuine quote
+  fixtures before enabling any reviewed-label acceptance.
+
 - P0 arm specification: docs/HISTORICAL_P0_ARM_CONTRACTS.md separates reported
   Judge002/V1 intent, current reconstructed fields and missing original contracts.
   Offline adapter decisions and provider gates remain unresolved; no runtime change.
