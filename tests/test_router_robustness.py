@@ -18,6 +18,7 @@ from llmgnn_sara.sara3.pipeline import run_offline
 from llmgnn_sara.evaluation.router_robustness import (
     SEEDS, ORDERS, STAGES, review_selection, request_fingerprints, robustness_review)
 from llmgnn_sara.evaluation.r2_comparison import compare_r2
+from llmgnn_sara.evaluation.routing_experiment import synthetic_source_excerpt
 
 ROOT = Path(__file__).resolve().parents[1]
 FROZEN, AUTHENTIC = ROOT / ".local_artifacts/frozen", ROOT / ".local_artifacts/authentic"
@@ -101,11 +102,11 @@ class AuthenticRobustnessTests(unittest.TestCase):
             def blind(self, request):
                 abstain = request.node_id % 3 == 0
                 return {"class_index": None if abstain else 0, "abstain": abstain,
-                        "evidence": [] if abstain else [request.text.strip()[:120]]}
+                        "evidence": [] if abstain else [synthetic_source_excerpt(request.text)]}
             def compare(self, request):
                 abstain = request.node_id % 3 == 1
                 return {"class_index": None if abstain else 0, "abstain": abstain,
-                        "evidence": [] if abstain else [request.text.strip()[:120]]}
+                        "evidence": [] if abstain else [synthetic_source_excerpt(request.text)]}
         with tempfile.TemporaryDirectory() as temp, \
              patch.object(socket.socket, "connect", side_effect=AssertionError("Network forbidden")):
             for index, result in enumerate(comparison["routers"].values()):

@@ -48,6 +48,20 @@ class RichValidationTests(unittest.TestCase):
         result = self.validate(raw)
         self.assertEqual(result["rich_evidence"], {k: raw[k] for k in result["rich_evidence"]})
 
+    def test_decorative_wrappers_shared_by_support_and_counter_without_rewriting(self):
+        raw = response()
+        raw["supporting_evidence"][0]["quote"] = '\u201c'+QUOTE+'\u201d'
+        raw["counter_evidence"] = [{"source_id": "target.text", "quote": '"'+COUNTER+'"',
+                                  "claim": "Synthetic counter claim, not semantic approval."}]
+        before = copy.deepcopy(raw)
+        result = self.validate(raw)
+        self.assertEqual(raw, before)
+        self.assertEqual(result["evidence"], (raw["supporting_evidence"][0]["quote"],))
+        self.assertEqual(result["l2_status"], "NOT_ASSESSED")
+        raw["counter_evidence"][0]["quote"] = '\u201cFabricated counter quotation.\u201d'
+        with self.assertRaisesRegex(EvidenceError, "L1_QUOTE_NOT_FOUND"):
+            self.validate(raw)
+
     def test_fabricated_counter_quote_rejected(self):
         raw = response()
         raw["counter_evidence"] = [{"source_id": "target.text", "quote": "A fabricated counter quotation.", "claim": "Counter claim"}]

@@ -2,6 +2,25 @@
 
 Date: 2026-11-01 (America/Los_Angeles).
 
+- Post-observation L1 amendment: sara.l1.decorative_quote_match.v1 removes one
+  balanced ASCII/curly double-quote wrapper for exact matching only; raw responses
+  stay unchanged. Malformed/nested wrappers, edited/fabricated text remain rejected.
+  Preserved1243 blind: original HTTP200/JSON PASS/L1_QUOTE_NOT_FOUND/REJECTED;
+  separate private diagnostic under revised rule L1 PASS, source-exact, no accepted
+  label, L2 NOT_ASSESSED. Original batch remains halted; no comparison/new dispatch.
+  Nodes130,682,2396,653 still not attempted. Private versioned receipt in
+  .local_artifacts/gapgpt_1243_l1_reassessment; never committed.
+  Relevant106 PASS (35.621s); full289,288 PASS/1 Windows symlink SKIP (134.399s).
+  Guards blocked network and actual human-review access. Initial full run found
+  two synthetic fixtures cutting unmatched boundary quotes; only synthetic exact
+  excerpt selection fixed, all router/protocol assertions retained. Synthetic batch
+  setup isolated from real intents; production no-resume guard independently PASS.
+  Protected67 artifacts including P0, pilot seals, all live receipts/ledgers and
+  frozen/authentic inputs byte-unchanged; syntax/diff checks PASS.
+  Docs L1_DECORATIVE_QUOTES.md; parent69294627a4b5cfc1de58aae4e220c14d9d5f1069.
+  PUSH_PENDING; no Drive upload. Next: separately review continuation, no automatic
+  restart, retroactive acceptance or semantic/GCN claims from diagnostic L1 PASS.
+
 - Remaining genuine feasibility batch implemented, NOT DISPATCHED by agent.
   Command: python -B -m llmgnn_sara.pilot.remaining_gapgpt. Fixed remaining order
   1243,130,682,2396,653; excludes637 permanently. Exact owner-approved GapGPT

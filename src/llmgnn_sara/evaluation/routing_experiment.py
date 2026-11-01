@@ -2,6 +2,7 @@
 import argparse
 from collections import Counter
 import json
+import re
 from pathlib import Path
 import tempfile
 
@@ -10,6 +11,12 @@ from ..sara3.audit import PrivateAudit
 from ..sara3.experiment import FIXTURE_VERSION, MANIFEST_SHA256, build_manifest, load_selection
 from ..sara3.experiment_cache import CachedOfflineVerifier
 from ..sara3.pipeline import run_offline
+
+
+def synthetic_source_excerpt(text):
+    """Exact source span for fixtures; avoid incomplete boundary quote wrappers."""
+    letters = list(re.finditer(r"\w", text[:120]))
+    return text[letters[0].start():letters[-1].end()] if letters else ""
 
 
 class SyntheticExperimentVerifier:
@@ -26,7 +33,7 @@ class SyntheticExperimentVerifier:
             return {"class_index": None, "abstain": True, "evidence": []}
         pair = self.pairs[request.node_id]
         label = next(c for c in range(7) if c not in {pair.b1.class_index, pair.narrative_v0.class_index}) if mode == 1 else pair.b1.class_index
-        return {"class_index": label, "abstain": False, "evidence": [request.text.strip()[:120]]}
+        return {"class_index": label, "abstain": False, "evidence": [synthetic_source_excerpt(request.text)]}
 
     def blind(self, request):
         return self._response(request)

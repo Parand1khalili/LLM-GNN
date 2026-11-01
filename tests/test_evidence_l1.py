@@ -13,7 +13,7 @@ from unittest.mock import patch
 
 from llmgnn_sara.sara2.policy import Annotation, Pair
 from llmgnn_sara.sara3.audit import AuditError, PrivateAudit
-from llmgnn_sara.sara3.evidence import EvidenceError, EvidenceSource, validate_claims, validate_result
+from llmgnn_sara.sara3.evidence import EvidenceError, EvidenceSource, validate_claims, validate_result, quote_for_matching
 from llmgnn_sara.sara3.pipeline import run_offline
 from llmgnn_sara.downstream.frozen import plan_from_frozen
 
@@ -112,6 +112,66 @@ class L1Tests(unittest.TestCase):
                 validate_result(raw, TEXT)
             self.assertEqual(raw, before)
 
+    def test_single_decorative_pair_preserves_original_payload_and_claim(self):
+        quote = "Neural networks learn useful representations"
+        for left, right in (("", ""), ('"', '"'), ('\u201c', '\u201d')):
+            with self.subTest(wrapper=(left, right)):
+                raw = reply(evidence=[left+quote+right]); before = copy.deepcopy(raw)
+                result = validate_result(raw, TEXT)
+                self.assertEqual(result["l1_status"], "PASS")
+                self.assertEqual(result["evidence"], (raw["evidence"][0],))
+                self.assertEqual(raw, before)
+                claim = {**self.claim(), "quote": raw["evidence"][0]}
+                self.assertEqual(validate_claims([claim], (self.source(),))[0][-1], raw["evidence"][0])
+
+    def test_malformed_and_multiple_outer_wrappers_rejected_even_if_literal_in_source(self):
+        quote = "Neural networks learn useful representations"
+        values = ['"'+quote, quote+'"', '\u201c'+quote+'"', '"'+quote+'\u201d',
+                  '\u201d'+quote+'\u201c', '""'+quote+'""', '\u201c\u201c'+quote+'\u201d\u201d',
+                  '\u201c"'+quote+'"\u201d', '"\u201c'+quote+'\u201d"']
+        for value in values:
+            with self.subTest(wrapper=value), self.assertRaisesRegex(EvidenceError, "L1_QUOTE_NOT_FOUND"):
+                validate_result(reply(evidence=[value]), value)
+
+    def test_no_content_edits_trimming_or_fuzzy_matching(self):
+        for quote in ("Neural networks learn USEFUL representations", "Neural networks learn useful representations!",
+                      "Neural  networks learn useful representations", " Neural networks learn useful representations",
+                      "Neural\nnetworks learn useful representations", TEXT+" ",
+                      "Neural networks learn fabricated representations"):
+            with self.subTest(quote=quote), self.assertRaisesRegex(EvidenceError, "L1_QUOTE_NOT_FOUND"):
+                validate_result(reply(evidence=['\u201c'+quote+'\u201d']), TEXT)
+        with self.assertRaisesRegex(EvidenceError, "L1_QUOTE_NOT_FOUND"):
+            validate_result(reply(evidence=['\u201ccaf\u00e9 evidence\u201d']), 'cafe\u0301 evidence')
+
+    def test_interior_quotes_punctuation_and_whitespace_preserved(self):
+        quote = 'Scientific "topic" and \u201cmethod\u201d differ;  preserve\tspacing.'
+        for left, right in (('"', '"'), ('\u201c', '\u201d')):
+            wrapped = left+quote+right
+            self.assertEqual(quote_for_matching(wrapped), quote)
+            self.assertEqual(validate_result(reply(evidence=[wrapped]), quote)["evidence"], (wrapped,))
+
+    def test_synthetic_excerpt_is_exact_and_avoids_cut_wrappers(self):
+        from llmgnn_sara.evaluation.routing_experiment import synthetic_source_excerpt
+        text = '\u201cA synthetic "topic" has  exact\tspacing and more content.'
+        quote = synthetic_source_excerpt(text)
+        self.assertIn(quote, text)
+        self.assertIn('"topic" has  exact\tspacing', quote)
+        self.assertEqual(validate_result(reply(evidence=[quote]), text)["l1_status"], "PASS")
+
+    def test_wrapper_does_not_bypass_trivial_length_source_or_abstention_checks(self):
+        for quote in ('""', '\u201ca b\u201d', '"'+"x"*511+'"'):
+            with self.assertRaises(EvidenceError):
+                validate_result(reply(evidence=[quote]), TEXT)
+        with self.assertRaisesRegex(EvidenceError, "L1_ABSTENTION_CONTRADICTION"):
+            validate_result(reply(None, True, ['"'+TEXT+'"']), TEXT)
+        with self.assertRaisesRegex(EvidenceError, "L1_UNKNOWN_SOURCE"):
+            validate_claims([{**self.claim(), "source_id": "unknown", "quote": '"'+TEXT+'"'}], (self.source(),))
+        with self.assertRaisesRegex(EvidenceError, "L1_DUPLICATE_EVIDENCE"):
+            validate_result(reply(evidence=[TEXT, '\u201c'+TEXT+'\u201d']), TEXT)
+        for wrapped in ("'"+TEXT+"'", '\u00ab'+TEXT+'\u00bb', ' "'+TEXT+'" '):
+            with self.assertRaisesRegex(EvidenceError, "L1_QUOTE_NOT_FOUND"):
+                validate_result(reply(evidence=[wrapped]), TEXT)
+
 
 class V1Tests(unittest.TestCase):
     def setUp(self):
@@ -134,6 +194,15 @@ class V1Tests(unittest.TestCase):
         self.assertEqual((d["abstain"], d["accepted_label"], d["evidence"]), (True, None, []))
         self.assertFalse(d["accepted"])
         self.assertNotIn("Neural networks learn useful representations", json.dumps(d))
+
+    def test_wrapped_evidence_does_not_change_payloads_arbitration_or_raw_audit(self):
+        plain = self.run_case(Verifier())
+        raw = reply(evidence=['\u201cNeural networks learn useful representations\u201d'])
+        wrapped = self.run_case(Verifier(copy.deepcopy(raw), copy.deepcopy(raw)))
+        self.assertEqual(plain["verifier_inputs"], wrapped["verifier_inputs"])
+        self.assertEqual(plain["decisions"], wrapped["decisions"])
+        self.assertIsNone(wrapped["decisions"][0]["accepted_label"])
+        self.assertTrue(any(r.get("raw_response") == raw for r in self.records()))
 
     def test_immutable_blind_before_comparison_and_no_prior_fields(self):
         verifier = Verifier()

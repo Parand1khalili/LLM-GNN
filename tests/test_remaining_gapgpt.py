@@ -19,7 +19,10 @@ APPROVAL = {"privacy": True, "sealed_wire": True, "declared_limits": True,
 class RemainingTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.requests, cls.previous = batch.prepare()
+        # Synthetic runs use temporary ledgers, independently of completed live intents.
+        # The real admission guard remains unchanged and has a separate rejection test.
+        with patch.object(batch, "verify_no_prior_dispatch"):
+            cls.requests, cls.previous = batch.prepare()
 
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()

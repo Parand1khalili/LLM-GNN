@@ -5,6 +5,29 @@ import re
 
 from ..io.frozen import reject_gt
 
+QUOTE_MATCH_VERSION = "sara.l1.decorative_quote_match.v1"
+_QUOTE_PAIRS = {('"', '"'), ('\u201c', '\u201d')}
+_QUOTE_BOUNDARIES = frozenset('"\u201c\u201d')
+
+
+def quote_for_matching(quote):
+    """Strip one balanced decorative double-quote pair, for matching only.
+
+    Post-observation L1 amendment: no trimming, rewriting or recursive stripping.
+    Interior quotation marks remain verbatim; nested outer wrappers are rejected.
+    """
+    if type(quote) is not str:
+        raise EvidenceError("L1_CLAIM_SCHEMA_INVALID")
+    if not quote:
+        return quote
+    if quote[0] in _QUOTE_BOUNDARIES or quote[-1] in _QUOTE_BOUNDARIES:
+        if len(quote) < 2 or (quote[0], quote[-1]) not in _QUOTE_PAIRS:
+            raise EvidenceError("L1_QUOTE_NOT_FOUND")
+        quote = quote[1:-1]
+        if len(quote) >= 2 and quote[0] in _QUOTE_BOUNDARIES and quote[-1] in _QUOTE_BOUNDARIES:
+            raise EvidenceError("L1_QUOTE_NOT_FOUND")
+    return quote
+
 
 class EvidenceError(ValueError):
     CODES = frozenset({"L1_SOURCE_PROVENANCE_INVALID", "L1_EVIDENCE_MISSING_OR_MALFORMED",
@@ -49,6 +72,7 @@ def validate_claims(claims, approved_sources):
         raise EvidenceError("L1_EVIDENCE_MISSING_OR_MALFORMED")
     sources = {s.source_id: s for s in approved_sources}
     result = []
+    matched = set()
     for claim in claims:
         if type(claim) is not dict or set(claim) != {"source_id", "field", "source_sha256", "quote"}:
             raise EvidenceError("L1_CLAIM_SCHEMA_INVALID")
@@ -64,11 +88,14 @@ def validate_claims(claims, approved_sources):
         words = re.findall(r"[^\W_]+", quote, re.UNICODE)
         if len(quote) > 512 or len(words) < 2 or sum(map(len, words)) < 8:
             raise EvidenceError("L1_TRIVIAL_QUOTE")
-        if quote not in source.text:
+        matching_quote = quote_for_matching(quote)
+        if matching_quote not in source.text:
             raise EvidenceError("L1_QUOTE_NOT_FOUND")
         item = (source.source_id, source.field, source.sha256, quote)
-        if item in result:
+        match_identity = (source.source_id, source.field, source.sha256, matching_quote)
+        if match_identity in matched:
             raise EvidenceError("L1_DUPLICATE_EVIDENCE")
+        matched.add(match_identity)
         result.append(item)
     return tuple(result)
 

@@ -1,5 +1,9 @@
 # L1 evidence validity and conservative V1 arbitration
 
+Post-observation formatting amendment: [decorative quote matching v1](L1_DECORATIVE_QUOTES.md)
+permits one balanced outer double-quote pair for matching only. Original raw
+evidence is preserved; source content, semantic boundaries and old receipts are unchanged.
+
 Optional [rich evidence v1](RICH_EVIDENCE_SCHEMA.md) adds structured diagnostics
 through an explicit new response version; legacy contracts stay the default.
 
