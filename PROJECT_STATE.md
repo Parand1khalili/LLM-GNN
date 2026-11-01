@@ -2,6 +2,21 @@
 
 Date: 2026-11-01 (America/Los_Angeles).
 
+- L2 Shadow v1 (2026-11-01): evaluation-only private bindings/intake/comparison
+  reuse existing human-review/rubric validation and legacy/rich L1. States:
+  NOT_ASSESSED, ASSESSED, INVALID, UNAVAILABLE. No semantic judge or label gate.
+  Explicit receipt comparison only; no session/form discovery. Synthetic versus
+  self-attested external-human provenance separated; genuine identity/independence
+  not authenticated, illustrative cases never gold. No genuine assessments ingested.
+  Focused6 PASS; guarded full238:237 PASS,1 Windows symlink SKIP (167.383s).
+  Before/after synthetic runtime equal; downstream promotion rejected. Existing
+  full tests cover routers/replay/experiment; no runtime import of evaluation.
+  Nine inputs/P0/31+13 seal members verified intact; real reviews/network guarded.
+  Docs: docs/L2_SHADOW_MODE.md. Parent ad25b50af364dbb3038440e18f67799f81f4b127.
+  PUSH_PENDING; no Drive backup. Next: coordinator supplies actual completed,
+  independently obtained blinded human assessments with truthful provenance;
+  preserve L2 runtime NOT_ASSESSED and existing acceptance boundaries.
+
 - Pilot readiness completed offline (2026-11-01): new separate SQLite rehearsal
   binds immutable contract/context and every request; PENDING->UNCERTAIN before
   hypothetical dispatch, then COMPLETED/REJECTED only after parser/L1 and private
