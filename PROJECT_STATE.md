@@ -2,6 +2,24 @@
 
 Date: 2026-11-01 (America/Los_Angeles).
 
+- Router robustness review v1 (2026-11-01): no router redesign. Independent
+  R2 primary/stage metadata exactly matches; all24 prespecified4-seed x6-order
+  scenarios retain37 unique IDs. Seed-only overlaps33..34/37; order-only28..37;
+  joint25..37. Stage priority is material, not an interchangeable schedule.
+  Five-router comparison unchanged. All140 target/neighborhood inputs available;
+  canonical legacy/rich hashes invariant per node. Actual legacy fixture wiring
+  confirms conditional blind/comparison behavior for five test-injected selections.
+  R1/R2 remain standalone, NOT integrated into runtime; no transport verified.
+  Focused6 PASS; full217:216 PASS,1 Windows symlink SKIP (152.281s), no failures.
+  Real human-review session/network guarded; review-schema tests use temporary
+  synthetic records only. P0/nine inputs/31+13 pilot members unchanged.
+  Decision: docs/ROUTER_ROBUSTNESS_DECISION.md; report: reports/router_robustness.json.
+  Draft role-based set: R0 control; R1-v2/R2-v1 candidates; Semantic/R1-v1 ablations.
+  No scientific winner or protocol freeze. L2/arbitration/defaults/GraphScope intact.
+  Parent dc08852ce918c9ac8ed91f97d6dcded2ed351e11; PUSH_PENDING; no Drive backup.
+  Next: reviewed offline experiment manifest/adapter contract and matched verifier
+  protocol/call-budget accounting; no live execution, GT or training authorization.
+
 - R2-candidate v1 (2026-11-01): prospective stratified hybrid, not historical
   R2 recovery. Prespecified37-slot allocation: unknown4 (version/node hash order),
   observed17 (R1-v2 among covered nodes), candidate16 (remaining R0 rank), then
