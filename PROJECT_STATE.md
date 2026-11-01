@@ -2,6 +2,23 @@
 
 Date: 2026-11-01 (America/Los_Angeles).
 
+- R1 coverage review (2026-11-01): three prespecified policies separate lexical
+  mismatch from missingness; v2 uses observed-risk=(D+I[match]*(M+A))/3, coverage
+  C=max_hits/4 only for descending tie priority, then ascending node ID. Neutral
+  imputes1/2; original v1 unchanged. All13 prespecified settings recorded before
+  new results; primary choice follows absence-is-not-positive-evidence principle.
+  Descriptive140: coverage zero30/partial51/multi59; primary zero-match selections
+  v1=30, neutral12, v2=0; disagreements7/9/6; HH at reconstructed80=15/16/20.
+  V2 may under-route unknown cases; coverage tie sensitivity retains25..33/37.
+  Longer observed-match texts indicate possible vocabulary/length bias, not error.
+  Twelve focused +68 related tests PASS (80). Initial descriptor-guard test error
+  corrected; syntax/report reproducibility and31+13 seal members verified.
+  No human-review access/tests, GT, provider, training, Atlas or runtime changes.
+  Docs: docs/R1_COVERAGE_POLICY.md, docs/R1_COVERAGE_RESULTS.md; machine report:
+  reports/r1_coverage_comparison.json. Parent e9ffdb6aba110461e2fa3c07348b62d38fdbf8b5.
+  PUSH_PENDING; no Drive backup. Next: review observed-risk versus unknown-case
+  exploration and tie preference before freezing any prospective pilot selection.
+
 - R1-candidate v1 (2026-11-01): independent fixed37 offline ranking uses equal
   disagreement/candidate lexical mismatch/lexical ambiguity terms; exact rational
   scores and node-ID ties. Historical formulas remain MISSING_EVIDENCE. Existing
