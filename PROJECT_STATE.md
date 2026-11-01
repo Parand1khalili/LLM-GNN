@@ -2,6 +2,21 @@
 
 Date: 2026-11-01 (America/Los_Angeles).
 
+- Third-agent feasibility scientific protocol v1 documented (2026-11-01):
+  docs/THIRD_AGENT_FEASIBILITY_V1.md fixes existing six nodes/legacy blind-first
+  and conditional comparison, maximum12 calls/16384 declared input/512 output,
+  no retries. Execution NO_GO: provider/revision/privacy/prices/financial approval
+  and final owner authorization unresolved; no live command/transport enabled.
+  Genuine outputs need two separate blinded human reviews per eligible phase
+  response; prior consensus cases remain development feedback, not validation.
+  L1/L2/arbitration/GCN claims separated; no reviewed-label promotion.
+  Checks PASS:31+13 seal members, nine pins,12 current-builder payload matches,
+  cohort/classes/blind boundary/placeholders, P0 and live block. Docs-only;
+  no unit/full rerun, private review or runtime modification. Parent
+  8b30ac51d104a4f3e39d3f31b0b1a21b47db5922; PUSH_PENDING; no Drive upload.
+  Next: owner reviews this scope and resolves gates; only minimal bridge/ledger
+  and genuine-output packet adapter require later approved engineering.
+
 - L2 Shadow v1 (2026-11-01): evaluation-only private bindings/intake/comparison
   reuse existing human-review/rubric validation and legacy/rich L1. States:
   NOT_ASSESSED, ASSESSED, INVALID, UNAVAILABLE. No semantic judge or label gate.
