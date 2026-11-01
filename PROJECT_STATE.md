@@ -2,6 +2,21 @@
 
 Date: 2026-10-31 (America/Los_Angeles).
 
+- Authentic L2-boundary replay: sara3.replay uses nine pinned JSON inputs, real
+  target/neighborhood/Atlas data and clearly synthetic fixed verifier responses.
+  Eleven cases and both full140 routers each run twice deterministically (330
+  mock calls total, zero provider calls). Each router reviews37; reviewed accepted0.
+  Baseline unreviewed retention is93/R0 and82/semantic, not verifier approval.
+  Genuine non-topic copyright quotation passes L1 but L2 stays NOT_ASSESSED.
+  Private audit readback validates fixture bodies/request hashes/blind references;
+  injected write failure and timeout explicitly report unavailable raw responses.
+  Seven new integration tests PASS; full regressions137:136PASS,1Windows symlink
+  SKIP (106.738s). P0, six-node seals, original runtime/routing/prompts/policies and
+  GraphScope remain unchanged. Report: reports/authentic_l2_replay.json;
+  instructions: docs/L1_EVIDENCE_VALIDATION.md. Parent6f8fe0c45e308cf01dd25d53647bfdf5ba33bcec.
+  No semantic judge, API/token-count, GT evaluation, real training or Drive writes.
+  Next: review offline L2 semantic-support criteria; no acceptance enabled here.
+
 - L1/V1 slice: strict abstention/schema/source/quote validation now fails closed.
   Private current-user ACL audit stores decoded raw responses and proposals before
   comparison; public decisions contain no raw evidence or third-class suggestions.

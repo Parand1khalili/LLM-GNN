@@ -98,3 +98,38 @@ python -B -m unittest discover -s tests -v
 Next testable work is an independently reviewed offline L2 decision contract and
 fixtures, including genuine but irrelevant quotes. It requires explicit semantic
 criteria and provenance; keyword agreement must not become automatic approval.
+
+## Authentic replay and the L2 boundary
+
+The offline replay harness uses the nine pinned JSON inputs described in
+PILOT_PROTOCOL.md. It preserves the existing runtime, routing, prompts and policies.
+Restore those external inputs first; from the checkout root run:
+
+```powershell
+python -B -m llmgnn_sara.sara3.replay --frozen-root .local_artifacts/frozen --authentic-root .local_artifacts/authentic --audit-root .local_artifacts/authentic_l2_boundary_audit
+python -B -m unittest discover -s tests -p test_authentic_replay.py -v
+```
+
+The command prints a body-free JSON coverage report. Raw synthetic responses stay
+in private audit subdirectories, excluded from Git/public exports. The executed
+report is reports/authentic_l2_replay.json. Eleven fixed cases cover quotes,
+sources, abstention, contradiction, candidate disagreement/agreement, third class,
+audit failure and comparison timeout. Every case and both full140 routers run
+twice with identical outcomes; private audit readback checks exact fixture data,
+request hashes and immutable blind references. The full140 fixture always returns
+the frozen B1 candidate and the first120 target characters, with no semantic
+inference. It is not blind model performance despite the blind input boundary.
+
+The genuine quotation fixture at node90 is a copyright notice (fixed span/hash).
+Its lack of topical support is a manual fixture diagnostic, not an L2 algorithm,
+correctness label or acceptance criterion. L1 passes but L2 remains NOT_ASSESSED;
+the label stays unaccepted. Unknown explicit sources are checked at validate_claims;
+the unchanged string-only wire separately rejects evidence objects. No new source
+schema or graph quotation permission is introduced.
+
+Expected fault injection is reported honestly: audit-write failure leaves no raw
+archive; comparison timeout preserves blind data but has no comparison response.
+Both prevent acceptance. Full140 unreviewed baseline retention is separate from
+V1 approval. The harness verifies pseudo-training masks without running training,
+and checks that input hashes remain unchanged. It makes no accuracy, semantic
+support, historical raw-response recovery or graph-recomputation claim.
