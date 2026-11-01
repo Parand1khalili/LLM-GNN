@@ -23,6 +23,16 @@ ENDPOINT = "https://api.gapapi.com/v1/chat/completions"
 IDENTITY = "gapgpt-blind-637-canary-v1"
 ROOT = Path(__file__).resolve().parents[3]
 MAX_BODY = 1024 * 1024
+ACCOUNT_PANEL_IDENTITY = "gapgpt-app-blind-637-canary-v1"
+
+
+def target_settings(target):
+    if target == "historical":
+        return HOST, ENDPOINT, IDENTITY, "gapgpt_canary_637"
+    if target == "account-panel":
+        return ("api.gapgpt.app", "https://api.gapgpt.app/v1/chat/completions",
+                ACCOUNT_PANEL_IDENTITY, "gapgpt_app_canary_637")
+    raise ValueError("Unapproved target")
 SEALS = ("29fa95c7d34f5826b628509e6bad2baced83ac986ebfbc7cadc4bb36d4c31b41",
          "9fd65d82e3cab296afc503813b97b0c0af9e8f4dcb41cd0be1aa20ac34ef1f96")
 
@@ -73,11 +83,12 @@ def credential():
     return key
 
 
-def post_once(wire_bytes, key):
+def post_once(wire_bytes, key, *, target="historical"):
     """Fixed TLS host/path, no proxy, redirect, retry, alternate model or endpoint."""
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
     context.load_default_certs()  # Does not enable environment-driven TLS key logging.
-    connection = http.client.HTTPSConnection(HOST, timeout=120, context=context)
+    host, _, _, _ = target_settings(target)
+    connection = http.client.HTTPSConnection(host, timeout=120, context=context)
     try:
         connection.request("POST", "/v1/chat/completions", body=wire_bytes,
             headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"})
@@ -120,8 +131,9 @@ def redact_decoded(value, key, depth=0):
     return value
 
 
-def execute(payload, wire, key, audit, ledger, approval, *, transport=post_once):
+def execute(payload, wire, key, audit, ledger, approval, *, transport=None, target="historical"):
     """One attempt. Tests substitute transport; CLI alone gathers owner approval."""
+    _, endpoint, identity, _ = target_settings(target)
     expected_payload, expected_wire = prepare()
     if payload != expected_payload or wire != expected_wire:
         raise ValueError("Canary payload differs")
@@ -129,9 +141,9 @@ def execute(payload, wire, key, audit, ledger, approval, *, transport=post_once)
         raise ValueError("Invalid credential format")
     if (type(approval) is not dict or any(approval.get(k) is not True for k in ("privacy", "compatibility", "declared_limits"))
             or approval != {"privacy": True, "compatibility": True, "declared_limits": True,
-                    "usd_reservation": "0.10", "dispatch": IDENTITY}):
+                    "usd_reservation": "0.10", "dispatch": identity}):
         raise ValueError("Explicit scoped approvals required")
-    context = {"version": IDENTITY, "endpoint": ENDPOINT, "model": "gpt-6-luna",
+    context = {"version": identity, "endpoint": endpoint, "model": "gpt-6-luna",
         "node": 637, "phase": "blind", "wire_sha256": sha(wire), "approval": approval,
         "readiness_contract_sha256": CONTRACT_SHA256, "seal_sha256": list(SEALS),
         "pricing": "OWNER_PROVISIONAL_0.10_INPUT_0.50_OUTPUT_PER_M_NOT_BILLING_CAP"}
@@ -146,13 +158,13 @@ def execute(payload, wire, key, audit, ledger, approval, *, transport=post_once)
             db.execute("INSERT INTO canary_context VALUES (?)", (context_sha,))
     # Full reservation is consumed even on rejection/uncertainty. No release/retry.
     audit.read(audit.write({"kind": "canary_approval", "context": context}))
-    ledger.reserve(IDENTITY, payload, 16384, 512)
-    ledger.mark_dispatched(IDENTITY, payload)
+    ledger.reserve(identity, payload, 16384, 512)
+    ledger.mark_dispatched(identity, payload)
     result = {"status": "UNCERTAIN", "l1_status": "NOT_ASSESSED", "usage": None,
               "estimated_cost_usd": None, "cost_status": "UNKNOWN_NOT_VERIFIED_BILLING",
               "accepted_label": None, "l2_status": "NOT_ASSESSED"}
     try:
-        status, raw = transport(wire, key)
+        status, raw = post_once(wire, key, target=target) if transport is None else transport(wire, key)
         original_sha = sha(raw)
         safe = raw.replace(key.encode(), b"[REDACTED]")
         safe = safe.replace(json.dumps(key)[1:-1].encode(), b"[REDACTED]")
@@ -204,7 +216,7 @@ def execute(payload, wire, key, audit, ledger, approval, *, transport=post_once)
                     inner_bytes, reason = content.encode(), "PARSER_L1"
             except (ValueError, KeyError, TypeError, AttributeError):
                 reason = "INVALID_ENVELOPE_OR_USAGE"
-        settled = ledger.settle(IDENTITY, payload, inner_bytes, audit,
+        settled = ledger.settle(identity, payload, inner_bytes, audit,
                                rejection_reason=None if reason == "PARSER_L1" else reason)
         result.update(status=settled["state"], l1_status="PASS" if reason == "PARSER_L1" and settled["state"] == "COMPLETED" else "FAIL",
                       reason=settled["reason"] if reason == "PARSER_L1" else reason,
@@ -220,16 +232,17 @@ def execute(payload, wire, key, audit, ledger, approval, *, transport=post_once)
         return {"status": "UNCERTAIN", "reason": "AUDIT_UNAVAILABLE_NO_RETRY", "accepted_label": None}
 
 
-def main():
+def main(*, target="historical"):
     try:
         if len(sys.argv) != 1 or not sys.stdin.isatty():
             raise ValueError("Run interactively without arguments")
+        _, endpoint, identity, directory = target_settings(target)
         payload, wire = prepare()
-        audit = PrivateAudit(ROOT / ".local_artifacts/gapgpt_canary_637")
+        audit = PrivateAudit(ROOT / ".local_artifacts" / directory)
         ledger = ReadinessLedger(audit.root / "intent.sqlite")
         if ledger.snapshot():
             raise ValueError("Existing canary intent; no repeat or automatic recovery")
-        print("GapGPT | " + ENDPOINT + " | gpt-6-luna | node637 | BLIND ONLY")
+        print("GapGPT | " + endpoint + " | gpt-6-luna | node637 | BLIND ONLY")
         print("One attempt; input reservation16384/output512. Provisional estimate USD0.0018944.")
         print("USD0.10 reservation is NOT a provider billing guarantee. No comparison/retry.")
         approval = {}
@@ -240,11 +253,11 @@ def main():
         if not all(approval.get(k) is True for k in ("privacy", "compatibility", "declared_limits")) or approval["usd_reservation"] != "0.10":
             raise ValueError("Approvals incomplete")
         key = credential()
-        approval["dispatch"] = input("Authorize exactly one request; type " + IDENTITY + ": ")
-        result = execute(payload, wire, key, audit, ledger, approval)
+        approval["dispatch"] = input("Authorize exactly one request; type " + identity + ": ")
+        result = execute(payload, wire, key, audit, ledger, approval, target=target)
         # Raw text, labels, response bodies, identifiers and usage stay private.
         print(json.dumps({k: result.get(k) for k in ("status", "l1_status", "cost_status", "reason")}))
-        print("Private results: .local_artifacts/gapgpt_canary_637; do not rerun after any intent.")
+        print("Private results: .local_artifacts/" + directory + "; do not rerun after any intent.")
         return 0 if result["status"] == "COMPLETED" else 1
     except BaseException:
         print("Canary blocked or interrupted; inspect private state. No automatic retry.", file=sys.stderr)

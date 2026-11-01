@@ -1,5 +1,11 @@
 # GapGPT preflight — fixed provider decision, 2026-11-01
 
+Update: the owner requested a separately identified fresh blind637 canary using
+`https://api.gapgpt.app/v1/chat/completions`, as specified by the current account
+panel. Preparation only; historical endpoint/failed intent remain intact. See
+[GAPGPT_ENDPOINT_CANARY.md](GAPGPT_ENDPOINT_CANARY.md) for evidence, command and
+required fresh local confirmations. No new live request was made.
+
 Provider fixed by owner: **GapGPT (gapgpt.app), GPT-6 Luna**. Do not research
 alternatives or migrate providers. Live execution remains NO-GO pending the five
 items below. This update supersedes the earlier provider-identity uncertainty and

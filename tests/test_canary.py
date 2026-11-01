@@ -119,3 +119,25 @@ class CanaryTests(unittest.TestCase):
  def test_noninteractive_cli_rejects_without_key_access_or_dispatch(self):
   with patch.object(canary.sys.stdin,'isatty',return_value=False),patch.object(canary,'credential',side_effect=AssertionError('Key accessed')),patch.object(canary,'execute',side_effect=AssertionError('Dispatch')):
    self.assertEqual(canary.main(),1)
+
+ def test_account_panel_target_has_fresh_identity_and_fixed_host(self):
+  approval={**APPROVAL,'dispatch':canary.ACCOUNT_PANEL_IDENTITY}
+  conn=MagicMock();conn.getresponse.return_value.status=200;conn.getresponse.return_value.read.return_value=self.envelope()
+  with patch.object(canary.http.client,'HTTPSConnection',return_value=conn) as factory:
+   result=canary.execute(self.payload,self.wire,KEY,self.audit,self.ledger,approval,target='account-panel')
+  self.assertEqual(result['status'],'COMPLETED')
+  self.assertEqual(factory.call_args.args,('api.gapgpt.app',))
+  self.assertEqual(conn.request.call_args.args[:2],('POST','/v1/chat/completions'))
+  self.assertEqual(conn.request.call_args.kwargs['body'],self.wire)
+  self.assertEqual(conn.request.call_args.kwargs['headers']['Authorization'],'Bearer '+KEY)
+  self.assertEqual(self.ledger.snapshot()[0][0],canary.ACCOUNT_PANEL_IDENTITY)
+  with self.assertRaises(ValueError):canary.execute(self.payload,self.wire,KEY,self.audit,self.ledger,approval,target='account-panel')
+  self.assertEqual(conn.request.call_count,1)
+ def test_old_confirmation_and_arbitrary_host_do_not_authorize_new_target(self):
+  post=MagicMock()
+  with self.assertRaises(ValueError):canary.execute(self.payload,self.wire,KEY,self.audit,self.ledger,APPROVAL,target='account-panel',transport=post)
+  with self.assertRaises(ValueError):canary.post_once(self.wire,KEY,target='unapproved-host')
+  post.assert_not_called()
+ def test_main_profiles_have_distinct_state_directories(self):
+  old=canary.target_settings('historical');new=canary.target_settings('account-panel')
+  self.assertNotEqual(old[1],new[1]);self.assertNotEqual(old[2],new[2]);self.assertNotEqual(old[3],new[3])

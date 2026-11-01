@@ -2,6 +2,23 @@
 
 Date: 2026-11-01 (America/Los_Angeles).
 
+- Endpoint mismatch diagnosis/fresh canary prepared (2026-11-01): original
+  live blind637 attempt observed401 invalid_api_key/authentication_error at
+  api.gapapi.com; charges UNKNOWN. Owner confirms correct previously working key.
+  Historical source also configures that host/Bearer format; raw successful HTTP
+  receipts not independently recovered here. Current panel specifies api.gapgpt.app:
+  routing/endpoint policy is leading hypothesis, not proven cause/user error.
+  New explicit profile gapgpt-app-blind-637-canary-v1 targets api.gapgpt.app with
+  same sealed body, separate .local_artifacts/gapgpt_app_canary_637, fresh local
+  approvals/hidden key/USD0.10 reservation. Old profile/REJECTED state retained;
+  all original receipt/SQLite byte fingerprints unchanged. No new request sent.
+  Command: python -B -m llmgnn_sara.pilot.canary_gapgpt. Docs:
+  docs/GAPGPT_ENDPOINT_CANARY.md. Focused21 PASS; guarded relevant43 PASS (15.812s);
+ 31+13 seals/nine inputs/exact wire/P0 PASS. Full suite not rerun. No real key read.
+  Parent383a6ad66cda0e4cc3521a54b650b1e5e2aa8a20; PUSH_PENDING; no Drive backup.
+  Next: owner reviews new scope and confirms locally before at most one new blind
+  canary; no fallback/retry/comparison, no label or training change.
+
 - GapGPT single blind637 owner-operated canary CLI prepared (2026-11-01), NOT
   EXECUTED. python -B -m llmgnn_sara.pilot.canary verifies31+13 seal members,
   nine inputs and exact wire; fixed endpoint/model; hidden getpass or process env,
