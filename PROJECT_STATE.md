@@ -2,6 +2,18 @@
 
 Date: 2026-11-01 (America/Los_Angeles).
 
+- Pilot readiness completed offline (2026-11-01): new separate SQLite rehearsal
+  binds immutable contract/context and every request; PENDING->UNCERTAIN before
+  hypothetical dispatch, then COMPLETED/REJECTED only after parser/L1 and private
+  audit readback. Raw-byte SHA and audit-receipt SHA distinct. No automatic retry,
+  migration or terminal rewrite. Caps12/16384/512; financial approval UNRESOLVED;
+  live unconditionally disabled. Focused3 PASS; guarded full232:231 PASS,1 Windows
+  symlink SKIP (339.736s). Nine inputs/P0/31+13 seal members verified unchanged.
+  Docs: docs/PILOT_READINESS_DRAFT.md. No real human-review/network/GT/training.
+  Parent f61d11f21f8eb4e7d4b7d839741e45a85435d463; PUSH_PENDING, no Drive backup.
+  Next: owner reviews legacy recommendation and unresolved provider/model/privacy/
+  financial conditions before any separately approved live protocol. No transport.
+
 - Offline routing experiment draft v1 (2026-11-01): pinned manifest connects
   R0 control/R1-v2/R2-v1 candidates to existing legacy pipeline via explicit
   VerifiedSelection; default routing/schema/policy unchanged. Optional Semantic/
