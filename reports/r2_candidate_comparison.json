@@ -1,0 +1,1776 @@
+{
+  "schema_version": "sara.r2_comparison.v1",
+  "status": "RECONSTRUCTED_DESCRIPTIVE_ONLY",
+  "cohort_size": 140,
+  "budget": 37,
+  "source_hashes": {
+    "b1": "c6bc236ac5f8c1615067a10750cb150ecaf54fbe458afd4df7e750f92ce4b141",
+    "narrative_v0": "181806c4622449c8f9cdc9bdabb725232666fdc95394b3a8d7b78067b385ff02",
+    "selection": "dc8260974c7c0ca2e828f2d069e2896e9bcf2c363b15ca81d9f09d2803c9b12c",
+    "b1_prompts.json": "d7416cb83070b4a5d1ceaee061fe3fb81b6646abcee5cdabe58db33c5b8fdf29",
+    "narrative_prompts.json": "cc8b51db94ecf9c8f4d37a8a2ace2746ec0805cb0b3fd44cc8eac54088a7f8ed",
+    "neighborhoods.json": "1bd0be9dba2760159f30d72f77dc6036729b2ff10182d220f7673823af95f56e",
+    "prompt_receipt.json": "bdd95ba25cacc20efe94567317c1fb747e565218273351d2520a54ca02f2ab19",
+    "request_manifest.json": "7a0266129f99ef87fd3e715ab68c015176b48b90bb8b2955c65285aac5492ab1",
+    "preparation": "fb6777e8dec547b2aee5ca664ffa566f9148a944c7ee6065072df9fb1b4ad4ab"
+  },
+  "atlas_sha256": "1a9f5537db96c3589c6a7dcb97a5664f14c8ac1cd193d7912e07b20d374ebbf9",
+  "design_sha256": "1ec488e8c1d533ffa9c7d83c4400cdef6ba5201eb48e2ad215b9e172906e1d4b",
+  "routers": {
+    "r0_current": {
+      "count": 37,
+      "selected_node_ids": [
+        637,
+        1243,
+        130,
+        682,
+        722,
+        734,
+        351,
+        2487,
+        2396,
+        1528,
+        653,
+        695,
+        267,
+        1283,
+        2238,
+        2317,
+        2022,
+        27,
+        207,
+        357,
+        1559,
+        568,
+        1120,
+        2379,
+        1814,
+        614,
+        917,
+        1751,
+        1649,
+        25,
+        1690,
+        2490,
+        2534,
+        114,
+        94,
+        1269,
+        552
+      ],
+      "coverage_counts": {
+        "NO_ATLAS_MATCH": 11,
+        "OBSERVED_MULTI_KEYWORD_MATCH": 14,
+        "PARTIAL_COVERAGE": 12
+      },
+      "zero_match_count": 11,
+      "disagreement_count": 9,
+      "hh_agreement_at_reconstructed_80": 0,
+      "r0_score_selected": {
+        "min": 25.83333333333333,
+        "median": 44.166666666666664,
+        "mean": 64.990990990991,
+        "max": 152.5
+      },
+      "r1_v2_observed_risk_selected": {
+        "min": 0.0,
+        "median": 0.3333333333333333,
+        "mean": 0.283033033033033,
+        "max": 0.8333333333333334
+      },
+      "cutoff": {
+        "key_without_node_id": [
+          "-25.83333333333333"
+        ],
+        "tied_node_ids": [
+          552,
+          2628
+        ],
+        "selected_from_tie": [
+          552
+        ],
+        "at_budget36_removed_id": 552,
+        "at_budget38_added_id": 2628
+      }
+    },
+    "semantic_v0_current": {
+      "count": 37,
+      "selected_node_ids": [
+        682,
+        2396,
+        637,
+        1243,
+        130,
+        653,
+        267,
+        1120,
+        722,
+        917,
+        1751,
+        734,
+        25,
+        351,
+        2487,
+        94,
+        2291,
+        881,
+        2319,
+        181,
+        81,
+        2177,
+        2287,
+        1649,
+        1240,
+        979,
+        1946,
+        1764,
+        47,
+        1528,
+        695,
+        1283,
+        2238,
+        2317,
+        2022,
+        27,
+        207
+      ],
+      "coverage_counts": {
+        "NO_ATLAS_MATCH": 6,
+        "OBSERVED_MULTI_KEYWORD_MATCH": 16,
+        "PARTIAL_COVERAGE": 15
+      },
+      "zero_match_count": 6,
+      "disagreement_count": 9,
+      "hh_agreement_at_reconstructed_80": 11,
+      "r0_score_selected": {
+        "min": 4.0,
+        "median": 44.166666666666664,
+        "mean": 56.94144144144144,
+        "max": 152.5
+      },
+      "r1_v2_observed_risk_selected": {
+        "min": 0.0,
+        "median": 0.3333333333333333,
+        "mean": 0.36036036036036034,
+        "max": 0.8333333333333334
+      },
+      "cutoff": {
+        "key_without_node_id": [
+          "-44.166666666666664"
+        ],
+        "tied_node_ids": [
+          27,
+          207
+        ],
+        "selected_from_tie": [
+          27,
+          207
+        ],
+        "at_budget36_removed_id": 207,
+        "at_budget38_added_id": 357
+      }
+    },
+    "sara.router.r1_candidate.v1": {
+      "count": 37,
+      "selected_node_ids": [
+        351,
+        637,
+        734,
+        722,
+        160,
+        207,
+        267,
+        295,
+        375,
+        430,
+        552,
+        682,
+        743,
+        783,
+        862,
+        932,
+        1013,
+        1031,
+        1066,
+        1120,
+        1269,
+        1283,
+        1308,
+        1776,
+        1814,
+        1951,
+        1958,
+        2291,
+        2317,
+        2327,
+        2396,
+        2434,
+        2490,
+        2534,
+        2685,
+        2698,
+        130
+      ],
+      "coverage_counts": {
+        "NO_ATLAS_MATCH": 30,
+        "OBSERVED_MULTI_KEYWORD_MATCH": 1,
+        "PARTIAL_COVERAGE": 6
+      },
+      "zero_match_count": 30,
+      "disagreement_count": 7,
+      "hh_agreement_at_reconstructed_80": 15,
+      "r0_score_selected": {
+        "min": 2.1666666666666714,
+        "median": 24.16666666666667,
+        "mean": 44.211711711711715,
+        "max": 152.5
+      },
+      "r1_v2_observed_risk_selected": {
+        "min": 0.0,
+        "median": 0.0,
+        "mean": 0.1554054054054054,
+        "max": 0.8333333333333334
+      },
+      "cutoff": {
+        "key_without_node_id": [
+          "-7/12"
+        ],
+        "tied_node_ids": [
+          130,
+          1243
+        ],
+        "selected_from_tie": [
+          130
+        ],
+        "at_budget36_removed_id": 130,
+        "at_budget38_added_id": 1243
+      }
+    },
+    "sara.router.r1_candidate.v2": {
+      "count": 37,
+      "selected_node_ids": [
+        722,
+        267,
+        682,
+        1120,
+        2291,
+        2396,
+        130,
+        1243,
+        653,
+        2319,
+        2487,
+        25,
+        47,
+        62,
+        972,
+        979,
+        1240,
+        1260,
+        1649,
+        1719,
+        1764,
+        1946,
+        2425,
+        2695,
+        81,
+        90,
+        94,
+        181,
+        436,
+        568,
+        614,
+        698,
+        711,
+        785,
+        881,
+        917,
+        1226
+      ],
+      "coverage_counts": {
+        "OBSERVED_MULTI_KEYWORD_MATCH": 18,
+        "PARTIAL_COVERAGE": 19
+      },
+      "zero_match_count": 0,
+      "disagreement_count": 6,
+      "hh_agreement_at_reconstructed_80": 20,
+      "r0_score_selected": {
+        "min": 3.5,
+        "median": 19.16666666666667,
+        "mean": 38.51801801801802,
+        "max": 152.5
+      },
+      "r1_v2_observed_risk_selected": {
+        "min": 0.3333333333333333,
+        "median": 0.3333333333333333,
+        "mean": 0.4189189189189189,
+        "max": 0.8333333333333334
+      },
+      "cutoff": {
+        "key_without_node_id": [
+          "-1/3",
+          "-1/4"
+        ],
+        "tied_node_ids": [
+          81,
+          90,
+          94,
+          181,
+          436,
+          568,
+          614,
+          698,
+          711,
+          785,
+          881,
+          917,
+          1226,
+          1690,
+          1751,
+          1757,
+          1793,
+          2034,
+          2177,
+          2287,
+          2409,
+          2500
+        ],
+        "selected_from_tie": [
+          81,
+          90,
+          94,
+          181,
+          436,
+          568,
+          614,
+          698,
+          711,
+          785,
+          881,
+          917,
+          1226
+        ],
+        "at_budget36_removed_id": 1226,
+        "at_budget38_added_id": 1690
+      }
+    },
+    "sara.router.r2_candidate.v1": {
+      "count": 37,
+      "selected_node_ids": [
+        1013,
+        1958,
+        1283,
+        1031,
+        722,
+        267,
+        682,
+        1120,
+        2291,
+        2396,
+        130,
+        1243,
+        653,
+        2319,
+        2487,
+        25,
+        47,
+        62,
+        972,
+        979,
+        1240,
+        637,
+        734,
+        351,
+        1528,
+        695,
+        2238,
+        2317,
+        2022,
+        27,
+        207,
+        357,
+        1559,
+        568,
+        2379,
+        1814,
+        614
+      ],
+      "coverage_counts": {
+        "NO_ATLAS_MATCH": 10,
+        "OBSERVED_MULTI_KEYWORD_MATCH": 18,
+        "PARTIAL_COVERAGE": 9
+      },
+      "zero_match_count": 10,
+      "disagreement_count": 9,
+      "hh_agreement_at_reconstructed_80": 9,
+      "r0_score_selected": {
+        "min": 3.3333333333333286,
+        "median": 44.166666666666664,
+        "mean": 58.765765765765764,
+        "max": 152.5
+      },
+      "r1_v2_observed_risk_selected": {
+        "min": 0.0,
+        "median": 0.3333333333333333,
+        "mean": 0.30855855855855857,
+        "max": 0.8333333333333334
+      },
+      "selection": {
+        "router_version": "sara.router.r2_candidate.v1",
+        "allocation": [
+          4,
+          17,
+          16
+        ],
+        "selected_node_ids_admission_order": [
+          1013,
+          1958,
+          1283,
+          1031,
+          722,
+          267,
+          682,
+          1120,
+          2291,
+          2396,
+          130,
+          1243,
+          653,
+          2319,
+          2487,
+          25,
+          47,
+          62,
+          972,
+          979,
+          1240,
+          637,
+          734,
+          351,
+          1528,
+          695,
+          2238,
+          2317,
+          2022,
+          27,
+          207,
+          357,
+          1559,
+          568,
+          2379,
+          1814,
+          614
+        ],
+        "stages": [
+          {
+            "stage": "unknown_exploration",
+            "requested": 4,
+            "pool_size": 30,
+            "overlap_skipped": 0,
+            "available": 30,
+            "admitted_node_ids": [
+              1013,
+              1958,
+              1283,
+              1031
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "19a5400c1e846e76b070344e668ea624f4f82183c8c3fe40eb4116c4a3d07552"
+            ],
+            "cutoff_tied_ids": [
+              1031
+            ],
+            "next_eligible_node_id": 351
+          },
+          {
+            "stage": "observed_risk",
+            "requested": 17,
+            "pool_size": 110,
+            "overlap_skipped": 0,
+            "available": 110,
+            "admitted_node_ids": [
+              722,
+              267,
+              682,
+              1120,
+              2291,
+              2396,
+              130,
+              1243,
+              653,
+              2319,
+              2487,
+              25,
+              47,
+              62,
+              972,
+              979,
+              1240
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "-1/3",
+              "-1/2"
+            ],
+            "cutoff_tied_ids": [
+              25,
+              47,
+              62,
+              972,
+              979,
+              1240,
+              1260,
+              1649,
+              1719,
+              1764,
+              1946,
+              2425,
+              2695
+            ],
+            "next_eligible_node_id": 1260
+          },
+          {
+            "stage": "candidate_risk",
+            "requested": 16,
+            "pool_size": 140,
+            "overlap_skipped": 21,
+            "available": 119,
+            "admitted_node_ids": [
+              637,
+              734,
+              351,
+              1528,
+              695,
+              2238,
+              2317,
+              2022,
+              27,
+              207,
+              357,
+              1559,
+              568,
+              2379,
+              1814,
+              614
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "-39.166666666666664"
+            ],
+            "cutoff_tied_ids": [
+              614,
+              917,
+              1751
+            ],
+            "next_eligible_node_id": 917
+          },
+          {
+            "stage": "backfill_candidate_risk",
+            "requested": 0,
+            "pool_size": 140,
+            "overlap_skipped": 37,
+            "available": 103,
+            "admitted_node_ids": [],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": null,
+            "cutoff_tied_ids": [],
+            "next_eligible_node_id": 917
+          }
+        ]
+      }
+    }
+  },
+  "input_order_stability": {
+    "r0_current": true,
+    "semantic_v0_current": true,
+    "sara.router.r1_candidate.v1": true,
+    "sara.router.r1_candidate.v2": true,
+    "sara.router.r2_candidate.v1": true
+  },
+  "pairwise_overlaps": {
+    "r0_current / semantic_v0_current": 25,
+    "r0_current / sara.router.r1_candidate.v1": 17,
+    "r0_current / sara.router.r1_candidate.v2": 15,
+    "r0_current / sara.router.r2_candidate.v1": 27,
+    "semantic_v0_current / sara.router.r1_candidate.v1": 13,
+    "semantic_v0_current / sara.router.r1_candidate.v2": 23,
+    "semantic_v0_current / sara.router.r2_candidate.v1": 26,
+    "sara.router.r1_candidate.v1 / sara.router.r1_candidate.v2": 7,
+    "sara.router.r1_candidate.v1 / sara.router.r2_candidate.v1": 17,
+    "sara.router.r1_candidate.v2 / sara.router.r2_candidate.v1": 19
+  },
+  "r2_sensitivity": {
+    "4/17/16": {
+      "count": 37,
+      "selected_node_ids": [
+        1013,
+        1958,
+        1283,
+        1031,
+        722,
+        267,
+        682,
+        1120,
+        2291,
+        2396,
+        130,
+        1243,
+        653,
+        2319,
+        2487,
+        25,
+        47,
+        62,
+        972,
+        979,
+        1240,
+        637,
+        734,
+        351,
+        1528,
+        695,
+        2238,
+        2317,
+        2022,
+        27,
+        207,
+        357,
+        1559,
+        568,
+        2379,
+        1814,
+        614
+      ],
+      "coverage_counts": {
+        "NO_ATLAS_MATCH": 10,
+        "OBSERVED_MULTI_KEYWORD_MATCH": 18,
+        "PARTIAL_COVERAGE": 9
+      },
+      "zero_match_count": 10,
+      "disagreement_count": 9,
+      "hh_agreement_at_reconstructed_80": 9,
+      "r0_score_selected": {
+        "min": 3.3333333333333286,
+        "median": 44.166666666666664,
+        "mean": 58.765765765765764,
+        "max": 152.5
+      },
+      "r1_v2_observed_risk_selected": {
+        "min": 0.0,
+        "median": 0.3333333333333333,
+        "mean": 0.30855855855855857,
+        "max": 0.8333333333333334
+      },
+      "selection": {
+        "router_version": "sara.router.r2_candidate.v1",
+        "allocation": [
+          4,
+          17,
+          16
+        ],
+        "selected_node_ids_admission_order": [
+          1013,
+          1958,
+          1283,
+          1031,
+          722,
+          267,
+          682,
+          1120,
+          2291,
+          2396,
+          130,
+          1243,
+          653,
+          2319,
+          2487,
+          25,
+          47,
+          62,
+          972,
+          979,
+          1240,
+          637,
+          734,
+          351,
+          1528,
+          695,
+          2238,
+          2317,
+          2022,
+          27,
+          207,
+          357,
+          1559,
+          568,
+          2379,
+          1814,
+          614
+        ],
+        "stages": [
+          {
+            "stage": "unknown_exploration",
+            "requested": 4,
+            "pool_size": 30,
+            "overlap_skipped": 0,
+            "available": 30,
+            "admitted_node_ids": [
+              1013,
+              1958,
+              1283,
+              1031
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "19a5400c1e846e76b070344e668ea624f4f82183c8c3fe40eb4116c4a3d07552"
+            ],
+            "cutoff_tied_ids": [
+              1031
+            ],
+            "next_eligible_node_id": 351
+          },
+          {
+            "stage": "observed_risk",
+            "requested": 17,
+            "pool_size": 110,
+            "overlap_skipped": 0,
+            "available": 110,
+            "admitted_node_ids": [
+              722,
+              267,
+              682,
+              1120,
+              2291,
+              2396,
+              130,
+              1243,
+              653,
+              2319,
+              2487,
+              25,
+              47,
+              62,
+              972,
+              979,
+              1240
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "-1/3",
+              "-1/2"
+            ],
+            "cutoff_tied_ids": [
+              25,
+              47,
+              62,
+              972,
+              979,
+              1240,
+              1260,
+              1649,
+              1719,
+              1764,
+              1946,
+              2425,
+              2695
+            ],
+            "next_eligible_node_id": 1260
+          },
+          {
+            "stage": "candidate_risk",
+            "requested": 16,
+            "pool_size": 140,
+            "overlap_skipped": 21,
+            "available": 119,
+            "admitted_node_ids": [
+              637,
+              734,
+              351,
+              1528,
+              695,
+              2238,
+              2317,
+              2022,
+              27,
+              207,
+              357,
+              1559,
+              568,
+              2379,
+              1814,
+              614
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "-39.166666666666664"
+            ],
+            "cutoff_tied_ids": [
+              614,
+              917,
+              1751
+            ],
+            "next_eligible_node_id": 917
+          },
+          {
+            "stage": "backfill_candidate_risk",
+            "requested": 0,
+            "pool_size": 140,
+            "overlap_skipped": 37,
+            "available": 103,
+            "admitted_node_ids": [],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": null,
+            "cutoff_tied_ids": [],
+            "next_eligible_node_id": 917
+          }
+        ]
+      },
+      "overlap_with_primary": 37,
+      "added_vs_primary": [],
+      "removed_vs_primary": [],
+      "input_order_stable": true
+    },
+    "2/18/17": {
+      "count": 37,
+      "selected_node_ids": [
+        1013,
+        1958,
+        722,
+        267,
+        682,
+        1120,
+        2291,
+        2396,
+        130,
+        1243,
+        653,
+        2319,
+        2487,
+        25,
+        47,
+        62,
+        972,
+        979,
+        1240,
+        1260,
+        637,
+        734,
+        351,
+        1528,
+        695,
+        1283,
+        2238,
+        2317,
+        2022,
+        27,
+        207,
+        357,
+        1559,
+        568,
+        2379,
+        1814,
+        614
+      ],
+      "coverage_counts": {
+        "NO_ATLAS_MATCH": 9,
+        "OBSERVED_MULTI_KEYWORD_MATCH": 19,
+        "PARTIAL_COVERAGE": 9
+      },
+      "zero_match_count": 9,
+      "disagreement_count": 9,
+      "hh_agreement_at_reconstructed_80": 9,
+      "r0_score_selected": {
+        "min": 3.3333333333333286,
+        "median": 44.166666666666664,
+        "mean": 58.63963963963964,
+        "max": 152.5
+      },
+      "r1_v2_observed_risk_selected": {
+        "min": 0.0,
+        "median": 0.3333333333333333,
+        "mean": 0.31756756756756754,
+        "max": 0.8333333333333334
+      },
+      "selection": {
+        "router_version": "sara.router.r2_candidate.v1",
+        "allocation": [
+          2,
+          18,
+          17
+        ],
+        "selected_node_ids_admission_order": [
+          1013,
+          1958,
+          722,
+          267,
+          682,
+          1120,
+          2291,
+          2396,
+          130,
+          1243,
+          653,
+          2319,
+          2487,
+          25,
+          47,
+          62,
+          972,
+          979,
+          1240,
+          1260,
+          637,
+          734,
+          351,
+          1528,
+          695,
+          1283,
+          2238,
+          2317,
+          2022,
+          27,
+          207,
+          357,
+          1559,
+          568,
+          2379,
+          1814,
+          614
+        ],
+        "stages": [
+          {
+            "stage": "unknown_exploration",
+            "requested": 2,
+            "pool_size": 30,
+            "overlap_skipped": 0,
+            "available": 30,
+            "admitted_node_ids": [
+              1013,
+              1958
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "09e605b35c2a6aec6b1eee0b6a8fc6bd36062531f36449d6c2526e748633b819"
+            ],
+            "cutoff_tied_ids": [
+              1958
+            ],
+            "next_eligible_node_id": 1283
+          },
+          {
+            "stage": "observed_risk",
+            "requested": 18,
+            "pool_size": 110,
+            "overlap_skipped": 0,
+            "available": 110,
+            "admitted_node_ids": [
+              722,
+              267,
+              682,
+              1120,
+              2291,
+              2396,
+              130,
+              1243,
+              653,
+              2319,
+              2487,
+              25,
+              47,
+              62,
+              972,
+              979,
+              1240,
+              1260
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "-1/3",
+              "-1/2"
+            ],
+            "cutoff_tied_ids": [
+              25,
+              47,
+              62,
+              972,
+              979,
+              1240,
+              1260,
+              1649,
+              1719,
+              1764,
+              1946,
+              2425,
+              2695
+            ],
+            "next_eligible_node_id": 1649
+          },
+          {
+            "stage": "candidate_risk",
+            "requested": 17,
+            "pool_size": 140,
+            "overlap_skipped": 20,
+            "available": 120,
+            "admitted_node_ids": [
+              637,
+              734,
+              351,
+              1528,
+              695,
+              1283,
+              2238,
+              2317,
+              2022,
+              27,
+              207,
+              357,
+              1559,
+              568,
+              2379,
+              1814,
+              614
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "-39.166666666666664"
+            ],
+            "cutoff_tied_ids": [
+              614,
+              917,
+              1751
+            ],
+            "next_eligible_node_id": 917
+          },
+          {
+            "stage": "backfill_candidate_risk",
+            "requested": 0,
+            "pool_size": 140,
+            "overlap_skipped": 37,
+            "available": 103,
+            "admitted_node_ids": [],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": null,
+            "cutoff_tied_ids": [],
+            "next_eligible_node_id": 917
+          }
+        ]
+      },
+      "overlap_with_primary": 36,
+      "added_vs_primary": [
+        1260
+      ],
+      "removed_vs_primary": [
+        1031
+      ],
+      "input_order_stable": true
+    },
+    "6/16/15": {
+      "count": 37,
+      "selected_node_ids": [
+        1013,
+        1958,
+        1283,
+        1031,
+        351,
+        1776,
+        722,
+        267,
+        682,
+        1120,
+        2291,
+        2396,
+        130,
+        1243,
+        653,
+        2319,
+        2487,
+        25,
+        47,
+        62,
+        972,
+        979,
+        637,
+        734,
+        1528,
+        695,
+        2238,
+        2317,
+        2022,
+        27,
+        207,
+        357,
+        1559,
+        568,
+        2379,
+        1814,
+        614
+      ],
+      "coverage_counts": {
+        "NO_ATLAS_MATCH": 11,
+        "OBSERVED_MULTI_KEYWORD_MATCH": 17,
+        "PARTIAL_COVERAGE": 9
+      },
+      "zero_match_count": 11,
+      "disagreement_count": 9,
+      "hh_agreement_at_reconstructed_80": 9,
+      "r0_score_selected": {
+        "min": 3.3333333333333286,
+        "median": 44.166666666666664,
+        "mean": 58.37837837837838,
+        "max": 152.5
+      },
+      "r1_v2_observed_risk_selected": {
+        "min": 0.0,
+        "median": 0.3333333333333333,
+        "mean": 0.29954954954954954,
+        "max": 0.8333333333333334
+      },
+      "selection": {
+        "router_version": "sara.router.r2_candidate.v1",
+        "allocation": [
+          6,
+          16,
+          15
+        ],
+        "selected_node_ids_admission_order": [
+          1013,
+          1958,
+          1283,
+          1031,
+          351,
+          1776,
+          722,
+          267,
+          682,
+          1120,
+          2291,
+          2396,
+          130,
+          1243,
+          653,
+          2319,
+          2487,
+          25,
+          47,
+          62,
+          972,
+          979,
+          637,
+          734,
+          1528,
+          695,
+          2238,
+          2317,
+          2022,
+          27,
+          207,
+          357,
+          1559,
+          568,
+          2379,
+          1814,
+          614
+        ],
+        "stages": [
+          {
+            "stage": "unknown_exploration",
+            "requested": 6,
+            "pool_size": 30,
+            "overlap_skipped": 0,
+            "available": 30,
+            "admitted_node_ids": [
+              1013,
+              1958,
+              1283,
+              1031,
+              351,
+              1776
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "217ea844b187c403e2f15fe668a4fec5848d9dfa0eb48ee6c591d04f7c907f46"
+            ],
+            "cutoff_tied_ids": [
+              1776
+            ],
+            "next_eligible_node_id": 1066
+          },
+          {
+            "stage": "observed_risk",
+            "requested": 16,
+            "pool_size": 110,
+            "overlap_skipped": 0,
+            "available": 110,
+            "admitted_node_ids": [
+              722,
+              267,
+              682,
+              1120,
+              2291,
+              2396,
+              130,
+              1243,
+              653,
+              2319,
+              2487,
+              25,
+              47,
+              62,
+              972,
+              979
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "-1/3",
+              "-1/2"
+            ],
+            "cutoff_tied_ids": [
+              25,
+              47,
+              62,
+              972,
+              979,
+              1240,
+              1260,
+              1649,
+              1719,
+              1764,
+              1946,
+              2425,
+              2695
+            ],
+            "next_eligible_node_id": 1240
+          },
+          {
+            "stage": "candidate_risk",
+            "requested": 15,
+            "pool_size": 140,
+            "overlap_skipped": 22,
+            "available": 118,
+            "admitted_node_ids": [
+              637,
+              734,
+              1528,
+              695,
+              2238,
+              2317,
+              2022,
+              27,
+              207,
+              357,
+              1559,
+              568,
+              2379,
+              1814,
+              614
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "-39.166666666666664"
+            ],
+            "cutoff_tied_ids": [
+              614,
+              917,
+              1751
+            ],
+            "next_eligible_node_id": 917
+          },
+          {
+            "stage": "backfill_candidate_risk",
+            "requested": 0,
+            "pool_size": 140,
+            "overlap_skipped": 37,
+            "available": 103,
+            "admitted_node_ids": [],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": null,
+            "cutoff_tied_ids": [],
+            "next_eligible_node_id": 917
+          }
+        ]
+      },
+      "overlap_with_primary": 36,
+      "added_vs_primary": [
+        1776
+      ],
+      "removed_vs_primary": [
+        1240
+      ],
+      "input_order_stable": true
+    },
+    "4/16/17": {
+      "count": 37,
+      "selected_node_ids": [
+        1013,
+        1958,
+        1283,
+        1031,
+        722,
+        267,
+        682,
+        1120,
+        2291,
+        2396,
+        130,
+        1243,
+        653,
+        2319,
+        2487,
+        25,
+        47,
+        62,
+        972,
+        979,
+        637,
+        734,
+        351,
+        1528,
+        695,
+        2238,
+        2317,
+        2022,
+        27,
+        207,
+        357,
+        1559,
+        568,
+        2379,
+        1814,
+        614,
+        917
+      ],
+      "coverage_counts": {
+        "NO_ATLAS_MATCH": 10,
+        "OBSERVED_MULTI_KEYWORD_MATCH": 17,
+        "PARTIAL_COVERAGE": 10
+      },
+      "zero_match_count": 10,
+      "disagreement_count": 9,
+      "hh_agreement_at_reconstructed_80": 8,
+      "r0_score_selected": {
+        "min": 3.3333333333333286,
+        "median": 44.166666666666664,
+        "mean": 59.292792792792795,
+        "max": 152.5
+      },
+      "r1_v2_observed_risk_selected": {
+        "min": 0.0,
+        "median": 0.3333333333333333,
+        "mean": 0.30855855855855857,
+        "max": 0.8333333333333334
+      },
+      "selection": {
+        "router_version": "sara.router.r2_candidate.v1",
+        "allocation": [
+          4,
+          16,
+          17
+        ],
+        "selected_node_ids_admission_order": [
+          1013,
+          1958,
+          1283,
+          1031,
+          722,
+          267,
+          682,
+          1120,
+          2291,
+          2396,
+          130,
+          1243,
+          653,
+          2319,
+          2487,
+          25,
+          47,
+          62,
+          972,
+          979,
+          637,
+          734,
+          351,
+          1528,
+          695,
+          2238,
+          2317,
+          2022,
+          27,
+          207,
+          357,
+          1559,
+          568,
+          2379,
+          1814,
+          614,
+          917
+        ],
+        "stages": [
+          {
+            "stage": "unknown_exploration",
+            "requested": 4,
+            "pool_size": 30,
+            "overlap_skipped": 0,
+            "available": 30,
+            "admitted_node_ids": [
+              1013,
+              1958,
+              1283,
+              1031
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "19a5400c1e846e76b070344e668ea624f4f82183c8c3fe40eb4116c4a3d07552"
+            ],
+            "cutoff_tied_ids": [
+              1031
+            ],
+            "next_eligible_node_id": 351
+          },
+          {
+            "stage": "observed_risk",
+            "requested": 16,
+            "pool_size": 110,
+            "overlap_skipped": 0,
+            "available": 110,
+            "admitted_node_ids": [
+              722,
+              267,
+              682,
+              1120,
+              2291,
+              2396,
+              130,
+              1243,
+              653,
+              2319,
+              2487,
+              25,
+              47,
+              62,
+              972,
+              979
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "-1/3",
+              "-1/2"
+            ],
+            "cutoff_tied_ids": [
+              25,
+              47,
+              62,
+              972,
+              979,
+              1240,
+              1260,
+              1649,
+              1719,
+              1764,
+              1946,
+              2425,
+              2695
+            ],
+            "next_eligible_node_id": 1240
+          },
+          {
+            "stage": "candidate_risk",
+            "requested": 17,
+            "pool_size": 140,
+            "overlap_skipped": 20,
+            "available": 120,
+            "admitted_node_ids": [
+              637,
+              734,
+              351,
+              1528,
+              695,
+              2238,
+              2317,
+              2022,
+              27,
+              207,
+              357,
+              1559,
+              568,
+              2379,
+              1814,
+              614,
+              917
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "-39.166666666666664"
+            ],
+            "cutoff_tied_ids": [
+              614,
+              917,
+              1751
+            ],
+            "next_eligible_node_id": 1751
+          },
+          {
+            "stage": "backfill_candidate_risk",
+            "requested": 0,
+            "pool_size": 140,
+            "overlap_skipped": 37,
+            "available": 103,
+            "admitted_node_ids": [],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": null,
+            "cutoff_tied_ids": [],
+            "next_eligible_node_id": 1751
+          }
+        ]
+      },
+      "overlap_with_primary": 36,
+      "added_vs_primary": [
+        917
+      ],
+      "removed_vs_primary": [
+        1240
+      ],
+      "input_order_stable": true
+    },
+    "4/18/15": {
+      "count": 37,
+      "selected_node_ids": [
+        1013,
+        1958,
+        1283,
+        1031,
+        722,
+        267,
+        682,
+        1120,
+        2291,
+        2396,
+        130,
+        1243,
+        653,
+        2319,
+        2487,
+        25,
+        47,
+        62,
+        972,
+        979,
+        1240,
+        1260,
+        637,
+        734,
+        351,
+        1528,
+        695,
+        2238,
+        2317,
+        2022,
+        27,
+        207,
+        357,
+        1559,
+        568,
+        2379,
+        1814
+      ],
+      "coverage_counts": {
+        "NO_ATLAS_MATCH": 10,
+        "OBSERVED_MULTI_KEYWORD_MATCH": 19,
+        "PARTIAL_COVERAGE": 8
+      },
+      "zero_match_count": 10,
+      "disagreement_count": 9,
+      "hh_agreement_at_reconstructed_80": 10,
+      "r0_score_selected": {
+        "min": 3.3333333333333286,
+        "median": 44.166666666666664,
+        "mean": 57.82432432432432,
+        "max": 152.5
+      },
+      "r1_v2_observed_risk_selected": {
+        "min": 0.0,
+        "median": 0.3333333333333333,
+        "mean": 0.30855855855855857,
+        "max": 0.8333333333333334
+      },
+      "selection": {
+        "router_version": "sara.router.r2_candidate.v1",
+        "allocation": [
+          4,
+          18,
+          15
+        ],
+        "selected_node_ids_admission_order": [
+          1013,
+          1958,
+          1283,
+          1031,
+          722,
+          267,
+          682,
+          1120,
+          2291,
+          2396,
+          130,
+          1243,
+          653,
+          2319,
+          2487,
+          25,
+          47,
+          62,
+          972,
+          979,
+          1240,
+          1260,
+          637,
+          734,
+          351,
+          1528,
+          695,
+          2238,
+          2317,
+          2022,
+          27,
+          207,
+          357,
+          1559,
+          568,
+          2379,
+          1814
+        ],
+        "stages": [
+          {
+            "stage": "unknown_exploration",
+            "requested": 4,
+            "pool_size": 30,
+            "overlap_skipped": 0,
+            "available": 30,
+            "admitted_node_ids": [
+              1013,
+              1958,
+              1283,
+              1031
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "19a5400c1e846e76b070344e668ea624f4f82183c8c3fe40eb4116c4a3d07552"
+            ],
+            "cutoff_tied_ids": [
+              1031
+            ],
+            "next_eligible_node_id": 351
+          },
+          {
+            "stage": "observed_risk",
+            "requested": 18,
+            "pool_size": 110,
+            "overlap_skipped": 0,
+            "available": 110,
+            "admitted_node_ids": [
+              722,
+              267,
+              682,
+              1120,
+              2291,
+              2396,
+              130,
+              1243,
+              653,
+              2319,
+              2487,
+              25,
+              47,
+              62,
+              972,
+              979,
+              1240,
+              1260
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "-1/3",
+              "-1/2"
+            ],
+            "cutoff_tied_ids": [
+              25,
+              47,
+              62,
+              972,
+              979,
+              1240,
+              1260,
+              1649,
+              1719,
+              1764,
+              1946,
+              2425,
+              2695
+            ],
+            "next_eligible_node_id": 1649
+          },
+          {
+            "stage": "candidate_risk",
+            "requested": 15,
+            "pool_size": 140,
+            "overlap_skipped": 22,
+            "available": 118,
+            "admitted_node_ids": [
+              637,
+              734,
+              351,
+              1528,
+              695,
+              2238,
+              2317,
+              2022,
+              27,
+              207,
+              357,
+              1559,
+              568,
+              2379,
+              1814
+            ],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": [
+              "-39.333333333333336"
+            ],
+            "cutoff_tied_ids": [
+              1814
+            ],
+            "next_eligible_node_id": 614
+          },
+          {
+            "stage": "backfill_candidate_risk",
+            "requested": 0,
+            "pool_size": 140,
+            "overlap_skipped": 37,
+            "available": 103,
+            "admitted_node_ids": [],
+            "shortfall": 0,
+            "cutoff_key_without_node_id": null,
+            "cutoff_tied_ids": [],
+            "next_eligible_node_id": 614
+          }
+        ]
+      },
+      "overlap_with_primary": 36,
+      "added_vs_primary": [
+        1260
+      ],
+      "removed_vs_primary": [
+        614
+      ],
+      "input_order_stable": true
+    }
+  },
+  "hh_definition": "Agreement and both frozen confidence>=80; reconstructed convention",
+  "selection_order": "Baselines: own risk ranking; R2: stage admission order, no global risk score",
+  "ground_truth_accessed": false,
+  "human_review_accessed": false,
+  "provider_calls": 0,
+  "training_runs": 0,
+  "production_or_pilot_freeze": false
+}

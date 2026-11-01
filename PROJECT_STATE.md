@@ -2,6 +2,23 @@
 
 Date: 2026-11-01 (America/Los_Angeles).
 
+- R2-candidate v1 (2026-11-01): prospective stratified hybrid, not historical
+  R2 recovery. Prespecified37-slot allocation: unknown4 (version/node hash order),
+  observed17 (R1-v2 among covered nodes), candidate16 (remaining R0 rank), then
+  global R0 backfill for exhausted pools. No incompatible score averaging.
+  Authentic140 selects9 disagreements/9 HH at reconstructed80/10 Atlas-unknown;
+  unknown4 from exploration and6 from candidate stage. Overlap with R0/Semantic/
+  R1-v1/R1-v2 is27/26/17/19. Four prespecified quota sensitivities retain36/37;
+  observed/candidate cutoff ties13/3. These are descriptive, not error detection.
+  Eleven focused +80 related regressions PASS (91,7.913s); prior four router
+  selections unchanged, nine pins admitted, P0 and31+13 pilot seal members intact.
+  No human-review access/tests, GT/provider/training, runtime/default/pilot freeze,
+  verifier/L2/arbitration/GraphScope changes. Report: reports/r2_candidate_comparison.json.
+  Design/results: docs/R2_CANDIDATE.md and docs/R2_CANDIDATE_RESULTS.md.
+  Parent0264f93b750d3d181eb52dc08c22f3405a2e72a2; PUSH_PENDING; no Drive backup.
+  Next: review objective/quotas/stage priority and cutoff effects before any
+  separately authorized prospective protocol freeze. No accuracy claim.
+
 - R1 coverage review (2026-11-01): three prespecified policies separate lexical
   mismatch from missingness; v2 uses observed-risk=(D+I[match]*(M+A))/3, coverage
   C=max_hits/4 only for descending tie priority, then ascending node ID. Neutral
