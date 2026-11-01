@@ -6,6 +6,35 @@ No API client or execution command is implemented.
 The fixture deliberately uses target keywords, not neighborhood inference; tests
 check evidence delivery, not its scientific usefulness to a future real verifier.
 
+## Historical P0 selection reconstruction (separate protocol)
+
+`manifests/historical_p0.json` is a versioned reconstruction of the reported P0
+selection contract, not recovered source or byte-identical P1 wire data. It fixes
+Group A to 734,2379,2490,682 (Judge002 and SARA3_V1 each), and Group B to
+1031,655,1013,1328 (SARA3_V1 only): eight unique nodes, twelve logical node/arm
+records. Order and membership are fixed; the validator never reroutes or selects.
+The twelve logical records are not the six-node pilot's up-to-twelve stage intents.
+Historical V1 generation calls per record remain unknown; do not assume two.
+
+Read-only validation from the checkout root, using the existing three pinned
+frozen JSON inputs (B1, Narrative v0 and FeatProp selection):
+
+```powershell
+$env:PYTHONPATH = Join-Path $PWD 'src'
+python -B -m llmgnn_sara.pilot.historical_p0 --manifest manifests/historical_p0.json --frozen-root .local_artifacts/frozen
+python -B -m unittest discover -s tests -p test_historical_p0.py -v
+```
+
+The manifest and all three inputs are SHA-256 admitted before JSON use. Source
+document hashes identify secondary reports; they do not authenticate lost P1 data.
+Group B agreement and HH (both confidences >=80 percent) are checked from frozen
+predictions. This descriptive bucket comes from the historical results report;
+it does not reconstruct Policy 002. Historical R1 membership and exclusion from
+historical R0 remain REPORTED_UNVERIFIED. Exact Judge002/V1 prompts and schemas,
+Policy 002 rules, R1 selection evidence, original selection hashes, V1 arbitration
+and original P1 wire bytes/hashes remain MISSING_EVIDENCE. No transport or judge
+behavior is added. Existing six-node sealed files are unchanged.
+
 ## Restore inputs and run from a clean checkout
 
 Use Python3.10+ and the README setup. No third-party dependency is required unless

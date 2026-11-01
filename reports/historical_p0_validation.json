@@ -1,0 +1,84 @@
+{
+  "status": "PASS",
+  "scope": "RECONSTRUCTED_P0_SELECTION_ONLY_NOT_P1_WIRE_REPRODUCTION",
+  "unique_nodes": 8,
+  "logical_records": 12,
+  "arm_counts": {
+    "Judge002": 4,
+    "SARA3_V1": 8
+  },
+  "cohort_size": 140,
+  "group_b_checks": [
+    {
+      "node_id": 1031,
+      "agreement": true,
+      "hh": true,
+      "b1_confidence_percent": 91.0,
+      "narrative_v0_confidence_percent": 93.16666666666667
+    },
+    {
+      "node_id": 655,
+      "agreement": true,
+      "hh": true,
+      "b1_confidence_percent": 96.0,
+      "narrative_v0_confidence_percent": 96.66666666666667
+    },
+    {
+      "node_id": 1013,
+      "agreement": true,
+      "hh": true,
+      "b1_confidence_percent": 91.16666666666667,
+      "narrative_v0_confidence_percent": 94.66666666666667
+    },
+    {
+      "node_id": 1328,
+      "agreement": true,
+      "hh": true,
+      "b1_confidence_percent": 95.33333333333333,
+      "narrative_v0_confidence_percent": 93.33333333333333
+    }
+  ],
+  "historical_r1_membership": "REPORTED_UNVERIFIED",
+  "historical_outside_r0_membership": "REPORTED_UNVERIFIED",
+  "v1_generation_calls_per_record": "UNKNOWN_DO_NOT_ASSUME_TWO",
+  "frozen_input_sha256": {
+    "b1": "c6bc236ac5f8c1615067a10750cb150ecaf54fbe458afd4df7e750f92ce4b141",
+    "narrative_v0": "181806c4622449c8f9cdc9bdabb725232666fdc95394b3a8d7b78067b385ff02",
+    "selection": "dc8260974c7c0ca2e828f2d069e2896e9bcf2c363b15ca81d9f09d2803c9b12c"
+  },
+  "missing_evidence": {
+    "judge002_prompt": "MISSING_EVIDENCE",
+    "judge002_schema": "MISSING_EVIDENCE",
+    "v1_historical_prompt_and_schema": "MISSING_EVIDENCE",
+    "policy_002_complete_rules": "MISSING_EVIDENCE",
+    "r1_node_level_selection_and_formula": "MISSING_EVIDENCE",
+    "p0_original_selection_algorithm_and_hashes": "MISSING_EVIDENCE",
+    "p1_original_wire_bytes_and_per_request_hashes": "MISSING_EVIDENCE",
+    "v1_historical_arbitration_table": "MISSING_EVIDENCE"
+  },
+  "provider_calls": 0,
+  "token_count_requests": 0,
+  "training_runs": 0,
+  "ground_truth_accessed": false,
+  "manifest_sha256": "7affacee222dbec3ecb5710b038968543c19d252190ee6eab76c5b03a4307410",
+  "date": "2026-10-31",
+  "tests": {
+    "new_p0_tests": {
+      "run": 9,
+      "passed": 9
+    },
+    "existing_pilot_regressions": {
+      "run": 10,
+      "passed": 10
+    },
+    "initial_attempt": "Windows sandbox temporary-directory permissions caused five errors; unchanged tests passed outside sandbox"
+  },
+  "six_node_seal_verification": {
+    "status": "PASS_UNCHANGED",
+    "artifact_manifest_sha256": "29fa95c7d34f5826b628509e6bad2baced83ac986ebfbc7cadc4bb36d4c31b41",
+    "artifact_files_checked": 31,
+    "pilot_manifest_sha256": "9fd65d82e3cab296afc503813b97b0c0af9e8f4dcb41cd0be1aa20ac34ef1f96",
+    "pilot_files_checked": 13,
+    "note": "Pilot files overlap the full artifact file set."
+  }
+}

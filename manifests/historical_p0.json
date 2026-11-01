@@ -1,0 +1,127 @@
+{
+  "schema": "sara.historical_p0.v1",
+  "status": "RECONSTRUCTED_SELECTION_CONTRACT_NOT_RECOVERED_WIRE",
+  "historical_sources": [
+    {
+      "filename": "SARA3_ROUTING_SPEC.md",
+      "sha256": "a93f13023a55b934e4a764fc3937e7b80bea4b29d54a395f80a0847f2db7f120",
+      "evidence": "SECONDARY_HISTORICAL_REPORT"
+    },
+    {
+      "filename": "SARA_PROJECT_RECOVERY_HANDOFF_2026-10-29 (1).md",
+      "sha256": "4579c5f500b697acc1c701b302e4f08bc9c77b0d8d1aad8b2f5d0a545af76126",
+      "evidence": "SECONDARY_HISTORICAL_REPORT"
+    },
+    {
+      "filename": "SARA_LLMGNN_Research_Results_2026-10-29_FA.md",
+      "sha256": "5bc8245aff43217751c25079210fb0ca7aa6e41696728d082a75e71475aa17e3",
+      "evidence": "SECONDARY_HISTORICAL_REPORT"
+    }
+  ],
+  "frozen_input_sha256": {
+    "b1": "c6bc236ac5f8c1615067a10750cb150ecaf54fbe458afd4df7e750f92ce4b141",
+    "narrative_v0": "181806c4622449c8f9cdc9bdabb725232666fdc95394b3a8d7b78067b385ff02",
+    "selection": "dc8260974c7c0ca2e828f2d069e2896e9bcf2c363b15ca81d9f09d2803c9b12c"
+  },
+  "groups": {
+    "A": [
+      734,
+      2379,
+      2490,
+      682
+    ],
+    "B": [
+      1031,
+      655,
+      1013,
+      1328
+    ]
+  },
+  "logical_records": [
+    {
+      "node_id": 734,
+      "group": "A",
+      "arm": "Judge002"
+    },
+    {
+      "node_id": 734,
+      "group": "A",
+      "arm": "SARA3_V1"
+    },
+    {
+      "node_id": 2379,
+      "group": "A",
+      "arm": "Judge002"
+    },
+    {
+      "node_id": 2379,
+      "group": "A",
+      "arm": "SARA3_V1"
+    },
+    {
+      "node_id": 2490,
+      "group": "A",
+      "arm": "Judge002"
+    },
+    {
+      "node_id": 2490,
+      "group": "A",
+      "arm": "SARA3_V1"
+    },
+    {
+      "node_id": 682,
+      "group": "A",
+      "arm": "Judge002"
+    },
+    {
+      "node_id": 682,
+      "group": "A",
+      "arm": "SARA3_V1"
+    },
+    {
+      "node_id": 1031,
+      "group": "B",
+      "arm": "SARA3_V1"
+    },
+    {
+      "node_id": 655,
+      "group": "B",
+      "arm": "SARA3_V1"
+    },
+    {
+      "node_id": 1013,
+      "group": "B",
+      "arm": "SARA3_V1"
+    },
+    {
+      "node_id": 1328,
+      "group": "B",
+      "arm": "SARA3_V1"
+    }
+  ],
+  "group_b_contract": {
+    "agreement_required": true,
+    "hh_min_confidence_percent": 80,
+    "hh_definition_evidence": "SECONDARY_REPORTED_DESCRIPTIVE_BUCKET_NOT_COMPLETE_POLICY_002",
+    "historical_r1_membership": "REPORTED_UNVERIFIED",
+    "historical_outside_r0_membership": "REPORTED_UNVERIFIED"
+  },
+  "request_semantics": "12_LOGICAL_NODE_ARM_RECORDS_NOT_12_BLIND_COMPARISON_STAGE_INTENTS",
+  "v1_generation_calls_per_record": "UNKNOWN_DO_NOT_ASSUME_TWO",
+  "six_node_feasibility_pilot": "SEPARATE_UNCHANGED",
+  "missing_evidence": {
+    "judge002_prompt": "MISSING_EVIDENCE",
+    "judge002_schema": "MISSING_EVIDENCE",
+    "v1_historical_prompt_and_schema": "MISSING_EVIDENCE",
+    "policy_002_complete_rules": "MISSING_EVIDENCE",
+    "r1_node_level_selection_and_formula": "MISSING_EVIDENCE",
+    "p0_original_selection_algorithm_and_hashes": "MISSING_EVIDENCE",
+    "p1_original_wire_bytes_and_per_request_hashes": "MISSING_EVIDENCE",
+    "v1_historical_arbitration_table": "MISSING_EVIDENCE"
+  },
+  "historical_reported_identifiers": {
+    "policy_002_sha256": "5a9377dd050ab243d72ddceea71725ebd70d476bae0d89254fc9e7ab4fd64c3f",
+    "p2_contract_sha256": "05e481916eeb6581a8d239347bf0514903c0dd330a87aa0071ceaa83c85a8ef1",
+    "verification": "REPORTED_ONLY_ORIGINAL_BYTES_UNAVAILABLE"
+  }
+}

@@ -1,6 +1,18 @@
 # Project state
 
-Date: 2026-10-30 (America/Los_Angeles).
+Date: 2026-10-31 (America/Los_Angeles).
+
+- Historical P0: manifests/historical_p0.json reconstructs eight fixed nodes and
+  twelve logical node/arm records, not twelve stage intents or recovered P1 wire.
+  Read-only pilot.historical_p0 validator admits three pinned frozen inputs;
+  all eight nodes align and all four Group B nodes have agreement/HH >=80.
+  R1 membership remains REPORTED_UNVERIFIED; missing prompts/schemas/policies/wire
+  remain MISSING_EVIDENCE. Nine focused tests and ten existing pilot regressions
+  PASS; syntax checks PASS. Six-node seals are hash-verified unchanged.
+  See reports/historical_p0_validation.json for executed checks and initial
+  Windows sandbox temporary-directory errors resolved by running outside sandbox.
+  Parent before this slice: 573b1e42507d57ddeafc212a165b7f388d965ffe on main.
+  No new transport, verifier prompts, provider requests, GT use or training.
 
 - Objective: defensible ground-truth-free annotation and downstream GCN research.
 - GraphScope v2: isolated static React/TypeScript atlas in web/graphscope/;
