@@ -120,6 +120,14 @@ decoding or real training occurred. The prepared optional backend is default-den
 not exposed as an offline training command. Its synthetic forward is tested;
 the optimizer/training path remains unexecuted and numerically unverified.
 
+## Offline routing experiment
+
+The draft three-arm router experiment connects hash-verified R0/R1-v2/R2-v1
+selections to the unchanged legacy verifier contract, using only offline fixtures.
+See [offline routing experiment](docs/OFFLINE_ROUTING_EXPERIMENT.md) for the pinned
+manifest, exact commands, conditional request identities and call-budget bounds.
+It is DRAFT and NOT_AUTHORIZED_FOR_LIVE_EXECUTION; no provider calls or training.
+
 ## Raw recovery and backups
 
 Use scripts/colab_recover_responses.py in the owner's fresh CPU Colab notebook;

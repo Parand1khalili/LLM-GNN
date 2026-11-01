@@ -18,6 +18,7 @@ import hashlib
 from .evidence import EvidenceError, validate_result
 from .audit import AuditError, PrivateAudit
 from .rich_evidence import RICH_VERSION, rich_verifier_input, target_source, validate_rich_result
+from .experiment import MANIFEST_SHA256, VerifiedSelection
 
 
 @dataclass(frozen=True)
@@ -78,7 +79,8 @@ def _decision(pair: Pair, label: int | None, reason: str, reviewed: bool) -> dic
 
 def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifier | None = None,
                 config: PolicyConfig | None = None, ledger: OfflineLedger | None = None,
-                audit: PrivateAudit | None = None, response_version: str | None = None) -> dict:
+                audit: PrivateAudit | None = None, response_version: str | None = None,
+                selection: VerifiedSelection | None = None) -> dict:
     """Run GT-free frozen pairs through an explicitly offline verifier.
 
     With no text/verifier, reviewed cases abstain; no response is fabricated.
@@ -101,7 +103,12 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
     if audit is not None and type(audit) is not PrivateAudit:
         raise TypeError("PrivateAudit required")
     audit_store, responses = audit, {}
-    selected = (route_r0 if router == "r0" else route_semantic)(rows, budget)
+    if selection is not None:
+        if type(selection) is not VerifiedSelection or router != "r0":
+            raise ValueError("Explicit verified selection requires default router argument")
+        selected = selection.resolve(rows, budget, response_version, config)
+    else:
+        selected = (route_r0 if router == "r0" else route_semantic)(rows, budget)
     chosen = set(selected)
     decisions, requests, estimated_chars, exact_inputs = [], 0, 0, []
 
@@ -199,8 +206,11 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
     available = sum(max(semantic_support(pair.text)) > 0 for pair in rows)
     return {"status": "OFFLINE_TESTED", "evidence_level": "OFFLINE_RECONSTRUCTION_NOT_LIVE_MEASURED",
             "policy_provenance": config.provenance, "historical_policy_002_equivalence": False,
-            "policy": asdict(config), "router": router, "router_parameters": {
-                "semantic_mismatch_weight": 100.0, "calibration": "PREDECLARED_UNVALIDATED_HEURISTIC"},
+            "policy": asdict(config), "router": router if selection is None else "manifest:" + selection.arm,
+            **({"experiment_selection": {"manifest_sha256": MANIFEST_SHA256, "arm": selection.arm}}
+               if selection is not None else {}), "router_parameters": {
+                "semantic_mismatch_weight": 100.0, "calibration": "PREDECLARED_UNVALIDATED_HEURISTIC"}
+                if selection is None else {"selection_source": "HASH_VERIFIED_DRAFT_MANIFEST"},
             "ordered_classes": list(CLASSES), "target_count": len(rows), "review_budget": budget,
             "selected_node_ids": list(selected), "review_count": len(selected),
             "completed_review_count": sum(d["verification_completed"] for d in decisions),

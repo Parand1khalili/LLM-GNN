@@ -2,6 +2,28 @@
 
 Date: 2026-11-01 (America/Los_Angeles).
 
+- Offline routing experiment draft v1 (2026-11-01): pinned manifest connects
+  R0 control/R1-v2/R2-v1 candidates to existing legacy pipeline via explicit
+  VerifiedSelection; default routing/schema/policy unchanged. Optional Semantic/
+  R1-v1 selections retained. All5 selections/budget37, nine sources, cohort/evidence,
+  prompts/schema/classes and R2 primary4/17/16 seed/order pinned; live NOT_AUTHORIZED.
+  Manifest SHA dd2cd784e58cbb905ffa6c337782ef67073960a11ca32d07e8f9991dcc71387b.
+  Exact offline identity binds full effective request/context; comparison requires
+  actual blind class and full raw-blind hash. Private readback-verified in-process
+  fixture cache shares successful responses only; uncertain/rejected attempts blocked.
+  Primary union62: maximum124 calls versus222 standalone; tokens/prices/costs unknown.
+  Synthetic3-arm test:203 logical requests,114 dispatches,89 reuse hits; reviewed
+  accepted0, third-class accepted0, L2 NOT_ASSESSED, labels unique per arm. Frozen
+  unreviewed retention93/73/84 is baseline behavior, not verifier scientific evidence.
+  Initial focused11 PASS; full229:228 PASS,1 Windows symlink SKIP (199.481s), no failures;
+  all12 new tests included. Real human session/network guarded; only temporary
+  synthetic review records in regressions. P0/nine inputs/31+13 pilot members intact.
+  Docs: docs/OFFLINE_ROUTING_EXPERIMENT.md; report: reports/routing_experiment_offline.json.
+  Parent cbf70ffb32020f0d90cda738e215c20f9ac5991c; PUSH_PENDING; no Drive backup.
+  Next: review draft/provider-wire/privacy/replicate/budget/durable recovery gates
+  before separately approved live pilot. Cache is not crash-durable or live billing
+  protection; no real inference/GT/training/L2 gate, scientific winner or pilot freeze.
+
 - Router robustness review v1 (2026-11-01): no router redesign. Independent
   R2 primary/stage metadata exactly matches; all24 prespecified4-seed x6-order
   scenarios retain37 unique IDs. Seed-only overlaps33..34/37; order-only28..37;
