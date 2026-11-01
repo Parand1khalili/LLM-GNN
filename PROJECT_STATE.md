@@ -2,6 +2,21 @@
 
 Date: 2026-11-01 (America/Los_Angeles).
 
+- Minimal provider preflight (2026-11-01): docs/PROVIDER_PREFLIGHT_V1.md.
+  Historical GapAPI endpoint/model/settings preserved; official GapAPI documentation
+  unavailable through searches/fetch, account availability/prices/privacy UNKNOWN.
+  OpenAI official catalog confirms gpt-6-luna only for its own public offering;
+  no transfer of compatibility/pricing/privacy to gateway. Omitted reasoning with
+  temperature0.7 and deprecated max_tokens require explicit wire review. Prompt
+  strings can remain unchanged; any wire derivative needs separate approval/hash.
+  Reference-only Standard cost scenarios: USD0.0227328 uncached,0.027648 higher
+  cache-write input at declared maxima; not GapAPI prices or approved billing cap.
+  Checks PASS:31+13 seals,12 exact message mappings/settings, closed live guard;
+  Decimal arithmetic and official-doc review. Docs-only; no unit/full/provider test.
+  NO_GO: gateway/model/revision/parameters/privacy/tariff and owner authorization.
+  No code/credentials/manifest changes. Parent6b2f828628b80488fa69e3b4d54339e8812a4bc3;
+  PUSH_PENDING; no Drive backup. Next: owner supplies official gateway docs URL.
+
 - Third-agent feasibility scientific protocol v1 documented (2026-11-01):
   docs/THIRD_AGENT_FEASIBILITY_V1.md fixes existing six nodes/legacy blind-first
   and conditional comparison, maximum12 calls/16384 declared input/512 output,
