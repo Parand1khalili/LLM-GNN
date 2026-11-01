@@ -86,7 +86,7 @@ class ReadinessLedger:
     def mark_dispatched(self, identity, payload):
         self._transition(identity,payload,"PENDING","UNCERTAIN",None,None)
 
-    def settle(self, identity, payload, raw_response, audit):
+    def settle(self, identity, payload, raw_response, audit, *, rejection_reason=None):
         from ..sara3.evidence import validate_result
         from ..sara3.audit import PrivateAudit
         if type(raw_response) is not bytes or type(audit) is not PrivateAudit:
@@ -108,6 +108,11 @@ class ReadinessLedger:
             state,reason="COMPLETED","L1_PASS_L2_NOT_ASSESSED"
         except (ValueError,TypeError,UnicodeError) as error:
             reason=getattr(error,"code","MALFORMED_JSON_OR_SCHEMA")
+        if rejection_reason is not None:
+            if rejection_reason not in {"BODY_LIMIT", "SECRET_ECHO_REDACTED", "HTTP_REJECTION_NO_RETRY",
+                                        "TRUNCATED_OR_NONFINAL", "INVALID_ENVELOPE_OR_USAGE"}:
+                raise ValueError("Unknown protocol rejection")
+            state,reason="REJECTED",rejection_reason
         receipt=audit.write({"kind":"readiness_response","raw_hex":raw_response.hex(),"raw_sha256":raw_sha,
             "contract_sha256":self.pin,"request_sha256":self._payload(payload),"reason":reason})
         record=audit.read(receipt)

@@ -2,6 +2,23 @@
 
 Date: 2026-11-01 (America/Los_Angeles).
 
+- GapGPT single blind637 owner-operated canary CLI prepared (2026-11-01), NOT
+  EXECUTED. python -B -m llmgnn_sara.pilot.canary verifies31+13 seal members,
+  nine inputs and exact wire; fixed endpoint/model; hidden getpass or process env,
+  mandatory interactive privacy/wire/declared-limit/USD0.10/final confirmations.
+  One fixed private ledger path blocks all repeat intents; full reservation
+  retained. UNCERTAIN committed before mocked/owner-authorized dispatch. No retry,
+  redirect, comparison or fallback. Raw/usage privately audited with secret-echo
+  redaction; strict legacy parser/L1; no accepted labels. General live guard intact.
+  Local byte preflight/declarations do not verify vendor tokenization or guarantee
+  billing cap. Financial/privacy/compatibility confirmations remain owner actions.
+  Focused18 PASS; full guarded256:255 PASS,1 Windows symlink SKIP (173.906s);
+  extra positive-quote HTTP smoke PASS. No real credentials/network/human reviews.
+  P0/seals/frozen inputs/routers/arbitration/GraphScope untouched. Docs:
+  docs/GAPGPT_BLIND_CANARY.md. Parent efc20838696351ffbea27eb660676df0d523470d.
+  PUSH_PENDING; no Drive backup. Next: owner reviews/accepts scoped conditions and
+  runs command manually in local terminal; never supplies key in chat/Codex.
+
 - GapGPT provider decision fixed by owner (2026-11-01): GapGPT/gpt-6-luna,
   no alternatives/migration. docs/PROVIDER_PREFLIGHT_V1.md updated accordingly.
   Exact historical endpoint remains api.gapapi.com/v1/chat/completions in recovered
