@@ -130,6 +130,11 @@ It is DRAFT and NOT_AUTHORIZED_FOR_LIVE_EXECUTION; no provider calls or training
 
 ## Raw recovery and backups
 
+For the owner-authorized remaining five-node GapGPT feasibility execution, see
+[GAPGPT_REMAINING_PILOT.md](docs/GAPGPT_REMAINING_PILOT.md). The local interactive
+command requires fresh aggregate privacy/budget/dispatch approvals. It never
+reruns node637, resumes a started batch, or accepts training labels.
+
 Use scripts/colab_recover_responses.py in the owner's fresh CPU Colab notebook;
 see docs/RAW_RESPONSE_RECOVERY.md. For package use in Colab, upload the source tree,
 put its src/ directory on sys.path and supply actual external artifact paths.

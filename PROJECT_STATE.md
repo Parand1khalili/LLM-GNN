@@ -2,6 +2,25 @@
 
 Date: 2026-11-01 (America/Los_Angeles).
 
+- Remaining genuine feasibility batch implemented, NOT DISPATCHED by agent.
+  Command: python -B -m llmgnn_sara.pilot.remaining_gapgpt. Fixed remaining order
+  1243,130,682,2396,653; excludes637 permanently. Exact owner-approved GapGPT
+  alias/revision mapping, provider-reported provenance, temperature1 wire variant;
+  original sealed scientific messages unchanged. Max10 calls, fresh aggregate
+  USD0.10 local approval, hidden key input, no retries/resume or label promotion.
+  Source hashes25/seals/authentic inputs/prior637 admission verified; existing
+  operational ledgers show only637 attempts. Private summary is generated only
+  on actual owner execution, not from synthetic tests. No batch API calls yet.
+  Tests: final relevant65 PASS (18.021s); full281,280 PASS/1 Windows symlink SKIP
+  (141.578s), guarded against network and actual human-session access. Source-pin
+  binding/summary-only final additions rechecked by final focused suite, including
+  missing-cost UNKNOWN handling. Initial
+  focused run exposed a test SQLite connection cleanup issue, fixed before passing.
+  Protected58 files byte-unchanged; AST checks PASS. Docs GAPGPT_REMAINING_PILOT.md.
+  Parent ec471097bef7387ce2fce1504e87d3694b75baae; PUSH_PENDING; no Drive upload.
+  Next: owner supplies fresh local privacy/wire/revision/budget/exact-dispatch
+  approvals. Actual costs unknown; USD0.018944 estimate is conditional, not a cap.
+
 - Temperature1 owner canary diagnosis: HTTP200, returned dated model revision
   differs from exact requested alias; original REJECTED intent remains immutable.
   Saved content independently passes offline legacy L1, abstains, no label accepted.

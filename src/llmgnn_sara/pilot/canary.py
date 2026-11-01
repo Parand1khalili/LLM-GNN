@@ -171,6 +171,15 @@ def execute(payload, wire, key, audit, ledger, approval, *, transport=None, targ
     audit.read(audit.write({"kind": "canary_approval", "context": context}))
     ledger.reserve(identity, payload, 16384, 512)
     ledger.mark_dispatched(identity, payload)
+    return _dispatch_recorded(payload, wire, key, audit, ledger, identity, context_sha,
+                              transport=transport, target=target)
+
+
+def _dispatch_recorded(payload, wire, key, audit, ledger, identity, context_sha, *,
+                       transport=None, target="historical", model_check=None):
+    """Shared one-shot receive path; caller must durably mark dispatch first."""
+    if model_check is None:
+        model_check = lambda model: model in (None, "gpt-6-luna")
     result = {"status": "UNCERTAIN", "l1_status": "NOT_ASSESSED", "usage": None,
               "estimated_cost_usd": None, "cost_status": "UNKNOWN_NOT_VERIFIED_BILLING",
               "accepted_label": None, "l2_status": "NOT_ASSESSED"}
@@ -214,7 +223,7 @@ def execute(payload, wire, key, audit, ledger, approval, *, transport=None, targ
                         result["cost_status"] = "PROVISIONAL_RATE_ESTIMATE_NOT_INVOICE"
                         if i > 16384 or o > 512:
                             raise ValueError("Usage exceeded declared reservation")
-                if envelope.get("model") not in (None, "gpt-6-luna"):
+                if not model_check(envelope.get("model")):
                     reason = "RETURNED_MODEL_MISMATCH"
                     raise ValueError("Unapproved returned model identifier")
                 choices = envelope["choices"]
