@@ -1,6 +1,21 @@
 # Project state
 
-Date: 2026-10-31 (America/Los_Angeles).
+Date: 2026-11-01 (America/Los_Angeles).
+
+- R1-candidate v1 (2026-11-01): independent fixed37 offline ranking uses equal
+  disagreement/candidate lexical mismatch/lexical ambiguity terms; exact rational
+  scores and node-ID ties. Historical formulas remain MISSING_EVIDENCE. Existing
+  R0/Semantic runtime, P0, both six-node seals and all nine inputs unchanged.
+  Descriptive140 comparison: R1 selects7 disagreements/15 HH agreements (>=80
+  reconstructed convention), all30 no-keyword-match articles. This exposes sparse
+  Atlas coverage, not accuracy. Overlaps R0/Semantic25, R0/R1=17, Semantic/R1=13.
+  Focused8 + related60 PASS (68); first sandbox run13 temp-permission errors,
+  rerun outside sandbox passed. Syntax and31+13 sealed members PASS. No human
+  review material/tests accessed; L2, arbitration, prompts and GraphScope untouched.
+  See docs/R1_CANDIDATE.md and reports/r1_candidate_comparison.json.
+  Parent f887c2ed5d65c45094da0d39b284e2e00a3b6a2d; PUSH_PENDING, no new Drive backup.
+  Next: scientific review of prespecified lexical/missing-evidence defaults before
+  any future selection freeze. No R2, live calls, GT evaluation or training.
 
 - Independent L2 review infrastructure: evaluation.l2_reviews prepares blinded
   allowlisted packets and blank forms, imports hash-bound human-self-attested

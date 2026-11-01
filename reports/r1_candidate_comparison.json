@@ -1,0 +1,1363 @@
+{
+  "schema_version": "sara.router_comparison.v1",
+  "provenance": "RECONSTRUCTED",
+  "cohort_size": 140,
+  "budget": 37,
+  "classes": [
+    "rule_learning",
+    "neural_networks",
+    "case_based",
+    "genetic_algorithms",
+    "theory",
+    "reinforcement_learning",
+    "probabilistic_methods"
+  ],
+  "r1_parameters": {
+    "weights": {
+      "disagreement": "1/3",
+      "candidate_mismatch": "1/3",
+      "lexical_ambiguity": "1/3"
+    },
+    "normalization": "mismatch=1-(hits_b1+hits_v0)/(2*top); ambiguity=second/top",
+    "no_keyword_match": "mismatch=ambiguity=1; explicitly unknown, not semantic failure",
+    "tie_break": "descending exact Fraction score, ascending node ID",
+    "confidence_in_score": false,
+    "historical_count_tuning": false
+  },
+  "no_keyword_match_count": 30,
+  "source_hashes": {
+    "b1": "c6bc236ac5f8c1615067a10750cb150ecaf54fbe458afd4df7e750f92ce4b141",
+    "narrative_v0": "181806c4622449c8f9cdc9bdabb725232666fdc95394b3a8d7b78067b385ff02",
+    "selection": "dc8260974c7c0ca2e828f2d069e2896e9bcf2c363b15ca81d9f09d2803c9b12c",
+    "b1_prompts.json": "d7416cb83070b4a5d1ceaee061fe3fb81b6646abcee5cdabe58db33c5b8fdf29",
+    "narrative_prompts.json": "cc8b51db94ecf9c8f4d37a8a2ace2746ec0805cb0b3fd44cc8eac54088a7f8ed",
+    "neighborhoods.json": "1bd0be9dba2760159f30d72f77dc6036729b2ff10182d220f7673823af95f56e",
+    "prompt_receipt.json": "bdd95ba25cacc20efe94567317c1fb747e565218273351d2520a54ca02f2ab19",
+    "request_manifest.json": "7a0266129f99ef87fd3e715ab68c015176b48b90bb8b2955c65285aac5492ab1",
+    "preparation": "fb6777e8dec547b2aee5ca664ffa566f9148a944c7ee6065072df9fb1b4ad4ab"
+  },
+  "atlas_sha256": "1a9f5537db96c3589c6a7dcb97a5664f14c8ac1cd193d7912e07b20d374ebbf9",
+  "routers": {
+    "r0_current": {
+      "selected_node_ids_ranked": [
+        637,
+        1243,
+        130,
+        682,
+        722,
+        734,
+        351,
+        2487,
+        2396,
+        1528,
+        653,
+        695,
+        267,
+        1283,
+        2238,
+        2317,
+        2022,
+        27,
+        207,
+        357,
+        1559,
+        568,
+        1120,
+        2379,
+        1814,
+        614,
+        917,
+        1751,
+        1649,
+        25,
+        1690,
+        2490,
+        2534,
+        114,
+        94,
+        1269,
+        552
+      ],
+      "count": 37,
+      "disagreement_count": 9,
+      "no_keyword_match_count": 11,
+      "hh_agreement_count_at_reconstructed_80": 0,
+      "native_score_all": {
+        "min": 2.0,
+        "median": 10.916666666666664,
+        "mean": 24.14404761904762,
+        "max": 152.5
+      },
+      "native_score_selected": {
+        "min": 25.83333333333333,
+        "median": 44.166666666666664,
+        "mean": 64.990990990991,
+        "max": 152.5
+      },
+      "r1_score_selected": {
+        "min": 0.0,
+        "median": 0.5,
+        "mean": 0.48123123123123124,
+        "max": 1.0
+      }
+    },
+    "semantic_v0_current": {
+      "selected_node_ids_ranked": [
+        682,
+        2396,
+        637,
+        1243,
+        130,
+        653,
+        267,
+        1120,
+        722,
+        917,
+        1751,
+        734,
+        25,
+        351,
+        2487,
+        94,
+        2291,
+        881,
+        2319,
+        181,
+        81,
+        2177,
+        2287,
+        1649,
+        1240,
+        979,
+        1946,
+        1764,
+        47,
+        1528,
+        695,
+        1283,
+        2238,
+        2317,
+        2022,
+        27,
+        207
+      ],
+      "count": 37,
+      "disagreement_count": 9,
+      "no_keyword_match_count": 6,
+      "hh_agreement_count_at_reconstructed_80": 11,
+      "native_score_all": {
+        "min": 2.0,
+        "median": 14.0,
+        "mean": 37.71547619047619,
+        "max": 245.0
+      },
+      "native_score_selected": {
+        "min": 44.166666666666664,
+        "median": 113.66666666666667,
+        "mean": 108.2927927927928,
+        "max": 245.0
+      },
+      "r1_score_selected": {
+        "min": 0.0,
+        "median": 0.3333333333333333,
+        "mean": 0.46846846846846846,
+        "max": 1.0
+      }
+    },
+    "sara.router.r1_candidate.v1": {
+      "selected_node_ids_ranked": [
+        351,
+        637,
+        734,
+        722,
+        160,
+        207,
+        267,
+        295,
+        375,
+        430,
+        552,
+        682,
+        743,
+        783,
+        862,
+        932,
+        1013,
+        1031,
+        1066,
+        1120,
+        1269,
+        1283,
+        1308,
+        1776,
+        1814,
+        1951,
+        1958,
+        2291,
+        2317,
+        2327,
+        2396,
+        2434,
+        2490,
+        2534,
+        2685,
+        2698,
+        130
+      ],
+      "count": 37,
+      "disagreement_count": 7,
+      "no_keyword_match_count": 30,
+      "hh_agreement_count_at_reconstructed_80": 15,
+      "native_score_all": {
+        "min": 0.0,
+        "median": 0.3333333333333333,
+        "mean": 0.2996031746031746,
+        "max": 1.0
+      },
+      "native_score_selected": {
+        "min": 0.5833333333333334,
+        "median": 0.6666666666666666,
+        "mean": 0.6959459459459459,
+        "max": 1.0
+      },
+      "r1_score_selected": {
+        "min": 0.5833333333333334,
+        "median": 0.6666666666666666,
+        "mean": 0.6959459459459459,
+        "max": 1.0
+      }
+    }
+  },
+  "overlaps": {
+    "r0_current / semantic_v0_current": 25,
+    "r0_current / sara.router.r1_candidate.v1": 17,
+    "semantic_v0_current / sara.router.r1_candidate.v1": 13
+  },
+  "r1_terms_by_node": [
+    {
+      "node_id": 25,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 27,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 47,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.5,
+      "lexical_ambiguity": 0.5,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 62,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 81,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 90,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 94,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 114,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.6666666666666666,
+      "score": 0.2222222222222222,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 130,
+      "disagreement": 1.0,
+      "candidate_mismatch": 0.25,
+      "lexical_ambiguity": 0.5,
+      "score": 0.5833333333333334,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 160,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 181,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 200,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 207,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 222,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 252,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 267,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 273,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 295,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 302,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 351,
+      "disagreement": 1.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 1.0,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 357,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.5,
+      "score": 0.16666666666666666,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 375,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 383,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 417,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 420,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 430,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 436,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 445,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 457,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 552,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 568,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 575,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 578,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 607,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 614,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 637,
+      "disagreement": 1.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 1.0,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 653,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 0.5,
+      "score": 0.5,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 655,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 664,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.5,
+      "score": 0.16666666666666666,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 682,
+      "disagreement": 1.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 695,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.3333333333333333,
+      "score": 0.1111111111111111,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 698,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 711,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 717,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.5,
+      "score": 0.16666666666666666,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 722,
+      "disagreement": 1.0,
+      "candidate_mismatch": 0.5,
+      "lexical_ambiguity": 1.0,
+      "score": 0.8333333333333334,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 734,
+      "disagreement": 1.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 1.0,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 743,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 765,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 783,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 785,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 862,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 866,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 881,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 907,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.3333333333333333,
+      "score": 0.1111111111111111,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 913,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.5,
+      "score": 0.16666666666666666,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 917,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 932,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 967,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 972,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 979,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.5,
+      "lexical_ambiguity": 0.5,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 997,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1013,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 1031,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 1066,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 1091,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1118,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.3333333333333333,
+      "score": 0.1111111111111111,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1120,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1226,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1240,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.5,
+      "lexical_ambiguity": 0.5,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1243,
+      "disagreement": 1.0,
+      "candidate_mismatch": 0.25,
+      "lexical_ambiguity": 0.5,
+      "score": 0.5833333333333334,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1254,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.5,
+      "score": 0.16666666666666666,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1260,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1269,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 1283,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 1308,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 1328,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1384,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1433,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1505,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1528,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.5,
+      "score": 0.16666666666666666,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1556,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1559,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.75,
+      "score": 0.25,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1589,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1649,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.5,
+      "lexical_ambiguity": 0.5,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1690,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1702,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1716,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1719,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1751,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1757,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1764,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.5,
+      "lexical_ambiguity": 0.5,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1776,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 1793,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1814,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 1816,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1880,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1926,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.5,
+      "score": 0.16666666666666666,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1946,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.5,
+      "lexical_ambiguity": 0.5,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 1951,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 1958,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 2006,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2014,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2022,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2034,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2062,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2070,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.5,
+      "score": 0.16666666666666666,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2145,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2166,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2177,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2238,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.6666666666666666,
+      "score": 0.2222222222222222,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2241,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2270,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2287,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2291,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2306,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2317,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 2319,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 0.5,
+      "score": 0.5,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2327,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 2379,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2395,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2396,
+      "disagreement": 1.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2409,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2425,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2434,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 2461,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2476,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2487,
+      "disagreement": 1.0,
+      "candidate_mismatch": 0.5,
+      "lexical_ambiguity": 0.0,
+      "score": 0.5,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2490,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 2499,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2500,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2513,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2534,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 2564,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2576,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2603,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2628,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.25,
+      "score": 0.08333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2643,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 0.0,
+      "score": 0.0,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2685,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    },
+    {
+      "node_id": 2695,
+      "disagreement": 0.0,
+      "candidate_mismatch": 0.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.3333333333333333,
+      "evidence_status": "LEXICAL_PROXY_AVAILABLE"
+    },
+    {
+      "node_id": 2698,
+      "disagreement": 0.0,
+      "candidate_mismatch": 1.0,
+      "lexical_ambiguity": 1.0,
+      "score": 0.6666666666666666,
+      "evidence_status": "NO_ATLAS_KEYWORD_MATCH"
+    }
+  ],
+  "interpretation": "DESCRIPTIVE_ONLY_NO_ACCURACY_OR_HISTORICAL_EQUIVALENCE",
+  "hh_definition": "Agreement and both frozen confidence>=80; reconstructed descriptive convention, not verified historical HH",
+  "ground_truth_accessed": false,
+  "provider_calls": 0,
+  "training_runs": 0
+}
