@@ -1,0 +1,540 @@
+{
+  "schema": "sara.l2.development_benchmark.v1",
+  "rubric_version": "sara.l2.rubric.v1",
+  "status": "ILLUSTRATIVE_NOT_GOLD_INDEPENDENT_REVIEW_PENDING",
+  "selection": "Predeclared text-only examples90/130/734 reused from inspected development texts; no E0/E1 or correctness selection.",
+  "training_use": "FORBIDDEN",
+  "future_holdout_eligible": false,
+  "cases": [
+    {
+      "case_id": "cbr_narrow_description",
+      "node_id": 90,
+      "author_id": "codex-author-2026-10-31",
+      "usage": "DEVELOPMENT_FIXTURE_NOT_HOLDOUT",
+      "future_holdout_eligible": false,
+      "target_text_sha256": "4daf460d75c0226507f44b21faa8a1ae82ca38bfab72f8c576418ce9567464f8",
+      "excerpts": [
+        {
+          "evidence_id": "topic",
+          "source_id": "target.text",
+          "start": 75,
+          "end": 142,
+          "quote_sha256": "bff54707a667c3f313f2758b7edae37fe1f62616a6a44437c5812b127acadaf9"
+        },
+        {
+          "evidence_id": "method",
+          "source_id": "target.text",
+          "start": 183,
+          "end": 269,
+          "quote_sha256": "f777713c54784906dac6b3d04a5e2cef6c6532718b532727c7dc56fe8efe29e9"
+        }
+      ],
+      "rich_response_template": {
+        "schema_version": "sara.verifier.rich_evidence.v1",
+        "class_index": 2,
+        "abstain": false,
+        "primary_topic": "Evaluation of a case-based system",
+        "supporting_evidence": [
+          {
+            "source_id": "target.text",
+            "quote_ref": "topic",
+            "claim": "The paper reports a case study evaluating a case-based system."
+          }
+        ],
+        "counter_evidence": [],
+        "auxiliary_method_warning": null,
+        "uncertainty_reason": null
+      },
+      "review": {
+        "rubric_version": "sara.l2.rubric.v1",
+        "reviewer_id": "codex-author-2026-10-31",
+        "kind": "ILLUSTRATIVE",
+        "independently_reviewed": false,
+        "basis": "AUTHOR_TEXT_READING_NO_SCORING_HEURISTIC_OR_JUDGE_TEST",
+        "dimensions": {
+          "primary_topic_relevance": {
+            "outcome": "SUPPORTED",
+            "rationale": "The stated aim directly concerns evaluation of the system.",
+            "evidence_refs": [
+              "topic"
+            ]
+          },
+          "quote_claim_support": {
+            "outcome": "SUPPORTED",
+            "rationale": "The quotation explicitly states the claimed case-study aim.",
+            "evidence_refs": [
+              "topic"
+            ]
+          },
+          "counter_evidence_resolution": {
+            "outcome": "SUPPORTED",
+            "rationale": "The mixed-method description does not refute this narrow evaluation claim.",
+            "evidence_refs": [
+              "topic",
+              "method"
+            ]
+          },
+          "topic_method_separation": {
+            "outcome": "SUPPORTED",
+            "rationale": "The description distinguishes system components from the evaluation aim.",
+            "evidence_refs": [
+              "topic",
+              "method"
+            ]
+          }
+        },
+        "overall": {
+          "outcome": "SUPPORTED",
+          "rationale": "The narrow descriptive claim repeats the stated aim; this does not certify the Cora class label.",
+          "evidence_refs": [
+            "topic",
+            "method"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "copyright_is_not_topic_evidence",
+      "node_id": 90,
+      "author_id": "codex-author-2026-10-31",
+      "usage": "DEVELOPMENT_FIXTURE_NOT_HOLDOUT",
+      "future_holdout_eligible": false,
+      "target_text_sha256": "4daf460d75c0226507f44b21faa8a1ae82ca38bfab72f8c576418ce9567464f8",
+      "excerpts": [
+        {
+          "evidence_id": "notice",
+          "source_id": "target.text",
+          "start": 1336,
+          "end": 1356,
+          "quote_sha256": "21f29224bb655170d51b49b23015b779434d5540dc2825f5adf9a2bbc131b5f5"
+        },
+        {
+          "evidence_id": "topic",
+          "source_id": "target.text",
+          "start": 75,
+          "end": 142,
+          "quote_sha256": "bff54707a667c3f313f2758b7edae37fe1f62616a6a44437c5812b127acadaf9"
+        }
+      ],
+      "rich_response_template": {
+        "schema_version": "sara.verifier.rich_evidence.v1",
+        "class_index": 2,
+        "abstain": false,
+        "primary_topic": "Case-based research established by a rights notice",
+        "supporting_evidence": [
+          {
+            "source_id": "target.text",
+            "quote_ref": "notice",
+            "claim": "The rights notice establishes the primary research topic."
+          }
+        ],
+        "counter_evidence": [],
+        "auxiliary_method_warning": null,
+        "uncertainty_reason": null
+      },
+      "review": {
+        "rubric_version": "sara.l2.rubric.v1",
+        "reviewer_id": "codex-author-2026-10-31",
+        "kind": "ILLUSTRATIVE",
+        "independently_reviewed": false,
+        "basis": "AUTHOR_TEXT_READING_NO_SCORING_HEURISTIC_OR_JUDGE_TEST",
+        "dimensions": {
+          "primary_topic_relevance": {
+            "outcome": "UNSUPPORTED",
+            "rationale": "The notice concerns rights rather than research.",
+            "evidence_refs": [
+              "notice"
+            ]
+          },
+          "quote_claim_support": {
+            "outcome": "UNSUPPORTED",
+            "rationale": "No topic follows from reserving rights.",
+            "evidence_refs": [
+              "notice"
+            ]
+          },
+          "counter_evidence_resolution": {
+            "outcome": "AMBIGUOUS",
+            "rationale": "No counter-evidence analysis was supplied by the controlled response.",
+            "evidence_refs": [
+              "notice",
+              "topic"
+            ]
+          },
+          "topic_method_separation": {
+            "outcome": "NOT_ASSESSED",
+            "rationale": "This fixture does not assess auxiliary-method confusion.",
+            "evidence_refs": []
+          }
+        },
+        "overall": {
+          "outcome": "UNSUPPORTED",
+          "rationale": "A rights reservation contains no scientific-topic assertion; the full text separately states an evaluation aim.",
+          "evidence_refs": [
+            "notice",
+            "topic"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "auxiliary_rule_method_promoted",
+      "node_id": 90,
+      "author_id": "codex-author-2026-10-31",
+      "usage": "DEVELOPMENT_FIXTURE_NOT_HOLDOUT",
+      "future_holdout_eligible": false,
+      "target_text_sha256": "4daf460d75c0226507f44b21faa8a1ae82ca38bfab72f8c576418ce9567464f8",
+      "excerpts": [
+        {
+          "evidence_id": "method",
+          "source_id": "target.text",
+          "start": 183,
+          "end": 269,
+          "quote_sha256": "f777713c54784906dac6b3d04a5e2cef6c6532718b532727c7dc56fe8efe29e9"
+        },
+        {
+          "evidence_id": "topic",
+          "source_id": "target.text",
+          "start": 75,
+          "end": 142,
+          "quote_sha256": "bff54707a667c3f313f2758b7edae37fe1f62616a6a44437c5812b127acadaf9"
+        }
+      ],
+      "rich_response_template": {
+        "schema_version": "sara.verifier.rich_evidence.v1",
+        "class_index": 0,
+        "abstain": false,
+        "primary_topic": "Learning symbolic rules is the main contribution",
+        "supporting_evidence": [
+          {
+            "source_id": "target.text",
+            "quote_ref": "method",
+            "claim": "Mention of rule-based reasoning proves that learning rules is the main contribution."
+          }
+        ],
+        "counter_evidence": [
+          {
+            "source_id": "target.text",
+            "quote_ref": "topic",
+            "claim": "The stated aim is evaluation of a case-based system."
+          }
+        ],
+        "auxiliary_method_warning": null,
+        "uncertainty_reason": null
+      },
+      "review": {
+        "rubric_version": "sara.l2.rubric.v1",
+        "reviewer_id": "codex-author-2026-10-31",
+        "kind": "ILLUSTRATIVE",
+        "independently_reviewed": false,
+        "basis": "AUTHOR_TEXT_READING_NO_SCORING_HEURISTIC_OR_JUDGE_TEST",
+        "dimensions": {
+          "primary_topic_relevance": {
+            "outcome": "UNSUPPORTED",
+            "rationale": "The explicit aim is evaluation, not a new rule-learning method.",
+            "evidence_refs": [
+              "topic",
+              "method"
+            ]
+          },
+          "quote_claim_support": {
+            "outcome": "UNSUPPORTED",
+            "rationale": "The quotation names components; it does not claim to learn rules.",
+            "evidence_refs": [
+              "method"
+            ]
+          },
+          "counter_evidence_resolution": {
+            "outcome": "UNSUPPORTED",
+            "rationale": "The explicit evaluation aim remains unresolved against the proposed topic.",
+            "evidence_refs": [
+              "topic"
+            ]
+          },
+          "topic_method_separation": {
+            "outcome": "UNSUPPORTED",
+            "rationale": "A component is being substituted for the stated research aim.",
+            "evidence_refs": [
+              "method",
+              "topic"
+            ]
+          }
+        },
+        "overall": {
+          "outcome": "UNSUPPORTED",
+          "rationale": "The interpretation promotes a named system component into a research contribution without support.",
+          "evidence_refs": [
+            "method",
+            "topic"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "finite_size_claim_contradicted",
+      "node_id": 130,
+      "author_id": "codex-author-2026-10-31",
+      "usage": "DEVELOPMENT_FIXTURE_NOT_HOLDOUT",
+      "future_holdout_eligible": false,
+      "target_text_sha256": "e7fa705f248da0bef8fff16200ab8b604675a5a8852a58015b4e9433be7ff173",
+      "excerpts": [
+        {
+          "evidence_id": "weights",
+          "source_id": "target.text",
+          "start": 318,
+          "end": 401,
+          "quote_sha256": "81a92edbe9fec3684a96a1e3f26c18ccc669af19defea4f57e9cf16b9809253b"
+        },
+        {
+          "evidence_id": "limit",
+          "source_id": "target.text",
+          "start": 781,
+          "end": 868,
+          "quote_sha256": "2a0e2d7f224eebf179033a6e3aac2e4cff1e9f069134ed8edaeaff4033ac0ee6"
+        },
+        {
+          "evidence_id": "contribution",
+          "source_id": "target.text",
+          "start": 576,
+          "end": 756,
+          "quote_sha256": "eceb4809b9ae4d7eeebbc5941dd23a60e44dd23d69dfa9e97daf818544dd0246"
+        }
+      ],
+      "rich_response_template": {
+        "schema_version": "sara.verifier.rich_evidence.v1",
+        "class_index": 1,
+        "abstain": false,
+        "primary_topic": "Selecting a finite hidden-unit limit",
+        "supporting_evidence": [
+          {
+            "source_id": "target.text",
+            "quote_ref": "weights",
+            "claim": "The main contribution requires choosing a fixed finite network size."
+          }
+        ],
+        "counter_evidence": [
+          {
+            "source_id": "target.text",
+            "quote_ref": "limit",
+            "claim": "The text says there is no need to limit network size."
+          }
+        ],
+        "auxiliary_method_warning": null,
+        "uncertainty_reason": null
+      },
+      "review": {
+        "rubric_version": "sara.l2.rubric.v1",
+        "reviewer_id": "codex-author-2026-10-31",
+        "kind": "ILLUSTRATIVE",
+        "independently_reviewed": false,
+        "basis": "AUTHOR_TEXT_READING_NO_SCORING_HEURISTIC_OR_JUDGE_TEST",
+        "dimensions": {
+          "primary_topic_relevance": {
+            "outcome": "UNSUPPORTED",
+            "rationale": "The stated contribution concerns priors and an infinite-unit limit.",
+            "evidence_refs": [
+              "contribution"
+            ]
+          },
+          "quote_claim_support": {
+            "outcome": "UNSUPPORTED",
+            "rationale": "Naming perceptron weights does not establish a finite-size selection requirement.",
+            "evidence_refs": [
+              "weights",
+              "limit"
+            ]
+          },
+          "counter_evidence_resolution": {
+            "outcome": "UNSUPPORTED",
+            "rationale": "The explicit no-limit statement conflicts with the controlled interpretation.",
+            "evidence_refs": [
+              "limit"
+            ]
+          },
+          "topic_method_separation": {
+            "outcome": "AMBIGUOUS",
+            "rationale": "Neural networks are a research object here; their auxiliary-versus-primary role is not resolved.",
+            "evidence_refs": [
+              "weights",
+              "contribution"
+            ]
+          }
+        },
+        "overall": {
+          "outcome": "UNSUPPORTED",
+          "rationale": "A finite-size requirement conflicts with the explicit infinite-limit/no-size-limit discussion.",
+          "evidence_refs": [
+            "weights",
+            "limit",
+            "contribution"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "bayesian_neural_boundary_ambiguous",
+      "node_id": 130,
+      "author_id": "codex-author-2026-10-31",
+      "usage": "DEVELOPMENT_FIXTURE_NOT_HOLDOUT",
+      "future_holdout_eligible": false,
+      "target_text_sha256": "e7fa705f248da0bef8fff16200ab8b604675a5a8852a58015b4e9433be7ff173",
+      "excerpts": [
+        {
+          "evidence_id": "prior",
+          "source_id": "target.text",
+          "start": 168,
+          "end": 317,
+          "quote_sha256": "25ec24f5c7a2db55d8574351996db13dec85c2d9e932c31b8c3a94b992989cf6"
+        },
+        {
+          "evidence_id": "weights",
+          "source_id": "target.text",
+          "start": 318,
+          "end": 401,
+          "quote_sha256": "81a92edbe9fec3684a96a1e3f26c18ccc669af19defea4f57e9cf16b9809253b"
+        },
+        {
+          "evidence_id": "contribution",
+          "source_id": "target.text",
+          "start": 576,
+          "end": 756,
+          "quote_sha256": "eceb4809b9ae4d7eeebbc5941dd23a60e44dd23d69dfa9e97daf818544dd0246"
+        }
+      ],
+      "rich_response_template": {
+        "schema_version": "sara.verifier.rich_evidence.v1",
+        "class_index": 6,
+        "abstain": false,
+        "primary_topic": "Bayesian priors over neural-network functions",
+        "supporting_evidence": [
+          {
+            "source_id": "target.text",
+            "quote_ref": "prior",
+            "claim": "The work discusses Bayesian inference and priors."
+          }
+        ],
+        "counter_evidence": [
+          {
+            "source_id": "target.text",
+            "quote_ref": "weights",
+            "claim": "The work is also framed in terms of neural networks."
+          }
+        ],
+        "auxiliary_method_warning": null,
+        "uncertainty_reason": null
+      },
+      "review": {
+        "rubric_version": "sara.l2.rubric.v1",
+        "reviewer_id": "codex-author-2026-10-31",
+        "kind": "ILLUSTRATIVE",
+        "independently_reviewed": false,
+        "basis": "AUTHOR_TEXT_READING_NO_SCORING_HEURISTIC_OR_JUDGE_TEST",
+        "dimensions": {
+          "primary_topic_relevance": {
+            "outcome": "SUPPORTED",
+            "rationale": "Priors over network functions are explicitly discussed.",
+            "evidence_refs": [
+              "prior",
+              "contribution"
+            ]
+          },
+          "quote_claim_support": {
+            "outcome": "SUPPORTED",
+            "rationale": "The quote explicitly introduces Bayesian inference and priors.",
+            "evidence_refs": [
+              "prior"
+            ]
+          },
+          "counter_evidence_resolution": {
+            "outcome": "AMBIGUOUS",
+            "rationale": "The neural framing is material context but not a direct refutation of Bayesian content.",
+            "evidence_refs": [
+              "prior",
+              "weights"
+            ]
+          },
+          "topic_method_separation": {
+            "outcome": "AMBIGUOUS",
+            "rationale": "The excerpt does not cleanly separate statistical topic from neural research object.",
+            "evidence_refs": [
+              "weights",
+              "contribution"
+            ]
+          }
+        },
+        "overall": {
+          "outcome": "AMBIGUOUS",
+          "rationale": "The descriptions overlap; the text alone does not settle a unique taxonomy emphasis for this fixture.",
+          "evidence_refs": [
+            "prior",
+            "weights",
+            "contribution"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "title_only_unassessed",
+      "node_id": 734,
+      "author_id": "codex-author-2026-10-31",
+      "usage": "DEVELOPMENT_FIXTURE_NOT_HOLDOUT",
+      "future_holdout_eligible": false,
+      "target_text_sha256": "06cc13d8c486f73f8c59c8910143fe336c0db98ba7061658e321c6a37e31dcec",
+      "excerpts": [
+        {
+          "evidence_id": "title",
+          "source_id": "target.text",
+          "start": 0,
+          "end": 111,
+          "quote_sha256": "1f6c90607de41b31f2189e49bc74c97c0d068d3d244aeb5c6bc9f3fc363a9a34"
+        }
+      ],
+      "rich_response_template": {
+        "schema_version": "sara.verifier.rich_evidence.v1",
+        "class_index": null,
+        "abstain": true,
+        "primary_topic": null,
+        "supporting_evidence": [],
+        "counter_evidence": [],
+        "auxiliary_method_warning": null,
+        "uncertainty_reason": "No semantic review has been recorded."
+      },
+      "review": {
+        "rubric_version": "sara.l2.rubric.v1",
+        "reviewer_id": "codex-author-2026-10-31",
+        "kind": "ILLUSTRATIVE",
+        "independently_reviewed": false,
+        "basis": "AUTHOR_TEXT_READING_NO_SCORING_HEURISTIC_OR_JUDGE_TEST",
+        "dimensions": {
+          "primary_topic_relevance": {
+            "outcome": "NOT_ASSESSED",
+            "rationale": "Review not performed.",
+            "evidence_refs": []
+          },
+          "quote_claim_support": {
+            "outcome": "NOT_ASSESSED",
+            "rationale": "Review not performed.",
+            "evidence_refs": []
+          },
+          "counter_evidence_resolution": {
+            "outcome": "NOT_ASSESSED",
+            "rationale": "Review not performed.",
+            "evidence_refs": []
+          },
+          "topic_method_separation": {
+            "outcome": "NOT_ASSESSED",
+            "rationale": "Review not performed.",
+            "evidence_refs": []
+          }
+        },
+        "overall": {
+          "outcome": "NOT_ASSESSED",
+          "rationale": "No semantic judgment has been recorded; the recovered input here contains a title only.",
+          "evidence_refs": [
+            "title"
+          ]
+        }
+      }
+    }
+  ]
+}

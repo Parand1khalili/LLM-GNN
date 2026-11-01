@@ -2,6 +2,20 @@
 
 Date: 2026-10-31 (America/Los_Angeles).
 
+- L2 evaluation foundation: docs/L2_EVALUATION_RUBRIC.md defines four dimensions
+  and SUPPORTED/UNSUPPORTED/AMBIGUOUS/NOT_ASSESSED as reviewer outcomes, not gates.
+  Six pinned development cases at nodes90/130/734 contain controlled interpretations
+  and author rationales/citations. All illustrative; independently reviewed0, no
+  gold standard or holdout. Runtime L2/arbitration remains unchanged NOT_ASSESSED.
+  evaluation.l2_benchmark validates structure, source/quote hashes, L1 and reviewer
+  provenance only; never scores semantics or imports into runtime. New12 tests and
+  related33 regressions PASS; full suite not rerun for this isolated slice.
+  Nine input hashes, P0 and six-node seals verified unchanged; GraphScope untouched.
+  Report: reports/l2_benchmark_validation.json. Parent84900e9e6933354dc912167e37b3ae671716e6b2.
+  Next: independent offline reviews with author opinions initially hidden, followed
+  by a reviewed immutable reviewer-record contract. No judge, prompts, thresholds,
+  API/GT evaluation/training or Drive writes. PUSH_PENDING.
+
 - Rich evidence: explicit response_version=sara.verifier.rich_evidence.v1 adds
   primary_topic, support/counter source-quote-claim items, auxiliary warning and
   uncertainty diagnostics. All quotes use existing L1 provenance rules; L2 remains

@@ -1,0 +1,55 @@
+{
+  "status": "PASS_STRUCTURE_AND_L1_ONLY",
+  "cases": 6,
+  "nodes": [
+    90,
+    130,
+    734
+  ],
+  "illustrative_outcome_counts": {
+    "AMBIGUOUS": 1,
+    "NOT_ASSESSED": 1,
+    "SUPPORTED": 1,
+    "UNSUPPORTED": 3
+  },
+  "independently_reviewed": 0,
+  "gold_standard": false,
+  "semantic_accuracy_measured": false,
+  "runtime_l2_status": "NOT_ASSESSED",
+  "future_holdout_eligible": false,
+  "training_use": "FORBIDDEN",
+  "benchmark_sha256": "d6f84007bd79da2cf389976e8410f2a4f9822225ae001ff88b11a252ac3451b2",
+  "rubric_version": "sara.l2.rubric.v1",
+  "source_sha256": {
+    "b1": "c6bc236ac5f8c1615067a10750cb150ecaf54fbe458afd4df7e750f92ce4b141",
+    "narrative_v0": "181806c4622449c8f9cdc9bdabb725232666fdc95394b3a8d7b78067b385ff02",
+    "selection": "dc8260974c7c0ca2e828f2d069e2896e9bcf2c363b15ca81d9f09d2803c9b12c",
+    "b1_prompts.json": "d7416cb83070b4a5d1ceaee061fe3fb81b6646abcee5cdabe58db33c5b8fdf29",
+    "narrative_prompts.json": "cc8b51db94ecf9c8f4d37a8a2ace2746ec0805cb0b3fd44cc8eac54088a7f8ed",
+    "neighborhoods.json": "1bd0be9dba2760159f30d72f77dc6036729b2ff10182d220f7673823af95f56e",
+    "prompt_receipt.json": "bdd95ba25cacc20efe94567317c1fb747e565218273351d2520a54ca02f2ab19",
+    "request_manifest.json": "7a0266129f99ef87fd3e715ab68c015176b48b90bb8b2955c65285aac5492ab1",
+    "preparation": "fb6777e8dec547b2aee5ca664ffa566f9148a944c7ee6065072df9fb1b4ad4ab"
+  },
+  "provider_calls": 0,
+  "training_runs": 0,
+  "GT_accessed": false,
+  "verification": {
+    "focused_tests": 12,
+    "related_regressions": {
+      "rich_schema": 18,
+      "cli_separation": 6,
+      "historical_p0": 9
+    },
+    "passed_total": 45,
+    "syntax_import": "PASS",
+    "nine_input_hashes": "PASS_UNCHANGED",
+    "historical_p0_and_six_node_seals": "PASS_UNCHANGED",
+    "runtime_arbitration_routing_prompts_GraphScope": "UNCHANGED",
+    "full_suite": "NOT_RUN_THIS_ISOLATED_EVALUATION_SLICE",
+    "semantic_judgment_accuracy": "NOT_TESTED_NO_GOLD_STANDARD"
+  },
+  "next_step": "Independent offline review of all six development cases, author outcomes initially hidden; approve separate immutable reviewer-record contract.",
+  "remote_push": "PUSH_PENDING",
+  "drive_backup": "NOT_PERFORMED"
+}

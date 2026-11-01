@@ -1,5 +1,8 @@
 # Rich evidence response v1 (offline, opt-in)
 
+The separate [L2 evaluation rubric](L2_EVALUATION_RUBRIC.md) and six-case development
+benchmark support future independent review; they do not approve runtime labels.
+
 Version: `sara.verifier.rich_evidence.v1`. The machine-readable schema is
 `RICH_RESPONSE_SCHEMA` in src/llmgnn_sara/sara3/rich_evidence.py. This is a newly
 reconstructed diagnostic contract, not recovered historical Judge002/V1 wire.
