@@ -203,8 +203,6 @@ def execute(payload, wire, key, audit, ledger, approval, *, transport=None, targ
         else:
             try:
                 envelope = strict_json(safe)
-                if envelope.get("model") not in (None, "gpt-6-luna"):
-                    raise ValueError("Unapproved returned model identifier")
                 usage = envelope.get("usage")
                 result["usage"] = usage
                 if isinstance(usage, dict):
@@ -216,6 +214,9 @@ def execute(payload, wire, key, audit, ledger, approval, *, transport=None, targ
                         result["cost_status"] = "PROVISIONAL_RATE_ESTIMATE_NOT_INVOICE"
                         if i > 16384 or o > 512:
                             raise ValueError("Usage exceeded declared reservation")
+                if envelope.get("model") not in (None, "gpt-6-luna"):
+                    reason = "RETURNED_MODEL_MISMATCH"
+                    raise ValueError("Unapproved returned model identifier")
                 choices = envelope["choices"]
                 if len(choices) != 1 or choices[0].get("finish_reason") != "stop":
                     reason = "TRUNCATED_OR_NONFINAL"
@@ -226,7 +227,8 @@ def execute(payload, wire, key, audit, ledger, approval, *, transport=None, targ
                     strict_json(content)
                     inner_bytes, reason = content.encode(), "PARSER_L1"
             except (ValueError, KeyError, TypeError, AttributeError):
-                reason = "INVALID_ENVELOPE_OR_USAGE"
+                if reason != "RETURNED_MODEL_MISMATCH":
+                    reason = "INVALID_ENVELOPE_OR_USAGE"
         settled = ledger.settle(identity, payload, inner_bytes, audit,
                                rejection_reason=None if reason == "PARSER_L1" else reason)
         result.update(status=settled["state"], l1_status="PASS" if reason == "PARSER_L1" and settled["state"] == "COMPLETED" else "FAIL",

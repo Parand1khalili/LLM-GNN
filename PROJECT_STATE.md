@@ -2,6 +2,18 @@
 
 Date: 2026-11-01 (America/Los_Angeles).
 
+- Temperature1 owner canary diagnosis: HTTP200, returned dated model revision
+  differs from exact requested alias; original REJECTED intent remains immutable.
+  Saved content independently passes offline legacy L1, abstains, no label accepted.
+  Diagnostic fix preserves usage before model check and reports
+  RETURNED_MODEL_MISMATCH; no revision auto-approval, new identity or dispatch.
+  Guarded relevant46 tests PASS (24.955s); initial sandbox run failed private-audit
+  Windows ACL setup, rerun outside sandbox with socket connections blocked passed.
+  Full suite not rerun. Seals/authentic inputs checked by prepare, original private
+  artifacts unchanged during read-only reanalysis. See docs/GAPGPT_TEMPERATURE_FIX.md.
+  Parent a98233147b92e22a0b6719e1bc1e832b629da168; PUSH_PENDING, no Drive upload.
+  Next: explicit exact-revision compatibility decision, not another paid retry.
+
 - Concrete GapGPT compatibility fix (2026-11-01): second endpoint attempt
   actually returned400 invalid_request_error/unsupported_value, param temperature;
   provider says0.7 unsupported, only default1. Not another observed401/key error.

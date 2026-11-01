@@ -1,5 +1,28 @@
 # Explicit temperature1 compatibility derivative
 
+## Observed owner execution: do not rerun this identity
+
+The owner subsequently dispatched this identity once. The saved response is HTTP200,
+finish_reason stop, with returned model `gpt-6-luna-2026-09-22`. The client rejected
+the revision identifier because its exact allowlist contains only `gpt-6-luna`.
+Thus INVALID_ENVELOPE_OR_USAGE was a misleading umbrella diagnosis, not an HTTP
+rejection or evidence that authentication failed. The original terminal ledger and
+audit remain unchanged. No fresh identity or revision authorization is introduced.
+
+Read-only offline parsing of the saved content passes legacy schema/L1 and shows
+abstention with empty evidence. This does not retroactively complete the rejected
+intent, assess L2, prove the returned revision's identity, or accept a training label.
+Usage is 689 prompt and 165 completion tokens (140 reasoning tokens included in
+completion); total854. At owner-provisional rates the estimate is USD0.0001514,
+not verified billing. The old result's missing usage reflects validation order.
+
+The diagnostic correction retains available usage before model identity checking
+and reports RETURNED_MODEL_MISMATCH explicitly. Unknown revisions still fail
+closed. Approval/documentation of an exact revision mapping is a separate decision;
+no wildcard acceptance, network request, retry, or reset is part of this correction.
+
+## Original preparation record
+
 Observed second attempt: api.gapgpt.app returned HTTP400, invalid_request_error,
 unsupported_value, param temperature. Sanitized message: temperature does not
 support0.7 for this model; only default1 is supported. No usage/charge was supplied.

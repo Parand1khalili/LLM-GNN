@@ -111,7 +111,18 @@ class CanaryTests(unittest.TestCase):
   self.assertEqual(result['status'],'REJECTED')
  def test_returned_model_substitution_is_not_accepted(self):
   raw=json.loads(self.envelope());raw['model']='unapproved-other-model'
-  self.assertEqual(self.run_mock(json.dumps(raw).encode())['status'],'REJECTED')
+  result=self.run_mock(json.dumps(raw).encode())
+  self.assertEqual(result['status'],'REJECTED')
+  self.assertEqual(result['reason'],'RETURNED_MODEL_MISMATCH')
+  self.assertEqual(result['usage'],raw['usage'])
+  self.assertIsNone(result['accepted_label'])
+ def test_revision_identifier_is_not_silently_authorized_and_usage_survives(self):
+  raw=json.loads(self.envelope());raw['model']='gpt-6-luna-2026-09-22'
+  result=self.run_mock(json.dumps(raw).encode())
+  self.assertEqual(result['reason'],'RETURNED_MODEL_MISMATCH')
+  self.assertEqual(result['status'],'REJECTED')
+  self.assertEqual(result['estimated_cost_usd'],'0.000125')
+  self.assertIsNone(result['accepted_label'])
  def test_missing_usage_is_unknown_not_zero_billing(self):
   result=self.run_mock(self.envelope(usage=False))
   self.assertEqual(result['status'],'COMPLETED');self.assertIsNone(result['usage'])

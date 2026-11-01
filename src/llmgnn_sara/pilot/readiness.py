@@ -110,7 +110,8 @@ class ReadinessLedger:
             reason=getattr(error,"code","MALFORMED_JSON_OR_SCHEMA")
         if rejection_reason is not None:
             if rejection_reason not in {"BODY_LIMIT", "SECRET_ECHO_REDACTED", "HTTP_REJECTION_NO_RETRY",
-                                        "TRUNCATED_OR_NONFINAL", "INVALID_ENVELOPE_OR_USAGE"}:
+                                        "TRUNCATED_OR_NONFINAL", "INVALID_ENVELOPE_OR_USAGE",
+                                        "RETURNED_MODEL_MISMATCH"}:
                 raise ValueError("Unknown protocol rejection")
             state,reason="REJECTED",rejection_reason
         receipt=audit.write({"kind":"readiness_response","raw_hex":raw_response.hex(),"raw_sha256":raw_sha,
