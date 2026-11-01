@@ -2,6 +2,21 @@
 
 Date: 2026-11-01 (America/Los_Angeles).
 
+- GapGPT provider decision fixed by owner (2026-11-01): GapGPT/gpt-6-luna,
+  no alternatives/migration. docs/PROVIDER_PREFLIGHT_V1.md updated accordingly.
+  Exact historical endpoint remains api.gapapi.com/v1/chat/completions in recovered
+  source; temperature0.7/n1/user message, no max_tokens historically. New sealed
+ 512 cap/legacy JSON task remain canary compatibility questions, not disproven
+  by another provider's rules. Provisional owner-reported screenshot rates0.10/M
+  input,0.50/M output; screenshot not independently inspected. Conditional full-
+  reservation USD0.0227328, not actual billing or approved cap. Current admitted
+  inputs contain no provider usage fields; no usage/billing claim.
+  Checks:3 recovered source pins,9 inputs,parsed replay,31+13 seals PASS; no live,
+  credentials, GT or training. No unit/full rerun for docs-only delta.
+  Remaining only wire/endpoint confirmation, privacy approval, actual limits and
+  monetary cap, credential availability attestation and explicit live permission.
+  Parent dee4978d02a3f4ae21e4d7232351fb6317233a2b; PUSH_PENDING; no Drive backup.
+
 - Minimal provider preflight (2026-11-01): docs/PROVIDER_PREFLIGHT_V1.md.
   Historical GapAPI endpoint/model/settings preserved; official GapAPI documentation
   unavailable through searches/fetch, account availability/prices/privacy UNKNOWN.

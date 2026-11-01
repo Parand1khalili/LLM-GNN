@@ -1,107 +1,96 @@
-# Minimal provider preflight — 2026-11-01
+# GapGPT preflight � fixed provider decision, 2026-11-01
 
-Decision: **NO-GO**. Documentation-only; no model, models-list, token-count or
-authenticated API requests. No provider selection/change, transport or credentials.
+Provider fixed by owner: **GapGPT (gapgpt.app), GPT-6 Luna**. Do not research
+alternatives or migrate providers. Live execution remains NO-GO pending the five
+items below. This update supersedes the earlier provider-identity uncertainty and
+reference-provider comparisons; historical artifacts are not rewritten.
 
-## Historical evidence versus current facts
+## Evidence and reusable historical contract
 
-The sealed provider proposal is GapAPI at
-`https://api.gapapi.com/v1/chat/completions`, model `gpt-6-luna`, n1,
-temperature0.7, max_tokens512. It is a Chat Completions JSON body with one user
-message containing the canonical logical request. It does not set reasoning
-effort, response_format, service tier or retention controls. Sealed six-node scope,
-12-call/16384-input/512-output reservations, timeout120 and retries0 remain unchanged.
+Owner confirms earlier successful use of this service/model. Independently checked
+repository evidence is narrower: recovered source hashes and frozen parsed outputs,
+not a fresh successful HTTP request or complete raw-response/billing recovery.
 
-The historical provider homepage https://gapapi.com returned404 through the web
-tool; https://api.gapapi.com was inaccessible through that tool. Targeted searches
-did not establish current official GapAPI model, endpoint, parameter, pricing or
-privacy documentation. This is missing evidence, not proof the service is absent.
-The similarly named gpapi.co was not treated as the same company/service. Owner's
-public official documentation link is requested; no credentials are requested.
+- Exact recovered matched-run configuration: model `gpt-6-luna`, endpoint
+  `https://api.gapapi.com/v1/chat/completions`, temperature0.7, n1, one user message.
+  max_tokens, top_p and provider seed omitted. No automatic retries or redirects.
+  Source: recovered_sources/experiments/matched_cora/run_matched.py, payload and
+  configuration functions; run_v1.py supplies the historical aiohttp post_once.
+- recovered_sources/src/openail/utils.py also names its helper GapGPT while using
+  api.gapapi.com. GapGPT is the owner's confirmed service; the actual stored
+  endpoint is preserved as historical evidence. Do not silently replace it with
+  another hostname or assume a current domain mapping.
+- Historical response extraction expects a2xx status, exactly one
+  choices[0].message.content string, after private raw-body persistence. Receipts
+  contain status, whitelisted request headers, body/hash and transport-failure
+  metadata. This describes source behavior, not newly observed response receipts.
+- All nine currently admitted JSONs were scanned: no provider usage, prompt_tokens,
+  completion_tokens or total_tokens fields. They establish no actual historical
+  token charge, reasoning charge or successful current API/model availability.
+  Frozen parsed replay PASS is not raw-body parsing or provider compatibility.
 
-For comparison only, official OpenAI documentation lists `gpt-6-luna`, Chat
-Completions/Responses, Structured Outputs and128000 maximum output tokens.
-This verifies the public catalog, not account access, an immutable dated revision,
-GapAPI availability or gateway pass-through. No alternative provider is approved.
-[Model reference](https://developers.openai.com/api/docs/models/gpt-6-luna).
+The six-node sealed wrappers reuse model, temperature, n and user-message envelope.
+They additionally set max_tokens512 and present the new sealed legacy-verifier
+JSON task. Reuse the historical choices/message/content response envelope; then
+apply the existing JSON parser/L1 rather than the historical annotation grammar.
+The512 cap, JSON-task compliance and current endpoint acceptance remain canary
+questions. Do not impose another provider's reasoning rules or silently add new
+parameters based on unrelated documentation.
 
-The GPT-6 guide permits reasoning none for Luna and disallows temperature when
-reasoning is not none. Luna's documented default effort is medium. Therefore the
-sealed omitted-effort/temperature0.7 combination needs explicit gateway evidence
-or an approved wire derivative; compatibility is not established.
-[Parameter guide](https://developers.openai.com/api/docs/guides/latest-model),
-[model default](https://developers.openai.com/api/docs/models/gpt-6-luna).
+Sealed message-content bytes, six nodes, inputs and prompts stay unchanged.
+Any confirmed endpoint/wire adjustment needs an explicitly approved derivative and
+hash, preserving the original seals. Adding native response_format is unnecessary
+for the first unchanged-wire canary unless GapGPT specifically requires it; it
+must not be silently added. No transport or credentials were changed here.
 
-## Wire and JSON consequences
+## Provisional price evidence and conditional estimate
 
-OpenAI's documented endpoint is `https://api.openai.com/v1/chat/completions`,
-accepting model/messages JSON. It documents max_completion_tokens as the total
-visible/reasoning output limit and max_tokens as deprecated. response_format can
-request JSON schema or JSON object mode. These facts do not establish GapAPI
-support or that the current sealed requests use native structured output.
-[API reference](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create).
+Owner attributes the rates below to a GapGPT pricing screenshot:
+USD0.10/M input and USD0.50/M output. The screenshot itself was not available for
+independent inspection in this slice. Treat these as owner-supplied provisional
+rates, not a verified tariff, invoice or spending authorization.
+Owner's page: https://gapgpt.app/platform-v2/pricing . Its earlier public fetch
+returned a loader rather than a readable tariff; no further browsing was repeated.
 
-Existing response_schema is inside user-message content; there is no outer
-response_format, so server-side schema enforcement must not be claimed. Current
-local parser/L1 remains necessary even with a future constrained decoder.
-No strict-schema subset compatibility or actual512-token completion was tested.
+For at most12 calls, assuming all declared input/output caps are real billable
+limits, no hidden retry, and no extra gateway/reasoning/cache/currency charges:
 
-Prompt content can be retained byte-for-byte as the same decoded UTF-8 message
-string, preserving target/context, instructions and schema. Original logical and
-provider-wrapper files remain unchanged. A future max_tokens ->
-max_completion_tokens conversion, explicit reasoning_effort=none, service/retention
-setting or native JSON response format changes effective wire bytes/context and
-requires a separately reviewed hashed derivative. Responses API would additionally
-require a different envelope/output parser. None is silently interchangeable.
-If GapAPI supports the original envelope, conversion may be unnecessary, but that
-is currently unverified. Do not remove temperature or enlarge512 to get a success.
+- Full reservations:12*16384=196608 input,12*512=6144 output;
+  cost =196608*0.10/1e6 +6144*0.50/1e6 = **USD0.0227328**.
+- Existing local input estimate12542 plus6144 output gives **USD0.0043262**;
+  this lower scenario is not a measured provider-token count.
 
-## Pricing and conditional estimate — NOT GapAPI pricing
+The reservation scenario is more conservative under those assumptions, not a
+billing guarantee. GapGPT's actual tokenization, whether512 includes reasoning,
+fee/currency treatment, usage fields and current credit availability are unknown.
+No monetary cap is approved; do not invent one or treat these small estimates as
+permission. Preserve actual raw usage and charges when a later authorized request
+provides them; mark absent fields unknown.
 
-OpenAI Standard short-context rates shown in current official documentation:
-uncached input USD0.10/M, output USD0.50/M;30-minute cache writes USD0.125/M.
-Do not confuse the lower Flex/Batch table with Standard. No tools/discounts are
-assumed. [Pricing](https://developers.openai.com/api/docs/pricing).
-Reasoning is billed as output; total-output limits must include it.
-[Reasoning billing](https://developers.openai.com/api/docs/guides/reasoning).
+## Only remaining blockers / minimum canary sequence
 
-For12 calls, declared maxima I=196608 input and O=6144 total output tokens:
-`I*0.10/1e6 + O*0.50/1e6 = USD0.0227328`.
-Using the higher30-minute cache-write rate for every input token gives the more
-conservative conditional scenario USD0.027648. This assumes Standard/global
-short-context, no extra cache tier, regional surcharge, gateway markup, minimum
-charge, currency conversion or hidden retry, and a functioning total-output cap.
-Changing those assumptions requires recalculation. These are not a financial cap.
-
-The sealed local input estimate12542, with the same6144 output assumption, gives
-USD0.0043262 at uncached Standard rates; it is less conservative and NOT a
-provider-token measurement. Actual usage and charges are unknown. GapAPI cost
-cannot be priced numerically without its tariff; the reservation-based formula is
-`USD = 0.196608*P_input_per_M + 0.006144*P_output_per_M + other charges`.
-All monetary estimates are hypothetical reference calculations, not authorization,
-guaranteed billing, credit sufficiency or a reason to switch providers.
-
-## Privacy and unresolved go/no-go decisions
-
-For direct OpenAI API only, documentation says training use is opt-in; default
-abuse-monitoring retention for Chat Completions is30 days, with separate application
-state/caching exceptions. ZDR requires eligible account configuration; store=false
-does not establish it. These conditions cannot be attributed to GapAPI.
-[Data controls](https://developers.openai.com/api/docs/guides/your-data).
-
-| Unresolved blocker | Required evidence/owner action |
+| Item | Minimum resolution |
 |---|---|
-| GapAPI identity/docs/model/revision/account entitlement | Official URL/support statement; exact model/revision and endpoint mapping |
-| Parameters/JSON/output cap | Document temperature/reasoning/max-token handling and native JSON support; review any wire derivative |
-| Gateway and upstream privacy | Retention, logging, subprocessors, training use and account-specific terms; owner data-sharing approval |
-| Price and spending | Gateway tariff, reasoning/cache/fees, explicit monetary authorization and reservation plan |
-| Final execution approval | Approve exact endpoint/model/wire/context and spending; current guard stays unconditionally closed |
+| Current wire compatibility | Confirm current endpoint and exact model ID for the owner's GapGPT service; review unchanged historical parameters plus512 cap. Canary tests new JSON/L1 behavior; prior success is not a universal guarantee. |
+| Privacy | Owner explicitly approves transmitting the six sealed article/context payloads under applicable gateway/upstream retention terms; no assumed ZDR. |
+| Actual limits/cost | Confirm token-cap/usage semantics and provisional tariff/fees; owner states a monetary spending cap. |
+| Credentials available | Owner confirms an authorized credential source is available to the eventual executor; no key read, requested in chat or exposed here. |
+| Live authorization | Explicit owner approval of exact canary request/context and cost exposure; current unconditional execution guard remains closed. |
 
-Existing minimal bridge/ledger integration remains a prerequisite after these
-decisions, not another framework to build in this slice. Public documentation
-alone does not complete account preflight or authorize even a canary request.
+After those five are resolved: review the minimal existing-integration invocation
+and ledger/audit wiring, persist intent before the first blind request for637,
+then send only that separately authorized canary. Preserve raw response/usage,
+parse and run L1. Stop on incompatibility, truncation, uncertainty or audit failure;
+no automatic retry, node substitution, comparison or full-pilot continuation by
+implication. Further conditional steps require the scope of the owner's approval.
+Do not require a paid compatibility probe before authorizing the canary itself:
+current acceptance is one of its explicit feasibility questions.
 
-Checks: sealed settings inspected; both31+13-member manifests and12 wrapper-to-
-logical content mappings checked read-only; arithmetic recomputed with Decimal.
-No seals/manifests/runtime/human records modified. No unit/full suite rerun for
-documentation-only work; no actual provider compatibility test performed.
+## Checks executed
+
+Three recovered source files byte-verified against recovered_sources manifest;
+no historical module imported/executed. Nine input pins and frozen parsed replay
+PASS;31+13 seal members PASS. Stored wire settings and response-parser source
+inspected; provider usage-key scan returned0 occurrences in admitted inputs.
+Both Decimal calculations recomputed. Documentation-only: no new unit/full suite,
+network/model call, credential access, GT, training, seal/manifest/runtime change.
