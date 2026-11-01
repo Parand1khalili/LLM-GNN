@@ -2,6 +2,24 @@
 
 Date: 2026-10-31 (America/Los_Angeles).
 
+- Independent L2 review infrastructure: evaluation.l2_reviews prepares blinded
+  allowlisted packets and blank forms, imports hash-bound human-self-attested
+  records and compares outcomes/dimensions without adjudication or label gates.
+  Actual private session .local_artifacts/l2_human_review_session contains12
+  packets/12 blank forms for two unassigned slots; completed human reviews0,
+  missing12. No reviewer identity or genuine independence is authenticated.
+  Only each working/<slot>/ folder may be given to its human; coordinator,
+  author benchmark and other review files must remain hidden. No sharing occurred.
+  Focused13 plus related27 tests PASS; full suite not rerun for this isolated slice.
+  Test completed-record fixtures are temporary syntax data, not human/LLM reviews.
+  Benchmark/nine input hashes/P0/six-node seals unchanged; runtime/arbitration,
+  routing and GraphScope untouched. Report: reports/l2_human_review_workflow.json;
+  instructions: docs/L2_HUMAN_REVIEW_WORKFLOW.md.
+  Parentb34ef1f4aa4f54a56e5182e6c37835baa0d83ba1. PUSH_PENDING; no Drive backup.
+  Next: coordinator assigns two genuine independent humans and collects their
+  completed forms offline. L2 stays NOT_ASSESSED; no gold standard or holdout
+  promotion, API/GT evaluation/training/automatic adjudication is introduced.
+
 - L2 evaluation foundation: docs/L2_EVALUATION_RUBRIC.md defines four dimensions
   and SUPPORTED/UNSUPPORTED/AMBIGUOUS/NOT_ASSESSED as reviewer outcomes, not gates.
   Six pinned development cases at nodes90/130/734 contain controlled interpretations

@@ -1,0 +1,151 @@
+{
+  "status": "OFFLINE_WORKFLOW_READY_REAL_HUMANS_PENDING",
+  "session_sha256": "0cc8ca5ec0afae7ddeabd45f5a4a16a0f63ba0d4e7632b9af13421161ddaa387",
+  "private_root": ".local_artifacts/l2_human_review_session",
+  "packets_generated": 12,
+  "blank_forms_generated": 12,
+  "completed_real_reviews": 0,
+  "reviewers": "UNASSIGNED_HUMAN_SLOTS_NOT_IDENTITIES",
+  "comparison": {
+    "scope": "DEVELOPMENT_ONLY_NOT_HOLDOUT",
+    "reviewers": [
+      "reviewer-a",
+      "reviewer-b"
+    ],
+    "cases": [
+      {
+        "case_id": "case-001",
+        "missing_reviewers": [
+          "reviewer-a",
+          "reviewer-b"
+        ],
+        "overall_outcomes": [
+          null,
+          null
+        ],
+        "overall_comparison": "MISSING_REVIEW",
+        "dimension_comparison": {
+          "primary_topic_relevance": "MISSING_REVIEW",
+          "quote_claim_support": "MISSING_REVIEW",
+          "counter_evidence_resolution": "MISSING_REVIEW",
+          "topic_method_separation": "MISSING_REVIEW"
+        }
+      },
+      {
+        "case_id": "case-002",
+        "missing_reviewers": [
+          "reviewer-a",
+          "reviewer-b"
+        ],
+        "overall_outcomes": [
+          null,
+          null
+        ],
+        "overall_comparison": "MISSING_REVIEW",
+        "dimension_comparison": {
+          "primary_topic_relevance": "MISSING_REVIEW",
+          "quote_claim_support": "MISSING_REVIEW",
+          "counter_evidence_resolution": "MISSING_REVIEW",
+          "topic_method_separation": "MISSING_REVIEW"
+        }
+      },
+      {
+        "case_id": "case-003",
+        "missing_reviewers": [
+          "reviewer-a",
+          "reviewer-b"
+        ],
+        "overall_outcomes": [
+          null,
+          null
+        ],
+        "overall_comparison": "MISSING_REVIEW",
+        "dimension_comparison": {
+          "primary_topic_relevance": "MISSING_REVIEW",
+          "quote_claim_support": "MISSING_REVIEW",
+          "counter_evidence_resolution": "MISSING_REVIEW",
+          "topic_method_separation": "MISSING_REVIEW"
+        }
+      },
+      {
+        "case_id": "case-004",
+        "missing_reviewers": [
+          "reviewer-a",
+          "reviewer-b"
+        ],
+        "overall_outcomes": [
+          null,
+          null
+        ],
+        "overall_comparison": "MISSING_REVIEW",
+        "dimension_comparison": {
+          "primary_topic_relevance": "MISSING_REVIEW",
+          "quote_claim_support": "MISSING_REVIEW",
+          "counter_evidence_resolution": "MISSING_REVIEW",
+          "topic_method_separation": "MISSING_REVIEW"
+        }
+      },
+      {
+        "case_id": "case-005",
+        "missing_reviewers": [
+          "reviewer-a",
+          "reviewer-b"
+        ],
+        "overall_outcomes": [
+          null,
+          null
+        ],
+        "overall_comparison": "MISSING_REVIEW",
+        "dimension_comparison": {
+          "primary_topic_relevance": "MISSING_REVIEW",
+          "quote_claim_support": "MISSING_REVIEW",
+          "counter_evidence_resolution": "MISSING_REVIEW",
+          "topic_method_separation": "MISSING_REVIEW"
+        }
+      },
+      {
+        "case_id": "case-006",
+        "missing_reviewers": [
+          "reviewer-a",
+          "reviewer-b"
+        ],
+        "overall_outcomes": [
+          null,
+          null
+        ],
+        "overall_comparison": "MISSING_REVIEW",
+        "dimension_comparison": {
+          "primary_topic_relevance": "MISSING_REVIEW",
+          "quote_claim_support": "MISSING_REVIEW",
+          "counter_evidence_resolution": "MISSING_REVIEW",
+          "topic_method_separation": "MISSING_REVIEW"
+        }
+      }
+    ],
+    "human_self_attested_records": 0,
+    "missing_records": 12,
+    "identity_and_independence": "SELF_ATTESTED_NOT_AUTHENTICATED",
+    "adjudication": "NOT_PERFORMED",
+    "gold_standard": false,
+    "runtime_l2_status": "NOT_ASSESSED",
+    "training_use": "FORBIDDEN"
+  },
+  "tests": {
+    "focused_passed": 13,
+    "benchmark_regressions_passed": 12,
+    "cli_regressions_passed": 6,
+    "p0_regressions_passed": 9,
+    "total_passed": 40,
+    "synthetic_unit_records": "TEMPORARY_STRUCTURE_FIXTURES_NOT_HUMAN_OR_LLM_REVIEWS",
+    "full_suite": "NOT_RERUN_ISOLATED_EVALUATION_INFRASTRUCTURE"
+  },
+  "syntax_import": "PASS",
+  "benchmark_nine_inputs_p0_six_node_seals": "HASH_UNCHANGED",
+  "runtime_routing_arbitration_GraphScope": "UNCHANGED",
+  "provider_calls": 0,
+  "training_runs": 0,
+  "GT_accessed": false,
+  "review_sharing": "NOT_PERFORMED",
+  "remote_push": "PUSH_PENDING",
+  "drive_backup": "NOT_PERFORMED"
+}

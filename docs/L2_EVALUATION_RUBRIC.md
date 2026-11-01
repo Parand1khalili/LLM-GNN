@@ -1,5 +1,9 @@
 # L2 semantic evaluation foundation (development only)
 
+The [offline human-review workflow](L2_HUMAN_REVIEW_WORKFLOW.md) now prepares
+blinded packets, validates separate self-attested human records and compares them.
+The original illustrative benchmark remains unchanged; genuine reviews are pending.
+
 Rubric: `sara.l2.rubric.v1`. Benchmark: `sara.l2.development_benchmark.v1`,
 configs/l2_development_benchmark.json. Status: illustrative, not a gold standard;
 independent review is pending. This document defines human-review questions,
