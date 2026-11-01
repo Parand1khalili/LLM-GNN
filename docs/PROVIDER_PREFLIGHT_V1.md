@@ -1,5 +1,10 @@
 # GapGPT preflight — fixed provider decision, 2026-11-01
 
+Latest observed account-panel attempt returned HTTP400 unsupported_value for
+ temperature0.7; provider explicitly permits default1 only. A separate, explicitly
+approved temperature1 derivative is prepared in GAPGPT_TEMPERATURE_FIX.md. No new
+request was sent; both earlier failed intents remain immutable.
+
 Update: the owner requested a separately identified fresh blind637 canary using
 `https://api.gapgpt.app/v1/chat/completions`, as specified by the current account
 panel. Preparation only; historical endpoint/failed intent remain intact. See

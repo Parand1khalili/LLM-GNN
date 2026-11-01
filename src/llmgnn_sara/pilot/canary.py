@@ -24,6 +24,7 @@ IDENTITY = "gapgpt-blind-637-canary-v1"
 ROOT = Path(__file__).resolve().parents[3]
 MAX_BODY = 1024 * 1024
 ACCOUNT_PANEL_IDENTITY = "gapgpt-app-blind-637-canary-v1"
+TEMPERATURE1_IDENTITY = "gapgpt-app-t1-blind-637-canary-v1"
 
 
 def target_settings(target):
@@ -32,6 +33,9 @@ def target_settings(target):
     if target == "account-panel":
         return ("api.gapgpt.app", "https://api.gapgpt.app/v1/chat/completions",
                 ACCOUNT_PANEL_IDENTITY, "gapgpt_app_canary_637")
+    if target == "account-panel-temperature1":
+        return ("api.gapgpt.app", "https://api.gapgpt.app/v1/chat/completions",
+                TEMPERATURE1_IDENTITY, "gapgpt_app_t1_canary_637")
     raise ValueError("Unapproved target")
 SEALS = ("29fa95c7d34f5826b628509e6bad2baced83ac986ebfbc7cadc4bb36d4c31b41",
          "9fd65d82e3cab296afc503813b97b0c0af9e8f4dcb41cd0be1aa20ac34ef1f96")
@@ -41,7 +45,8 @@ def sha(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
-def prepare():
+def prepare(*, target="historical"):
+    target_settings(target)
     base = ROOT / ".local_artifacts/pilot-gapapi"
     seals = []
     for directory, pin in zip((base, base / "pilot"), SEALS):
@@ -67,6 +72,9 @@ def prepare():
     # Declared reservation only: this byte check is not vendor tokenization.
     if len(wire_bytes) > 16384:
         raise ValueError("Declared input-byte preflight exceeded; no token guarantee")
+    if target == "account-panel-temperature1":
+        wire["temperature"] = 1
+        wire_bytes = canonical_bytes(wire)  # Explicit derivative; original seal is never rewritten.
     return payload, wire_bytes
 
 
@@ -134,14 +142,17 @@ def redact_decoded(value, key, depth=0):
 def execute(payload, wire, key, audit, ledger, approval, *, transport=None, target="historical"):
     """One attempt. Tests substitute transport; CLI alone gathers owner approval."""
     _, endpoint, identity, _ = target_settings(target)
-    expected_payload, expected_wire = prepare()
+    expected_payload, expected_wire = prepare(target=target)
     if payload != expected_payload or wire != expected_wire:
         raise ValueError("Canary payload differs")
     if type(key) is not str or not 12 <= len(key) <= 4096 or any(ord(c) < 33 or ord(c) > 126 for c in key):
         raise ValueError("Invalid credential format")
-    if (type(approval) is not dict or any(approval.get(k) is not True for k in ("privacy", "compatibility", "declared_limits"))
-            or approval != {"privacy": True, "compatibility": True, "declared_limits": True,
-                    "usd_reservation": "0.10", "dispatch": identity}):
+    expected_approval = {"privacy": True, "compatibility": True, "declared_limits": True,
+                         "usd_reservation": "0.10", "dispatch": identity}
+    if target == "account-panel-temperature1":
+        expected_approval["temperature_change"] = True
+    if (type(approval) is not dict or approval != expected_approval
+            or any(approval.get(k) is not True for k in expected_approval if type(expected_approval[k]) is bool)):
         raise ValueError("Explicit scoped approvals required")
     context = {"version": identity, "endpoint": endpoint, "model": "gpt-6-luna",
         "node": 637, "phase": "blind", "wire_sha256": sha(wire), "approval": approval,
@@ -237,7 +248,7 @@ def main(*, target="historical"):
         if len(sys.argv) != 1 or not sys.stdin.isatty():
             raise ValueError("Run interactively without arguments")
         _, endpoint, identity, directory = target_settings(target)
-        payload, wire = prepare()
+        payload, wire = prepare(target=target)
         audit = PrivateAudit(ROOT / ".local_artifacts" / directory)
         ledger = ReadinessLedger(audit.root / "intent.sqlite")
         if ledger.snapshot():
@@ -249,9 +260,14 @@ def main(*, target="historical"):
         for field, phrase in (("privacy", "APPROVE PRIVACY"), ("compatibility", "APPROVE SEALED WIRE"),
                               ("declared_limits", "APPROVE DECLARED LIMITS")):
             approval[field] = input("Type " + phrase + ": ") == phrase
+        if target == "account-panel-temperature1":
+            print("Explicit derivative: temperature0.7 -> 1; scientific message unchanged.")
+            approval["temperature_change"] = input("Type APPROVE TEMPERATURE 1: ") == "APPROVE TEMPERATURE 1"
         approval["usd_reservation"] = input("Confirm full USD reservation by typing 0.10: ")
         if not all(approval.get(k) is True for k in ("privacy", "compatibility", "declared_limits")) or approval["usd_reservation"] != "0.10":
             raise ValueError("Approvals incomplete")
+        if target == "account-panel-temperature1" and approval.get("temperature_change") is not True:
+            raise ValueError("Temperature change not approved")
         key = credential()
         approval["dispatch"] = input("Authorize exactly one request; type " + identity + ": ")
         result = execute(payload, wire, key, audit, ledger, approval, target=target)

@@ -141,3 +141,22 @@ class CanaryTests(unittest.TestCase):
  def test_main_profiles_have_distinct_state_directories(self):
   old=canary.target_settings('historical');new=canary.target_settings('account-panel')
   self.assertNotEqual(old[1],new[1]);self.assertNotEqual(old[2],new[2]);self.assertNotEqual(old[3],new[3])
+
+ def test_explicit_temperature1_derivative_only_changes_generation_setting(self):
+  payload,wire=canary.prepare(target='account-panel-temperature1')
+  old=json.loads(self.wire);new=json.loads(wire)
+  self.assertEqual(payload,self.payload);self.assertEqual(new['messages'],old['messages'])
+  self.assertEqual({k for k in old if old[k]!=new[k]},{'temperature'})
+  self.assertEqual(new['temperature'],1)
+  approval={**APPROVAL,'dispatch':canary.TEMPERATURE1_IDENTITY,'temperature_change':True}
+  conn=MagicMock();conn.getresponse.return_value.status=200;conn.getresponse.return_value.read.return_value=self.envelope()
+  with patch.object(canary.http.client,'HTTPSConnection',return_value=conn) as factory:
+   result=canary.execute(payload,wire,KEY,self.audit,self.ledger,approval,target='account-panel-temperature1')
+  self.assertEqual(result['status'],'COMPLETED');self.assertIsNone(result['accepted_label'])
+  self.assertEqual(factory.call_args.args,('api.gapgpt.app',));self.assertEqual(conn.request.call_args.kwargs['body'],wire)
+  self.assertEqual(self.ledger.snapshot()[0][0],canary.TEMPERATURE1_IDENTITY)
+ def test_temperature_change_needs_separate_confirmation(self):
+  payload,wire=canary.prepare(target='account-panel-temperature1');post=MagicMock()
+  approval={**APPROVAL,'dispatch':canary.TEMPERATURE1_IDENTITY}
+  with self.assertRaises(ValueError):canary.execute(payload,wire,KEY,self.audit,self.ledger,approval,target='account-panel-temperature1',transport=post)
+  post.assert_not_called()

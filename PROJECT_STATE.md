@@ -2,6 +2,21 @@
 
 Date: 2026-11-01 (America/Los_Angeles).
 
+- Concrete GapGPT compatibility fix (2026-11-01): second endpoint attempt
+  actually returned400 invalid_request_error/unsupported_value, param temperature;
+  provider says0.7 unsupported, only default1. Not another observed401/key error.
+  No claim of zero cost; usage absent. New explicit derivative changes ONLY
+  temperature to1, preserves sealed message/body fields and all original files.
+  Identity gapgpt-app-t1-blind-637-canary-v1; same api.gapgpt.app; new state
+  .local_artifacts/gapgpt_app_t1_canary_637. Command python -B -m
+  llmgnn_sara.pilot.canary_gapgpt_t1 requires fresh approvals including APPROVE
+  TEMPERATURE 1 and USD0.10. No actual new dispatch/key access during preparation.
+  Focused23 PASS; guarded relevant45 PASS (15.761s); both failed intent/receipt
+  trees byte-unchanged, seals/nine inputs/P0 PASS. Full suite not rerun.
+  Docs: docs/GAPGPT_TEMPERATURE_FIX.md. Parent bbcf9346d8d8607d5c7146d6b508999b3ace4e24;
+  PUSH_PENDING; no Drive backup. Next: owner reviews explicit generation delta
+  and confirms locally; no retry/fallback/comparison or label promotion.
+
 - Endpoint mismatch diagnosis/fresh canary prepared (2026-11-01): original
   live blind637 attempt observed401 invalid_api_key/authentication_error at
   api.gapapi.com; charges UNKNOWN. Owner confirms correct previously working key.
