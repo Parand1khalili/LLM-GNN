@@ -1,0 +1,47 @@
+{
+  "schema_version": "sara.verifier.rich_evidence.v1",
+  "status": "OFFLINE_VALIDATED_L2_NOT_ASSESSED",
+  "schema_sha256": "46552bb3fd9851b3275701cb481b3e078c954f5b2542c7b7ff5e84957fbeaa98",
+  "focused_tests": {
+    "run": 18,
+    "passed": 18,
+    "seconds": 1.802
+  },
+  "full_regressions": {
+    "run": 155,
+    "passed": 154,
+    "skipped": 1,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 103.177,
+    "skip_reason": "OS account cannot create filesystem symlinks; ZIP symlink rejection tested"
+  },
+  "syntax_and_imports": "PASS",
+  "static_type_checker": "NOT_CONFIGURED_NOT_RUN",
+  "offline_wheel_build": {
+    "status": "PASS",
+    "network": "DISABLED_NO_INDEX",
+    "dependencies_installed": 0,
+    "path": ".local_artifacts/rich_schema_build/llmgnn_sara-0.1.0-py3-none-any.whl",
+    "sha256": "f63d1197cf90ca83ff4c23dcf29e48eee2b4001f3ded5722328be0a7a4fdb1f7",
+    "isolated_stdlib_only_import": "PASS"
+  },
+  "compatibility": {
+    "legacy_authentic_replay_report": "EXACT_EQUALITY_PASS",
+    "p0_manifest": "SHA256_UNCHANGED",
+    "six_node_seals": "BOTH_PINS_AND_ALL_MEMBER_HASHES_UNCHANGED",
+    "nine_frozen_json_inputs": "SHA256_UNCHANGED",
+    "legacy_inputs_policy_atlas_pilot_protocol_provider_config": "BYTE_UNCHANGED",
+    "GraphScope": "UNCHANGED"
+  },
+  "raw_diagnostics": "PRIVATE_AUDIT_ONLY_NOT_EXPORTED",
+  "semantic_mismatched_claim": "L1_MAY_PASS_L2_NOT_ASSESSED_NO_ACCEPTANCE",
+  "arbitration": "UNCHANGED_CONSERVATIVE_NO_REVIEWED_LABEL_ACCEPTANCE",
+  "provider_calls": 0,
+  "token_count_calls": 0,
+  "real_training_runs": 0,
+  "GT_evaluation": false,
+  "model_prompt_execution": false,
+  "remote_push": "PUSH_PENDING",
+  "drive_backup": "NOT_PERFORMED"
+}

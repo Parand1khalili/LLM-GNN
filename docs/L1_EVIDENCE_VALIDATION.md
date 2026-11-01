@@ -1,5 +1,8 @@
 # L1 evidence validity and conservative V1 arbitration
 
+Optional [rich evidence v1](RICH_EVIDENCE_SCHEMA.md) adds structured diagnostics
+through an explicit new response version; legacy contracts stay the default.
+
 This is new offline engineering, not recovered Policy 002/V1 behavior. Routing,
 scientific thresholds, prompts, provider envelopes and call caps are unchanged.
 Historical P0 and the existing six-node sealed artifacts remain unchanged.

@@ -17,6 +17,7 @@ from .inputs import canonical_bytes, verifier_input
 import hashlib
 from .evidence import EvidenceError, validate_result
 from .audit import AuditError, PrivateAudit
+from .rich_evidence import RICH_VERSION, rich_verifier_input, target_source, validate_rich_result
 
 
 @dataclass(frozen=True)
@@ -77,7 +78,7 @@ def _decision(pair: Pair, label: int | None, reason: str, reviewed: bool) -> dic
 
 def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifier | None = None,
                 config: PolicyConfig | None = None, ledger: OfflineLedger | None = None,
-                audit: PrivateAudit | None = None) -> dict:
+                audit: PrivateAudit | None = None, response_version: str | None = None) -> dict:
     """Run GT-free frozen pairs through an explicitly offline verifier.
 
     With no text/verifier, reviewed cases abstain; no response is fabricated.
@@ -85,6 +86,8 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
     deliberately do not attempt to recover historical R0/R1 selection counts.
     """
     rows = validated_pairs(pairs)
+    if response_version is not None and (type(response_version) is not str or response_version != RICH_VERSION):
+        raise EvidenceError("L1_SCHEMA_VERSION_INVALID")
     integer(budget, "review budget")
     if router not in {"r0", "semantic"}:
         raise ValueError("Unknown router")
@@ -104,7 +107,8 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
 
     def invoke(node: int, phase: str, request):
         nonlocal requests, estimated_chars, audit_store
-        payload = verifier_input(request.node_id, request.text, request.neighborhood,
+        input_builder = verifier_input if response_version is None else rich_verifier_input
+        payload = input_builder(request.node_id, request.text, request.neighborhood,
                                  candidates=request.historical_candidates if phase == "compare" else None,
                                  blind_class=request.blind_class_index if phase == "compare" else None)
         if audit_store is None:
@@ -120,7 +124,8 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
             response = getattr(verifier, phase)(request)
             # Freeze decoded raw data immediately; comparison cannot mutate blind evidence.
             raw = json.loads(canonical_bytes(response))
-            validated = validate_result(response, request.text)
+            validated = (validate_result(response, request.text) if response_version is None else
+                         validate_rich_result(response, (target_source(request.text),)))
         except Exception as error:
             code = (error.code if isinstance(error, EvidenceError) else
                     "TIMEOUT_UNCERTAIN_NO_RETRY" if isinstance(error, TimeoutError) else

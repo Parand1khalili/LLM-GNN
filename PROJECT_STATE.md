@@ -2,6 +2,22 @@
 
 Date: 2026-10-31 (America/Los_Angeles).
 
+- Rich evidence: explicit response_version=sara.verifier.rich_evidence.v1 adds
+  primary_topic, support/counter source-quote-claim items, auxiliary warning and
+  uncertainty diagnostics. All quotes use existing L1 provenance rules; L2 remains
+  NOT_ASSESSED and conservative arbitration is unchanged. Legacy is still default;
+  rich request/schema is new and unsealed, not an authorized live prompt.
+  Eighteen focused tests PASS; full155:154PASS,1Windows symlink SKIP (103.177s).
+  Offline wheel build and isolated stdlib-only wheel import PASS; no static type
+  checker is configured. Legacy authentic replay matches its report exactly;
+  P0, both six-node seals, nine inputs, routing/providers/old prompts and GraphScope
+  are unchanged. Report: reports/rich_evidence_validation.json; contract:
+  docs/RICH_EVIDENCE_SCHEMA.md. Parent661d80065c3b5c12e01e8e9286c5cd3239ae644a.
+  No API/model prompt execution, token-count requests, GT evaluation, real training,
+  new Judge, third-class acceptance or Drive writes. PUSH_PENDING.
+  Next: review L2 semantics for topic/claim alignment and counter-evidence; schema
+  completeness alone must never approve a label.
+
 - Authentic L2-boundary replay: sara3.replay uses nine pinned JSON inputs, real
   target/neighborhood/Atlas data and clearly synthetic fixed verifier responses.
   Eleven cases and both full140 routers each run twice deterministically (330
