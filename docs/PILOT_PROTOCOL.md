@@ -8,6 +8,9 @@ check evidence delivery, not its scientific usefulness to a future real verifier
 
 ## Historical P0 selection reconstruction (separate protocol)
 
+See [Judge002/V1 contracts](HISTORICAL_P0_ARM_CONTRACTS.md) for field-level
+provenance, missing evidence, paired-comparison requirements and future gates.
+
 `manifests/historical_p0.json` is a versioned reconstruction of the reported P0
 selection contract, not recovered source or byte-identical P1 wire data. It fixes
 Group A to 734,2379,2490,682 (Judge002 and SARA3_V1 each), and Group B to

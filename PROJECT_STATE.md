@@ -2,6 +2,13 @@
 
 Date: 2026-10-31 (America/Los_Angeles).
 
+- P0 arm specification: docs/HISTORICAL_P0_ARM_CONTRACTS.md separates reported
+  Judge002/V1 intent, current reconstructed fields and missing original contracts.
+  Offline adapter decisions and provider gates remain unresolved; no runtime change.
+  Parent for this documentation slice: 628aa6484e6a8670de6e394cd7b40ec0f393de26.
+  Content/eight local links and P0/six-node seal hashes checked successfully;
+  documentation-only slice, no new runtime tests or provider checks executed.
+
 - Historical P0: manifests/historical_p0.json reconstructs eight fixed nodes and
   twelve logical node/arm records, not twelve stage intents or recovered P1 wire.
   Read-only pilot.historical_p0 validator admits three pinned frozen inputs;
