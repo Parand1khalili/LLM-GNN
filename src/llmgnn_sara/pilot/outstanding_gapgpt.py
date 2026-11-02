@@ -14,6 +14,8 @@ from ..sara3.inputs import canonical_bytes
 
 VERSION = "gapgpt-outstanding-l1-wrapper-v1"
 DIRECTORY = "gapgpt_outstanding_l1_v1"
+FOUR_VERSION = "gapgpt-four-unattempted-v1"
+FOUR_DIRECTORY = "gapgpt_four_unattempted_v1"
 NODES = (130, 682, 2396, 653)
 RULE = "sara.l1.decorative_quote_match.v1"
 ROOT = canary.ROOT
@@ -99,11 +101,64 @@ def preserved_1243(root, blind):
     return outcome
 
 
-def prepare(root=ROOT):
+def rejected_comparison(root, payload, lineage):
+    """Admit the previous genuine failure as history, never as a new intent."""
+    directory = root / ".local_artifacts" / DIRECTORY
+    records = prior._read_receipts(directory)
+    provider_id, provider = _one(records, "kind", "canary_provider_response")
+    context_id, context = _one(records, "kind", "outstanding_request")
+    _, approval = _one(records, "kind", "outstanding_approval")
+    with closing(sqlite3.connect((directory / "intent.sqlite").resolve().as_uri()+"?mode=ro", uri=True)) as db:
+        entries = db.execute("SELECT id,request_sha,state,raw_sha,audit_sha FROM intents").fetchall()
+        run = db.execute("SELECT digest,state,binding FROM remaining_run").fetchone()
+    if (len(entries) != 1 or entries[0][0] != VERSION+":1243:compare" or entries[0][2] != "REJECTED"
+            or run[1] != "HALTED_REVIEW_REQUIRED_NO_RETRY" or canary.sha(run[2]) != run[0]
+            or canary.strict_json(run[2]) != approval["binding"]
+            or context["contract_binding"] != run[0] or context["identity"] != entries[0][0]
+            or context["dependency"] != lineage
+            or context["request_sha256"] != canary.sha(encoded(payload))
+            or entries[0][1] != context["request_sha256"]
+            or context["wire_sha256"] != canary.sha(prior.wire_for(payload))):
+        raise ValueError("Prior comparison ledger/request binding differs")
+    raw = bytes.fromhex(provider["raw_hex"])
+    if (provider["http_status"] != 200 or not provider["body_complete"] or provider["secret_echo_redacted"]
+            or canary.sha(raw) != provider["original_response_sha256"]
+            or canary.sha(raw) != provider["persisted_response_sha256"]
+            or provider["context_sha256"] != canary.sha(canonical_bytes(context))):
+        raise ValueError("Prior comparison response integrity failure")
+    envelope = canary.strict_json(raw)
+    if envelope["model"] != prior.REVISION or len(envelope["choices"]) != 1 or envelope["choices"][0]["finish_reason"] != "stop":
+        raise ValueError("Unexpected prior comparison envelope")
+    content = envelope["choices"][0]["message"]["content"]
+    receipt = records[entries[0][4]]
+    if (entries[0][3] != canary.sha(content.encode()) or receipt["raw_sha256"] != entries[0][3]
+            or receipt["request_sha256"] != entries[0][1]
+            or bytes.fromhex(receipt["raw_hex"]) != content.encode() or receipt["reason"] != "L1_QUOTE_NOT_FOUND"):
+        raise ValueError("Prior comparison rejection receipt differs")
+    value = canary.strict_json(content)
+    from ..sara3.evidence import EvidenceError
+    try:
+        validate_result(value, payload["target"]["text"])
+    except EvidenceError as error:
+        if error.code != "L1_QUOTE_NOT_FOUND":
+            raise ValueError("Prior comparison failure changed") from None
+    else:
+        raise ValueError("Unexpected reclassification of failed comparison")
+    return {"state": "REJECTED", "historical": True, "http_status": 200, "parse_status": "PASS",
+            "l1_status": "FAIL", "reason": "L1_QUOTE_NOT_FOUND", "usage": envelope.get("usage"),
+            "provider_model": envelope["model"], "provider_receipt": provider_id,
+            "request_receipt": context_id, "response_sha256": canary.sha(raw),
+            "accepted_label": None, "l2_status": "NOT_ASSESSED"}
+
+
+def prepare(root=ROOT, *, four_only=False):
     requests, first = prior.sealed_inputs(root)
     preserved = preserved_1243(root, requests[1243][0])
     plan = []
-    if not preserved["abstain"]:
+    historical_comparison = None
+    if four_only:
+        historical_comparison = rejected_comparison(root, materialize_comparison(requests[1243][1], preserved["class_index"]), preserved["lineage"])
+    if not four_only and not preserved["abstain"]:
         plan.append({"node": 1243, "phase": "compare", "conditional": False,
             "payload": materialize_comparison(requests[1243][1], preserved["class_index"]),
             "dependency": preserved["lineage"]})
@@ -112,12 +167,15 @@ def prepare(root=ROOT):
                      {"node": node, "phase": "compare", "conditional": True, "payload": requests[node][1]}])
     possible = [materialize_comparison(s["payload"], label) for s in plan if s["conditional"] for label in range(7)]
     possible += [s["payload"] for s in plan if not s["conditional"]]
-    prior.verify_no_prior_dispatch(root, possible, reserved_prefix=VERSION)
+    version = FOUR_VERSION if four_only else VERSION
+    prior.verify_no_prior_dispatch(root, possible, reserved_prefix=version)
     for payload in possible:
         prior.wire_for(payload)
     runtime = ["pilot/outstanding_gapgpt.py", "pilot/remaining_gapgpt.py", "pilot/canary.py",
                "pilot/readiness.py", "pilot/protocol.py", "sara3/audit.py", "sara3/evidence.py"]
-    contract = {"version": VERSION, "provider": "GapGPT", "endpoint": prior.ENDPOINT, "model": prior.MODEL,
+    if four_only:
+        runtime.append("pilot/four_gapgpt.py")
+    contract = {"version": version, "provider": "GapGPT", "endpoint": prior.ENDPOINT, "model": prior.MODEL,
         "allowed_returned_revision": prior.REVISION, "identity_provenance": prior.CONTRACT["identity_provenance"],
         "temperature": 1, "n": 1, "max_tokens": 512, "reasoning_effort": "OMITTED", "l1_rule": RULE,
         "amendment": "POST_OBSERVATION_1243_COMPARISON_ELIGIBILITY_NOT_ORIGINAL_ACCEPTANCE",
@@ -127,12 +185,15 @@ def prepare(root=ROOT):
         "resume": "FORBIDDEN", "accepted_label": None, "l2_status": "NOT_ASSESSED",
         "source_manifest_sha256": canary.sha((root / "manifests/recovered_sources.json").read_bytes()),
         "runtime_hashes": {name: canary.sha((root / "src/llmgnn_sara" / name).read_bytes()) for name in runtime}}
+    if four_only:
+        contract["preserved_1243_comparison"] = historical_comparison
+        contract["amendment"] = "OWNER_APPROVED_PROCEED_AFTER_RECORDED_COMPARISON_FAILURE_NO_RETRY"
     return contract
 
 
 def approvals_for(contract):
     return {"amendment": True, "privacy": True, "outstanding_list": True, "declared_limits": True,
-            "reservation_usd": "0.10", "dispatch": VERSION,
+            "reservation_usd": "0.10", "dispatch": contract["version"],
             "contract_sha256": canary.sha(canonical_bytes(contract))}
 
 
@@ -140,9 +201,13 @@ def start(contract, approval, ledger, audit):
     if approval != approvals_for(contract) or any(approval.get(k) is not True for k in
             ("amendment", "privacy", "outstanding_list", "declared_limits")):
         raise ValueError("Fresh amended-contract approvals required")
-    expected = ([] if contract["preserved_1243"]["abstain"] else [(1243, "compare", False)])
+    four_only = contract["version"] == FOUR_VERSION
+    if four_only and (contract.get("preserved_1243_comparison", {}).get("state") != "REJECTED"
+                      or contract["preserved_1243_comparison"].get("historical") is not True):
+        raise ValueError("Prior comparison failure must remain historical")
+    expected = ([] if four_only or contract["preserved_1243"]["abstain"] else [(1243, "compare", False)])
     expected += [(node, phase, phase == "compare") for node in NODES for phase in ("blind", "compare")]
-    if (contract["version"] != VERSION or contract["l1_rule"] != RULE
+    if (contract["version"] not in (VERSION, FOUR_VERSION) or contract["l1_rule"] != RULE
             or [(s["node"], s["phase"], s["conditional"]) for s in contract["plan"]] != expected
             or contract["maximum_calls"] != len(expected) or contract["local_reservation_usd"] != "0.10"
             or (contract["provider"], contract["endpoint"], contract["model"], contract["allowed_returned_revision"])
@@ -184,7 +249,7 @@ def dispatch(contract, ordinal, payload, dependency, key, ledger, audit, digest,
     step = contract["plan"][ordinal]
     expected = step["payload"]
     if step["conditional"]:
-        prior_id = f"{VERSION}:{step['node']}:blind"
+        prior_id = f"{contract['version']}:{step['node']}:blind"
         with closing(sqlite3.connect(ledger.path)) as db:
             entry = db.execute("SELECT id,state,audit_sha FROM intents ORDER BY rowid DESC LIMIT 1").fetchone()
         if not entry or entry[:2] != (prior_id, "COMPLETED"):
@@ -213,7 +278,7 @@ def dispatch(contract, ordinal, payload, dependency, key, ledger, audit, digest,
         count, inputs, outputs = db.execute("SELECT count(*),coalesce(sum(input_cap),0),coalesce(sum(output_cap),0) FROM intents").fetchone()
         if count >= contract["maximum_calls"] or inputs+16384 > len(contract["plan"])*16384 or outputs+512 > len(contract["plan"])*512:
             raise ValueError("Outstanding reservation exhausted")
-    identity = f"{VERSION}:{step['node']}:{step['phase']}"
+    identity = f"{contract['version']}:{step['node']}:{step['phase']}"
     wire = prior.wire_for(payload)
     context = {"kind": "outstanding_request", "ordinal": ordinal, "identity": identity,
                "contract_binding": digest, "request_sha256": canary.sha(encoded(payload)),
@@ -234,10 +299,11 @@ def run(contract, key, ledger, audit, digest, *, transport=None):
     if ledger.snapshot():
         raise ValueError("Existing intent; no restart")
     rows = [contract["preserved_637"], {"node": 1243, "blind": contract["preserved_1243"],
-            "compare": {"state": "NOT_ATTEMPTED" if not contract["preserved_1243"]["abstain"] else "NOT_PERMITTED_BLIND_ABSTENTION"}}]
+            "compare": contract.get("preserved_1243_comparison", {"state": "NOT_ATTEMPTED" if not contract["preserved_1243"]["abstain"] else "NOT_PERMITTED_BLIND_ABSTENTION"})}]
     rows += [{"node": node, "blind": {"state": "NOT_ATTEMPTED"}, "compare": {"state": "NOT_ATTEMPTED"}} for node in NODES]
-    summary = {"version": VERSION, "batch_digest": digest, "rows": rows,
+    summary = {"version": contract["version"], "batch_digest": digest, "rows": rows,
                "historical_1243_blind_included_in_new_totals": False,
+               "original_cohort_size": 6, "maximum_new_dispatches": contract["maximum_calls"],
                "accepted_label": None, "l2_status": "NOT_ASSESSED"}
     try:
         for ordinal, step in enumerate(contract["plan"]):
@@ -264,15 +330,21 @@ def run(contract, key, ledger, audit, digest, *, transport=None):
         state = "FINISHED"
     except BaseException:
         state = "HALTED_REVIEW_REQUIRED_NO_RETRY"
+    entries = ledger.snapshot()
+    summary["new_phase_denominators"] = {phase: sum(r[0].endswith(":"+phase) for r in entries)
+                                         for phase in ("blind", "compare")}
+    summary["new_nodes_with_intents"] = len({r[0].split(":")[-2] for r in entries})
     return prior.finish_summary(summary, ledger, audit, digest, state)
 
 
-def main():
+def main(*, four_only=False):
     try:
         if len(sys.argv) != 1 or not sys.stdin.isatty():
             raise ValueError("Fresh local terminal approvals required")
-        contract = prepare()
-        audit = PrivateAudit(ROOT / ".local_artifacts" / DIRECTORY)
+        contract = prepare(four_only=four_only)
+        directory = FOUR_DIRECTORY if four_only else DIRECTORY
+        version = contract["version"]
+        audit = PrivateAudit(ROOT / ".local_artifacts" / directory)
         ledger = ReadinessLedger(audit.root / "intent.sqlite")
         with closing(sqlite3.connect(ledger.path)) as db:
             if db.execute("SELECT count(*) FROM sqlite_master WHERE name='remaining_run'").fetchone()[0] or ledger.snapshot():
@@ -280,6 +352,8 @@ def main():
         print(f"GapGPT | {prior.ENDPOINT} | {prior.MODEL} -> exact {prior.REVISION} (provider-reported)")
         print("temperature1/n1/max_tokens512; reasoning_effort omitted; L1 " + RULE)
         print("Post-observation L1 amendment; original REJECTED states stay unchanged. No637/1243 blind.")
+        if four_only:
+            print("FOUR NEVER-ATTEMPTED NODES ONLY. No1243 comparison retry; preserve that failure.")
         print("Outstanding list (comparison entries after new blinds are conditional):")
         for s in contract["plan"]:
             print(f"node{s['node']} {s['phase']}" + (" IF ELIGIBLE" if s["conditional"] else ""))
@@ -299,13 +373,13 @@ def main():
         if approval["reservation_usd"] != "0.10":
             raise ValueError("Budget declined")
         key = canary.credential()
-        approval["dispatch"] = input("Authorize outstanding requests; type " + VERSION + ": ")
-        if prepare() != contract:
+        approval["dispatch"] = input("Authorize outstanding requests; type " + version + ": ")
+        if prepare(four_only=four_only) != contract:
             raise ValueError("Inputs/state changed during approvals")
         digest = start(contract, approval, ledger, audit)
         summary, _ = run(contract, key, ledger, audit, digest)
         print(json.dumps({k: summary[k] for k in ("state", "dispatch_attempts_upper_bound", "state_counts")}))
-        print("Private results: .local_artifacts/" + DIRECTORY + "; never rerun after start.")
+        print("Private results: .local_artifacts/" + directory + "; never rerun after start.")
         return 0 if summary["state"] == "FINISHED" else 1
     except BaseException:
         print("Continuation blocked/interrupted; no retry/resume. Inspect private ledger.", file=sys.stderr)

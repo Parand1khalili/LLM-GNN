@@ -2,6 +2,27 @@
 
 Date: 2026-11-02 (America/Los_Angeles).
 
+- Four never-attempted feasibility scope prepared, NOT DISPATCHED. Entry:
+  python -B -m llmgnn_sara.pilot.four_gapgpt. Reuses the same continuation engine,
+  ledger and private audit; no new verifier. Fixed130,682,2396,653 blind/conditional
+  comparison, maximum8 calls. No637/1243 requests of either phase. Prior1243 comparison
+  remains genuine REJECTED/L1_QUOTE_NOT_FOUND; raw/request/context/ledger/approval
+  and preserved-blind lineage hashes reverified. All prior ledgers remain immutable.
+  Exact approved revision/temp1/n1/max_tokens512/L1 wrapper v1 and seals unchanged.
+  Fresh local amendment/privacy/scope/limits/USD0.10/dispatch approvals required;
+  estimate USD0.0151552 under declared caps/rates, not verified billing or guarantee.
+  Private final summary includes six-node history, new phase intent denominators,
+  confirmed responses, usage/missingness and costs; historical usage excluded from
+  new totals. Any failure/uncertainty halts; no retries or automatic resume.
+  Final focused67 PASS (25.956s). Full309:308 PASS/1 Windows symlink SKIP (135.088s)
+  before final lineage assertion; that assertion and its negative regression covered
+  by final focused run. Initial fixture dependency-key assumption fixed, not a live
+  validator defect. Protected77 artifacts unchanged; syntax/sealing/admission PASS.
+  New real calls0; no new usage or charge claim. L2 NOT_ASSESSED; no labels promoted.
+  Docs GAPGPT_FOUR_NODE_EXECUTION.md; parent5f35bd1a2c05ea0b4f7a6bd6b7b7c305e33dcc3e.
+  PUSH_PENDING; no Drive upload. Next: owner confirms and executes new four-only CLI;
+  never rerun old halted commands or a started new scope.
+
 - Outstanding-only amended feasibility continuation prepared, NOT DISPATCHED.
   Entry: python -B -m llmgnn_sara.pilot.outstanding_gapgpt. Explicit post-observation
   approval required for preserved1243 non-abstaining blind's comparison. Original

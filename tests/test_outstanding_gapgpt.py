@@ -144,7 +144,7 @@ class ContinuationTests(unittest.TestCase):
         step = self.contract["plan"][0]
         with patch.object(self.audit, "write", side_effect=AuditError()):
             with self.assertRaises(AuditError):
-                continuation.dispatch(self.contract, 0, step["payload"], step["dependency"], KEY,
+                continuation.dispatch(self.contract, 0, step["payload"], step.get("dependency"), KEY,
                                       self.ledger, self.audit, digest, transport=post)
         post.assert_not_called()
         original = self.audit.write

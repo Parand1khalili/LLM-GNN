@@ -130,8 +130,8 @@ It is DRAFT and NOT_AUTHORIZED_FOR_LIVE_EXECUTION; no provider calls or training
 
 ## Raw recovery and backups
 
-For the explicit outstanding-only GapGPT feasibility continuation, see
-[GAPGPT_OUTSTANDING_CONTINUATION.md](docs/GAPGPT_OUTSTANDING_CONTINUATION.md).
+For the four never-attempted GapGPT feasibility nodes, see
+[GAPGPT_FOUR_NODE_EXECUTION.md](docs/GAPGPT_FOUR_NODE_EXECUTION.md).
 Fresh local amendment/privacy/budget/dispatch approvals are mandatory. Preserved
 637/1243 blind requests are never repeated; old halted commands remain blocked.
 No automatic resume or training-label acceptance is enabled.

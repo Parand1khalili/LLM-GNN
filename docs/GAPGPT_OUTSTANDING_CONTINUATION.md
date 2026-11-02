@@ -1,5 +1,9 @@
 # Outstanding-only feasibility continuation
 
+This run halted after the real1243 comparison failed L1. Do not rerun it. The
+owner-approved four-never-attempted-node scope is in
+[GAPGPT_FOUR_NODE_EXECUTION.md](GAPGPT_FOUR_NODE_EXECUTION.md); prior failures remain.
+
 Version `gapgpt-outstanding-l1-wrapper-v1`. This is an explicitly owner-authorized
 post-observation protocol amendment, not a retry or terminal-state migration.
 No old ledger, intent, receipt, raw response or diagnostic assessment is modified.
