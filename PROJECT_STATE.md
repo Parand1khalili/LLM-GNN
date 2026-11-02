@@ -2,6 +2,27 @@
 
 Date: 2026-11-02 (America/Los_Angeles).
 
+- Exact identity correction/post130 continuation prepared, NOT DISPATCHED.
+  Old remaining predicate allowed alias+revision; newer revision-only conjunction
+  excluded requested alias. New owner-approved policy sara.gapgpt.identity.
+  exact_alias_revision.v1 admits ONLY gpt-6-luna/gpt-6-luna-2026-09-22 under fixed
+  GapGPT endpoint/request/wire context. Provider-reported, not upstream proof.
+  Old contracts and REJECTED records unchanged. Preserved130 HTTP200 replay passes
+  corrected identity, legacy parser and L1, non-abstaining; separate private
+  versioned diagnostic in gapgpt_130_identity_reassessment; no accepted label.
+  Entry python -B -m llmgnn_sara.pilot.post130_gapgpt:130 comparison only, then
+  682,2396,653 blind/conditional comparison; max7 calls. No130 blind or637/1243
+  requests. Uses existing engine/ledger/audit; new exact contract and fresh local
+  policy/privacy/scope/limits/USD0.10/dispatch approvals required. Estimate
+  USD0.0132608 under declared caps/rates, not billing guarantee. New calls0.
+  Focused53 PASS (23.643s); final full318,317 PASS/1 Windows symlink SKIP
+  (146.334s), network and actual human-session access guarded. Protected86 files
+  unchanged; sealed admission, old no-resume guards, syntax/diff checks PASS.
+  L2 NOT_ASSESSED; no label promotion, GT or real training. Docs GAPGPT_POST130_IDENTITY.md.
+  Parent076a18e1318409ce1869c26ecad72dd1938502df; PUSH_PENDING; no Drive upload.
+  Next: owner executes new scoped CLI after fresh terminal approvals; never retry
+  a started scope or reset earlier ledgers. Historical usage excluded from new totals.
+
 - Four never-attempted feasibility scope prepared, NOT DISPATCHED. Entry:
   python -B -m llmgnn_sara.pilot.four_gapgpt. Reuses the same continuation engine,
   ledger and private audit; no new verifier. Fixed130,682,2396,653 blind/conditional

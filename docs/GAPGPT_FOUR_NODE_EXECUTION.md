@@ -1,5 +1,9 @@
 # Four never-attempted feasibility nodes
 
+This scope halted on130 blind's undated model alias. Never rerun it. The owner's
+two-exact-identity amendment and outstanding-only scope are documented in
+[GAPGPT_POST130_IDENTITY.md](GAPGPT_POST130_IDENTITY.md).
+
 Owner-approved scope `gapgpt-four-unattempted-v1`, using the existing continuation
 engine, provider bridge, ReadinessLedger and PrivateAudit. No verifier redesign.
 Historical637 abstention,1243 blind diagnostic reclassification, and1243 genuine
