@@ -19,6 +19,8 @@ FOUR_VERSION = "gapgpt-four-unattempted-v1"
 FOUR_DIRECTORY = "gapgpt_four_unattempted_v1"
 ALIAS_VERSION = "gapgpt-post130-exact-identities-v1"
 ALIAS_DIRECTORY = "gapgpt_post130_v1"
+BLIND_VERSION = "gapgpt-three-blind-only-v1"
+BLIND_DIRECTORY = "gapgpt_three_blind_only_v1"
 NODES = (130, 682, 2396, 653)
 RULE = "sara.l1.decorative_quote_match.v1"
 ROOT = canary.ROOT
@@ -104,9 +106,10 @@ def preserved_1243(root, blind):
     return outcome
 
 
-def rejected_comparison(root, payload, lineage):
+def rejected_comparison(root, payload, lineage, *, node=1243):
     """Admit the previous genuine failure as history, never as a new intent."""
-    directory = root / ".local_artifacts" / DIRECTORY
+    directory = root / ".local_artifacts" / (ALIAS_DIRECTORY if node == 130 else DIRECTORY)
+    version = ALIAS_VERSION if node == 130 else VERSION
     records = prior._read_receipts(directory)
     provider_id, provider = _one(records, "kind", "canary_provider_response")
     context_id, context = _one(records, "kind", "outstanding_request")
@@ -114,7 +117,7 @@ def rejected_comparison(root, payload, lineage):
     with closing(sqlite3.connect((directory / "intent.sqlite").resolve().as_uri()+"?mode=ro", uri=True)) as db:
         entries = db.execute("SELECT id,request_sha,state,raw_sha,audit_sha FROM intents").fetchall()
         run = db.execute("SELECT digest,state,binding FROM remaining_run").fetchone()
-    if (len(entries) != 1 or entries[0][0] != VERSION+":1243:compare" or entries[0][2] != "REJECTED"
+    if (node not in (1243,130) or len(entries) != 1 or entries[0][0] != f"{version}:{node}:compare" or entries[0][2] != "REJECTED"
             or run[1] != "HALTED_REVIEW_REQUIRED_NO_RETRY" or canary.sha(run[2]) != run[0]
             or canary.strict_json(run[2]) != approval["binding"]
             or context["contract_binding"] != run[0] or context["identity"] != entries[0][0]
@@ -130,7 +133,8 @@ def rejected_comparison(root, payload, lineage):
             or provider["context_sha256"] != canary.sha(canonical_bytes(context))):
         raise ValueError("Prior comparison response integrity failure")
     envelope = canary.strict_json(raw)
-    if envelope["model"] != prior.REVISION or len(envelope["choices"]) != 1 or envelope["choices"][0]["finish_reason"] != "stop":
+    valid_identity = envelope["model"] in identity_policy.MODELS if node == 130 else envelope["model"] == prior.REVISION
+    if not valid_identity or len(envelope["choices"]) != 1 or envelope["choices"][0]["finish_reason"] != "stop":
         raise ValueError("Unexpected prior comparison envelope")
     content = envelope["choices"][0]["message"]["content"]
     receipt = records[entries[0][4]]
@@ -201,7 +205,8 @@ def reassess_130(root, blind):
             "wire_sha256": context["wire_sha256"], "batch_digest": run[0]}}
 
 
-def prepare(root=ROOT, *, four_only=False, post130=False):
+def prepare(root=ROOT, *, four_only=False, post130=False, blind_only=False):
+    post130 = post130 or blind_only
     four_only = four_only or post130
     requests, first = prior.sealed_inputs(root)
     preserved = preserved_1243(root, requests[1243][0])
@@ -218,7 +223,7 @@ def prepare(root=ROOT, *, four_only=False, post130=False):
                 or diagnostic["policy_sha256"] != canary.sha((root / "src/llmgnn_sara/pilot/identity.py").read_bytes())):
             raise ValueError("Preserved130 diagnostic mismatch")
         preserved130["lineage"]["diagnostic_receipt"] = diagnostic_id
-        if not preserved130["abstain"]:
+        if not blind_only and not preserved130["abstain"]:
             plan.append({"node":130,"phase":"compare","conditional":False,
                 "payload":materialize_comparison(requests[130][1],preserved130["class_index"]),
                 "dependency":preserved130["lineage"]})
@@ -227,11 +232,12 @@ def prepare(root=ROOT, *, four_only=False, post130=False):
             "payload": materialize_comparison(requests[1243][1], preserved["class_index"]),
             "dependency": preserved["lineage"]})
     for node in (NODES[1:] if post130 else NODES):
-        plan.extend([{"node": node, "phase": "blind", "conditional": False, "payload": requests[node][0]},
-                     {"node": node, "phase": "compare", "conditional": True, "payload": requests[node][1]}])
+        plan.append({"node": node, "phase": "blind", "conditional": False, "payload": requests[node][0]})
+        if not blind_only:
+            plan.append({"node": node, "phase": "compare", "conditional": True, "payload": requests[node][1]})
     possible = [materialize_comparison(s["payload"], label) for s in plan if s["conditional"] for label in range(7)]
     possible += [s["payload"] for s in plan if not s["conditional"]]
-    version = ALIAS_VERSION if post130 else FOUR_VERSION if four_only else VERSION
+    version = BLIND_VERSION if blind_only else ALIAS_VERSION if post130 else FOUR_VERSION if four_only else VERSION
     prior.verify_no_prior_dispatch(root, possible, reserved_prefix=version)
     for payload in possible:
         prior.wire_for(payload)
@@ -241,6 +247,8 @@ def prepare(root=ROOT, *, four_only=False, post130=False):
         runtime.append("pilot/four_gapgpt.py")
     if post130:
         runtime.extend(("pilot/identity.py", "pilot/post130_gapgpt.py"))
+    if blind_only:
+        runtime.append("pilot/blind_only_gapgpt.py")
     contract = {"version": version, "provider": "GapGPT", "endpoint": prior.ENDPOINT, "model": prior.MODEL,
         "allowed_returned_revision": prior.REVISION, "identity_provenance": prior.CONTRACT["identity_provenance"],
         "temperature": 1, "n": 1, "max_tokens": 512, "reasoning_effort": "OMITTED", "l1_rule": RULE,
@@ -258,6 +266,10 @@ def prepare(root=ROOT, *, four_only=False, post130=False):
         contract.update(preserved_130=preserved130, identity_policy=identity_policy.VERSION,
                         allowed_returned_models=list(identity_policy.MODELS),
                         amendment="OWNER_APPROVED_EXACT_ALIAS_RESTORATION_POST130_COMPARISON_NOT_ORIGINAL_ACCEPTANCE")
+    if blind_only:
+        contract["preserved_130_comparison"] = rejected_comparison(root,
+            materialize_comparison(requests[130][1],preserved130["class_index"]),preserved130["lineage"],node=130)
+        contract["amendment"] = "POST_OBSERVATION_BLIND_ONLY_NOT_COMPLETION_OF_ORIGINAL_PAIRED_PROTOCOL"
     return contract
 
 
@@ -271,8 +283,9 @@ def start(contract, approval, ledger, audit):
     if approval != approvals_for(contract) or any(approval.get(k) is not True for k in
             ("amendment", "privacy", "outstanding_list", "declared_limits")):
         raise ValueError("Fresh amended-contract approvals required")
-    post130 = contract["version"] == ALIAS_VERSION
-    four_only = contract["version"] in (FOUR_VERSION, ALIAS_VERSION)
+    blind_only = contract["version"] == BLIND_VERSION
+    post130 = contract["version"] in (ALIAS_VERSION,BLIND_VERSION)
+    four_only = contract["version"] in (FOUR_VERSION, ALIAS_VERSION,BLIND_VERSION)
     if four_only and (contract.get("preserved_1243_comparison", {}).get("state") != "REJECTED"
                       or contract["preserved_1243_comparison"].get("historical") is not True):
         raise ValueError("Prior comparison failure must remain historical")
@@ -282,7 +295,12 @@ def start(contract, approval, ledger, audit):
             raise ValueError("Unknown identity policy")
         expected = [] if contract["preserved_130"]["abstain"] else [(130,"compare",False)]
     expected += [(node, phase, phase == "compare") for node in (NODES[1:] if post130 else NODES) for phase in ("blind", "compare")]
-    if (contract["version"] not in (VERSION, FOUR_VERSION, ALIAS_VERSION) or contract["l1_rule"] != RULE
+    if blind_only:
+        if (contract.get("preserved_130_comparison",{}).get("state") != "REJECTED"
+                or contract["preserved_130_comparison"].get("historical") is not True):
+            raise ValueError("Prior130 comparison failure must remain immutable history")
+        expected = [(node,"blind",False) for node in NODES[1:]]
+    if (contract["version"] not in (VERSION, FOUR_VERSION, ALIAS_VERSION,BLIND_VERSION) or contract["l1_rule"] != RULE
             or [(s["node"], s["phase"], s["conditional"]) for s in contract["plan"]] != expected
             or contract["maximum_calls"] != len(expected) or contract["local_reservation_usd"] != "0.10"
             or (contract["provider"], contract["endpoint"], contract["model"], contract["allowed_returned_revision"])
@@ -367,7 +385,7 @@ def dispatch(contract, ordinal, payload, dependency, key, ledger, audit, digest,
         canary.sha(canonical_bytes(context)), transport=transport, target="account-panel-temperature1",
         model_check=lambda model: identity_policy.allowed(contract["provider"],contract["endpoint"],contract["model"],model,
             {k:contract[k] for k in ("temperature","n","max_tokens","reasoning_effort")})
-            if contract["version"] == ALIAS_VERSION else model == prior.REVISION and prior.identity_allowed("GapGPT", prior.ENDPOINT, prior.MODEL, model))
+            if contract["version"] in (ALIAS_VERSION,BLIND_VERSION) else model == prior.REVISION and prior.identity_allowed("GapGPT", prior.ENDPOINT, prior.MODEL, model))
     outcome = prior.phase_outcome(result, audit, payload)
     if outcome["state"] == "COMPLETED":
         _advance(ledger, digest, ordinal)
@@ -380,13 +398,18 @@ def run(contract, key, ledger, audit, digest, *, transport=None):
     rows = [contract["preserved_637"], {"node": 1243, "blind": contract["preserved_1243"],
             "compare": contract.get("preserved_1243_comparison", {"state": "NOT_ATTEMPTED" if not contract["preserved_1243"]["abstain"] else "NOT_PERMITTED_BLIND_ABSTENTION"})}]
     rows += [{"node": node, "blind": {"state": "NOT_ATTEMPTED"}, "compare": {"state": "NOT_ATTEMPTED"}} for node in NODES]
-    if contract["version"] == ALIAS_VERSION:
+    if contract["version"] in (ALIAS_VERSION,BLIND_VERSION):
         rows[2]["blind"] = contract["preserved_130"]
         if contract["preserved_130"]["abstain"]:
             rows[2]["compare"] = {"state":"NOT_PERMITTED_BLIND_ABSTENTION"}
+    if contract["version"] == BLIND_VERSION:
+        rows[2]["compare"] = contract["preserved_130_comparison"]
+        for row in rows[3:]:
+            row["compare"] = {"state":"NOT_PERMITTED_BLIND_ONLY_AMENDMENT"}
     summary = {"version": contract["version"], "batch_digest": digest, "rows": rows,
                "historical_1243_blind_included_in_new_totals": False,
-               "historical_130_blind_included_in_new_totals": False if contract["version"] == ALIAS_VERSION else None,
+               "historical_130_blind_included_in_new_totals": False if contract["version"] in (ALIAS_VERSION,BLIND_VERSION) else None,
+               "paired_protocol_complete": False,
                "original_cohort_size": 6, "maximum_new_dispatches": contract["maximum_calls"],
                "accepted_label": None, "l2_status": "NOT_ASSESSED"}
     try:
@@ -421,12 +444,12 @@ def run(contract, key, ledger, audit, digest, *, transport=None):
     return prior.finish_summary(summary, ledger, audit, digest, state)
 
 
-def main(*, four_only=False, post130=False):
+def main(*, four_only=False, post130=False, blind_only=False):
     try:
         if len(sys.argv) != 1 or not sys.stdin.isatty():
             raise ValueError("Fresh local terminal approvals required")
-        contract = prepare(four_only=four_only,post130=post130)
-        directory = ALIAS_DIRECTORY if post130 else FOUR_DIRECTORY if four_only else DIRECTORY
+        contract = prepare(four_only=four_only,post130=post130,blind_only=blind_only)
+        directory = BLIND_DIRECTORY if blind_only else ALIAS_DIRECTORY if post130 else FOUR_DIRECTORY if four_only else DIRECTORY
         version = contract["version"]
         audit = PrivateAudit(ROOT / ".local_artifacts" / directory)
         ledger = ReadinessLedger(audit.root / "intent.sqlite")
@@ -441,6 +464,8 @@ def main(*, four_only=False, post130=False):
             print("FOUR NEVER-ATTEMPTED NODES ONLY. No1243 comparison retry; preserve that failure.")
         if post130:
             print("POST130 IDENTITY AMENDMENT: no130 blind retry; original REJECTED preserved.")
+        if blind_only:
+            print("BLIND ONLY:682,2396,653. NO COMPARISONS. Post-observation amendment, not paired completion.")
         print("Outstanding list (comparison entries after new blinds are conditional):")
         for s in contract["plan"]:
             print(f"node{s['node']} {s['phase']}" + (" IF ELIGIBLE" if s["conditional"] else ""))
@@ -449,7 +474,7 @@ def main(*, four_only=False, post130=False):
         print("Byte preflight is not vendor tokenization; usage/prices are not verified billing.")
         print(f"Provisional estimate USD{cap*.0018944:.7f}; fresh USD0.10 reservation, NOT provider billing guarantee.")
         approval = {"contract_sha256": canary.sha(canonical_bytes(contract))}
-        for field, phrase in (("amendment", "APPROVE EXACT IDENTITY POLICY V1" if post130 else "APPROVE POST-OBSERVATION L1 CONTINUATION"),
+        for field, phrase in (("amendment", "APPROVE BLIND ONLY AMENDMENT V1" if blind_only else "APPROVE EXACT IDENTITY POLICY V1" if post130 else "APPROVE POST-OBSERVATION L1 CONTINUATION"),
                               ("privacy", "APPROVE CONTINUATION PRIVACY"),
                               ("outstanding_list", "APPROVE EXACT OUTSTANDING LIST"),
                               ("declared_limits", "APPROVE OUTSTANDING DECLARED LIMITS")):
@@ -461,7 +486,7 @@ def main(*, four_only=False, post130=False):
             raise ValueError("Budget declined")
         key = canary.credential()
         approval["dispatch"] = input("Authorize outstanding requests; type " + version + ": ")
-        if prepare(four_only=four_only,post130=post130) != contract:
+        if prepare(four_only=four_only,post130=post130,blind_only=blind_only) != contract:
             raise ValueError("Inputs/state changed during approvals")
         digest = start(contract, approval, ledger, audit)
         summary, _ = run(contract, key, ledger, audit, digest)

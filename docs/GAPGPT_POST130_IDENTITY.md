@@ -1,5 +1,9 @@
 # Exact identity correction and preserved130 continuation
 
+This scope halted after130 comparison failed exact-quote L1. Never rerun it.
+The separately approved blind-only amendment is in
+[GAPGPT_BLIND_ONLY_COMPLETION.md](GAPGPT_BLIND_ONLY_COMPLETION.md).
+
 Policy `sara.gapgpt.identity.exact_alias_revision.v1` accepts exactly two returned
 strings: `gpt-6-luna` and `gpt-6-luna-2026-09-22`. Scope is GapGPT at
 `https://api.gapgpt.app/v1/chat/completions`, request model `gpt-6-luna`, wire

@@ -130,8 +130,8 @@ It is DRAFT and NOT_AUTHORIZED_FOR_LIVE_EXECUTION; no provider calls or training
 
 ## Raw recovery and backups
 
-For the exact-identity correction and outstanding work after preserved130, see
-[GAPGPT_POST130_IDENTITY.md](docs/GAPGPT_POST130_IDENTITY.md).
+For the post-observation blind-only completion on682,2396,653, see
+[GAPGPT_BLIND_ONLY_COMPLETION.md](docs/GAPGPT_BLIND_ONLY_COMPLETION.md).
 Fresh local amendment/privacy/budget/dispatch approvals are mandatory. Preserved
 637/1243 blind requests are never repeated; old halted commands remain blocked.
 No automatic resume or training-label acceptance is enabled.
