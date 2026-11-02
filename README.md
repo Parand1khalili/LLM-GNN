@@ -130,10 +130,11 @@ It is DRAFT and NOT_AUTHORIZED_FOR_LIVE_EXECUTION; no provider calls or training
 
 ## Raw recovery and backups
 
-For the owner-authorized remaining five-node GapGPT feasibility execution, see
-[GAPGPT_REMAINING_PILOT.md](docs/GAPGPT_REMAINING_PILOT.md). The local interactive
-command requires fresh aggregate privacy/budget/dispatch approvals. It never
-reruns node637, resumes a started batch, or accepts training labels.
+For the explicit outstanding-only GapGPT feasibility continuation, see
+[GAPGPT_OUTSTANDING_CONTINUATION.md](docs/GAPGPT_OUTSTANDING_CONTINUATION.md).
+Fresh local amendment/privacy/budget/dispatch approvals are mandatory. Preserved
+637/1243 blind requests are never repeated; old halted commands remain blocked.
+No automatic resume or training-label acceptance is enabled.
 
 Use scripts/colab_recover_responses.py in the owner's fresh CPU Colab notebook;
 see docs/RAW_RESPONSE_RECOVERY.md. For package use in Colab, upload the source tree,

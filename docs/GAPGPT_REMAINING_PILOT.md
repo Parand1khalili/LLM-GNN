@@ -1,5 +1,9 @@
 # Authorized remaining feasibility batch
 
+This original batch is now HALTED after node1243 blind. Never rerun/reset it.
+The explicitly authorized outstanding-only amendment is documented in
+[GAPGPT_OUTSTANDING_CONTINUATION.md](GAPGPT_OUTSTANDING_CONTINUATION.md).
+
 Owner-authorized continuation, not a new cohort or historical replay. Execute on
 main only after offline tests and fresh local approvals. Node637 is permanently
 excluded from dispatch: its original terminal REJECTED ledger remains intact;

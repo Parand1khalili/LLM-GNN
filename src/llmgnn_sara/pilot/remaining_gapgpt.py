@@ -93,7 +93,7 @@ def prior_637(root):
         "compare": {"state": "NOT_PERMITTED_BLIND_ABSTENTION"}}
 
 
-def verify_no_prior_dispatch(root, payloads):
+def verify_no_prior_dispatch(root, payloads, *, reserved_prefix=VERSION):
     expected = {canary.sha(encoded(p)) for p in payloads}
     # Only operational pilot stores; never inspect human-review or development intake.
     directories = [p for p in (root / ".local_artifacts").iterdir()
@@ -110,11 +110,11 @@ def verify_no_prior_dispatch(root, payloads):
                 if not {"id", "request_sha", "state"} <= columns:
                     raise ValueError("Unrecognized operational ledger; review required")
                 for identity, digest, state in db.execute("SELECT id,request_sha,state FROM intents"):
-                    if digest in expected or identity.startswith(VERSION):
+                    if digest in expected or identity.startswith(reserved_prefix):
                         raise ValueError("Existing intent; no continuation/retry allowed")
 
 
-def prepare(root=ROOT):
+def sealed_inputs(root=ROOT):
     canary.prepare(target="account-panel-temperature1")  # All sealed members + authentic inputs.
     manifest = json.loads((root / "manifests/recovered_sources.json").read_bytes())
     for entry in manifest["files"]:
@@ -142,6 +142,11 @@ def prepare(root=ROOT):
             raise ValueError("Unexpected sealed wire")
         requests[node] = (blind, comparison)
     previous = prior_637(root)
+    return requests, previous
+
+
+def prepare(root=ROOT):
+    requests, previous = sealed_inputs(root)
     verify_no_prior_dispatch(root, [p[0] for p in requests.values()])
     return requests, previous
 
@@ -245,6 +250,10 @@ def dispatch(node, phase, payload, key, ledger, audit, digest, *, dependency=Non
     result = canary._dispatch_recorded(payload, wire, key, audit, ledger, identity,
         canary.sha(canonical_bytes(context)), transport=transport, target="account-panel-temperature1",
         model_check=lambda returned: identity_allowed("GapGPT", ENDPOINT, MODEL, returned))
+    return phase_outcome(result, audit, payload)
+
+
+def phase_outcome(result, audit, payload):
     outcome = {"state": result["status"], "reason": result.get("reason"),
         "l1_status": result.get("l1_status"), "parse_status": "NOT_VERIFIED",
         "accepted_label": None, "l2_status": "NOT_ASSESSED", "result_receipt": result.get("result_receipt"),
@@ -307,6 +316,11 @@ def run(requests, previous, key, ledger, audit, digest, *, transport=None):
         state = "FINISHED"
     except BaseException:
         state = "HALTED_REVIEW_REQUIRED_NO_RETRY"
+    return finish_summary(summary, ledger, audit, digest, state)
+
+
+def finish_summary(summary, ledger, audit, digest, state):
+    rows = summary["rows"]
     snapshot = ledger.snapshot()
     for entry in snapshot:
         node, phase = int(entry[0].split(":")[-2]), entry[0].split(":")[-1]
@@ -314,7 +328,8 @@ def run(requests, previous, key, ledger, audit, digest, *, transport=None):
         if row[phase]["state"] == "NOT_ATTEMPTED":
             row[phase] = {"state": entry[3], "reason": "LOCAL_FAILURE_REVIEW_REQUIRED_NO_RETRY",
                           "parse_status": "UNAVAILABLE", "l1_status": "NOT_ASSESSED"}
-    outcomes = [r[p] for r in rows[1:] for p in ("blind", "compare")]
+    outcomes = [r[p] for r in rows if r["node"] != 637 for p in ("blind", "compare")
+                if not r[p].get("historical", False)]
     usages = [o["usage"] for o in outcomes if type(o.get("usage")) is dict]
     totals = {k: sum(u[k] for u in usages if type(u.get(k)) is int and u[k] >= 0) for k in ("prompt_tokens", "completion_tokens", "total_tokens")}
     totals["reasoning_tokens"] = sum(u.get("completion_tokens_details", {}).get("reasoning_tokens", 0) for u in usages

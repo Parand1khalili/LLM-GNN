@@ -1,6 +1,26 @@
 # Project state
 
-Date: 2026-11-01 (America/Los_Angeles).
+Date: 2026-11-02 (America/Los_Angeles).
+
+- Outstanding-only amended feasibility continuation prepared, NOT DISPATCHED.
+  Entry: python -B -m llmgnn_sara.pilot.outstanding_gapgpt. Explicit post-observation
+  approval required for preserved1243 non-abstaining blind's comparison. Original
+  REJECTED ledger and separate L1 diagnostic remain immutable; never redispatch
+  637/1243 blind. Then130,682,2396,653 blind/conditional comparison; maximum9 calls,
+  not10. Exact returned revision only; temperature1/n1/max_tokens512, no explicit
+  reasoning_effort, L1 decorative matcher v1. Source/seals/context/raw/diagnostic
+  hashes and all potential outstanding request identities verified. No old blind
+  imported as a fabricated COMPLETED intent. SQLite contract/cursor, immutable
+  lineage and private audit bind new requests; no retry/automatic resume.
+  Fresh local amendment/privacy/exact-list/limits/USD0.10/dispatch approvals and
+  hidden key input required. Estimate USD0.0170496 under declared limits/rates,
+  not verified billing or a financial guarantee. New real calls0; no new usage.
+  Focused85 PASS (20.429s); full302,301 PASS/1 Windows symlink SKIP (146.657s),
+  network and actual human-session access guarded. Protected68 artifacts unchanged;
+  old batch restart guard still PASS. L2 NOT_ASSESSED; no labels promoted.
+  Docs GAPGPT_OUTSTANDING_CONTINUATION.md; parent27e0bff8616ade0f8742c5f0c41df14d62a6c4a5.
+  PUSH_PENDING; no Drive upload. Next: owner runs new scoped command and confirms
+  locally; do not rerun a started continuation or old halted commands.
 
 - Post-observation L1 amendment: sara.l1.decorative_quote_match.v1 removes one
   balanced ASCII/curly double-quote wrapper for exact matching only; raw responses
