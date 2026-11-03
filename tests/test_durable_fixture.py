@@ -1,6 +1,7 @@
 """Crash/restart safety of the private offline fixture journal; zero provider calls."""
 import os
 import sqlite3
+from contextlib import closing
 import tempfile
 import unittest
 from pathlib import Path
@@ -158,7 +159,7 @@ class DurableFixtureTests(unittest.TestCase):
     def test_corrupt_receipt_prevents_reuse(self):
         journal = self.journal()
         journal.blind(Request())
-        with sqlite3.connect(journal.path) as db:
+        with closing(sqlite3.connect(journal.path)) as db:
             receipt = db.execute("SELECT receipt FROM intents").fetchone()[0]
         (self.audit.root / (receipt + ".json")).write_text("tamper", encoding="utf-8")
         fresh = Fixture()
