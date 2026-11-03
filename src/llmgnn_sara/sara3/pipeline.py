@@ -17,7 +17,8 @@ from .inputs import canonical_bytes, verifier_input
 import hashlib
 from .evidence import EvidenceError, validate_result
 from .audit import AuditError, PrivateAudit
-from .rich_evidence import RICH_VERSION, rich_verifier_input, target_source, validate_rich_result
+from .rich_evidence import (RICH_PROMPT_V2, RICH_VERSION, rich_verifier_input,
+                            rich_verifier_input_v2, target_source, validate_rich_result)
 from .experiment import MANIFEST_SHA256, VerifiedSelection
 
 
@@ -80,7 +81,8 @@ def _decision(pair: Pair, label: int | None, reason: str, reviewed: bool) -> dic
 def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifier | None = None,
                 config: PolicyConfig | None = None, ledger: OfflineLedger | None = None,
                 audit: PrivateAudit | None = None, response_version: str | None = None,
-                selection: VerifiedSelection | None = None) -> dict:
+                selection: VerifiedSelection | None = None,
+                prompt_version: str | None = None) -> dict:
     """Run GT-free frozen pairs through an explicitly offline verifier.
 
     With no text/verifier, reviewed cases abstain; no response is fabricated.
@@ -90,6 +92,11 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
     rows = validated_pairs(pairs)
     if response_version is not None and (type(response_version) is not str or response_version != RICH_VERSION):
         raise EvidenceError("L1_SCHEMA_VERSION_INVALID")
+    if prompt_version is not None:
+        if prompt_version != RICH_PROMPT_V2 or response_version != RICH_VERSION:
+            raise EvidenceError("L1_SCHEMA_VERSION_INVALID")
+        if selection is not None:
+            raise ValueError("Prospective prompt is incompatible with pinned legacy selection")
     integer(budget, "review budget")
     if router not in {"r0", "semantic"}:
         raise ValueError("Unknown router")
@@ -114,7 +121,8 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
 
     def invoke(node: int, phase: str, request):
         nonlocal requests, estimated_chars, audit_store
-        input_builder = verifier_input if response_version is None else rich_verifier_input
+        input_builder = (rich_verifier_input_v2 if prompt_version == RICH_PROMPT_V2
+                         else verifier_input if response_version is None else rich_verifier_input)
         payload = input_builder(request.node_id, request.text, request.neighborhood,
                                  candidates=request.historical_candidates if phase == "compare" else None,
                                  blind_class=request.blind_class_index if phase == "compare" else None)
@@ -205,7 +213,8 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
               for index, name in enumerate(CLASSES)}
     available = sum(max(semantic_support(pair.text)) > 0 for pair in rows)
     return {"status": "OFFLINE_TESTED", "evidence_level": "OFFLINE_RECONSTRUCTION_NOT_LIVE_MEASURED",
-            "policy_provenance": config.provenance, "historical_policy_002_equivalence": False,
+            **({"prompt_version": prompt_version} if prompt_version is not None else {}),
+             "policy_provenance": config.provenance, "historical_policy_002_equivalence": False,
             "policy": asdict(config), "router": router if selection is None else "manifest:" + selection.arm,
             **({"experiment_selection": {"manifest_sha256": MANIFEST_SHA256, "arm": selection.arm}}
                if selection is not None else {}), "router_parameters": {
