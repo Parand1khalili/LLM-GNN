@@ -104,7 +104,7 @@ used the same underlying LLM.
 SARA defaults are new unvalidated decisions, not restored Policy002 thresholds
 or historical routing parity. Class semantics are public; no GT diagnostics
 enter prompts, routing, filtering or pseudo-training labels. Third-class proposals
-cannot become training labels. The offline ledger is not durable/live-ready.
+cannot become training labels. The default offline ledger is in-memory; only the opt-in synthetic fixture journal is durable. Neither is live-ready.
 
 Exact recovered Narrative topology and the reviewed GCN class are reused.
 Frozen PS deletion orders/class guards are checked for both arms/cohorts.
@@ -127,6 +127,26 @@ selections to the unchanged legacy verifier contract, using only offline fixture
 See [offline routing experiment](docs/OFFLINE_ROUTING_EXPERIMENT.md) for the pinned
 manifest, exact commands, conditional request identities and call-budget bounds.
 It is DRAFT and NOT_AUTHORIZED_FOR_LIVE_EXECUTION; no provider calls or training.
+
+## Crash-durable OFFLINE fixture replay (no API)
+
+The pinned three-router synthetic experiment has an optional private SQLite journal.
+It persists each complete request identity and an UNCERTAIN intent **before**
+dispatch. A completed L1-valid fixture can be replayed after restart without
+reinvoking the fixture. REJECTED and UNCERTAIN requests never auto-retry.
+A failure between dispatch and journal settlement deliberately requires manual
+reconciliation; it is not exactly-once delivery or a live provider runner.
+
+~~~powershell
+.venv\Scripts\python.exe -B -m llmgnn_sara.evaluation.routing_experiment --frozen-root .local_artifacts/frozen --authentic-root .local_artifacts/authentic --manifest manifests/routing_experiment_draft_v1.json --journal-root .local_artifacts/routing_fixture_journal --output .local_artifacts/routing_fixture_run_1.json
+# To verify replay, rerun with the SAME journal-root and a NEW output filename.
+.venv\Scripts\python.exe -B -m llmgnn_sara.evaluation.routing_experiment --frozen-root .local_artifacts/frozen --authentic-root .local_artifacts/authentic --manifest manifests/routing_experiment_draft_v1.json --journal-root .local_artifacts/routing_fixture_journal --output .local_artifacts/routing_fixture_run_2.json
+~~~
+
+Both runs use synthetic fixture responses, **zero paid API calls** and **zero
+training**. On an unchanged contract, the second run must have zero underlying
+fixture dispatches, the same per-arm decisions, and independently revalidated
+private receipt bindings. This does not validate semantic L2 or freeze a router.
 
 ## Raw recovery and backups
 

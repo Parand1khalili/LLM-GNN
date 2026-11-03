@@ -1,6 +1,7 @@
 """Temporary synthetic three-arm integration, never a real annotation experiment."""
 import argparse
 from collections import Counter
+from contextlib import nullcontext
 import json
 import re
 from pathlib import Path
@@ -10,6 +11,7 @@ from ..io.project import load_project_inputs
 from ..sara3.audit import PrivateAudit
 from ..sara3.experiment import FIXTURE_VERSION, MANIFEST_SHA256, build_manifest, load_selection
 from ..sara3.experiment_cache import CachedOfflineVerifier
+from ..sara3.durable_fixture import DurableOfflineFixtureVerifier
 from ..sara3.pipeline import run_offline
 
 
@@ -42,16 +44,20 @@ class SyntheticExperimentVerifier:
         return self._response(request, True)
 
 
-def exercise_experiment(inputs, manifest_path):
+def exercise_experiment(inputs, manifest_path, *, journal_root=None):
     manifest = build_manifest(inputs)
     candidates = {p.node_id: {p.b1.class_index, p.narrative_v0.class_index} for p in inputs.pairs}
     selections = {arm: load_selection(manifest_path, MANIFEST_SHA256, arm, inputs)
                   for arm in manifest["primary_arms"]}
     summaries, common = {}, {}
-    with tempfile.TemporaryDirectory() as temporary:
+    with (tempfile.TemporaryDirectory() if journal_root is None else nullcontext(journal_root)) as temporary:
         root = Path(temporary)
-        cache = CachedOfflineVerifier(SyntheticExperimentVerifier(inputs.pairs),
-            manifest["execution_context"], PrivateAudit(root / "cache"))
+        fixture = SyntheticExperimentVerifier(inputs.pairs)
+        cache_audit = PrivateAudit(root / "cache")
+        cache = (CachedOfflineVerifier(fixture, manifest["execution_context"], cache_audit)
+                 if journal_root is None else
+                 DurableOfflineFixtureVerifier(fixture, manifest["execution_context"],
+                     cache_audit, maximum_calls=manifest["accounting"]["primary_union_maximum_generation_calls"]))
         for arm, selection in selections.items():
             run = run_offline(inputs.pairs, 37, verifier=cache,
                               audit=PrivateAudit(root / arm), selection=selection)
@@ -82,7 +88,11 @@ def exercise_experiment(inputs, manifest_path):
     return {"schema_version": "sara.routing.experiment.offline_validation.v1",
         "manifest_sha256": MANIFEST_SHA256, "evidence_level": "SYNTHETIC_FIXTURES_NOT_SCIENTIFIC_FINDINGS",
         "arms": summaries, "synthetic_execution": execution, "accounting_bounds": manifest["accounting"],
-        "common_node_request_invariance": "PASS", "raw_audit": "PRIVATE_TEMPORARY_REMOVED_AFTER_RUN",
+        "common_node_request_invariance": "PASS",
+        "raw_audit": ("PRIVATE_TEMPORARY_REMOVED_AFTER_RUN" if journal_root is None
+                      else "PRIVATE_PERSISTENT_CONTENT_ADDRESSED_NOT_PROVIDER_RAW"),
+        **({"journal_persistence": "SQLITE_FAIL_CLOSED_OFFLINE_FIXTURE_ONLY"}
+           if journal_root is not None else {}),
         "live_execution": "NOT_AUTHORIZED_FOR_LIVE_EXECUTION", "ground_truth_accessed": False,
         "human_review_accessed": False, "provider_calls": 0, "training_runs": 0}
 
@@ -93,8 +103,11 @@ def main():
     parser.add_argument("--authentic-root", required=True)
     parser.add_argument("--manifest", required=True)
     parser.add_argument("--output", required=True)
+    parser.add_argument("--journal-root", type=Path,
+                        help="Private crash-durable OFFLINE fixture cache; never use live credentials")
     args = parser.parse_args()
-    report = exercise_experiment(load_project_inputs(args.frozen_root, args.authentic_root), args.manifest)
+    report = exercise_experiment(load_project_inputs(args.frozen_root, args.authentic_root), args.manifest,
+                                 journal_root=args.journal_root)
     with Path(args.output).open("x", encoding="utf-8") as stream:
         json.dump(report, stream, indent=2, allow_nan=False)
         stream.write("\n")
