@@ -159,6 +159,16 @@ the eligible IDs, not semantic approvals. This is a **one-way offline checkpoint
 not an L2 evaluator, resumed human-reviewed Comparison runner, or a live adapter.
 The default (ungated) historical fixture behavior and manifests are unchanged.
 
+## Opt-in automatic concordance arbitration (experimental)
+
+`run_offline(..., response_version=RICH_VERSION, prompt_version=RICH_PROMPT_V2,
+automated_arbitration_version=VERSION)` executes Blind, L1 and Comparison,
+then applies a versioned deterministic consistency screen. It can provisionally
+retain B1/Narrative candidates but **does not perform semantic L2 validation**.
+No independent judge, human prerequisite, API or training is added.
+The existing `precomparison_l2_gate` remains an optional separate path.
+See [automated arbitration limitations and tests](docs/AUTOMATED_ARBITRATION_V1.md).
+
 ## Raw recovery and backups
 
 For the post-observation blind-only completion on682,2396,653, see

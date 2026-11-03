@@ -11,6 +11,7 @@ from typing import Protocol
 
 from ..sara2.policy import Annotation, CLASSES, Pair, PolicyConfig, integer, route_r0, validated_pairs
 from .atlas import ATLAS, route_semantic, semantic_support
+from .automated_policy import VERSION as AUTOMATED_VERSION, screen_validated
 from .ledger import OfflineLedger
 from ..io.evidence import NeighborhoodEvidence
 from .inputs import canonical_bytes, verifier_input
@@ -83,7 +84,8 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
                 audit: PrivateAudit | None = None, response_version: str | None = None,
                 selection: VerifiedSelection | None = None,
                 prompt_version: str | None = None,
-                precomparison_l2_gate: bool = False) -> dict:
+                precomparison_l2_gate: bool = False,
+                automated_arbitration_version: str | None = None) -> dict:
     """Run GT-free frozen pairs through an explicitly offline verifier.
 
     With no text/verifier, reviewed cases abstain; no response is fabricated.
@@ -103,6 +105,11 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
     if precomparison_l2_gate and (prompt_version != RICH_PROMPT_V2
                                   or response_version != RICH_VERSION):
         raise ValueError("Pre-comparison L2 gate requires prospective rich prompt v2")
+    if automated_arbitration_version is not None:
+        if (automated_arbitration_version != AUTOMATED_VERSION or
+                response_version != RICH_VERSION or prompt_version != RICH_PROMPT_V2 or
+                precomparison_l2_gate or selection is not None):
+            raise ValueError("Automated arbitration needs prospective rich-v2, no gate or pinned selection")
     integer(budget, "review budget")
     if router not in {"r0", "semantic"}:
         raise ValueError("Unknown router")
@@ -124,6 +131,7 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
         selected = (route_r0 if router == "r0" else route_semantic)(rows, budget)
     chosen = set(selected)
     decisions, requests, estimated_chars, exact_inputs = [], 0, 0, []
+    phase_predictions = {}
 
     def invoke(node: int, phase: str, request):
         nonlocal requests, estimated_chars, audit_store
@@ -169,6 +177,7 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
             ledger.settle(request_id, "REJECTED")
             raise
         ledger.settle(request_id, "COMPLETED")
+        phase_predictions[(node, phase)] = validated["class_index"]
         return validated
 
     def reviewed_decision(pair, reason, proposal=None):
@@ -177,6 +186,37 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
                            "decision": decision, "third_class_proposal": proposal,
                            "blind_response_sha256": responses.get((pair.node_id, "blind")),
                            "comparison_response_sha256": responses.get((pair.node_id, "compare"))})
+        return decision
+
+    def automated_decision(pair, first, second):
+        # Independently re-read immutable receipts and recompute L1 before accepting.
+        receipt_ids = [responses[(pair.node_id, phase)] for phase in ("blind", "compare")]
+        records = [audit_store.read(receipt_id) for receipt_id in receipt_ids]
+        reread = []
+        for record, expected in zip(records, (first, second)):
+            if record.get("kind") != "response" or record.get("l1_status") != "PASS":
+                raise ValueError("Audited phase has no L1 PASS")
+            validated = validate_rich_result(record["raw_response"], (target_source(pair.text),))
+            if canonical_bytes(validated) != canonical_bytes(expected):
+                raise ValueError("Audited phase and in-memory validation differ")
+            reread.append(validated)
+        screen = screen_validated(pair, *reread)
+        accepted = screen["class_index"] if screen["action"] == "ACCEPT" else None
+        decision = _decision(pair, accepted, screen["reason"], True)
+        decision.update({"decision": screen["action"], "label_source": screen["label_source"],
+                         "automated_screen_status": screen["action"],
+                         "automated_screen_reason": screen["reason"],
+                         "automated_policy_version": AUTOMATED_VERSION,
+                         "semantic_validation": "NOT_PERFORMED",
+                         "third_class_proposal": screen["third_class_proposal"],
+                         "training_use": "PROVISIONAL_UNVALIDATED_GCN_ADMISSION_FORBIDDEN",
+                         "verification_completed": True})
+        receipt_id = audit_store.write({
+            "kind": "arbitration", "node_id": pair.node_id, "decision": decision,
+            "blind_response_sha256": receipt_ids[0],
+            "comparison_response_sha256": receipt_ids[1],
+            "semantic_support_claimed": False, "policy_version": AUTOMATED_VERSION})
+        audit_store.read(receipt_id)
         return decision
 
     for pair in rows:
@@ -203,6 +243,9 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
                 continue
             second = invoke(pair.node_id, "compare", ComparisonRequest(
                 pair.node_id, pair.text, candidates, blind_class, neighborhood=pair.neighborhood))
+            if automated_arbitration_version is not None:
+                decisions.append(automated_decision(pair, first, second))
+                continue
             proposal = blind_class if blind_class not in candidates else None
             if second["class_index"] is not None and second["class_index"] not in candidates:
                 proposal = second["class_index"]
@@ -220,12 +263,38 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
         except Exception:
             # Exception bodies may contain payloads or credentials; never log them.
             decisions.append(_decision(pair, None, "VERIFIER_FAILURE_UNCERTAIN", True))
+    if automated_arbitration_version is not None:
+        for decision in decisions:
+            original = next(p for p in rows if p.node_id == decision["node_id"])
+            node = original.node_id
+            decision.update({
+                "b1_class_index": original.b1.class_index,
+                "narrative_v0_class_index": original.narrative_v0.class_index,
+                "blind_class_index": phase_predictions.get((node, "blind")),
+                "comparison_class_index": phase_predictions.get((node, "compare")),
+                "l1_status": ("NOT_APPLICABLE" if not decision["routed_for_review"] else
+                              "FAIL" if decision["reason"].startswith("L1_") else
+                              "PASS" if (node, "blind") in responses and (
+                                  (node, "compare") in responses or decision["reason"] == "BLIND_ABSTENTION")
+                              else "NOT_ASSESSED"),
+                "decision": decision.get("decision", "ACCEPT" if decision["accepted"] else "ABSTAIN"),
+                "label_source": decision.get("label_source", (
+                    "FROZEN_AGREEMENT_RECONSTRUCTED_80" if decision["accepted"] else None)),
+                "semantic_validation": "NOT_PERFORMED"})
     accepted = [d for d in decisions if d["accepted"]]
     counts = {name: sum(d["training_class_index"] == index for d in accepted)
               for index, name in enumerate(CLASSES)}
     available = sum(max(semantic_support(pair.text)) > 0 for pair in rows)
     return {"status": "OFFLINE_TESTED", "evidence_level": "OFFLINE_RECONSTRUCTION_NOT_LIVE_MEASURED",
             **({"prompt_version": prompt_version} if prompt_version is not None else {}),
+            **({"automated_arbitration_version": AUTOMATED_VERSION,
+                "provisional_pseudo_labels": [
+                    {"node_id": d["node_id"], "class_index": d["training_class_index"],
+                     "historical_confidence_percent": d["label_confidence_percent"],
+                     "label_source": d["label_source"], "l2_status": d["l2_status"]}
+                    for d in decisions if d["accepted"]],
+                "label_status": "PROVISIONAL_UNVALIDATED_NOT_GCN_AUTHORIZED"}
+               if automated_arbitration_version is not None else {}),
             **({"precomparison_l2_gate": "STOP_AFTER_BLIND_L1_FOR_HUMAN_REVIEW",
                 "l2_pending_node_ids": [d["node_id"] for d in decisions
                                         if d["reason"] == "L2_PENDING_BEFORE_COMPARISON"]}
@@ -251,7 +320,9 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
             "provider_calls": 0, "training_runs": 0, "GT_accessed": False,
             "raw_response_exported": False, "l2_semantic_validation": "NOT_IMPLEMENTED",
             "scientific_limitations": ["No measured verifier accuracy or downstream GCN improvement.",
-                                       "L1 provenance is not L2 semantic support; reviewed candidates remain unaccepted.",
+                                       ("L1 is not semantic L2; provisional decisions require independent evaluation."
+                                        if automated_arbitration_version is not None else
+                                        "L1 provenance is not L2 semantic support; reviewed candidates remain unaccepted."),
                                        "No exact recovered Policy 002 threshold table.",
                                        "Lexical semantic heuristic cannot establish primary-topic correctness.",
                                        "Historical confidence attached to retained candidates is not verifier calibration."]}
