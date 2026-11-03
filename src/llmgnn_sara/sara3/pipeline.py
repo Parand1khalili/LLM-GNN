@@ -82,7 +82,8 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
                 config: PolicyConfig | None = None, ledger: OfflineLedger | None = None,
                 audit: PrivateAudit | None = None, response_version: str | None = None,
                 selection: VerifiedSelection | None = None,
-                prompt_version: str | None = None) -> dict:
+                prompt_version: str | None = None,
+                precomparison_l2_gate: bool = False) -> dict:
     """Run GT-free frozen pairs through an explicitly offline verifier.
 
     With no text/verifier, reviewed cases abstain; no response is fabricated.
@@ -97,6 +98,11 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
             raise EvidenceError("L1_SCHEMA_VERSION_INVALID")
         if selection is not None:
             raise ValueError("Prospective prompt is incompatible with pinned legacy selection")
+    if type(precomparison_l2_gate) is not bool:
+        raise TypeError("precomparison_l2_gate must be boolean")
+    if precomparison_l2_gate and (prompt_version != RICH_PROMPT_V2
+                                  or response_version != RICH_VERSION):
+        raise ValueError("Pre-comparison L2 gate requires prospective rich prompt v2")
     integer(budget, "review budget")
     if router not in {"r0", "semantic"}:
         raise ValueError("Unknown router")
@@ -189,6 +195,12 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
                 decisions.append(reviewed_decision(pair, "BLIND_ABSTENTION"))
                 continue
             blind_class = first["class_index"]
+            if precomparison_l2_gate:
+                # Human semantic review is a separate operation, not a verifier self-judgment.
+                # A valid Blind L1 result only queues review; no comparison or label acceptance.
+                proposal = blind_class if blind_class not in candidates else None
+                decisions.append(reviewed_decision(pair, "L2_PENDING_BEFORE_COMPARISON", proposal))
+                continue
             second = invoke(pair.node_id, "compare", ComparisonRequest(
                 pair.node_id, pair.text, candidates, blind_class, neighborhood=pair.neighborhood))
             proposal = blind_class if blind_class not in candidates else None
@@ -214,6 +226,10 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
     available = sum(max(semantic_support(pair.text)) > 0 for pair in rows)
     return {"status": "OFFLINE_TESTED", "evidence_level": "OFFLINE_RECONSTRUCTION_NOT_LIVE_MEASURED",
             **({"prompt_version": prompt_version} if prompt_version is not None else {}),
+            **({"precomparison_l2_gate": "STOP_AFTER_BLIND_L1_FOR_HUMAN_REVIEW",
+                "l2_pending_node_ids": [d["node_id"] for d in decisions
+                                        if d["reason"] == "L2_PENDING_BEFORE_COMPARISON"]}
+               if precomparison_l2_gate else {}),
              "policy_provenance": config.provenance, "historical_policy_002_equivalence": False,
             "policy": asdict(config), "router": router if selection is None else "manifest:" + selection.arm,
             **({"experiment_selection": {"manifest_sha256": MANIFEST_SHA256, "arm": selection.arm}}

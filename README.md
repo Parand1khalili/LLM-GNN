@@ -148,6 +148,17 @@ training**. On an unchanged contract, the second run must have zero underlying
 fixture dispatches, the same per-arm decisions, and independently revalidated
 private receipt bindings. This does not validate semantic L2 or freeze a router.
 
+## Optional prospective L2 boundary (offline only)
+
+Rich Prompt V2 can opt into `run_offline(..., response_version=RICH_VERSION,
+prompt_version=RICH_PROMPT_V2, precomparison_l2_gate=True)`. A valid
+non-abstaining blind L1 response then becomes `L2_PENDING_BEFORE_COMPARISON`;
+no comparison request is sent and no reviewed training label is accepted.
+Abstentions and L1 failures are not queued. `l2_pending_node_ids` contains
+the eligible IDs, not semantic approvals. This is a **one-way offline checkpoint**,
+not an L2 evaluator, resumed human-reviewed Comparison runner, or a live adapter.
+The default (ungated) historical fixture behavior and manifests are unchanged.
+
 ## Raw recovery and backups
 
 For the post-observation blind-only completion on682,2396,653, see
