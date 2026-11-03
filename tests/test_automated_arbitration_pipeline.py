@@ -74,16 +74,22 @@ class AutomaticArbitrationIntegrationTests(unittest.TestCase):
         report, receipts = self.execute(fixture)
         self.assertEqual(fixture.calls, [("blind", 130), ("compare", 130)])
         d = report["decisions"][0]
-        self.assertEqual((d["decision"], d["training_class_index"], d["label_source"]),
-                         ("ACCEPT", 6, "NARRATIVE_V0_CANDIDATE"))
+        self.assertEqual((d["decision"], d["provisional_class_index"], d["provisional_label_source"]),
+                         ("PROPOSE", 6, "NARRATIVE_V0_CANDIDATE"))
+        self.assertEqual((d["accepted"], d["training_class_index"], d["accepted_label"]),
+                         (False, None, None))
+        self.assertFalse(d["provisional_status"] == "NOT_PROPOSED")
         self.assertEqual((d["b1_class_index"], d["narrative_v0_class_index"],
                           d["blind_class_index"], d["comparison_class_index"]), (5, 6, 6, 6))
         self.assertEqual((d["l1_status"], d["l2_status"], d["semantic_validation"]),
                          ("PASS", "NOT_ASSESSED", "NOT_PERFORMED"))
         self.assertTrue(d["verification_completed"])
-        self.assertEqual(report["accepted_count"], 1)
+        self.assertEqual(report["accepted_count"], 0)
+        self.assertEqual(report["provisional_count"], 1)
+        self.assertEqual(report["provisional_coverage"], 1.0)
         self.assertEqual(len(report["provisional_pseudo_labels"]), 1)
-        self.assertEqual(report["label_status"], "PROVISIONAL_UNVALIDATED_NOT_GCN_AUTHORIZED")
+        self.assertFalse(report["provisional_pseudo_labels"][0]["training_eligible"])
+        self.assertEqual(report["label_status"], "BASELINE_ELIGIBLE_PROVISIONAL_QUARANTINED")
         self.assertTrue(len(receipts) >= 3)
         self.assertEqual((report["provider_calls"], report["training_runs"], report["GT_accessed"]),
                          (0, 0, False))

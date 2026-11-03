@@ -167,7 +167,10 @@ then applies a versioned deterministic consistency screen. It can provisionally
 retain B1/Narrative candidates but **does not perform semantic L2 validation**.
 No independent judge, human prerequisite, API or training is added.
 The existing `precomparison_l2_gate` remains an optional separate path.
-See [automated arbitration limitations and tests](docs/AUTOMATED_ARBITRATION_V1.md).
+Routed proposals now have `accepted=false` and `training_class_index=null`.
+Only a separately pinned, explicitly versioned **experimental GCN plan adapter**
+can admit them for a controlled *plan*, never automatically for training.
+See [automated arbitration and experimental admission](docs/AUTOMATED_ARBITRATION_V1.md).
 
 ## Raw recovery and backups
 

@@ -201,16 +201,24 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
                 raise ValueError("Audited phase and in-memory validation differ")
             reread.append(validated)
         screen = screen_validated(pair, *reread)
-        accepted = screen["class_index"] if screen["action"] == "ACCEPT" else None
-        decision = _decision(pair, accepted, screen["reason"], True)
-        decision.update({"decision": screen["action"], "label_source": screen["label_source"],
-                         "automated_screen_status": screen["action"],
-                         "automated_screen_reason": screen["reason"],
-                         "automated_policy_version": AUTOMATED_VERSION,
-                         "semantic_validation": "NOT_PERFORMED",
-                         "third_class_proposal": screen["third_class_proposal"],
-                         "training_use": "PROVISIONAL_UNVALIDATED_GCN_ADMISSION_FORBIDDEN",
-                         "verification_completed": True})
+        # A consistency-screen ACCEPT is only a *proposal*, never a training decision.
+        proposed = screen["class_index"] if screen["action"] == "ACCEPT" else None
+        decision = _decision(pair, None, screen["reason"], True)
+        decision.update({
+            "decision": "PROPOSE" if proposed is not None else screen["action"],
+            "label_source": None,
+            "provisional_class_index": proposed,
+            "provisional_label_source": screen["label_source"] if proposed is not None else None,
+            "provisional_confidence_percent":
+                _label_confidence(pair, proposed) if proposed is not None else None,
+            "provisional_status": "PROPOSED" if proposed is not None else "NOT_PROPOSED",
+            "automated_screen_status": screen["action"],
+            "automated_screen_reason": screen["reason"],
+            "automated_policy_version": AUTOMATED_VERSION,
+            "semantic_validation": "NOT_PERFORMED",
+            "third_class_proposal": screen["third_class_proposal"],
+            "training_use": "PROVISIONAL_UNVALIDATED_GCN_ADMISSION_FORBIDDEN",
+            "verification_completed": True})
         receipt_id = audit_store.write({
             "kind": "arbitration", "node_id": pair.node_id, "decision": decision,
             "blind_response_sha256": receipt_ids[0],
@@ -281,6 +289,10 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
                 "label_source": decision.get("label_source", (
                     "FROZEN_AGREEMENT_RECONSTRUCTED_80" if decision["accepted"] else None)),
                 "semantic_validation": "NOT_PERFORMED"})
+            decision.setdefault("provisional_class_index", None)
+            decision.setdefault("provisional_label_source", None)
+            decision.setdefault("provisional_confidence_percent", None)
+            decision.setdefault("provisional_status", "NOT_PROPOSED")
     accepted = [d for d in decisions if d["accepted"]]
     counts = {name: sum(d["training_class_index"] == index for d in accepted)
               for index, name in enumerate(CLASSES)}
@@ -288,12 +300,30 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
     return {"status": "OFFLINE_TESTED", "evidence_level": "OFFLINE_RECONSTRUCTION_NOT_LIVE_MEASURED",
             **({"prompt_version": prompt_version} if prompt_version is not None else {}),
             **({"automated_arbitration_version": AUTOMATED_VERSION,
+                "result_schema": "sara.automated_arbitration_result.v2",
                 "provisional_pseudo_labels": [
-                    {"node_id": d["node_id"], "class_index": d["training_class_index"],
-                     "historical_confidence_percent": d["label_confidence_percent"],
-                     "label_source": d["label_source"], "l2_status": d["l2_status"]}
-                    for d in decisions if d["accepted"]],
-                "label_status": "PROVISIONAL_UNVALIDATED_NOT_GCN_AUTHORIZED"}
+                    {"node_id": d["node_id"],
+                     "provisional_class_index": d["provisional_class_index"],
+                     "historical_confidence_percent": d["provisional_confidence_percent"],
+                     "provisional_label_source": d["provisional_label_source"],
+                     "l2_status": d["l2_status"], "training_eligible": False}
+                    for d in decisions if d["provisional_status"] == "PROPOSED"],
+                "provisional_count": sum(d["provisional_status"] == "PROPOSED"
+                                         for d in decisions),
+                "provisional_coverage": (
+                    sum(d["provisional_status"] == "PROPOSED" for d in decisions)
+                    / len(rows) if rows else 0.0),
+                "potential_coverage_if_experimentally_admitted": (
+                    (len(accepted) + sum(d["provisional_status"] == "PROPOSED"
+                                         for d in decisions)) / len(rows) if rows else 0.0),
+                "routed_no_proposal_count": sum(
+                    d["routed_for_review"] and d["provisional_status"] != "PROPOSED"
+                    for d in decisions),
+                "provisional_class_distribution": {
+                    name: sum(d["provisional_class_index"] == index
+                              for d in decisions if d["provisional_status"] == "PROPOSED")
+                    for index, name in enumerate(CLASSES)},
+                "label_status": "BASELINE_ELIGIBLE_PROVISIONAL_QUARANTINED"}
                if automated_arbitration_version is not None else {}),
             **({"precomparison_l2_gate": "STOP_AFTER_BLIND_L1_FOR_HUMAN_REVIEW",
                 "l2_pending_node_ids": [d["node_id"] for d in decisions
