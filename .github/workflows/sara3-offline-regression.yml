@@ -29,8 +29,32 @@ jobs:
           python -B -m unittest discover -s tests -p "test_experimental_gcn_admission.py" -v
           python -B -m unittest discover -s tests -p "test_automated_*.py" -v
           python -B -m unittest discover -s tests -p "test_precomparison_l2_gate.py" -v
-      - name: Full offline regression (no paid APIs, no real training)
+      - name: Broad public-only regression (six sealed private pilot modules excluded)
         env:
           PYTHONPATH: src
           PYTHONDONTWRITEBYTECODE: "1"
-        run: python -B -m unittest discover -s tests -v
+        run: |
+          python -B - <<'PY'
+          import pathlib
+          import sys
+          import unittest
+
+          tests = pathlib.Path("tests").resolve()
+          sys.path.insert(0, str(tests))
+          private = {
+              "test_blind_only_gapgpt", "test_canary", "test_four_gapgpt",
+              "test_outstanding_gapgpt", "test_post130_gapgpt",
+              "test_remaining_gapgpt",
+          }
+          paths = sorted(tests.glob("test_*.py"))
+          print("EXCLUDED_PRIVATE_PILOT_MODULES:", ", ".join(sorted(private)), flush=True)
+          suite = unittest.TestSuite()
+          for file in paths:
+              if file.stem not in private:
+                  suite.addTests(unittest.defaultTestLoader.loadTestsFromName(file.stem))
+          result = unittest.TextTestRunner(verbosity=2).run(suite)
+          sys.exit(0 if result.wasSuccessful() else 1)
+          PY
+      - name: Explicit full-regression limitation
+        run: |
+          echo "::warning::FULL_REGRESSION_NOT_VERIFIED: six sealed GapGPT pilot suites require private artifacts not present in GitHub Actions. Run complete unittest discover on the owner's private checkout."

@@ -71,8 +71,13 @@ because no provider transport is used; it is not a prediction of API cost.
 .venv\Scripts\python.exe -B -m unittest discover -s tests -v
 ```
 
-The regression workflow also runs on main pushes (subject to GitHub Actions
-availability). The authentic-Cora integration test only runs if the private,
+GitHub Actions runs the four focused suites and a broad **public-only**
+regression on main pushes. Six sealed GapGPT pilot test modules depend on
+non-versioned private raw/seal artifacts. They are **not** run by the public
+workflow, never recorded as PASS and are NOT weakened or modified; the initial
+full-suite attempt showed six setUpClass InputErrors because SHA256.json private
+input was absent. A full regression still requires the owner's complete private
+checkout. The authentic-Cora integration test similarly runs only if the
 hash-pinned Frozen and authentic input roots are present; skipping it proves
 nothing about authentic readback. Never report synthetic Coverage as real
 LLM effectiveness. Runtime never reads Ground Truth.
