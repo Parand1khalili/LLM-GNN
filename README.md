@@ -172,6 +172,34 @@ Only a separately pinned, explicitly versioned **experimental GCN plan adapter**
 can admit them for a controlled *plan*, never automatically for training.
 See [automated arbitration and experimental admission](docs/AUTOMATED_ARBITRATION_V1.md).
 
+## Crash-durable SARA-3 Rich V2 synthetic runner (no live API)
+
+The package now exposes a single CLI for authenticated Cora140 dry-run and
+durable offline integration, without importing GT or running GCN training.
+This is a *prospective synthetic test*, not a measured LLM result:
+
+```powershell
+$common = @('--frozen-root', '.local_artifacts/frozen',
+            '--authentic-root', '.local_artifacts/authentic',
+            '--router', 'r0', '--budget', '37')
+.venv\Scripts\python.exe -B -m llmgnn_sara.sara3.runner --mode dry-run @common
+.venv\Scripts\python.exe -B -m llmgnn_sara.sara3.runner --mode offline @common --output-root .local_artifacts/sara3_rich_runner
+# Resume: rerun EXACTLY the same offline command and output-root.
+```
+
+The offline Runner uses a private SQLite intent journal and content-addressed
+Rich V2 response/audit receipts. Completed calls replay without new fixture
+dispatches; uncertain/rejected calls are never automatically retried. It writes
+private complete reports and plan-only artifacts, and prints a GT-free aggregate
+summary containing their SHA-256 paths. `r1_v1`, `r1_v2` and `r2_v1`
+are optional fixed-37 *prospective* router variants; `r0` is the reconstructed
+baseline. The historical Policy002 is not claimed to be recovered.
+
+The `--mode live` option **refuses execution**. No provider adapter, current
+GapGPT preflight, price/retention verification or approval-ready live contract
+is implemented in this slice. Never use this command for paid inference.
+See [Rich V2 runner contract](docs/SARA3_RICH_RUNNER.md).
+
 ## Raw recovery and backups
 
 For the post-observation blind-only completion on682,2396,653, see

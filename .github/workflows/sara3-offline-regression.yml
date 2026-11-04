@@ -1,0 +1,36 @@
+name: SARA-3 offline regression
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/llmgnn_sara/**"
+      - "tests/**"
+      - ".github/workflows/sara3-offline-regression.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Focused Rich V2 runner, gate and arbitration tests
+        env:
+          PYTHONPATH: src
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: |
+          python -B -m unittest discover -s tests -p "test_rich_runner.py" -v
+          python -B -m unittest discover -s tests -p "test_experimental_gcn_admission.py" -v
+          python -B -m unittest discover -s tests -p "test_automated_*.py" -v
+          python -B -m unittest discover -s tests -p "test_precomparison_l2_gate.py" -v
+      - name: Full offline regression (no paid APIs, no real training)
+        env:
+          PYTHONPATH: src
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: python -B -m unittest discover -s tests -v

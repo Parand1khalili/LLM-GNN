@@ -21,6 +21,7 @@ from .audit import AuditError, PrivateAudit
 from .rich_evidence import (RICH_PROMPT_V2, RICH_VERSION, rich_verifier_input,
                             rich_verifier_input_v2, target_source, validate_rich_result)
 from .experiment import MANIFEST_SHA256, VerifiedSelection
+from .selection import ROUTERS, select_router
 
 
 @dataclass(frozen=True)
@@ -111,7 +112,7 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
                 precomparison_l2_gate or selection is not None):
             raise ValueError("Automated arbitration needs prospective rich-v2, no gate or pinned selection")
     integer(budget, "review budget")
-    if router not in {"r0", "semantic"}:
+    if router not in ROUTERS:
         raise ValueError("Unknown router")
     config = config if config is not None else PolicyConfig()
     if type(config) is not PolicyConfig:
@@ -128,7 +129,7 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
             raise ValueError("Explicit verified selection requires default router argument")
         selected = selection.resolve(rows, budget, response_version, config)
     else:
-        selected = (route_r0 if router == "r0" else route_semantic)(rows, budget)
+        selected = select_router(rows, budget, router)
     chosen = set(selected)
     decisions, requests, estimated_chars, exact_inputs = [], 0, 0, []
     phase_predictions = {}
@@ -332,9 +333,12 @@ def run_offline(pairs, budget: int, router: str = "r0", verifier: OfflineVerifie
              "policy_provenance": config.provenance, "historical_policy_002_equivalence": False,
             "policy": asdict(config), "router": router if selection is None else "manifest:" + selection.arm,
             **({"experiment_selection": {"manifest_sha256": MANIFEST_SHA256, "arm": selection.arm}}
-               if selection is not None else {}), "router_parameters": {
+               if selection is not None else {}), "router_parameters": ({
                 "semantic_mismatch_weight": 100.0, "calibration": "PREDECLARED_UNVALIDATED_HEURISTIC"}
-                if selection is None else {"selection_source": "HASH_VERIFIED_DRAFT_MANIFEST"},
+                if router in ("r0", "semantic") else {
+                "variant": router, "budget": 37,
+                "calibration": "PREDECLARED_PROSPECTIVE_NOT_HISTORICAL"}
+                ) if selection is None else {"selection_source": "HASH_VERIFIED_DRAFT_MANIFEST"},
             "ordered_classes": list(CLASSES), "target_count": len(rows), "review_budget": budget,
             "selected_node_ids": list(selected), "review_count": len(selected),
             "completed_review_count": sum(d["verification_completed"] for d in decisions),

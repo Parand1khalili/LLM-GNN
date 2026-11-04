@@ -11,6 +11,7 @@ from ..sara2.policy import CLASSES, route_r0, validated_pairs
 from ..io.frozen import reject_gt
 from ..sara3.atlas import route_semantic
 from ..sara3.automated_policy import VERSION as ARBITRATION_VERSION
+from ..sara3.selection import ROUTERS, select_router
 from ..sara3.inputs import canonical_bytes
 from .plan import GCNConfig, PseudoLabel, gcn_plan
 
@@ -61,11 +62,11 @@ def controlled_gcn_plan(pairs, report, *, admission_version, frozen_pairs_sha256
             or report.get("policy") != {"agreement_acceptance_percent": 80.0,
                  "provenance": "RECONSTRUCTED_POLICY_NOT_HISTORICAL_EQUIVALENT"}):
         raise ValueError("Incompatible or unverified offline proposal report")
-    if report.get("router") not in ("r0", "semantic") or type(report.get("review_budget")) is not int:
+    if report.get("router") not in ROUTERS or type(report.get("review_budget")) is not int:
         raise ValueError("Only unchanged prospective routing is eligible")
     if not rows:
         raise ValueError("Empty experimental cohort")
-    selected = (route_r0 if report["router"] == "r0" else route_semantic)(rows, report["review_budget"])
+    selected = select_router(rows, report["review_budget"], report["router"])
     if report.get("selected_node_ids") != list(selected) or report.get("review_count") != len(selected):
         raise ValueError("Router selection differs from the frozen candidates")
     decisions = report.get("decisions")

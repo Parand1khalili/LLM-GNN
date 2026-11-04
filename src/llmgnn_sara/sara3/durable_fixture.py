@@ -113,6 +113,10 @@ class DurableOfflineFixtureVerifier:
                               (state, receipt, identity)).rowcount != 1:
                     raise ValueError("Illegal terminal transition")
 
+    def _validate(self, raw, text):
+        """Legacy default; prospective rich-v2 subclass overrides this validator."""
+        return validate_result(raw, text)
+
     def _replay(self, identity, row, payload, dependency, phase, text):
         payload_hash, saved_dep, saved_phase, state, receipt = row
         if (payload_hash, saved_dep, saved_phase) != (digest(payload), dependency, phase):
@@ -132,7 +136,7 @@ class DurableOfflineFixtureVerifier:
                 or record.get("blind_response_sha256") != dependency):
             raise ValueError("Fixture audit binding mismatch")
         raw = record.get("raw_response")
-        validate_result(raw, text)
+        self._validate(raw, text)
         return json.loads(canonical_bytes(raw))
 
     def _invoke(self, phase, request, payload, dependency=None):
@@ -162,7 +166,7 @@ class DurableOfflineFixtureVerifier:
                                     "blind_response_sha256": dependency,
                                     "raw_response": raw})
         try:
-            validate_result(raw, request.text)
+            self._validate(raw, request.text)
         except (EvidenceError, ValueError, TypeError):
             self._settle(identity, "REJECTED", receipt)
             raise
