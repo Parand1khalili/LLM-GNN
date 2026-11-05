@@ -22,6 +22,8 @@ from llmgnn_sara.sara3.gateway_run import (
     AMENDED_SCOPE_CONTEXT_SHA256, AMENDED_SCOPE_CONFIG_SHA256)
 from llmgnn_sara.sara3.inputs import canonical_bytes
 from llmgnn_sara.sara3.rich_evidence import rich_verifier_input_v2
+from llmgnn_sara.sara3.gateway_diagnostics import diagnose
+from llmgnn_sara.sara3.experiment import digest
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs/gapgpt_rich_v2_proposed.json"
@@ -531,6 +533,81 @@ class GatewayTests(unittest.TestCase):
                          ).read_text(encoding="utf-8"))
         with self.assertRaisesRegex(ValueError, "scope"):
             scoped_owner_authorization(self.data, "r0", 37, "sensitivity", cfg)
+
+    def test_read_only_diagnostic_counts_duplicate_without_private_text(self):
+        class DuplicateEvidenceTransport:
+            dispatches = 0
+            def __call__(self, wire, key):
+                self.dispatches += 1
+                status, raw = SyntheticGapGPTHttp("gpt-6-luna")(wire, key)
+                envelope = json.loads(raw)
+                result = json.loads(envelope["choices"][0]["message"]["content"])
+                if result["abstain"]:
+                    raise AssertionError("This fixture must have exact source support")
+                support = result["supporting_evidence"][0]
+                result["supporting_evidence"] = [support, dict(support)]
+                envelope["choices"][0]["message"]["content"] = (
+                    canonical_bytes(result).decode("utf-8"))
+                return status, canonical_bytes(envelope)
+        transport = DuplicateEvidenceTransport()
+        stopped = self.run_fake(transport)
+        self.assertEqual(stopped["status"], "BLOCKED_NO_AUTOMATIC_RETRY")
+        self.assertEqual(stopped["rejection_codes"], {"L1_DUPLICATE_EVIDENCE": 1})
+        self.assertEqual(transport.dispatches, 1)
+        _, ctx = gateway_context(self.data, "r0", 37, "sensitivity",
+                                 self.config, fake=True)
+        before = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                  for p in (self.root / "journal").iterdir() if p.is_file()}
+        report = diagnose(self.root, expected_context_sha256=digest(ctx))
+        self.assertTrue(report["read_only"])
+        self.assertTrue(report["journal_context_verified"])
+        self.assertEqual(report["states"],
+                         {"COMPLETED": 0, "REJECTED": 1, "UNCERTAIN": 0})
+        self.assertEqual(report["provider_calls"], 0)
+        self.assertEqual(len(report["rejected_receipts"]), 1)
+        item = report["rejected_receipts"][0]
+        self.assertEqual(item["reject_code"], "L1_DUPLICATE_EVIDENCE")
+        self.assertEqual((item["rich_json_parseable"],
+                          item["supporting_evidence_count"],
+                          item["duplicate_pair_count"]),
+                         (True, 2, 1))
+        self.assertEqual(item["duplicate_pair_kinds"],
+                         {"supporting_then_supporting": 1})
+        serialized = json.dumps(report)
+        self.assertNotIn(TEXT, serialized)
+        self.assertNotIn("Paper identifier", serialized)
+        self.assertNotIn("raw_hex", serialized)
+        self.assertEqual(before, {
+            p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in (self.root / "journal").iterdir() if p.is_file()})
+        # Inspecting cannot replay, retry, or change terminal rejected state.
+        self.assertEqual(self.run_fake()["new_dispatches"], 0)
+
+    def test_rejected_receipt_diagnostic_refuses_wrong_scope_and_tampering(self):
+        def duplicate(wire, key):
+            status, raw = SyntheticGapGPTHttp("gpt-6-luna")(wire, key)
+            envelope = json.loads(raw)
+            result = json.loads(envelope["choices"][0]["message"]["content"])
+            result["supporting_evidence"].append(
+                dict(result["supporting_evidence"][0]))
+            envelope["choices"][0]["message"]["content"] = (
+                canonical_bytes(result).decode("utf-8"))
+            return status, canonical_bytes(envelope)
+        self.assertEqual(self.run_fake(duplicate)["journal_states"]["REJECTED"], 1)
+        _, ctx = gateway_context(self.data, "r0", 37, "sensitivity",
+                                 self.config, fake=True)
+        with self.assertRaisesRegex(ValueError, "binding"):
+            diagnose(self.root, expected_context_sha256="0" * 64)
+        import sqlite3
+        db = self.root / "journal" / "fixture_journal.sqlite"
+        with sqlite3.connect(db) as conn:
+            receipt, = conn.execute(
+                "SELECT receipt FROM intents WHERE state='REJECTED'"
+            ).fetchone()
+        path = self.root / "journal" / (receipt + ".json")
+        path.write_bytes(path.read_bytes() + b" ")
+        with self.assertRaisesRegex(ValueError, "hash"):
+            diagnose(self.root, expected_context_sha256=digest(ctx))
 
     def test_budget_reservation_rejected_before_any_journal_or_dispatch(self):
         cfg = deepcopy(self.config)

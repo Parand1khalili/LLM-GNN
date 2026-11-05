@@ -307,3 +307,47 @@ bypass an existing REJECTED or UNCERTAIN intent. On a successful
 completion the report is a frozen LLM annotation result; Ground Truth
 accuracy and actual GCN training remain separate private evaluation
 steps and are not implemented by this CLI.
+
+### Real v2 Batch halt: L1 duplicate evidence, no retry
+
+The owner reported the first real v2/4096 execution stopped with
+`BLOCKED_NO_AUTOMATIC_RETRY`, after **53 real attempts**. Its private
+journal summary records **52 COMPLETED** (29 Blind + 23 Comparison),
+**1 REJECTED**, **0 UNCERTAIN**, rejection code
+`L1_DUPLICATE_EVIDENCE`. The 52 completed responses reported
+79,337 prompt tokens and 32,297 completion tokens; their modeled
+cost under **unverified user-declared rates** is USD 0.0240822.
+The rejected attempt may separately be billed. All 52 successful
+returned model IDs were permitted by the contract (22 alias, 30 dated
+revision). These are *owner-reported* live-run facts, not new
+assistant-executed network requests.
+
+The original strict `sara.l1.decorative_quote_match.v1` policy
+rejects duplicate normalized exact-source quotations across **both**
+`supporting_evidence` and `counter_evidence`. A duplicate citation
+is a structural failure, not itself proof of a wrong primary class.
+The implementation must not silently deduplicate, change L1 rules,
+or automatically retry the terminal REJECTED request. Coverage and
+accuracy cannot be inferred from a partially completed and halted run.
+GT and GCN training remain unperformed.
+
+For exact **read-only, content-free** diagnosis of the rejection,
+the owner runs this against the *existing* v2 output root; it does not
+require or read an API key:
+
+~~~powershell
+.venv\Scripts\python.exe -B -m llmgnn_sara.sara3.gateway_diagnostics `
+  --output-root .local_artifacts/sara3_gapgpt_live_cora140_r0_4096_20261105 `
+  --expected-context-sha256 c41b7a6ecec46a2a99c3b570f7e0b093756db4db98d692f4bb956135584599f8
+~~~
+
+The diagnostic opens the SQLite journal with `mode=ro` and
+`PRAGMA query_only`, verifies the journal's exact context
+binding and the private content-addressed HTTP response receipt
+hashes, and prints only whitelisted metadata: rejected node ID,
+phase, HTTP status, safe error code, model whitelist ID, finish
+reason, provider-reported usage, support/counter counts and the
+number/category of repeated exact quotes. It does **not** print
+quotes, claims, target papers, raw HTTP bodies, response IDs,
+API keys or other prompts. If it detects a broken receipt/binding,
+it fails closed. Existing run data must remain immutable.
