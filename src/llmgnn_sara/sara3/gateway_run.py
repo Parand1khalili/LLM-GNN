@@ -29,7 +29,15 @@ from .runner import SyntheticRichVerifier, _context, _journal_phases
 from .selection import select_router
 
 CONTRACT = "sara.runner.gapgpt_transport.v1"
-APPROVAL = "sara.gapgpt.owner_batch_approval.v1"
+APPROVAL = "sara.gapgpt.owner_batch_approval.v2"
+OWNER_PERMISSIONS = ("data_sharing_approved", "spend_approved",
+                     "explicit_batch_dispatch_approved")
+APPROVED_SCOPE_CONTEXT_SHA256 = "5e41ae8ab228ce607897df7015e4fe56972147811e2367f5fd8da88d01fb4abe"
+APPROVED_SCOPE_CONFIG_SHA256 = "d3a66b47e7be095b54c58bcdd1f24beae13d1edc2a7ef433e92b8027da7a5126"
+UNVERIFIED_PROVIDER_FIELDS = ("provider_format_verified",
+                              "returned_identity_verified",
+                              "current_gateway_prices_verified",
+                              "gateway_privacy_and_retention_reviewed")
 
 
 def gateway_context(inputs, router, budget, cohort, config, *, fake):
@@ -69,16 +77,48 @@ def approval_template(inputs, router, budget, cohort, config):
             "explicit_batch_dispatch_approved": False}
 
 
+def scoped_owner_authorization(inputs, router, budget, cohort, config):
+    """Build the exact owner-scoped authorization under an explicit CLI opt-in.
+
+    Provider verification fields remain FALSE. The caller's intentional
+    --enable-real-dispatch is the single positive authorization for this
+    predeclared batch, not a claim that external pricing or retention was verified.
+    """
+    approval = approval_template(inputs, router, budget, cohort, config)
+    # The user's one-time batch authorization is scoped to the exact Cora140
+    # Frozen input set and approved $0.40 contract recorded in prior preflight.
+    # Changes to inputs, model, settings, router or limits must NOT silently
+    # receive a new authorization via this convenience pathway.
+    if (approval["execution_context_sha256"] != APPROVED_SCOPE_CONTEXT_SHA256
+            or approval["gateway_contract_sha256"] != APPROVED_SCOPE_CONFIG_SHA256
+            or approval["router"] != "r0"
+            or approval["selected_count"] != 37
+            or approval["call_cap"] != 74
+            or approval["spend_cap_usd"] != "0.40"):
+        raise ValueError("Automated owner authorization exceeds frozen Cora140 batch scope")
+    for field in OWNER_PERMISSIONS:
+        approval[field] = True
+    return approval
+
+
 def require_approval(value, inputs, router, budget, cohort, config):
     expected = approval_template(inputs, router, budget, cohort, config)
     if type(value) is not dict or set(value) != set(expected):
-        raise ValueError("Exact user-approved execution contract required")
-    for key, declared in expected.items():
-        if type(declared) is bool:
-            if value[key] is not True:
-                raise ValueError("Required real-dispatch preflight was not approved")
-        elif value[key] != declared:
+        raise ValueError("Exact user-authorized execution contract required")
+    for field, declared in expected.items():
+        actual = value[field]
+        if field in OWNER_PERMISSIONS:
+            if actual is not True:
+                raise ValueError("Missing explicit owner authorization")
+        elif field in UNVERIFIED_PROVIDER_FIELDS:
+            # False means the check has NOT been verified; this is never a
+            # fabricated prerequisite for a first observed real HTTP request.
+            if type(actual) is not bool:
+                raise ValueError("Invalid provider-evidence status")
+        elif actual != declared or type(actual) is not type(declared):
             raise ValueError("Approval bound to another input, model, price or router")
+
+
 
 
 class SyntheticGapGPTHttp:
@@ -133,6 +173,16 @@ def gateway_run(inputs, output_root, *, router, budget, cohort, config,
     if ".local_artifacts" not in root.parts or root.is_symlink():
         raise ValueError("Private .local_artifacts output directory required")
     journal = PrivateAudit(root / "journal")
+    if not fake:
+        # Durable private authorization receipt must exist before any network
+        # dispatch; retains false/unverified provider flags verbatim.
+        approved = {"kind": "gapgpt_owner_batch_authorization_v2",
+                    "approval": approval,
+                    "gateway_context_sha256": digest(context),
+                    "pricing_status": "USER_DECLARED_UNVERIFIED_GATEWAY_RATES",
+                    "retention_status": RETENTION_STATUS}
+        if journal.read(journal.write(approved)) != approved:
+            raise ValueError("Unverifiable owner authorization receipt")
     phases = PrivateAudit(root / "phases")
     verifier = DurableGapGPTVerifier(cfg, context, journal,
                                    transport=transport, key=key, authorized_fake=fake)

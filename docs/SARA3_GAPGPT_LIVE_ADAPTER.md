@@ -142,3 +142,64 @@ model availability and returned identity, account-specific rates and
 limits, data handling and consent, 512-token Rich JSON compatibility,
 full regression on the local private checkout, and approve the exact
 router/call cap/budget. None of these is self-approved by `live-preflight`.
+
+### Owner-authorized live batch without provider-tariff attestation
+
+On 2026-11-05, the owner explicitly authorized the **exact** previously
+preflighted Cora-140 R0/37 batch with at most 74 Blind/Comparison requests,
+a declared USD 0.40 batch budget and no automatic retry. The owner further
+clarified that externally unverified third-party pricing must **not**
+prevent the first model response or the batch. This authorizes data sharing
+of the fixed text prompts and the scoped run; it does **not** establish
+current Gateway pricing, data retention, successful Rich JSON compatibility
+or upstream model identity.
+
+The CLI supports the following **one-action owner-operated execution**,
+provided `GAPGPT_API_KEY` has been set securely in the same Windows session:
+
+~~~powershell
+git pull --ff-only origin main
+$common = @('--frozen-root','.local_artifacts/frozen',
+            '--authentic-root','.local_artifacts/authentic',
+            '--router','r0','--budget','37',
+            '--gateway-config','configs/gapgpt_rich_v2_proposed.json')
+.venv\Scripts\python.exe -B -m llmgnn_sara.sara3.runner --mode live @common --enable-real-dispatch --output-root .local_artifacts/sara3_gapgpt_live_cora140_r0_20261105
+~~~
+
+The owner must deliberately execute this command; CI and ChatGPT tools
+**never** fetch the key or dispatch paid calls. No additional per-phase
+approval file or manual verification flag editing is necessary for this
+specific owner-approved scope. The activation flag derives a private
+owner authorization with exactly three positive permissions:
+`data_sharing_approved`, `spend_approved`, and
+`explicit_batch_dispatch_approved`. It does **not** turn any of the four
+provider-verification flags from false to true. The exact Frozen input,
+model/settings, Router and budget must match the prior published
+`execution_context_sha256` and `gateway_contract_sha256` from
+`live-preflight`; anything different fails closed, with no network call.
+This one-time scoped convenience path cannot authorize other experiments.
+
+The authorization receipt is written privately **before the first dispatch**.
+The run uses a **new** Live output root; never reuse the Fake HTTP journal.
+Only a successful complete response (HTTP status, exact allowed returned
+model, `finish_reason=stop`, strict Rich V2 JSON, exact source quotes and
+bounded provider usage) can complete a phase. The first invalid response
+halts all further sends. After interruption, a re-run of the **same command
+with the same private output root** can replay completed phases. Unknown or
+rejected intents are never retried automatically.
+
+`max_tokens=512` is **unchanged**, deliberately. If the first real
+response is truncated, the run stops and records
+`TRUNCATED_OR_NONFINAL`; do **not** increase tokens silently or restart
+under another output root without a separately reviewed scientific protocol
+amendment. Until independent Gateway rate verification, the observed
+token usage is provider-reported and the monetary estimate uses
+user-declared, not verified, rates. The USD 0.40 budget gate is calculated
+against those declared rates only, so it is **not** a genuine invoice limit.
+The **74-call ceiling is independently enforced** in SQLite.
+
+The existing live mode only freezes and privately audits the LLM annotation
+report; it does not automatically read Ground Truth or train GCN. Those
+are separate *post-freeze* stages with independent GT boundaries and
+matching graph/features/splits. No evaluation or training result should be
+claimed without execution against the owner's private artifacts.

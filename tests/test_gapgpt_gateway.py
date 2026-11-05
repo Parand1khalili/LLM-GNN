@@ -17,7 +17,8 @@ from llmgnn_sara.sara3.gapgpt_live import (
 from llmgnn_sara.sara3.gateway_preflight import validate_batch_wire, VERSION as PREFLIGHT_VERSION
 from llmgnn_sara.sara3.gateway_run import (
     SyntheticGapGPTHttp, approval_template, gateway_context,
-    gateway_run, require_approval)
+    gateway_run, require_approval, scoped_owner_authorization,
+    OWNER_PERMISSIONS, UNVERIFIED_PROVIDER_FIELDS)
 from llmgnn_sara.sara3.inputs import canonical_bytes
 from llmgnn_sara.sara3.rich_evidence import rich_verifier_input_v2
 
@@ -198,6 +199,91 @@ class GatewayTests(unittest.TestCase):
                 gateway_run(self.data, self.root, router="r0", budget=37,
                             cohort="sensitivity", config=self.config, fake=False,
                             approval=approval)
+        self.assertFalse(self.root.exists())
+
+    def test_authorized_scoped_batch_keeps_provider_unknown_and_needs_no_tariff(self):
+        """Do not make false verification claims to permit owner-approved Batch."""
+        from llmgnn_sara.sara3 import gateway_run as gateway
+        expected = approval_template(self.data, "r0", 37, "sensitivity", self.config)
+        with (patch.object(gateway, "APPROVED_SCOPE_CONTEXT_SHA256",
+                           expected["execution_context_sha256"]),
+              patch.object(gateway, "APPROVED_SCOPE_CONFIG_SHA256",
+                           expected["gateway_contract_sha256"])):
+            approval = scoped_owner_authorization(
+                self.data, "r0", 37, "sensitivity", self.config)
+            self.assertIsNone(require_approval(
+                approval, self.data, "r0", 37, "sensitivity", self.config))
+            for field in OWNER_PERMISSIONS:
+                self.assertIs(approval[field], True)
+            for field in UNVERIFIED_PROVIDER_FIELDS:
+                self.assertIs(approval[field], False)
+            self.assertEqual(approval["spend_cap_usd"], "0.40")
+            # Changing policy scope, budget or config cannot auto-expand consent.
+            with self.assertRaises(ValueError):
+                scoped_owner_authorization(self.data, "r0", 36, "sensitivity",
+                                           self.config)
+            changed = deepcopy(self.config)
+            changed["max_spend_usd"] = "0.50"
+            with self.assertRaises(ValueError):
+                scoped_owner_authorization(self.data, "r0", 37, "sensitivity",
+                                           changed)
+
+    def test_unverified_provider_fields_are_neither_required_true_nor_mislabelled(self):
+        approval = approval_template(self.data, "r0", 37, "sensitivity", self.config)
+        for name in OWNER_PERMISSIONS:
+            approval[name] = True
+        self.assertIsNone(require_approval(
+            approval, self.data, "r0", 37, "sensitivity", self.config))
+        for name in OWNER_PERMISSIONS:
+            bad = deepcopy(approval)
+            bad[name] = False
+            with self.subTest(name=name), self.assertRaises(ValueError):
+                require_approval(bad, self.data, "r0", 37, "sensitivity", self.config)
+        for name in UNVERIFIED_PROVIDER_FIELDS:
+            bad = deepcopy(approval)
+            bad[name] = "false"
+            with self.subTest(name=name), self.assertRaises(ValueError):
+                require_approval(bad, self.data, "r0", 37, "sensitivity", self.config)
+        bad = deepcopy(approval)
+        bad["gateway_contract_sha256"] = "0" * 64
+        with self.assertRaises(ValueError):
+            require_approval(bad, self.data, "r0", 37, "sensitivity", self.config)
+
+    def test_live_runner_requires_explicit_switch_before_dispatch(self):
+        from llmgnn_sara.sara3 import runner, gateway_run as gateway
+        from io import StringIO
+        import contextlib
+        argv = ["--mode", "live", "--frozen-root", "unused",
+                "--authentic-root", "unused", "--output-root",
+                str(self.root), "--gateway-config", str(CONFIG),
+                "--router", "r0", "--budget", "37"]
+        with (patch.object(runner, "load_project_inputs", return_value=self.data),
+              patch.object(gateway, "gateway_run", side_effect=AssertionError(
+                  "Live HTTP must not start without explicit switch"))):
+            with contextlib.redirect_stderr(StringIO()):
+                self.assertEqual(runner.main(argv), 1)
+
+    def test_live_runner_explicit_switch_uses_single_scoped_authorization(self):
+        from llmgnn_sara.sara3 import runner, gateway_run as gateway
+        from io import StringIO
+        import contextlib
+        argv = ["--mode", "live", "--enable-real-dispatch",
+                "--frozen-root", "unused", "--authentic-root", "unused",
+                "--output-root", str(self.root), "--gateway-config",
+                str(CONFIG), "--router", "r0", "--budget", "37"]
+        fake_receipt = {"version": "sara.gapgpt.owner_batch_approval.v2"}
+        with (patch.object(runner, "load_project_inputs", return_value=self.data),
+              patch.object(gateway, "scoped_owner_authorization",
+                           return_value=fake_receipt) as build,
+              patch.object(gateway, "gateway_run", return_value={
+                  "status": "BLOCKED_NO_AUTOMATIC_RETRY"}) as invoked):
+            with contextlib.redirect_stdout(StringIO()):
+                self.assertEqual(runner.main(argv), 2)
+        build.assert_called_once_with(
+            self.data, "r0", 37, "sensitivity", self.config)
+        invoked.assert_called_once()
+        self.assertIs(invoked.call_args.kwargs["fake"], False)
+        self.assertIs(invoked.call_args.kwargs["approval"], fake_receipt)
         self.assertFalse(self.root.exists())
 
     def test_contract_change_binds_journal_and_disables_dispatch(self):

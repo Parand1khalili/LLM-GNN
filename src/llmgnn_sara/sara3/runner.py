@@ -254,12 +254,19 @@ def main(argv=None):
                 if args.output_root is None:
                     raise ValueError("Private output root required")
                 if args.mode == "live":
-                    if not args.enable_real_dispatch or args.owner_approval_file is None:
-                        raise ValueError("Paid mode requires explicit opt-in and owner approval")
-                    if (args.owner_approval_file.is_symlink()
-                            or ".local_artifacts" not in args.owner_approval_file.resolve().parts):
-                        raise ValueError("Approval file must be in private .local_artifacts")
-                    approval = json.loads(args.owner_approval_file.read_text(encoding="utf-8"))
+                    if not args.enable_real_dispatch:
+                        raise ValueError("Live mode requires explicit owner dispatch opt-in")
+                    if args.owner_approval_file is None:
+                        from .gateway_run import scoped_owner_authorization
+                        # One already-authorized, hash-pinned $0.40 Cora140 batch.
+                        # Provider observations remain explicitly UNVERIFIED.
+                        approval = scoped_owner_authorization(
+                            inputs, args.router, args.budget, args.cohort, config)
+                    else:
+                        if (args.owner_approval_file.is_symlink()
+                                or ".local_artifacts" not in args.owner_approval_file.resolve().parts):
+                            raise ValueError("Approval file must be in private .local_artifacts")
+                        approval = json.loads(args.owner_approval_file.read_text(encoding="utf-8"))
                 else:
                     if args.enable_real_dispatch or args.owner_approval_file is not None:
                         raise ValueError("Fake mode forbids real-dispatch approval")
