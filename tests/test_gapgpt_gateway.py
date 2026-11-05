@@ -97,6 +97,27 @@ class GatewayTests(unittest.TestCase):
                         approval=expected, key="fake-key-no-network")
         self.assertFalse(self.root.exists())
 
+    def test_exact_positive_owner_approval_is_bound_but_never_sends_http(self):
+        approval = approval_template(self.data, "r0", 37, "sensitivity", self.config)
+        for field, value in list(approval.items()):
+            if type(value) is bool:
+                approval[field] = True
+        self.assertIsNone(require_approval(
+            approval, self.data, "r0", 37, "sensitivity", self.config))
+        changed = deepcopy(self.config)
+        changed["max_spend_usd"] = "0.50"
+        with self.assertRaises(ValueError):
+            require_approval(approval, self.data, "r0", 37, "sensitivity", changed)
+        with self.assertRaises(ValueError):
+            require_approval(approval, self.data, "r0", 36, "sensitivity", self.config)
+        # The complete approval alone does not dispatch: credential is still required.
+        with patch.dict("os.environ", {"GAPGPT_API_KEY": ""}):
+            with self.assertRaises(ValueError):
+                gateway_run(self.data, self.root, router="r0", budget=37,
+                            cohort="sensitivity", config=self.config, fake=False,
+                            approval=approval)
+        self.assertFalse(self.root.exists())
+
     def test_contract_change_binds_journal_and_disables_dispatch(self):
         first = self.run_fake()
         cfg = deepcopy(self.config)
