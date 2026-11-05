@@ -21,6 +21,7 @@ from .experiment import digest
 from .gapgpt_live import (
     VERSION, KEY_VARIABLE, RETENTION_STATUS, DurableGapGPTVerifier,
     contract_from_dict, wire_for, worst_call_cost)
+from .gateway_preflight import validate_batch_wire
 from .inputs import canonical_bytes
 from .pipeline import run_offline
 from .rich_evidence import RICH_PROMPT_V2, RICH_VERSION
@@ -112,6 +113,8 @@ def gateway_run(inputs, output_root, *, router, budget, cohort, config,
                 fake=True, transport=None, approval=None, key=None):
     cfg = contract_from_dict(config)
     selected, context = gateway_context(inputs, router, budget, cohort, cfg, fake=fake)
+    # No private journal or HTTP transport is initialized before this bound.
+    validate_batch_wire(inputs, router, budget, cfg)
     if type(fake) is not bool:
         raise TypeError("Explicit fake/live boolean required")
     if fake:
@@ -149,7 +152,10 @@ def gateway_run(inputs, output_root, *, router, budget, cohort, config,
     run["source_hashes"] = dict(inputs.provenance)
     run["ledger_persistence"] = "PRIVATE_SQLITE_GAPGPT_INTENT_AND_WIRE_HASH_V1"
     run["gateway_statistics"] = {k: v for k, v in stats.items()
-                                if k not in ("new_dispatches", "successful_replays")}
+                                if k not in ("new_dispatches", "successful_replays",
+                                             "returned_models", "rejection_codes",
+                                             "unknown_billing_attempts",
+                                             "verified_usage_scope")}
     run["provider_calls"] = 0 if fake else stats["attempted_calls"]
     run["estimated_cost_usd"] = stats["estimated_cost_usd"]
     run["cost_status"] = ("SYNTHETIC_DECLARED_RATES_NOT_BILLING" if fake else
@@ -194,6 +200,10 @@ def gateway_run(inputs, output_root, *, router, budget, cohort, config,
                "attempted_calls": stats["attempted_calls"],
                "journal_states": states,
                "usage": stats["verified_usage"],
+               "returned_models": stats["returned_models"],
+               "rejection_codes": stats["rejection_codes"],
+               "unknown_billing_attempts": stats["unknown_billing_attempts"],
+               "verified_usage_scope": stats["verified_usage_scope"],
                "estimated_cost_usd": stats["estimated_cost_usd"],
                "reserved_cost_upper_usd": stats["reserved_cost_upper_usd"],
                "cost_status": stats["cost_status"],

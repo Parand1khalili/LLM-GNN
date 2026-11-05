@@ -14,6 +14,7 @@ from llmgnn_sara.sara3.audit import PrivateAudit
 from llmgnn_sara.sara3.gapgpt_live import (
     ENDPOINT, VERSION, DurableGapGPTVerifier, contract_from_dict, wire_for,
     worst_call_cost)
+from llmgnn_sara.sara3.gateway_preflight import validate_batch_wire, VERSION as PREFLIGHT_VERSION
 from llmgnn_sara.sara3.gateway_run import (
     SyntheticGapGPTHttp, approval_template, gateway_context,
     gateway_run, require_approval)
@@ -73,6 +74,87 @@ class GatewayTests(unittest.TestCase):
         self.assertEqual(first["usage"]["completion_tokens"], 74 * 256)
         self.assertEqual(sum(first["provisional_class_distribution"].values()),
                          first["provisional_count"])
+
+    def test_entire_cohort_wire_preflight_is_deterministic_and_local_only(self):
+        with patch.object(socket.socket, "connect",
+                          side_effect=AssertionError("Network forbidden")):
+            first = validate_batch_wire(self.data, "r0", 37, self.config)
+            second = validate_batch_wire(self.data, "r0", 37, self.config)
+        self.assertEqual(first, second)
+        self.assertEqual(first["version"], PREFLIGHT_VERSION)
+        self.assertEqual((first["selected_count"], first["maximum_conditional_calls"]),
+                         (37, 74))
+        self.assertLess(first["largest_possible_wire_bytes"], 32768)
+        self.assertEqual(first["declared_maximum_reservation_usd"], "0.2614272")
+        self.assertEqual(first["max_spend_usd"], "0.40")
+        self.assertEqual(first["max_tokens_requested"], 512)
+        self.assertIn("RICH_JSON_COMPLETENESS_WITH_MAX_TOKENS",
+                      first["external_checks_not_verified"])
+        self.assertEqual(first["provider_calls"], 0)
+        self.assertFalse(first["GT_accessed"])
+
+    def test_input_wire_too_large_fails_before_creating_private_journal(self):
+        cfg = deepcopy(self.config)
+        cfg["max_input_tokens"] = 100
+        fake = SyntheticGapGPTHttp(cfg["model"])
+        with self.assertRaisesRegex(ValueError, "conservative byte-size input cap"):
+            self.run_fake(transport=fake, config=cfg)
+        self.assertEqual(fake.dispatches, 0)
+        self.assertFalse(self.root.exists())
+
+    def test_provider_returned_revision_model_is_reported_exactly(self):
+        revision = "gpt-6-luna-2026-09-22"
+        report = self.run_fake(SyntheticGapGPTHttp(revision))
+        self.assertEqual(report["status"], "COMPLETE_FAKE_HTTP")
+        self.assertEqual(report["returned_models"], {revision: 74})
+        self.assertEqual(report["requested_model"], "gpt-6-luna")
+        self.assertEqual(report["unknown_billing_attempts"], 0)
+        self.assertEqual(report["verified_usage_scope"],
+                         "COMPLETED_PHASES_ONLY_NOT_ALL_ATTEMPTS")
+
+    def test_response_mismatch_reason_is_durable_and_cost_unknown(self):
+        def invalid(wire, key):
+            status, raw = SyntheticGapGPTHttp(self.config["model"])(wire, key)
+            obj = json.loads(raw)
+            obj["model"] = "unapproved-gateway-model"
+            return status, canonical_bytes(obj)
+        report = self.run_fake(invalid)
+        self.assertEqual(report["rejection_codes"], {"RETURNED_MODEL_MISMATCH": 1})
+        self.assertEqual(report["unknown_billing_attempts"], 1)
+        self.assertEqual(report["usage"]["prompt_tokens"], 0)
+        self.assertEqual(report["journal_states"]["REJECTED"], 1)
+        report2 = self.run_fake()
+        self.assertEqual(report2["new_dispatches"], 0)
+        self.assertEqual(report2["rejection_codes"], report["rejection_codes"])
+
+    def test_output_limit_and_inconsistent_provider_usage_fail_closed(self):
+        variants = (
+            ("TRUNCATED_OR_NONFINAL", lambda e: e["choices"][0].update(finish_reason="length")),
+            ("PROVIDER_USAGE_MISSING", lambda e: e.pop("usage")),
+            ("PROVIDER_USAGE_OVER_CAP", lambda e: e["usage"].update(completion_tokens=513)),
+            ("PROVIDER_TOTAL_TOKENS_CONFLICT", lambda e: e["usage"].update(total_tokens=1)),
+        )
+        for reason, change in variants:
+            with self.subTest(reason=reason), tempfile.TemporaryDirectory() as tmp:
+                self.root = Path(tmp) / ".local_artifacts" / "bad_response"
+                def broken(wire, key):
+                    code, body = SyntheticGapGPTHttp(self.config["model"])(wire, key)
+                    envelope = json.loads(body)
+                    change(envelope)
+                    return code, canonical_bytes(envelope)
+                report = self.run_fake(broken)
+                self.assertEqual(report["rejection_codes"], {reason: 1})
+                self.assertEqual(report["unknown_billing_attempts"], 1)
+                self.assertEqual(report["new_dispatches"], 1)
+
+    def test_report_shape_preserves_previous_successful_fake_receipts(self):
+        first = self.run_fake()
+        # Session-level returned-model diagnostics do not alter scientific report.
+        second = self.run_fake()
+        self.assertEqual(first["private_report_sha256"], second["private_report_sha256"])
+        self.assertEqual(first["returned_models"], {"gpt-6-luna": 74})
+        self.assertEqual(second["returned_models"], first["returned_models"])
+        self.assertEqual(first["rejection_codes"], {})
 
     def test_wire_preflight_blind_cannot_leak_historical_candidates(self):
         payload = rich_verifier_input_v2(130, TEXT)
@@ -190,14 +272,14 @@ class GatewayTests(unittest.TestCase):
         for path in journal.glob("*.json"):
             self.assertNotIn(b"synthetic-local-key-unknown", path.read_bytes())
 
-    def test_budget_reservation_rejected_before_dispatch(self):
+    def test_budget_reservation_rejected_before_any_journal_or_dispatch(self):
         cfg = deepcopy(self.config)
         cfg["max_spend_usd"] = "0.000001"
         fake = SyntheticGapGPTHttp(cfg["model"])
-        report = self.run_fake(transport=fake, config=cfg)
+        with self.assertRaisesRegex(ValueError, "Worst-case declared reservation"):
+            self.run_fake(transport=fake, config=cfg)
         self.assertEqual(fake.dispatches, 0)
-        self.assertEqual(report["new_dispatches"], 0)
-        self.assertEqual(report["status"], "BLOCKED_NO_AUTOMATIC_RETRY")
+        self.assertFalse(self.root.exists())
 
     def test_budget_exact_rejects_invalid_values(self):
         for key, value in (("temperature", .5), ("max_tokens", 0),

@@ -85,40 +85,93 @@ def worst_call_cost(config):
             / Decimal(1000000))
 
 
+class GatewayResponseError(ValueError):
+    """Safe finite incompatibility reason; never contains untrusted response text."""
+
+    CODES = frozenset((
+        "HTTP_STATUS_OR_BODY_INVALID",
+        "GATEWAY_SECRET_ECHO",
+        "RESPONSE_JSON_INVALID",
+        "RETURNED_MODEL_MISMATCH",
+        "CHOICES_INVALID",
+        "TRUNCATED_OR_NONFINAL",
+        "ASSISTANT_CONTENT_MISSING",
+        "RICH_RESPONSE_JSON_INVALID",
+        "PROVIDER_USAGE_MISSING",
+        "PROVIDER_USAGE_INVALID",
+        "PROVIDER_USAGE_OVER_CAP",
+        "PROVIDER_TOTAL_TOKENS_CONFLICT",
+        "PROVIDER_RESPONSE_ID_INVALID",
+    ))
+
+    def __init__(self, code):
+        if code not in self.CODES:
+            raise ValueError("Unknown safe gateway diagnostic")
+        self.code = code
+        super().__init__(code)
+
+
 def strict_envelope(status, raw, config, key, target_text):
-    """Parse a complete Chat Completions response, after full private raw capture."""
+    """Strict complete Chat Completions envelope and source-valid rich L1.
+
+    This reports exact *diagnostic codes*, not a semantic L2 verdict. Never
+    include an untrusted response body, API key or provider error text in them.
+    """
     if type(status) is not int or status != 200 or type(raw) is not bytes or len(raw) > MAX_BODY:
-        raise ValueError("HTTP failure or oversized/truncated body")
+        raise GatewayResponseError("HTTP_STATUS_OR_BODY_INVALID")
     if key.encode() in raw:
-        raise ValueError("Credential echoed by provider")
-    envelope = strict_json(raw)
-    if (type(envelope) is not dict or envelope.get("model") not in config["allowed_returned_models"]
-            or type(envelope.get("choices")) is not list
-            or len(envelope["choices"]) != 1
-            or type(envelope["choices"][0]) is not dict
-            or envelope["choices"][0].get("finish_reason") != "stop"):
-        raise ValueError("Unapproved model, partial response or unexpected choices")
-    message = envelope["choices"][0].get("message")
+        raise GatewayResponseError("GATEWAY_SECRET_ECHO")
+    try:
+        envelope = strict_json(raw)
+    except (TypeError, ValueError, UnicodeError):
+        raise GatewayResponseError("RESPONSE_JSON_INVALID") from None
+    if type(envelope) is not dict:
+        raise GatewayResponseError("RESPONSE_JSON_INVALID")
+    if type(envelope.get("model")) is not str or envelope["model"] not in config["allowed_returned_models"]:
+        raise GatewayResponseError("RETURNED_MODEL_MISMATCH")
+    choices = envelope.get("choices")
+    if type(choices) is not list or len(choices) != 1 or type(choices[0]) is not dict:
+        raise GatewayResponseError("CHOICES_INVALID")
+    if choices[0].get("finish_reason") != "stop":
+        raise GatewayResponseError("TRUNCATED_OR_NONFINAL")
+    message = choices[0].get("message")
     content = message.get("content") if type(message) is dict else None
     if type(content) is not str or not content.strip():
-        raise ValueError("No full JSON response")
-    value = strict_json(content)
-    validated = validate_rich_result(value, (target_source(target_text),))
+        raise GatewayResponseError("ASSISTANT_CONTENT_MISSING")
+    try:
+        value = strict_json(content)
+    except (TypeError, ValueError, UnicodeError):
+        raise GatewayResponseError("RICH_RESPONSE_JSON_INVALID") from None
+    # Real source/exact-quote failures retain the L1_* EvidenceError code.
+    validate_rich_result(value, (target_source(target_text),))
     usage = envelope.get("usage")
     if type(usage) is not dict:
-        raise ValueError("Missing provider token usage")
+        raise GatewayResponseError("PROVIDER_USAGE_MISSING")
     input_tokens, output_tokens = usage.get("prompt_tokens"), usage.get("completion_tokens")
     if (type(input_tokens) is not int or type(output_tokens) is not int
-            or input_tokens < 0 or output_tokens < 0
-            or input_tokens > config["max_input_tokens"]
-            or output_tokens > config["max_tokens"]):
-        raise ValueError("Invalid or out-of-contract provider usage")
+            or input_tokens < 0 or output_tokens < 0):
+        raise GatewayResponseError("PROVIDER_USAGE_INVALID")
+    if input_tokens > config["max_input_tokens"] or output_tokens > config["max_tokens"]:
+        raise GatewayResponseError("PROVIDER_USAGE_OVER_CAP")
+    total = usage.get("total_tokens")
+    if total is not None:
+        if type(total) is not int or total != input_tokens + output_tokens:
+            raise GatewayResponseError("PROVIDER_TOTAL_TOKENS_CONFLICT")
+    response_id = envelope.get("id")
+    if response_id is not None and (type(response_id) is not str
+                                    or not 1 <= len(response_id) <= 256):
+        raise GatewayResponseError("PROVIDER_RESPONSE_ID_INVALID")
     cost = ((Decimal(input_tokens) * Decimal(config["input_usd_per_million"])
              + Decimal(output_tokens) * Decimal(config["output_usd_per_million"]))
             / Decimal(1000000))
-    return value, {"prompt_tokens": input_tokens, "completion_tokens": output_tokens,
-                   "returned_model": envelope["model"], "estimated_cost_usd": str(cost),
-                   "cost_status": "DECLARED_RATE_ESTIMATE_NOT_INVOICE"}
+    metadata = {"prompt_tokens": input_tokens, "completion_tokens": output_tokens,
+                "returned_model": envelope["model"], "estimated_cost_usd": str(cost),
+                "cost_status": "DECLARED_RATE_ESTIMATE_NOT_INVOICE"}
+    # Optional provider ID never appears in the existing fake response: old
+    # completed fake receipts remain byte-for-byte replay-compatible.
+    if response_id is not None:
+        metadata["provider_response_id"] = response_id
+    return value, metadata
 
 
 class DurableGapGPTVerifier(DurableOfflineFixtureVerifier):
@@ -254,8 +307,9 @@ class DurableGapGPTVerifier(DurableOfflineFixtureVerifier):
                     raise ValueError("SECRET_ECHO_REDACTED")
                 value, meta = strict_envelope(status, raw, self.config, self.key, request.text)
             except (ValueError, EvidenceError, TypeError, KeyError) as error:
-                response["reject_code"] = (error.code if isinstance(error, EvidenceError)
-                                           else "INVALID_GATEWAY_ENVELOPE_OR_USAGE")
+                response["reject_code"] = (
+                    error.code if isinstance(error, (EvidenceError, GatewayResponseError))
+                    else "INVALID_GATEWAY_ENVELOPE_OR_USAGE")
                 receipt = self.audit.write(response)
                 self.audit.read(receipt)
                 self._settle(identity, "REJECTED", receipt)
@@ -297,15 +351,32 @@ class DurableGapGPTVerifier(DurableOfflineFixtureVerifier):
             self._verify_binding(db)
             records = list(db.execute("SELECT identity,state,receipt FROM intents"))
         usage, spent = {"prompt_tokens": 0, "completion_tokens": 0}, Decimal(0)
+        returned_models, rejection_codes = {}, {}
+        unknown_billing_attempts = 0
         for _, state, receipt in records:
             if state == "COMPLETED":
                 record = self.audit.read(receipt)
                 summary = record.get("usage_summary", {})
-                if not {"prompt_tokens", "completion_tokens", "estimated_cost_usd"} <= set(summary):
-                    raise ValueError("Missing completed provider usage")
+                if not {"prompt_tokens", "completion_tokens", "estimated_cost_usd",
+                        "returned_model"} <= set(summary):
+                    raise ValueError("Missing completed provider usage or model")
                 usage["prompt_tokens"] += summary["prompt_tokens"]
                 usage["completion_tokens"] += summary["completion_tokens"]
                 spent += Decimal(summary["estimated_cost_usd"])
+                model = summary["returned_model"]
+                returned_models[model] = returned_models.get(model, 0) + 1
+            else:
+                # A rejected or unknown request can still be charged by Gateway.
+                # It must never silently disappear from the cost denominator.
+                unknown_billing_attempts += 1
+                if state == "REJECTED":
+                    record = self.audit.read(receipt)
+                    if record.get("kind") != "gapgpt_gateway_response":
+                        raise ValueError("Invalid rejected Gateway receipt")
+                    code = record.get("reject_code", "UNKNOWN_REJECTION")
+                    if type(code) is not str or len(code) > 128:
+                        raise ValueError("Invalid rejected Gateway diagnostic")
+                    rejection_codes[code] = rejection_codes.get(code, 0) + 1
         return {"attempted_calls": len(records), "new_dispatches": self.dispatches,
                 "successful_replays": self.hits,
                 "state_counts": {s: sum(1 for _, x, _ in records if x == s)
@@ -316,5 +387,9 @@ class DurableGapGPTVerifier(DurableOfflineFixtureVerifier):
                 "provider": "GapGPT", "endpoint": self.config["endpoint"],
                 "requested_model": self.config["model"],
                 "retention_status": RETENTION_STATUS,
-                "transport": "FAKE_HTTP" if self.authorized_fake else "LIVE_HTTPS"}
+                "transport": "FAKE_HTTP" if self.authorized_fake else "LIVE_HTTPS",
+                "returned_models": dict(sorted(returned_models.items())),
+                "rejection_codes": dict(sorted(rejection_codes.items())),
+                "unknown_billing_attempts": unknown_billing_attempts,
+                "verified_usage_scope": "COMPLETED_PHASES_ONLY_NOT_ALL_ATTEMPTS"}
 

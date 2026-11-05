@@ -91,3 +91,54 @@ CI tests Fake HTTP on public fixtures. The six sealed Pilot suites and
 authentic Cora140 checks still require the owner's local private checkout;
 skips are never treated as confirmations. No scientific outcome, raw
 accuracy or downstream GCN improvement is implied by the Fake run.
+
+### Contract verification update — November 5, 2026
+
+The upstream **OpenAI** GPT-6 Luna model documentation confirms Chat Completions
+support and Standard rates of USD 0.10 input / USD 0.50 output per million
+tokens: https://developers.openai.com/api/docs/models/gpt-6-luna .
+These facts **do not confirm** access, format, final tariff, billing mode or
+retention **at third-party GapGPT**. No current authenticated GapGPT response
+or contract proving those facts was obtained. Owner approvals for all of them
+must remain false until independently evidenced.
+
+The exact proposed protocol keeps the pilot's `temperature=1`, `n=1`,
+`max_tokens=512`, R0, 37/140 and at most 74 requests. The upstream
+model's maximum output capacity is not evidence that 512 tokens are enough
+for a **specific Rich Evidence V2 JSON response**. Truncated, nonfinal or
+over-cap responses terminate the run; the system never silently increases
+`max_tokens` or switches models. A future higher-output setting would
+require a **new explicitly reviewed contract and separate journal root**.
+
+The `live-preflight` CLI now runs `sara.gapgpt.wire_preflight.v1` for
+**every selected node**. It serializes the exact Blind wire and enumerates
+seven hypothetical Blind classes for the conditional Comparison, validates
+the largest wire byte count against the configured conservative cap, and
+checks that worst-case per-attempt reservations times the declared call cap
+do not exceed the declared spending cap. Its `wire_preflight` JSON contains
+the selected IDs, measured byte bounds and declared maximum monetary
+reservation. This is a **local wire/budget check**, not provider tokenization,
+model availability, billing approval or proof of successful Rich JSON output.
+
+The private response receipt now persists a **safe explicit incompatibility
+code** (e.g. `RETURNED_MODEL_MISMATCH`, `TRUNCATED_OR_NONFINAL`,
+`PROVIDER_USAGE_MISSING`, `PROVIDER_USAGE_OVER_CAP`,
+`PROVIDER_TOTAL_TOKENS_CONFLICT`, or the L1 validation error). The public
+Summary aggregates the exact provider-reported `returned_models` for
+Completed phases, `rejection_codes` for Rejected phases and
+`unknown_billing_attempts` for Rejected/Uncertain attempts. Token usage
+and modeled spend **only cover Completed responses**; incomplete attempts
+may still be billed by the Gateway. Do not infer that the reported
+`estimated_cost_usd` is a full invoice.
+
+**Backward compatibility:** these diagnostics are separate from the
+content-addressed scientific report and do not alter valid existing
+Fake-HTTP response metadata. The previous Cora Fake-HTTP journal should
+therefore replay with zero new dispatches and the same scientific report
+SHA; a session Summary SHA may differ by design.
+
+Before paid dispatch: the owner must independently verify current Gateway
+model availability and returned identity, account-specific rates and
+limits, data handling and consent, 512-token Rich JSON compatibility,
+full regression on the local private checkout, and approve the exact
+router/call cap/budget. None of these is self-approved by `live-preflight`.

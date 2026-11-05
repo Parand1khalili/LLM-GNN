@@ -234,13 +234,17 @@ def main(argv=None):
         inputs = load_project_inputs(args.frozen_root, args.authentic_root)
         if args.mode in ("live-preflight", "live-fake", "live"):
             from .gateway_run import approval_template, gateway_run
+            from .gateway_preflight import validate_batch_wire
             if args.gateway_config is None or args.gateway_config.is_symlink():
                 raise ValueError("Explicit versioned gateway configuration file required")
             config = json.loads(args.gateway_config.read_text(encoding="utf-8"))
             if args.mode == "live-preflight":
                 if args.enable_real_dispatch or args.owner_approval_file is not None:
                     raise ValueError("Preflight never approves or sends requests")
+                wire_report = validate_batch_wire(
+                    inputs, args.router, args.budget, config)
                 result = {"status": "PROPOSED_NO_DISPATCH",
+                          "wire_preflight": wire_report,
                           "approval_template": approval_template(
                               inputs, args.router, args.budget, args.cohort, config),
                           "provider_calls": 0, "training_runs": 0,
