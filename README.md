@@ -200,6 +200,29 @@ GapGPT preflight, price/retention verification or approval-ready live contract
 is implemented in this slice. Never use this command for paid inference.
 See [Rich V2 runner contract](docs/SARA3_RICH_RUNNER.md).
 
+## GapGPT Rich V2 Gateway bridge — separate paid approval required
+
+The existing SARA-3 CLI supports `live-preflight` (read-only contract and
+approval template), `live-fake` (synthetic HTTP envelope + durable SQLite
+Resume) and `live` (default-denied until separately owner-approved).
+The adapter retains Blind-first, two-stage L1 and independent training-label
+quarantine. No API calls or GCN training were performed by its development.
+
+~~~powershell
+$common = @('--frozen-root', '.local_artifacts/frozen',
+            '--authentic-root', '.local_artifacts/authentic',
+            '--router', 'r0', '--budget', '37',
+            '--gateway-config', 'configs/gapgpt_rich_v2_proposed.json')
+.venv\Scripts\python.exe -B -m llmgnn_sara.sara3.runner --mode live-preflight @common
+.venv\Scripts\python.exe -B -m llmgnn_sara.sara3.runner --mode live-fake @common --output-root .local_artifacts/sara3_gapgpt_fake_v1
+~~~
+
+**Do not use live mode until the owner approves the exact batch and verifies
+the Gateway's price, format, retention and privacy policy.** The proposed
+config is unverified. Real dispatch requires the private approved contract
+file, `--enable-real-dispatch` and an environment credential.
+See [the Gateway bridge safety contract](docs/SARA3_GAPGPT_LIVE_ADAPTER.md).
+
 ## Raw recovery and backups
 
 For the post-observation blind-only completion on682,2396,653, see

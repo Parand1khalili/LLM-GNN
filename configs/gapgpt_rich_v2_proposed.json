@@ -1,0 +1,19 @@
+{
+  "version": "sara.gapgpt.rich_v2.gateway.v1",
+  "endpoint": "https://api.gapgpt.app/v1/chat/completions",
+  "model": "gpt-6-luna",
+  "allowed_returned_models": [
+    "gpt-6-luna",
+    "gpt-6-luna-2026-09-22"
+  ],
+  "temperature": 1,
+  "n": 1,
+  "max_tokens": 512,
+  "max_input_tokens": 32768,
+  "max_calls": 74,
+  "max_spend_usd": "0.40",
+  "input_usd_per_million": "0.10",
+  "output_usd_per_million": "0.50",
+  "timeout_seconds": 120,
+  "retention_status": "GATEWAY_RETENTION_NOT_VERIFIED"
+}

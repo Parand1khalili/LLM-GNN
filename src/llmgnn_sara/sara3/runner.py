@@ -215,7 +215,7 @@ def _journal_phases(durable):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--mode", choices=("dry-run", "offline", "live"), required=True)
+    parser.add_argument("--mode", choices=("dry-run", "offline", "live-preflight", "live-fake", "live"), required=True)
     parser.add_argument("--frozen-root", type=Path, required=True)
     parser.add_argument("--authentic-root", type=Path, required=True)
     parser.add_argument("--output-root", type=Path)
@@ -223,21 +223,59 @@ def main(argv=None):
     parser.add_argument("--budget", type=int, default=37)
     parser.add_argument("--cohort", choices=("primary", "sensitivity"),
                         default="sensitivity")
+    parser.add_argument("--gateway-config", type=Path,
+                        help="Versioned non-secret model, prices and call/spend caps")
+    parser.add_argument("--owner-approval-file", type=Path,
+                        help="Separate private owner approval, bound to exact contract")
+    parser.add_argument("--enable-real-dispatch", action="store_true",
+                        help="Required along with separate signed-off owner approval")
     args = parser.parse_args(argv)
-    if args.mode == "live":
-        print(json.dumps({"status": "LIVE_DISABLED_PENDING_PROVIDER_PREFLIGHT_AND_APPROVAL"}))
-        return 2
     try:
         inputs = load_project_inputs(args.frozen_root, args.authentic_root)
-        if args.mode == "offline":
+        if args.mode in ("live-preflight", "live-fake", "live"):
+            from .gateway_run import approval_template, gateway_run
+            if args.gateway_config is None or args.gateway_config.is_symlink():
+                raise ValueError("Explicit versioned gateway configuration file required")
+            config = json.loads(args.gateway_config.read_text(encoding="utf-8"))
+            if args.mode == "live-preflight":
+                if args.enable_real_dispatch or args.owner_approval_file is not None:
+                    raise ValueError("Preflight never approves or sends requests")
+                result = {"status": "PROPOSED_NO_DISPATCH",
+                          "approval_template": approval_template(
+                              inputs, args.router, args.budget, args.cohort, config),
+                          "provider_calls": 0, "training_runs": 0,
+                          "pricing_status": "OWNER_DECLARED_GATEWAY_UNVERIFIED",
+                          "retention_status": "GATEWAY_RETENTION_NOT_VERIFIED"}
+            else:
+                if args.output_root is None:
+                    raise ValueError("Private output root required")
+                if args.mode == "live":
+                    if not args.enable_real_dispatch or args.owner_approval_file is None:
+                        raise ValueError("Paid mode requires explicit opt-in and owner approval")
+                    if (args.owner_approval_file.is_symlink()
+                            or ".local_artifacts" not in args.owner_approval_file.resolve().parts):
+                        raise ValueError("Approval file must be in private .local_artifacts")
+                    approval = json.loads(args.owner_approval_file.read_text(encoding="utf-8"))
+                else:
+                    if args.enable_real_dispatch or args.owner_approval_file is not None:
+                        raise ValueError("Fake mode forbids real-dispatch approval")
+                    approval = None
+                result = gateway_run(
+                    inputs, args.output_root, router=args.router, budget=args.budget,
+                    cohort=args.cohort, config=config, fake=args.mode == "live-fake",
+                    approval=approval)
+        elif args.mode == "offline":
             if args.output_root is None:
                 raise ValueError("Private --output-root is required for durable offline run")
             result = offline_run(inputs, args.output_root, router=args.router,
                                  budget=args.budget, cohort=args.cohort)
         else:
+            if args.enable_real_dispatch or args.gateway_config or args.owner_approval_file:
+                raise ValueError("Dry/offline modes forbid gateway options")
             result = dry_run(inputs, args.router, args.budget)
         print(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False))
-        return 0 if result.get("status") != "BLOCKED_RECONCILIATION_REQUIRED" else 2
+        return 2 if result.get("status") in ("BLOCKED_RECONCILIATION_REQUIRED",
+                                             "BLOCKED_NO_AUTOMATIC_RETRY") else 0
     except (ValueError, OSError, TypeError, KeyError) as exc:
         # Never echo untrusted target text, raw responses, paths to credentials.
         print(json.dumps({"status": "FAIL_CLOSED", "reason_type": type(exc).__name__}),

@@ -38,6 +38,7 @@ class DurableOfflineFixtureVerifier:
             raise ValueError("Only explicitly budgeted offline fixtures are supported")
         if any(value is not None for value in context.get("model_settings", {}).values()):
             raise ValueError("Provider configuration is forbidden in offline fixture journal")
+        self._journal_version = VERSION
         self.verifier, self.audit = verifier, audit
         self.context = json.loads(canonical_bytes(context))
         self.context_digest = digest(self.context)
@@ -62,7 +63,7 @@ class DurableOfflineFixtureVerifier:
                 db.execute("BEGIN IMMEDIATE")
                 db.execute("CREATE TABLE IF NOT EXISTS binding (id INTEGER PRIMARY KEY CHECK(id=1), version TEXT NOT NULL, context_hash TEXT NOT NULL, call_limit INTEGER NOT NULL)")
                 db.execute("CREATE TABLE IF NOT EXISTS intents (identity TEXT PRIMARY KEY, payload_hash TEXT NOT NULL, dependency TEXT, phase TEXT NOT NULL, state TEXT NOT NULL, receipt TEXT, node_id INTEGER NOT NULL, UNIQUE(node_id,phase))")
-                expected = (VERSION, self.context_digest, self.maximum_calls)
+                expected = (self._journal_version, self.context_digest, self.maximum_calls)
                 old = db.execute("SELECT version,context_hash,call_limit FROM binding WHERE id=1").fetchone()
                 if old is None:
                     if existed or db.execute("SELECT count(*) FROM intents").fetchone()[0]:
@@ -76,7 +77,7 @@ class DurableOfflineFixtureVerifier:
 
     def _verify_binding(self, db):
         if db.execute("SELECT version,context_hash,call_limit FROM binding WHERE id=1").fetchall() != [
-                (VERSION, self.context_digest, self.maximum_calls)]:
+                (self._journal_version, self.context_digest, self.maximum_calls)]:
             raise ValueError("Fixture journal binding mismatch")
 
     def _get(self, identity):
@@ -85,6 +86,10 @@ class DurableOfflineFixtureVerifier:
         with closing(self._connection()) as db:
             self._verify_binding(db)
             return db.execute("SELECT payload_hash,dependency,phase,state,receipt FROM intents WHERE identity=?", (identity,)).fetchone()
+
+    def _budget_accepts_new_intent(self, existing_count):
+        """Subclass hook called under the SQLite write lock."""
+        return None
 
     def _reserve(self, identity, payload_hash, dependency, phase, node_id):
         if self.path.is_symlink():
@@ -96,8 +101,10 @@ class DurableOfflineFixtureVerifier:
                 if db.execute("SELECT 1 FROM intents WHERE identity=? OR (node_id=? AND phase=?)",
                               (identity, node_id, phase)).fetchone():
                     raise EvidenceError("TIMEOUT_UNCERTAIN_NO_RETRY")
-                if db.execute("SELECT count(*) FROM intents").fetchone()[0] >= self.maximum_calls:
+                count = db.execute("SELECT count(*) FROM intents").fetchone()[0]
+                if count >= self.maximum_calls:
                     raise ValueError("Offline fixture dispatch budget exhausted")
+                self._budget_accepts_new_intent(count)
                 # UNKNOWN from the instant this row commits, even if process dies before send.
                 db.execute("INSERT INTO intents VALUES(?,?,?,?,?,NULL,?)",
                            (identity, payload_hash, dependency, phase, "UNCERTAIN", node_id))

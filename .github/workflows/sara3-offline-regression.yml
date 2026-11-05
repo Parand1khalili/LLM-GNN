@@ -25,6 +25,7 @@ jobs:
           PYTHONPATH: src
           PYTHONDONTWRITEBYTECODE: "1"
         run: |
+          python -B -m unittest discover -s tests -p "test_gapgpt_gateway.py" -v
           python -B -m unittest discover -s tests -p "test_rich_runner.py" -v
           python -B -m unittest discover -s tests -p "test_experimental_gcn_admission.py" -v
           python -B -m unittest discover -s tests -p "test_automated_*.py" -v
