@@ -18,7 +18,8 @@ from llmgnn_sara.sara3.gateway_preflight import validate_batch_wire, VERSION as 
 from llmgnn_sara.sara3.gateway_run import (
     SyntheticGapGPTHttp, approval_template, gateway_context,
     gateway_run, require_approval, scoped_owner_authorization,
-    OWNER_PERMISSIONS, UNVERIFIED_PROVIDER_FIELDS)
+    OWNER_PERMISSIONS, UNVERIFIED_PROVIDER_FIELDS,
+    AMENDED_SCOPE_CONTEXT_SHA256, AMENDED_SCOPE_CONFIG_SHA256)
 from llmgnn_sara.sara3.inputs import canonical_bytes
 from llmgnn_sara.sara3.rich_evidence import rich_verifier_input_v2
 
@@ -427,6 +428,103 @@ class GatewayTests(unittest.TestCase):
         self.assertEqual(new["journal_states"]["COMPLETED"], 74)
         self.assertEqual(new["new_dispatches"], 74)
         self.assertNotEqual(new["gateway_context_sha256"], old["gateway_context_sha256"])
+
+    def test_amended_owner_authorization_is_exact_and_provider_stays_unverified(self):
+        from llmgnn_sara.sara3 import gateway_run as gateway
+        from llmgnn_sara.sara3.experiment import digest
+        cfg = json.loads((ROOT / "configs/gapgpt_rich_v2_output4096_proposed.json"
+                         ).read_text(encoding="utf-8"))
+        self.assertEqual(digest(cfg), AMENDED_SCOPE_CONFIG_SHA256)
+        expected = approval_template(self.data, "r0", 37, "sensitivity", cfg)
+        with (patch.object(gateway, "AMENDED_SCOPE_CONTEXT_SHA256",
+                           expected["execution_context_sha256"]),
+              patch.object(gateway, "AMENDED_SCOPE_CONFIG_SHA256",
+                           expected["gateway_contract_sha256"])):
+            approval = scoped_owner_authorization(
+                self.data, "r0", 37, "sensitivity", cfg)
+            self.assertIsNone(require_approval(
+                approval, self.data, "r0", 37, "sensitivity", cfg))
+            self.assertEqual(approval["version"], "sara.gapgpt.owner_batch_approval.v2")
+            self.assertEqual(approval["gateway_contract_sha256"],
+                             expected["gateway_contract_sha256"])
+            self.assertEqual(approval["execution_context_sha256"],
+                             expected["execution_context_sha256"])
+            for field in OWNER_PERMISSIONS:
+                self.assertIs(approval[field], True)
+            for field in UNVERIFIED_PROVIDER_FIELDS:
+                self.assertIs(approval[field], False)
+            # Consent to this amendment must not expand to new routing,
+            # cohort, input hash, cost, model or token limit.
+            for router, budget, cohort in (("r1", 37, "sensitivity"),
+                                           ("r0", 36, "sensitivity"),
+                                           ("r0", 37, "primary")):
+                with self.subTest(router=router, budget=budget, cohort=cohort):
+                    with self.assertRaises(ValueError):
+                        scoped_owner_authorization(
+                            self.data, router, budget, cohort, cfg)
+            changed = deepcopy(cfg)
+            changed["max_spend_usd"] = "0.50"
+            with self.assertRaises(ValueError):
+                scoped_owner_authorization(
+                    self.data, "r0", 37, "sensitivity", changed)
+
+    def test_amended_authorization_cannot_borrow_legacy_pinned_hashes(self):
+        from llmgnn_sara.sara3 import gateway_run as gateway
+        cfg = json.loads((ROOT / "configs/gapgpt_rich_v2_output4096_proposed.json"
+                         ).read_text(encoding="utf-8"))
+        new_approval = approval_template(self.data, "r0", 37, "sensitivity", cfg)
+        old_approval = approval_template(self.data, "r0", 37,
+                                         "sensitivity", self.config)
+        with (patch.object(gateway, "APPROVED_SCOPE_CONTEXT_SHA256",
+                           new_approval["execution_context_sha256"]),
+              patch.object(gateway, "APPROVED_SCOPE_CONFIG_SHA256",
+                           new_approval["gateway_contract_sha256"])):
+            with self.assertRaisesRegex(ValueError, "scope"):
+                scoped_owner_authorization(self.data, "r0", 37,
+                                           "sensitivity", cfg)
+        for field in OWNER_PERMISSIONS:
+            old_approval[field] = True
+        with self.assertRaises(ValueError):
+            require_approval(old_approval, self.data, "r0",
+                             37, "sensitivity", cfg)
+
+    def test_amendment_approval_receipt_persisted_before_attempt(self):
+        from llmgnn_sara.sara3 import gateway_run as gateway
+        from llmgnn_sara.sara3.gapgpt_live import (
+            AMENDED_OUTPUT_VERSION, )
+        cfg = json.loads((ROOT / "configs/gapgpt_rich_v2_output4096_proposed.json"
+                         ).read_text(encoding="utf-8"))
+        expected = approval_template(self.data, "r0", 37, "sensitivity", cfg)
+        with (patch.object(gateway, "AMENDED_SCOPE_CONTEXT_SHA256",
+                           expected["execution_context_sha256"]),
+              patch.object(gateway, "AMENDED_SCOPE_CONFIG_SHA256",
+                           expected["gateway_contract_sha256"])):
+            approval = scoped_owner_authorization(
+                self.data, "r0", 37, "sensitivity", cfg)
+        self.assertEqual(cfg["version"], AMENDED_OUTPUT_VERSION)
+        import llmgnn_sara.sara3.gapgpt_live as live
+        with (patch.object(socket.socket, "connect",
+                           side_effect=AssertionError("Network forbidden")),
+              patch.object(live, "post_once",
+                           side_effect=TimeoutError("synthetic lost HTTP"))):
+            result = gateway_run(self.data, self.root, router="r0",
+                                 budget=37, cohort="sensitivity", config=cfg,
+                                 fake=False, approval=approval,
+                                 key="synthetic-ephemeral-key")
+        self.assertEqual(result["status"], "BLOCKED_NO_AUTOMATIC_RETRY")
+        self.assertEqual(result["journal_states"]["UNCERTAIN"], 1)
+        self.assertEqual(result["attempted_calls"], 1)
+        receipts = [json.loads(p.read_text(encoding="utf-8"))
+                    for p in (self.root / "journal").glob("*.json")]
+        owner_receipts = [r for r in receipts
+                          if r.get("kind") == "gapgpt_owner_batch_authorization_v2"]
+        self.assertEqual(len(owner_receipts), 1)
+        self.assertEqual(owner_receipts[0]["scientific_amendment"],
+                         "OWNER_APPROVED_512_TO_4096_AFTER_REASONING_TRUNCATION")
+        self.assertEqual(owner_receipts[0]["approval"], approval)
+        self.assertFalse(owner_receipts[0]["approval"]["current_gateway_prices_verified"])
+        for p in (self.root / "journal").glob("*.json"):
+            self.assertNotIn(b"synthetic-ephemeral-key", p.read_bytes())
 
     def test_old_scope_authorization_does_not_approve_amended_contract(self):
         cfg = json.loads((ROOT / "configs/gapgpt_rich_v2_output4096_proposed.json"

@@ -19,7 +19,7 @@ from .audit import PrivateAudit
 from .automated_policy import VERSION as AUTOMATED_VERSION
 from .experiment import digest
 from .gapgpt_live import (
-    VERSION, KEY_VARIABLE, RETENTION_STATUS, DurableGapGPTVerifier,
+    VERSION, AMENDED_OUTPUT_VERSION, KEY_VARIABLE, RETENTION_STATUS, DurableGapGPTVerifier,
     contract_from_dict, wire_for, worst_call_cost)
 from .gateway_preflight import validate_batch_wire
 from .inputs import canonical_bytes
@@ -34,6 +34,10 @@ OWNER_PERMISSIONS = ("data_sharing_approved", "spend_approved",
                      "explicit_batch_dispatch_approved")
 APPROVED_SCOPE_CONTEXT_SHA256 = "5e41ae8ab228ce607897df7015e4fe56972147811e2367f5fd8da88d01fb4abe"
 APPROVED_SCOPE_CONFIG_SHA256 = "d3a66b47e7be095b54c58bcdd1f24beae13d1edc2a7ef433e92b8027da7a5126"
+# Independently consented scientific amendment after observed reasoning-only
+# truncation; exact hashes are from owner's real Cora140 v2 preflight.
+AMENDED_SCOPE_CONTEXT_SHA256 = "c41b7a6ecec46a2a99c3b570f7e0b093756db4db98d692f4bb956135584599f8"
+AMENDED_SCOPE_CONFIG_SHA256 = "59fd3de634a4aabae97fc9df02c396c5c435819e8b7f4cdbde1fe7837a8c165f"
 UNVERIFIED_PROVIDER_FIELDS = ("provider_format_verified",
                               "returned_identity_verified",
                               "current_gateway_prices_verified",
@@ -85,12 +89,19 @@ def scoped_owner_authorization(inputs, router, budget, cohort, config):
     predeclared batch, not a claim that external pricing or retention was verified.
     """
     approval = approval_template(inputs, router, budget, cohort, config)
-    # The user's one-time batch authorization is scoped to the exact Cora140
-    # Frozen input set and approved $0.40 contract recorded in prior preflight.
-    # Changes to inputs, model, settings, router or limits must NOT silently
-    # receive a new authorization via this convenience pathway.
-    if (approval["execution_context_sha256"] != APPROVED_SCOPE_CONTEXT_SHA256
-            or approval["gateway_contract_sha256"] != APPROVED_SCOPE_CONFIG_SHA256
+    # Two separately owner-approved, hash-pinned Cora140 experiments.
+    # The amended 4096-cap contract NEVER borrows the old 512 approval.
+    cfg = contract_from_dict(config)
+    scopes = {
+        VERSION: (512, APPROVED_SCOPE_CONTEXT_SHA256,
+                  APPROVED_SCOPE_CONFIG_SHA256),
+        AMENDED_OUTPUT_VERSION: (4096, AMENDED_SCOPE_CONTEXT_SHA256,
+                                 AMENDED_SCOPE_CONFIG_SHA256),
+    }
+    expected = scopes.get(cfg["version"])
+    if (expected is None
+            or (cfg["max_tokens"], approval["execution_context_sha256"],
+                approval["gateway_contract_sha256"]) != expected
             or approval["router"] != "r0"
             or approval["selected_count"] != 37
             or approval["call_cap"] != 74
@@ -180,7 +191,11 @@ def gateway_run(inputs, output_root, *, router, budget, cohort, config,
                     "approval": approval,
                     "gateway_context_sha256": digest(context),
                     "pricing_status": "USER_DECLARED_UNVERIFIED_GATEWAY_RATES",
-                    "retention_status": RETENTION_STATUS}
+                    "retention_status": RETENTION_STATUS,
+                    "scientific_amendment": (
+                        "OWNER_APPROVED_512_TO_4096_AFTER_REASONING_TRUNCATION"
+                        if cfg["version"] == AMENDED_OUTPUT_VERSION
+                        else "ORIGINAL_512_OUTPUT_CAP")}
         if journal.read(journal.write(approved)) != approved:
             raise ValueError("Unverifiable owner authorization receipt")
     phases = PrivateAudit(root / "phases")

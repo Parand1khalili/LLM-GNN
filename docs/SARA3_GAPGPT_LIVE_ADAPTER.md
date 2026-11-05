@@ -239,9 +239,10 @@ The historical v1 manifest `configs/gapgpt_rich_v2_proposed.json` remains
 
 Only a version-bound `4096` is accepted with v2, and only `512` is
 accepted with v1. The old v1 authorization Hash **does not** authorize
-v2. A separately verified, explicit amendment approval must be established
-before attempting live v2; it must not be represented as part of the
-original 512-token batch. Do not flip provider-verification flags to true.
+v2. The owner separately and explicitly approved the v2 amendment after
+the documented preflight. Its new execution and configuration hash pins are
+independent of the originally approved 512-token batch. Do not flip
+provider-verification flags to true.
 
 Read-only local preflight for v2 (no HTTP, no fee):
 
@@ -253,9 +254,56 @@ $amended = @('--frozen-root','.local_artifacts/frozen',
 .venv\Scripts\python.exe -B -m llmgnn_sara.sara3.runner --mode live-preflight @amended
 ~~~
 
-**Do not run v2 with `--mode live` yet.** Preserve the halted v1
+Preserve the halted v1
 `.local_artifacts/sara3_gapgpt_live_cora140_r0_20261105` folder
 unaltered, especially its REJECTED SQLite intent and private HTTP raw
-receipt. A new *approved* v2 batch must use an entirely different
-`.local_artifacts` output root, never overwrite, reset, or silently retry
-the original attempt. None of the tests execute paid HTTP.
+receipt. The separately approved v2 batch must use a different
+`.local_artifacts` output root and never overwrite or reset the original
+attempt. The v2 output-cap change is a new, explicitly amended protocol,
+not a retry of the same v1 wire. None of the automated tests execute
+paid HTTP.
+
+### V2 authorization and owner-operated live execution
+
+The owner explicitly approved the **512 → 4096** amendment following the
+successful read-only Cora140 v2 preflight. Both new hashes are pinned:
+
+- `execution_context_sha256=c41b7a6ecec46a2a99c3b570f7e0b093756db4db98d692f4bb956135584599f8`
+- `gateway_contract_sha256=59fd3de634a4aabae97fc9df02c396c5c435819e8b7f4cdbde1fe7837a8c165f`
+
+The same R0/37/Cora140/74 max-calls/declared USD0.40 parameters
+apply, with `temperature=1`, `n=1`, the unchanged Rich Prompt V2 and
+Automated Concordance V1. The code's scoped owner authorization now
+accepts only the original exact v1 hash pair or the separately approved
+exact v2 hash pair, and it writes an amendment identifier in the private
+authorization receipt before the first network attempt. Neither the
+existence of an API key nor the live CLI flag validates provider tariff,
+retention or response format; those remain explicitly unverified.
+
+After confirming that `GAPGPT_API_KEY` is already set in the same
+PowerShell session, the owner runs:
+
+~~~powershell
+git pull --ff-only origin main
+if ($LASTEXITCODE -ne 0) { throw "Git pull failed" }
+
+$amended = @(
+  '--frozen-root', '.local_artifacts/frozen',
+  '--authentic-root', '.local_artifacts/authentic',
+  '--router', 'r0',
+  '--budget', '37',
+  '--gateway-config', 'configs/gapgpt_rich_v2_output4096_proposed.json'
+)
+
+if (-not $env:GAPGPT_API_KEY) { throw 'GAPGPT_API_KEY is missing' }
+
+.venv\Scripts\python.exe -B -m llmgnn_sara.sara3.runner --mode live @amended --enable-real-dispatch --output-root .local_artifacts/sara3_gapgpt_live_cora140_r0_4096_20261105
+~~~
+
+This command is **real paid inference**, not dry-run. The first invalid
+or interrupted request halts the remaining batch; `max_tokens=4096`
+does not guarantee success. Never create another output root just to
+bypass an existing REJECTED or UNCERTAIN intent. On a successful
+completion the report is a frozen LLM annotation result; Ground Truth
+accuracy and actual GCN training remain separate private evaluation
+steps and are not implemented by this CLI.
