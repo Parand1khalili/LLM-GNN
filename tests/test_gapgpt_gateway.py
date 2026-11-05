@@ -12,7 +12,7 @@ from unittest.mock import patch
 from llmgnn_sara.sara2.policy import Annotation, Pair
 from llmgnn_sara.sara3.audit import PrivateAudit
 from llmgnn_sara.sara3.gapgpt_live import (
-    ENDPOINT, VERSION, DurableGapGPTVerifier, contract_from_dict, wire_for,
+    ENDPOINT, VERSION, AMENDED_OUTPUT_VERSION, DurableGapGPTVerifier, contract_from_dict, wire_for,
     worst_call_cost)
 from llmgnn_sara.sara3.gateway_preflight import validate_batch_wire, VERSION as PREFLIGHT_VERSION
 from llmgnn_sara.sara3.gateway_run import (
@@ -358,6 +358,82 @@ class GatewayTests(unittest.TestCase):
         for path in journal.glob("*.json"):
             self.assertNotIn(b"synthetic-local-key-unknown", path.read_bytes())
 
+    def test_reasoning_truncation_exact_512_token_diagnostic(self):
+        """Never interpret all-reasoning length response as an L1 label."""
+        class ReasoningExhausted:
+            calls = 0
+            def __call__(self, wire, key):
+                self.calls += 1
+                from llmgnn_sara.sara3.inputs import canonical_bytes
+                return 200, canonical_bytes({
+                    "id": "chatcmpl-reasoning-exhausted",
+                    "model": "gpt-6-luna",
+                    "choices": [{"finish_reason": "length",
+                                 "message": {"role": "assistant", "content": ""}}],
+                    "usage": {"prompt_tokens": 1522, "completion_tokens": 512,
+                              "total_tokens": 2034,
+                              "completion_tokens_details": {"reasoning_tokens": 512}}})
+        transport = ReasoningExhausted()
+        report = self.run_fake(transport)
+        self.assertEqual(transport.calls, 1)
+        self.assertEqual(report["status"], "BLOCKED_NO_AUTOMATIC_RETRY")
+        self.assertEqual(report["journal_states"], {"COMPLETED": 0,
+                         "REJECTED": 1, "UNCERTAIN": 0})
+        self.assertEqual(report["rejection_codes"], {"TRUNCATED_OR_NONFINAL": 1})
+        self.assertEqual(report["provisional_count"], 0)
+        self.assertEqual(report["unknown_billing_attempts"], 1)
+        self.assertEqual(self.run_fake(SyntheticGapGPTHttp("gpt-6-luna"))["new_dispatches"], 0)
+
+    def test_amended_output_contract_version_enforced_and_worst_cost(self):
+        new_path = ROOT / "configs/gapgpt_rich_v2_output4096_proposed.json"
+        amended = json.loads(new_path.read_text(encoding="utf-8"))
+        self.assertEqual(amended["version"], AMENDED_OUTPUT_VERSION)
+        self.assertEqual(amended["max_tokens"], 4096)
+        self.assertEqual(contract_from_dict(amended), amended)
+        self.assertEqual(validate_batch_wire(self.data, "r0", 37, amended)[
+            "declared_maximum_reservation_usd"], "0.3940352")
+        self.assertEqual(amended["max_calls"], 74)
+        self.assertEqual(amended["max_spend_usd"], "0.40")
+        self.assertEqual(json.loads(wire_for(
+            rich_verifier_input_v2(130, TEXT), amended))["max_tokens"], 4096)
+        legacy_with_new_cap = deepcopy(self.config)
+        legacy_with_new_cap["max_tokens"] = 4096
+        with self.assertRaises(ValueError):
+            contract_from_dict(legacy_with_new_cap)
+        amended_with_old_cap = deepcopy(amended)
+        amended_with_old_cap["max_tokens"] = 512
+        with self.assertRaises(ValueError):
+            contract_from_dict(amended_with_old_cap)
+        amended_with_higher_cap = deepcopy(amended)
+        amended_with_higher_cap["max_tokens"] = 8192
+        with self.assertRaises(ValueError):
+            contract_from_dict(amended_with_higher_cap)
+
+    def test_amended_contract_must_never_reuse_historical_fake_journal(self):
+        cfg = json.loads((ROOT / "configs/gapgpt_rich_v2_output4096_proposed.json"
+                         ).read_text(encoding="utf-8"))
+        old = self.run_fake()
+        self.assertEqual(old["journal_states"]["COMPLETED"], 74)
+        fake = SyntheticGapGPTHttp("gpt-6-luna")
+        with self.assertRaises(ValueError):
+            self.run_fake(transport=fake, config=cfg)
+        self.assertEqual(fake.dispatches, 0)
+        separate_root = self.root.parent / "gateway_fake_amended"
+        with patch.object(socket.socket, "connect",
+                          side_effect=AssertionError("Network forbidden")):
+            new = gateway_run(self.data, separate_root, router="r0",
+                              budget=37, cohort="sensitivity", config=cfg,
+                              fake=True, transport=fake)
+        self.assertEqual(new["journal_states"]["COMPLETED"], 74)
+        self.assertEqual(new["new_dispatches"], 74)
+        self.assertNotEqual(new["gateway_context_sha256"], old["gateway_context_sha256"])
+
+    def test_old_scope_authorization_does_not_approve_amended_contract(self):
+        cfg = json.loads((ROOT / "configs/gapgpt_rich_v2_output4096_proposed.json"
+                         ).read_text(encoding="utf-8"))
+        with self.assertRaisesRegex(ValueError, "scope"):
+            scoped_owner_authorization(self.data, "r0", 37, "sensitivity", cfg)
+
     def test_budget_reservation_rejected_before_any_journal_or_dispatch(self):
         cfg = deepcopy(self.config)
         cfg["max_spend_usd"] = "0.000001"
@@ -368,7 +444,8 @@ class GatewayTests(unittest.TestCase):
         self.assertFalse(self.root.exists())
 
     def test_budget_exact_rejects_invalid_values(self):
-        for key, value in (("temperature", .5), ("max_tokens", 0),
+        for key, value in (("version", []), ("version", "unknown"),
+                           ("temperature", .5), ("max_tokens", 0),
                            ("max_calls", 75), ("max_spend_usd", "-1"),
                            ("input_usd_per_million", "nan"),
                            ("endpoint", "https://untrusted.site/v1/chat/completions"),

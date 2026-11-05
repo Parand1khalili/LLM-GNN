@@ -23,6 +23,10 @@ from .rich_evidence import RICH_PROMPT_V2, RICH_VERSION, rich_verifier_input_v2
 from .rich_evidence import target_source, validate_rich_result
 
 VERSION = "sara.gapgpt.rich_v2.gateway.v1"
+AMENDED_OUTPUT_VERSION = "sara.gapgpt.rich_v2.gateway.v2"
+# Exact allowable output caps are version-bound. A new amount always needs
+# an explicit new contract, isolated journal and separately reviewed scope.
+OUTPUT_CAP_BY_VERSION = {VERSION: 512, AMENDED_OUTPUT_VERSION: 4096}
 JOURNAL_VERSION = "sara.gapgpt.rich_v2.journal.v1"
 ENDPOINT = "https://api.gapgpt.app/v1/chat/completions"
 MAX_BODY = 1024 * 1024
@@ -38,7 +42,9 @@ def contract_from_dict(value):
         "max_spend_usd", "input_usd_per_million", "output_usd_per_million",
         "timeout_seconds", "retention_status"}:
         raise ValueError("Exact versioned Gateway contract required")
-    if (value["version"] != VERSION or value["endpoint"] != ENDPOINT
+    if (type(value["version"]) is not str
+            or value["version"] not in OUTPUT_CAP_BY_VERSION
+            or value["endpoint"] != ENDPOINT
             or type(value["model"]) is not str or not value["model"].strip()
             or type(value["allowed_returned_models"]) is not list
             or not value["allowed_returned_models"]
@@ -47,7 +53,8 @@ def contract_from_dict(value):
             or value["model"] not in value["allowed_returned_models"]
             or type(value["temperature"]) not in (float, int) or value["temperature"] != 1
             or type(value["n"]) is not int or value["n"] != 1
-            or type(value["max_tokens"]) is not int or value["max_tokens"] != 512
+            or type(value["max_tokens"]) is not int
+            or value["max_tokens"] != OUTPUT_CAP_BY_VERSION[value["version"]]
             or type(value["max_input_tokens"]) is not int
             or not 1 <= value["max_input_tokens"] <= 131072
             or type(value["max_calls"]) is not int or not 1 <= value["max_calls"] <= 74

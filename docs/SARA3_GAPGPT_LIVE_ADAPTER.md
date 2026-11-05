@@ -203,3 +203,59 @@ report; it does not automatically read Ground Truth or train GCN. Those
 are separate *post-freeze* stages with independent GT boundaries and
 matching graph/features/splits. No evaluation or training result should be
 claimed without execution against the owner's private artifacts.
+
+### Proposed, NOT dispatched: reasoning-token exhaustion amendment (2026-11-05)
+
+The owner-operated first actual LIVE HTTPS request from the frozen v1/512
+contract returned HTTP 200 and allowed `model=gpt-6-luna`. Private
+diagnostic metadata reported:
+
+- `node_id=25`, `phase=blind`, `finish_reason=length`
+- `prompt_tokens=1522`, `completion_tokens=512`,
+  `completion_tokens_details.reasoning_tokens=512`
+- `message.content` had zero characters; a response ID existed
+- Journal: **1 REJECTED, 0 COMPLETED, 0 UNCERTAIN**, fail-closed halt
+- This rejected request's usage is **not** part of the completed-only
+  `estimated_cost_usd`; actual invoice remains unknown.
+
+This directly establishes that the 512-output-token limit was consumed by
+reasoning before any visible rich JSON could be emitted for that one request.
+It does NOT establish how many output tokens are needed for all 37 nodes,
+nor that increasing tokens guarantees L1-valid JSON.
+
+The historical v1 manifest `configs/gapgpt_rich_v2_proposed.json` remains
+**byte-unchanged**. A separate, explicit *proposal* exists at
+`configs/gapgpt_rich_v2_output4096_proposed.json`:
+
+- Protocol version `sara.gapgpt.rich_v2.gateway.v2`
+- Only changed research parameter: `max_tokens: 4096`
+- `model=gpt-6-luna`, `temperature=1`, `n=1`, Rich Prompt V2,
+  R0, 37/140, 74 calls, `max_input_tokens=32768`, and USD 0.40 declared
+  budget are **unchanged**.
+- Worst-case 74-attempt reservation using user-declared (unverified)
+  USD 0.10/0.50 input/output rates: **USD 0.3940352**.
+  The remainder under 0.40 is only USD 0.0059648 under those rates.
+  **Neither amount guarantees actual Gateway billing.**
+
+Only a version-bound `4096` is accepted with v2, and only `512` is
+accepted with v1. The old v1 authorization Hash **does not** authorize
+v2. A separately verified, explicit amendment approval must be established
+before attempting live v2; it must not be represented as part of the
+original 512-token batch. Do not flip provider-verification flags to true.
+
+Read-only local preflight for v2 (no HTTP, no fee):
+
+~~~powershell
+$amended = @('--frozen-root','.local_artifacts/frozen',
+             '--authentic-root','.local_artifacts/authentic',
+             '--router','r0','--budget','37',
+             '--gateway-config','configs/gapgpt_rich_v2_output4096_proposed.json')
+.venv\Scripts\python.exe -B -m llmgnn_sara.sara3.runner --mode live-preflight @amended
+~~~
+
+**Do not run v2 with `--mode live` yet.** Preserve the halted v1
+`.local_artifacts/sara3_gapgpt_live_cora140_r0_20261105` folder
+unaltered, especially its REJECTED SQLite intent and private HTTP raw
+receipt. A new *approved* v2 batch must use an entirely different
+`.local_artifacts` output root, never overwrite, reset, or silently retry
+the original attempt. None of the tests execute paid HTTP.
