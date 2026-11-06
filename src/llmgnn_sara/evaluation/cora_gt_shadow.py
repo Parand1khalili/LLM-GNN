@@ -12,7 +12,8 @@ import json
 from pathlib import Path
 import sys
 
-from ..io.frozen import CLASSES
+from ..annotation.prompts import MATCHED_PREPARATION_SHA256
+from ..io.frozen import CLASSES, read_pinned_json
 from ..io.project import load_project_inputs
 from ..sara3.audit import PrivateAudit
 from ..sara3.blind_review_pack import (
@@ -42,7 +43,27 @@ def _require(condition):
         raise ValueError("GT shadow evaluation proof or alignment mismatch")
 
 
-def _labels_from_original_graph(path):
+def _expected_graph_names(frozen_root):
+    """Read graph's original class-name order from the SHA-pinned prep receipt.
+
+    Historical prompts lowercased Cora's original class strings WITHOUT
+    changing class indices. Do not remap indices, sort names, or guess order.
+    """
+    receipt = read_pinned_json(
+        _safe_path(Path(frozen_root) / "preparation_receipt.json"),
+        MATCHED_PREPARATION_SHA256)
+    _require(type(receipt) is dict)
+    wrapper = receipt.get("historical_wrapper")
+    _require(type(wrapper) is dict
+             and wrapper.get("ordered_class_names") == list(CLASSES))
+    original = wrapper.get("original_ordered_class_names")
+    _require(type(original) is list and len(original) == len(CLASSES)
+             and all(type(name) is str for name in original)
+             and [name.lower() for name in original] == list(CLASSES))
+    return tuple(original)
+
+
+def _labels_from_original_graph(path, original_names):
     """Pin bytes BEFORE deserialize; the original graph is a trusted pickle.
 
     torch.load(weights_only=False) is deliberately restricted to this exact
@@ -51,6 +72,10 @@ def _labels_from_original_graph(path):
     """
     stage = "GRAPH_PATH_OR_HASH"
     try:
+        _require(type(original_names) in (tuple, list)
+                 and len(original_names) == len(CLASSES)
+                 and all(type(name) is str for name in original_names)
+                 and [name.lower() for name in original_names] == list(CLASSES))
         path = _safe_path(path)
         _require(path.is_file() and path.stat().st_size < 512 * 1024 * 1024)
         h = hashlib.sha256()
@@ -67,8 +92,9 @@ def _labels_from_original_graph(path):
         import torch  # Only imported within this separately invoked evaluator.
         graph = torch.load(io.BytesIO(b"".join(chunks)),
                            map_location="cpu", weights_only=False)
-        stage = "GRAPH_CLASS_OR_LABEL_SCHEMA"
-        _require(list(graph.label_names) == list(CLASSES))
+        stage = "GRAPH_CLASS_NAME_ORDER"
+        _require(list(graph.label_names) == list(original_names))
+        stage = "GRAPH_LABEL_TENSOR_SCHEMA"
         gt = graph.y.detach().cpu()
         _require(gt.ndim == 1 and len(gt) == TRUE_COUNT)
         _require(not gt.is_floating_point())
@@ -249,9 +275,13 @@ def run(frozen_root, authentic_root, output_root, gateway_config, graph_file,
         selected = [n for n, _ in material["records"]]
         pairs = {p.node_id: p for p in inputs.pairs}
 
+        # Read only signed/pinned preparation metadata, not GT.
+        stage = "GRAPH_CLASS_MAPPING_PROVENANCE"
+        original_names = _expected_graph_names(frozen_root)
+
         # No GT until this point; graph bytes are SHA-pinned before torch.load.
         stage = "GRAPH_LOADING"
-        labels = _labels_from_original_graph(graph_file)
+        labels = _labels_from_original_graph(graph_file, original_names)
 
         stage = "FROZEN_DECISION_SCORING"
         result = score(selected, report["run"]["decisions"], pairs, labels,

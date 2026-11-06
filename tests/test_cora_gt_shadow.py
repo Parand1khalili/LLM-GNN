@@ -13,6 +13,33 @@ from unittest.mock import patch
 from llmgnn_sara.evaluation import cora_gt_shadow as target
 from llmgnn_sara.sara3.audit import PrivateAudit
 
+ORIGINAL_GRAPH_NAMES = (
+    "Rule_Learning", "Neural_Networks", "Case_Based",
+    "Genetic_Algorithms", "Theory", "Reinforcement_Learning",
+    "Probabilistic_Methods",
+)
+
+
+class SyntheticY:
+    """In-memory test tensor; never touches the real GT graph."""
+    ndim = 1
+
+    def detach(self):
+        return self
+
+    def cpu(self):
+        return self
+
+    def __len__(self):
+        return 2708
+
+    def is_floating_point(self):
+        return False
+
+    def tolist(self):
+        return [i % 7 for i in range(2708)]
+
+
 
 def fixture():
     labels = [n % 7 for n in range(target.TRUE_COUNT)]
@@ -136,7 +163,7 @@ class GTShadowTests(unittest.TestCase):
             path = Path(temp) / "fake_original.pt"
             path.write_bytes(b"UNTRUSTED PICKLE, NO DESERIALIZATION")
             with self.assertRaises(ValueError):
-                target._labels_from_original_graph(path)
+                target._labels_from_original_graph(path, ORIGINAL_GRAPH_NAMES)
 
     def test_private_write_only_and_sanitized_cli_errors(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -178,22 +205,70 @@ class GTShadowTests(unittest.TestCase):
             blob = b"synthetic fake bytes, not the original Cora graph"
             path.write_bytes(blob)
             with self.assertRaises(target.EvaluationStageError) as cm:
-                target._labels_from_original_graph(path)
+                target._labels_from_original_graph(path, ORIGINAL_GRAPH_NAMES)
             self.assertEqual(cm.exception.stage, "GRAPH_PATH_OR_HASH")
             with patch.object(target, "GRAPH_SHA256", hashlib.sha256(blob).hexdigest()):
                 fake_torch = SimpleNamespace(load=lambda *a, **kw: (_ for _ in ()).throw(
                     ValueError("SENSITIVE GRAPH TEXT MUST NOT PRINT")))
                 with patch.dict("sys.modules", {"torch": fake_torch}):
                     with self.assertRaises(target.EvaluationStageError) as cm:
-                        target._labels_from_original_graph(path)
+                        target._labels_from_original_graph(path, ORIGINAL_GRAPH_NAMES)
                     self.assertEqual(cm.exception.stage, "GRAPH_TORCH_DESERIALIZATION")
                     self.assertNotIn("SENSITIVE", str(cm.exception))
                 fake_torch = SimpleNamespace(load=lambda *a, **kw: SimpleNamespace(
                     label_names=["intentionally_invalid"], y=object()))
                 with patch.dict("sys.modules", {"torch": fake_torch}):
                     with self.assertRaises(target.EvaluationStageError) as cm:
-                        target._labels_from_original_graph(path)
-                    self.assertEqual(cm.exception.stage, "GRAPH_CLASS_OR_LABEL_SCHEMA")
+                        target._labels_from_original_graph(path, ORIGINAL_GRAPH_NAMES)
+                    self.assertEqual(cm.exception.stage, "GRAPH_CLASS_NAME_ORDER")
+
+    def test_exact_original_names_from_sha_pinned_preparation_receipt(self):
+        receipt = {"historical_wrapper": {
+            "ordered_class_names": list(target.CLASSES),
+            "original_ordered_class_names": list(ORIGINAL_GRAPH_NAMES)}}
+        with patch.object(target, "read_pinned_json", return_value=receipt) as read:
+            self.assertEqual(target._expected_graph_names("offline-frozen"),
+                             ORIGINAL_GRAPH_NAMES)
+        self.assertEqual(read.call_args.args[1],
+                         target.MATCHED_PREPARATION_SHA256)
+        self.assertEqual([x.lower() for x in ORIGINAL_GRAPH_NAMES],
+                         list(target.CLASSES))
+        for value in ("missing", "wrong_order", "unmapped"):
+            bad = deepcopy(receipt)
+            names = bad["historical_wrapper"]["original_ordered_class_names"]
+            if value == "missing":
+                bad["historical_wrapper"].pop("original_ordered_class_names")
+            elif value == "wrong_order":
+                names[0], names[1] = names[1], names[0]
+            else:
+                names[0] = "Artificial_Intelligence"
+            with self.subTest(value=value), patch.object(
+                    target, "read_pinned_json", return_value=bad):
+                with self.assertRaises(ValueError):
+                    target._expected_graph_names("offline-frozen")
+
+    def test_original_capitalization_accepted_but_class_reorder_rejected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "fake_graph.pt"
+            blob = b"synthetic unit test graph only"
+            path.write_bytes(blob)
+            with patch.object(target, "GRAPH_SHA256", hashlib.sha256(blob).hexdigest()):
+                graph = SimpleNamespace(label_names=list(ORIGINAL_GRAPH_NAMES), y=SyntheticY())
+                fake_torch = SimpleNamespace(load=lambda *a, **kw: graph)
+                with patch.dict("sys.modules", {"torch": fake_torch}):
+                    labels = target._labels_from_original_graph(path, ORIGINAL_GRAPH_NAMES)
+                    self.assertEqual(len(labels), 2708)
+                    self.assertEqual(labels[:7], tuple(range(7)))
+                    graph.label_names[0], graph.label_names[1] = (
+                        graph.label_names[1], graph.label_names[0])
+                    with self.assertRaises(target.EvaluationStageError) as cm:
+                        target._labels_from_original_graph(path, ORIGINAL_GRAPH_NAMES)
+                    self.assertEqual(cm.exception.stage, "GRAPH_CLASS_NAME_ORDER")
+                    graph.label_names = list(ORIGINAL_GRAPH_NAMES)
+                    graph.y = object()
+                    with self.assertRaises(target.EvaluationStageError) as cm:
+                        target._labels_from_original_graph(path, ORIGINAL_GRAPH_NAMES)
+                    self.assertEqual(cm.exception.stage, "GRAPH_LABEL_TENSOR_SCHEMA")
 
     def test_run_path_prefight_failure_stays_stage_only(self):
         with tempfile.TemporaryDirectory() as temp:

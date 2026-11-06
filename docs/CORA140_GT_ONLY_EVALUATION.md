@@ -19,7 +19,14 @@ itself is not a semantic L2 adjudication of excerpt interpretation.
 The historical independent scorer in
 \`recovered_sources/experiments/matched_cora/run_matched.py\` uses the trusted
 graph \`cora_random_sbert.pt\`, its \`data.y\` tensor (2708 integer labels)
-and \`data.label_names\` class-order identity. This evaluation takes **only**
+and \`data.label_names\` class-order identity. The historical runner lowercased the
+original class strings for annotation WITHOUT changing class indices:
+`Rule_Learning` became `rule_learning`. The isolated evaluator reads
+`historical_wrapper.original_ordered_class_names` from the SHA-256-pinned
+`preparation_receipt.json` and checks exact equality with the graph's raw
+names. It also requires that lowercasing the original names equals the frozen
+ordered class vocabulary. No reordering, label remapping or GT alteration is
+permitted. This evaluation takes **only**
 that original graph with pinned SHA-256
 \`9285c2afae1bdd9e01ee1b805ace7bd1308a49895b1f11fa22bd0e5bd0adf466\`.
 It verifies the **entire graph file hash before any PyTorch deserialization**;
@@ -122,7 +129,7 @@ to GitHub CI, so CI exercises synthetic labels and fail-closed tests only.
 
 A failed run remains fail-closed. The CLI now emits a **fixed stage identifier**
 along with `FAIL_CLOSED`; no exception text, traceback, node ID or truth label
-is printed. Example: `{"status":"FAIL_CLOSED","stage":"GRAPH_CLASS_OR_LABEL_SCHEMA"}`.
+is printed. Example: `{"status":"FAIL_CLOSED","stage":"GRAPH_CLASS_NAME_ORDER"}`.
 
 - `SAFE_PATH_PREFLIGHT`: output paths or overlap restrictions rejected.
 - `FROZEN_CLOSEOUT_READ`, `PRIVATE_FINAL_REPORT_READ`,
@@ -132,8 +139,12 @@ is printed. Example: `{"status":"FAIL_CLOSED","stage":"GRAPH_CLASS_OR_LABEL_SCHE
 - `GRAPH_TORCH_DESERIALIZATION`: importing/loading the *hash-verified*
   historical .pt raised an exception. Check the local PyTorch/PyG environment;
   never modify the graph to silence it.
-- `GRAPH_CLASS_OR_LABEL_SCHEMA`: original graph loaded, but its declared
-  class order or 2708-node integer label schema was not admitted.
+- `GRAPH_CLASS_MAPPING_PROVENANCE`: pinned original class-name metadata is
+  missing or inconsistent with the frozen class index order.
+- `GRAPH_CLASS_NAME_ORDER`: the raw graph names differ from the original-case,
+  historical order (not an index permutation to repair).
+- `GRAPH_LABEL_TENSOR_SCHEMA`: the graph lacks 2708 integer node labels
+  covering all seven classes.
 - `FROZEN_DECISION_SCORING`: decision/proposal/abstention alignment failed.
 - `PRIVATE_RESULT_PERSISTENCE`: private audit directory or digest write/read
   failed.
@@ -142,3 +153,14 @@ A `torch.jit.script` **FutureWarning** is a library warning, not proof of any
 one failing stage. Do not modify scientific pins or silently bypass GT gates.
 After a failed run, the command may be re-executed with the same paths:
 the scorer never alters frozen source files or existing content-addressed results.
+
+### Owner-local diagnostic and correction (2026-11-06)
+
+The recovered original graph passed its SHA-256 and PyTorch deserialization,
+but the initial GT-only evaluator stopped at `GRAPH_CLASS_OR_LABEL_SCHEMA`.
+The implementation compared the graph's original-case names directly with
+lowercased frozen prediction names. The corrected evaluator verifies the
+original-case order against the SHA-pinned historical preparation receipt and
+requires the lowercase projection to preserve the exact frozen index order.
+Synthetic positive and negative checks exercise this mapping; a real GT score
+remains **unverified until the owner completes the Windows run**.
