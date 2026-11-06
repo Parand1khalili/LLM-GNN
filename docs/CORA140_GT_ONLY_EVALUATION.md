@@ -51,6 +51,7 @@ $graph = "..\LLMGNN_data\cora_random_sbert.pt"
 if (-not (Test-Path -LiteralPath $graph -PathType Leaf)) {
     throw "Original graph not found: locate existing cora_random_sbert.pt; DO NOT download or substitute."
 }
+$graph = (Resolve-Path -LiteralPath $graph).Path
 $sha = (Get-FileHash -LiteralPath $graph -Algorithm SHA256).Hash.ToLowerInvariant()
 if ($sha -ne "9285c2afae1bdd9e01ee1b805ace7bd1308a49895b1f11fa22bd0e5bd0adf466") {
     throw "Original graph SHA256 mismatch — DO NOT score"
