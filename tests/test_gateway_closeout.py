@@ -20,12 +20,6 @@ class ReadOnlyCloseoutTests(unittest.TestCase):
         self.fixture.setUp()
         self.addCleanup(self.fixture.doCleanups)
         self.root = self.fixture.fixture.root
-        self.fixture.amendment.update({
-            "original_intents": 53, "original_completed": 52,
-            "original_rejected_node_id": self.fixture.rejected_node,
-            "original_rejected_phase": "compare",
-            "maximum_cumulative_calls": 69, "maximum_new_calls": 16})
-        self.fixture.approval["amendment_sha256"] = digest(self.fixture.amendment)
         with patch.object(socket.socket, "connect",
                           side_effect=AssertionError("External network forbidden")):
             self.execution = self.fixture._run(SyntheticGapGPTHttp("gpt-6-luna"))
@@ -47,10 +41,7 @@ class ReadOnlyCloseoutTests(unittest.TestCase):
             self.fixture.data, self.root, **self.options)
         result.update(gateway_closeout.verify_private_report(
             result, self.root, self.execution["private_report_sha256"],
-            {p.node_id for p in self.fixture.data.pairs},
-            __import__("llmgnn_sara.sara3.gateway_run", fromlist=["gateway_context"]).gateway_context(
-                self.fixture.data, "r0", 37, "sensitivity",
-                self.fixture.config, fake=False)[0]))
+            {p.node_id for p in self.fixture.data.pairs}))
         return result
 
     def test_complete_no_redispatch_and_sealed_proposals(self):

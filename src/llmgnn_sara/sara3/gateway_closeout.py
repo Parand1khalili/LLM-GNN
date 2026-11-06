@@ -26,7 +26,7 @@ from .gateway_live_continuation import OVERLAY
 from .gateway_run import gateway_context
 from .gateway_usage_report import _valid_usage
 from .inputs import canonical_bytes
-from .rich_evidence import rich_verifier_input_v2
+from .rich_evidence import rich_verifier_input_v2, validate_rich_result, target_source
 
 VERSION = "sara.gapgpt.cora140.gt_free_closeout.v1"
 STATES = ("COMPLETED", "REJECTED", "UNCERTAIN")
@@ -183,7 +183,13 @@ def analyze(inputs, original_root, *, config, amendment, fake=False,
             reasons["L1_DUPLICATE_EVIDENCE"] += 1
             continue
         completed_pairs += 1
-        result = screen_validated(pair, blind, comparison)
+        # strict_envelope verifies raw values but deliberately returns the
+        # original payload. Convert only for concordance; the Comparison
+        # request dependency above must remain digest(original Blind).
+        result = screen_validated(
+            pair,
+            validate_rich_result(blind, (target_source(pair.text),)),
+            validate_rich_result(comparison, (target_source(pair.text),)))
         reasons[result["reason"]] += 1
         if result["action"] == "ACCEPT":
             if result["class_index"] not in candidates:
