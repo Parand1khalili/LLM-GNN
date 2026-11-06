@@ -40,3 +40,19 @@ if ($LASTEXITCODE -ne 0) { throw "Post-freeze diagnosis failed closed" }
 ```
 
 This is a descriptive **post-hoc analysis of an already observed cohort**, not evidence of accuracy, ground-truth validation, a retuned arbitration policy, or training eligibility. The scientific freeze SHA remains unchanged. This command writes no new files; capture only its whitelisted stdout if a local derived result is needed.
+
+## Optional post-freeze secondary-flag audit (GT-free, no API)
+
+Run `gateway_secondary_veto` locally **after** the immutable v1 closeout. This small diagnostic validates the private terminal run, content-addressed arbitration and Blind/Comparison phase audits, frozen request payload hashes and exact-quote L1, and reports **aggregate-only** co-occurrence of Counter-evidence, Auxiliary warning, Uncertainty, Topic drift and Missing shared target quote within the 11 Counter-evidence and 9 Third-class first-veto groups. All screening criteria and source Freeze remain unchanged. Later guards were not evaluated by the original first-veto decision, so these flags are descriptive, **not counterfactual accepted labels**.
+
+```powershell
+$env:PYTHONPATH = Join-Path $PWD "src"
+$env:PYTHONDONTWRITEBYTECODE = "1"
+& .\.venv\Scripts\python.exe -B -m llmgnn_sara.sara3.gateway_secondary_veto `
+ --output-root .local_artifacts/sara3_gapgpt_live_cora140_r0_4096_20261105 `
+ --freeze-sha256 03625722e672f25acb1001b59a4f4a72dd18ab0286ddb9a58a402b73895a1abb `
+ --private-report-sha256 e5405937b5862a90b128a811bcae8d93c9774c1b7d9c21fea0bf92814ea9f5b6
+if ($LASTEXITCODE -ne 0) { throw "Secondary veto audit FAIL_CLOSED" }
+```
+
+No source journal writes, model calls, GT, Human L2 or GCN training. Do not commit the private audit inputs. Independent semantic evaluation and any prospective new Arbitration/GCN protocol are **separate later studies**.
