@@ -23,3 +23,20 @@ The only write is a canonical, content-addressed metadata-only JSON file in the 
 - Content-addressed owner-local freeze: schema `sara.gapgpt.cora140.gt_free_closeout.v1`, **SHA-256 `03625722e672f25acb1001b59a4f4a72dd18ab0286ddb9a58a402b73895a1abb`**. Owner's Windows read-only closeout completed without errors; six targeted local tests passed. GitHub CI at commit `9116c0d`: 365 tests, 292 passed / 73 skipped, including all three new closeout tests.
 
 **Conclusion:** The exact frozen Automated Concordance policy produces zero provisional training proposals despite 29 structurally valid paired evaluations. This establishes zero *proposal coverage under that strict policy*, not label inaccuracy or model failure. Further GT-free diagnosis is descriptive only; any human L2, admission change or GCN experiment requires a separate protocol.
+
+## Next stage: strictly post-freeze GT-free veto diagnosis
+
+The `gateway_failure_diagnostics` command reads **only** the existing SHA256-frozen closeout summary and the immutable, content-addressed private *final run report* (no response-receipt, article text, GT or model call). It computes sanitized aggregate breakdowns for the observed 11 `COUNTER_EVIDENCE_UNRESOLVED` and 9 `THIRD_CLASS_DIAGNOSTIC_ONLY` cases: baseline-candidate agreement, Blind/Comparison class agreement, which phases selected outside the frozen candidate set, and the index distribution of *diagnostic-only* third classes. It cross-checks final reasons, 37 routed nodes, 29 screened pairs, frozen counts, and zero training admission; any mismatch fails closed. No per-node predictions, article/quote text, raw body, Human Review or private report fields appear in its JSON output.
+
+```powershell
+$root = ".local_artifacts/sara3_gapgpt_live_cora140_r0_4096_20261105"
+$env:PYTHONPATH = Join-Path $PWD "src"
+$env:PYTHONDONTWRITEBYTECODE = "1"
+& .\.venv\Scripts\python.exe -B -m llmgnn_sara.sara3.gateway_failure_diagnostics `
+    --output-root $root `
+    --freeze-sha256 03625722e672f25acb1001b59a4f4a72dd18ab0286ddb9a58a402b73895a1abb `
+    --private-report-sha256 e5405937b5862a90b128a811bcae8d93c9774c1b7d9c21fea0bf92814ea9f5b6
+if ($LASTEXITCODE -ne 0) { throw "Post-freeze diagnosis failed closed" }
+```
+
+This is a descriptive **post-hoc analysis of an already observed cohort**, not evidence of accuracy, ground-truth validation, a retuned arbitration policy, or training eligibility. The scientific freeze SHA remains unchanged. This command writes no new files; capture only its whitelisted stdout if a local derived result is needed.
