@@ -133,7 +133,8 @@ def analyze(root, freeze_sha, report_sha):
                     or set(payload.get("historical_candidates", ())) !=
                        {decision.get("b1_class_index"), decision.get("narrative_v0_class_index")}):
                 raise ValueError("Frozen candidates differ")
-            sha = arbitrations[node].get(phase + "_response_sha256")
+            sha = arbitrations[node].get("blind_response_sha256" if phase == "blind"
+                                        else "comparison_response_sha256")
             records[phase] = _matched_phase_receipt(
                 root, sha, name, source["text"],
                 decision.get("blind_class_index" if phase == "blind"
