@@ -1,0 +1,11 @@
+# Cora140 SARA-3 — GT-free Live Closeout v1
+
+This read-only tool analyzes **both** owner-local protected journals, verifies every original and continuation request identity, binding, raw-body SHA, protected receipt SHA, original terminal L1 rejection and every L1-passing receipt. It recomputes Automated Concordance v1 from frozen B1/Narrative candidates and verified Blind/Comparison results, without GT, Human L2 or GCN training. The original response bodies and private report are never exported.
+
+`python -B -m llmgnn_sara.sara3.gateway_closeout --frozen-root .local_artifacts/frozen --authentic-root .local_artifacts/authentic --output-root .local_artifacts/sara3_gapgpt_live_cora140_r0_4096_20261105 --gateway-config configs/gapgpt_rich_v2_output4096_proposed.json --amendment-file configs/sara3_gapgpt_continuation_amendment_v1.json --private-report-sha256 e5405937b5862a90b128a811bcae8d93c9774c1b7d9c21fea0bf92814ea9f5b6`
+
+The only write is a canonical, content-addressed metadata-only JSON file in the private output root's `closeout_v1/` directory. No original or continuation journal/receipt/phase ledger is written. The stdout JSON reports hash, usage and declared-rate estimated cost per state/origin; if the REJECTED response has no valid usage, the exact total is null with a *known-usage-only lower-bound*, not a fabricated provider invoice.
+
+`accepted=false` and `training_class_index=null` apply to **all provisional proposals**, not necessarily unreviewed frozen baseline decisions. Closeout verifies this against the persisted private final run. It verifies the exact two absent Comparison phases correspond to truly `abstain=true` Blind outputs, and refuses any absent Comparison after non-Abstain. It never restarts the live adapter or grants admission to GCN.
+
+**Critical local Git distinction:** The owner's Windows `main` already contains a local merge `fee185f` and independent research Commit `4376708`, plus uncommitted GraphScope changes. GitHub's current remote history does not yet include those two local commits. Use `git fetch origin main` and an ordinary non-destructive `git merge --no-ff origin/main` on local `main` (not `pull --ff-only`) after verifying the working tree; never reset/rebase/force-push.
