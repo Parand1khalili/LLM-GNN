@@ -1,5 +1,25 @@
 # Project state
 
+## README documentation milestone - 2026-11-06
+
+- Rebuilt the root README with method lineage, historical/SARA flowcharts,
+  matched historical result summaries, local startup, architecture and recovery
+  boundaries. Preserved the earlier operational README in docs/OFFLINE_OPERATIONS.md
+  with an explicit supersession note and repaired relative Markdown links.
+- Included two existing, visually inspected local GraphScope screenshots under
+  docs/assets with provenance. These depict a local working-tree preview including
+  uncommitted frontend work, not a verified deployed or committed frontend.
+- Implementation reference: f75d2e4 (prior to this documentation-only commit).
+  Eight-node continuation remains PROPOSED_NOT_AUTHORIZED; no live dispatch,
+  private journal reconciliation, GT decoding or real training in this task.
+- Documentation verification: local Markdown targets/README anchors, JPEG headers (original PNG extensions corrected),
+  copy SHA-256 equality, four historical table rows against the website JSON,
+  and staged diff/credential-pattern review. No scientific regression rerun.
+- GitHub: local documentation commit is PUSH_PENDING; no remote backup verified
+  by this task. Google Drive: no upload. Raw response admission remains partial.
+- Next approved action: owner review and manual GitHub push; scientific execution
+  remains subject to the existing explicit authorization boundaries.
+
 Date: 2026-11-02 (America/Los_Angeles).
 
 - Blind-only post-observation completion prepared, NOT DISPATCHED. Entry:
