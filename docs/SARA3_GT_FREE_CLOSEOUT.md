@@ -56,3 +56,16 @@ if ($LASTEXITCODE -ne 0) { throw "Secondary veto audit FAIL_CLOSED" }
 ```
 
 No source journal writes, model calls, GT, Human L2 or GCN training. Do not commit the private audit inputs. Independent semantic evaluation and any prospective new Arbitration/GCN protocol are **separate later studies**.
+
+## Owner-observed post-freeze first-veto results (2026-11-06)
+
+**Source:** Owner's Windows `gateway_failure_diagnostics` output, reconciled against the immutable closeout freeze SHA-256 `03625722e672f25acb1001b59a4f4a72dd18ab0286ddb9a58a402b73895a1abb`. The underlying private report/receipts are **not on GitHub**, so these are owner-local observed aggregates, not newly replayed remote data. Local targeted tests: **7/7 PASS**.
+
+| First-veto group | Count | Frozen baseline agreement | Cross-phase agreement | Third-class breakdown |
+| --- | ---: | ---: | ---: | --- |
+| `COUNTER_EVIDENCE_UNRESOLVED` | 11 | B1/Narrative 7/11 | Blind/Comparison 11/11 | Neither phase outside frozen candidates |
+| `THIRD_CLASS_DIAGNOSTIC_ONLY` | 9 | B1/Narrative 9/9 | Blind/Comparison 7/9 | Blind 9/9, Comparison 7/9 outside candidates |
+
+Diagnostic-only third-class index distribution: **0:3, 1:1, 4:2, 5:1, 6:2**. These indices are not verified labels. The frozen first-veto policy stops at the first barrier, so later evidence-related flags may co-occur. `gateway_secondary_veto` (above) is a separate **metadata-only descriptive check** of those co-occurrences, not a rule change or estimate of how many cases would be accepted if a veto were suppressed.
+
+**Research progression (distinct protocols):** (1) classify co-occurring veto flags on the same frozen 20 nodes; (2) separately preregister an independent semantic evaluation and its GT isolation/bias controls without tuning on evaluation labels; (3) only after supporting evidence, preregister an experimental Arbitration policy and matched GCN ablation including coverage, per-class retention, seeds and evaluation separation. No new API calls or GCN training are part of the current diagnostic.
