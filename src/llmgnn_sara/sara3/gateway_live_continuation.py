@@ -12,6 +12,7 @@ import sys
 
 from ..io.project import load_project_inputs
 from .audit import PrivateAudit
+from .evidence import EvidenceError
 from .automated_policy import VERSION as AUTOMATED_VERSION
 from .experiment import digest
 from .gapgpt_live import DurableGapGPTVerifier, KEY_VARIABLE, contract_from_dict, wire_for
@@ -115,6 +116,16 @@ class LiveAmendedContinuationVerifier(AmendedSyntheticContinuationVerifier):
             if row is None:
                 raise ValueError("Overlay comparison identity mismatch")
             self._completed(ci, row, cp, cw, dep, "compare", pair.text)
+
+    def _completed(self, identity_sha, row, payload, wire, dependency, phase, text):
+        # The original terminal rejection was independently verified in
+        # amendment_preflight. Preserve its exact historical L1 diagnostic in
+        # the new report instead of downgrading it to generic uncertainty.
+        rejected = self.base_phases[(FROZEN_REJECTED_NODE, "compare")]
+        if identity_sha == rejected[0] and row == rejected[1]:
+            raise EvidenceError("L1_DUPLICATE_EVIDENCE")
+        return super()._completed(
+            identity_sha, row, payload, wire, dependency, phase, text)
 
     def _reserve(self, identity_sha, payload, dependency, phase, node):
         # Recheck original SQLite binding/identities at the irreversible write
