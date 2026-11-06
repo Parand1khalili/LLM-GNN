@@ -104,7 +104,11 @@ class NodeJourneyTests(unittest.TestCase):
         self.assertEqual(unrouted["narrative_to_blind"], "NOT_REVIEWED")
         self.assertIsNone(unrouted["frozen_arbitration_reason"])
         self.assertEqual(sum(x["frozen_training_admitted"] is True
-                             for x in result["node_rows_owner_private"]), 0)
+                             for x in result["node_rows_owner_private"]
+                             if x["r0_selected_for_review"]), 0)
+        self.assertEqual(sum(x["frozen_training_admitted"] is True
+                             for x in result["node_rows_owner_private"]
+                             if not x["r0_selected_for_review"]), 103)
         self.assertEqual(result["summary"]["reviewed_phase_changes"]["b1_to_blind"]["denominator"], 37)
         self.assertEqual(result["summary"]["reviewed_phase_changes"]["narrative_v0_to_comparison"]["NO_CLASS_PREDICTION"], 10)
         for phase in journey.PHASES:
