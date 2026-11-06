@@ -1,5 +1,6 @@
 """GapGPT fake-wire integration and fail-closed live admission; never paid HTTP."""
 from copy import deepcopy
+from contextlib import closing
 import hashlib
 import json
 from pathlib import Path
@@ -600,7 +601,7 @@ class GatewayTests(unittest.TestCase):
             diagnose(self.root, expected_context_sha256="0" * 64)
         import sqlite3
         db = self.root / "journal" / "fixture_journal.sqlite"
-        with sqlite3.connect(db) as conn:
+        with closing(sqlite3.connect(db)) as conn:
             receipt, = conn.execute(
                 "SELECT receipt FROM intents WHERE state='REJECTED'"
             ).fetchone()

@@ -5,6 +5,7 @@ modify an existing receipt/SQLite journal. Never prints prompt/response text.
 """
 import argparse
 from collections import Counter
+from contextlib import closing
 import hashlib
 import json
 from pathlib import Path
@@ -113,7 +114,7 @@ def diagnose(output_root, *, expected_context_sha256):
     if private.is_symlink() or not private.is_dir():
         raise ValueError("Missing or unsafe private journal")
     path = _private_file(private, "fixture_journal.sqlite")
-    with sqlite3.connect(path.resolve().as_uri() + "?mode=ro", uri=True) as db:
+    with closing(sqlite3.connect(path.resolve().as_uri() + "?mode=ro", uri=True)) as db:
         db.execute("PRAGMA query_only=ON")
         rows = db.execute(
             "SELECT version, context_hash, call_limit FROM binding WHERE id=1"

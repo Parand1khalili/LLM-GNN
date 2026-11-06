@@ -351,3 +351,9 @@ number/category of repeated exact quotes. It does **not** print
 quotes, claims, target papers, raw HTTP bodies, response IDs,
 API keys or other prompts. If it detects a broken receipt/binding,
 it fails closed. Existing run data must remain immutable.
+
+## Slice 1 (2026-11-06): reporting-only repair
+
+The owner reports a halted, local-only Cora-140 R0 Rich V2/4096 live run: 53 recorded attempts (52 COMPLETED, one REJECTED for node 1814 compare / L1_DUPLICATE_EVIDENCE; zero UNCERTAIN). The private journal was **not** available to the GitHub editing session. No new dispatch, GT evaluation, L2 approval or GCN training was performed. The batch remains halted; never resume it from these changes.
+
+The corrected run-report layer distinguishes nodes with no persisted intent after halt from genuine UNCERTAIN intents. The new `python -B -m llmgnn_sara.sara3.gateway_usage_report` reconciles only local, content-hash-verified private receipts with declared tariff inputs. COMPLETED/REJECTED/UNCERTAIN and ALL ATTEMPTS are separate, and incomplete provider usage produces a null total estimate rather than a fabricated invoice. Historical summary JSON and terminal states remain immutable. The reported 80760 input / 33192 output / 18619 reasoning tokens and USD 0.0246720 are **owner-provided observations**, pending local read-only reconciliation, not independently verified by this GitHub change. L1/prompt/router/arbitration remain unchanged.

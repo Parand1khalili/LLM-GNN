@@ -248,3 +248,5 @@ not uploaded or verified. A local cache is not a remote backup.
 
 See PROJECT_STATE.md, EXPERIMENT_REGISTRY.jsonl, reports/, and
 manifests/implementation_lineage.json.
+
+Slice 1 (2026-11-06): offline-only reporting fixes and a receipt-verified read-only usage reconciliation CLI. See docs/SARA3_GAPGPT_LIVE_ADAPTER.md. A halted live batch remains blocked; this does not authorize dispatch.

@@ -211,6 +211,19 @@ def gateway_run(inputs, output_root, *, router, budget, cohort, config,
     stats = verifier.stats()
     states = stats["state_counts"]
     blocked = verifier.halted or states["UNCERTAIN"] or states["REJECTED"]
+    # Halted verifiers refuse unreserved nodes with a generic uncertainty code.
+    # Reconcile report-only classifications against durable intents; never alter
+    # SQLite terminal states, L1 decisions, or scientific label admission.
+    persisted_phases = verifier.phase_states()
+    if blocked:
+        for decision in run["decisions"]:
+            node = decision["node_id"]
+            if (decision["routed_for_review"] and
+                    (node, "blind") not in persisted_phases):
+                decision["reason"] = "NOT_ATTEMPTED_AFTER_HALT"
+                decision["verification_completed"] = False
+                if "l1_status" in decision:
+                    decision["l1_status"] = "NOT_ASSESSED"
     run["gateway_runner_version"] = CONTRACT
     run["gateway_context_sha256"] = digest(context)
     run["frozen_pairs_sha256"] = frozen_pair_digest(inputs.pairs)
@@ -264,6 +277,9 @@ def gateway_run(inputs, output_root, *, router, budget, cohort, config,
                "successful_replays": stats["successful_replays"],
                "attempted_calls": stats["attempted_calls"],
                "journal_states": states,
+               "not_attempted_after_halt_node_ids": sorted(
+                   d["node_id"] for d in run["decisions"]
+                   if d["reason"] == "NOT_ATTEMPTED_AFTER_HALT"),
                "usage": stats["verified_usage"],
                "returned_models": stats["returned_models"],
                "rejection_codes": stats["rejection_codes"],

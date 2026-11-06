@@ -60,3 +60,6 @@ Applies throughout this project. Respond primarily in Persian; write code, docum
 ## Report honestly in Persian
 - Routine reports: **Completed**, **Verification**, **GitHub** (SHA/verified push or `PUSH_PENDING`), **Google Drive** (status/destination or not applicable), **Scientific impact** (what is/is not established), **Next step** (one recommendation).
 - Major milestones also include cohort/scope, exact baselines/protocols, numerical results/uncertainty, failures/limitations, artifact locations, reproduction instructions, costs/resources, and remaining questions. Never hide failed checks, unavailable tools, missing artifacts, uncertainty, or incomplete backups; never describe plans as completed.
+
+## Slice 1 status (2026-11-06)
+- A user-authorized, limited commit to existing main covers synthetic regression corrections and read-only live reporting. Historical 'owner pushes manually' guidance above applies outside this explicit per-task authorization. Do not resume the halted 4096 batch or alter private journals; validate receipts locally with gateway_usage_report. No GT/GCN/L1 policy changes.

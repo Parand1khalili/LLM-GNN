@@ -111,8 +111,8 @@ class AuthenticRobustnessTests(unittest.TestCase):
              patch.object(socket.socket, "connect", side_effect=AssertionError("Network forbidden")):
             for index, result in enumerate(comparison["routers"].values()):
                 ids = result["selected_node_ids"]
-                # Test-only injection: new selectors remain unintegrated in production.
-                with patch("llmgnn_sara.sara3.pipeline.route_r0", return_value=tuple(ids)):
+                # Inject the selected IDs at the production selection interface.
+                with patch("llmgnn_sara.sara3.pipeline.select_router", return_value=tuple(ids)):
                     run = run_offline(inputs.pairs, 37, "r0", ProtocolFixture(),
                                       audit=PrivateAudit(Path(temp) / str(index)))
                 expected_calls = 37 + sum(node % 3 != 0 for node in ids)

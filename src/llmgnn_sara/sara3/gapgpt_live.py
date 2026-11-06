@@ -353,6 +353,13 @@ class DurableGapGPTVerifier(DurableOfflineFixtureVerifier):
             candidates=request.historical_candidates, blind_class=request.blind_class_index)
         return self._invoke("compare", request, payload, digest(blind))
 
+    def phase_states(self):
+        """Read actual persisted intent states, never infer them from exceptions."""
+        with closing(self._connection()) as db:
+            self._verify_binding(db)
+            return {(node, phase): state for node, phase, state in db.execute(
+                "SELECT node_id,phase,state FROM intents")}
+
     def stats(self):
         with closing(self._connection()) as db:
             self._verify_binding(db)
