@@ -255,7 +255,7 @@ def analyze(inputs, original_root, *, config, amendment, fake=False,
     return summary
 
 
-def verify_private_report(summary, root, report_sha, selected_nodes):
+def verify_private_report(summary, root, report_sha, all_node_ids, selected_node_ids):
     """Check the final persisted ledger without releasing private response content."""
     audit = PrivateAudit(Path(root) / OVERLAY / "journal")
     record = audit.read(report_sha)
@@ -267,9 +267,9 @@ def verify_private_report(summary, root, report_sha, selected_nodes):
         raise ValueError("Incomplete final run")
     all_decisions = run["decisions"]
     by_node = {d.get("node_id"): d for d in all_decisions if type(d) is dict}
-    if len(by_node) != len(all_decisions) or set(by_node) != set(selected_nodes):
+    if len(by_node) != len(all_decisions) or set(by_node) != set(all_node_ids):
         raise ValueError("Final report node coverage mismatch")
-    if set(run.get("selected_node_ids", ())) != set(selected_nodes):
+    if set(run.get("selected_node_ids", ())) != set(selected_node_ids):
         raise ValueError("Final report selection mismatch")
     proposed = [d for d in all_decisions if d.get("provisional_status") == "PROPOSED"]
     if any(d.get("accepted") is not False or d.get("training_class_index") is not None
@@ -332,14 +332,14 @@ def main(argv=None):
             args.output_root,
             config=json.loads(args.gateway_config.read_text(encoding="utf-8")),
             amendment=json.loads(args.amendment_file.read_text(encoding="utf-8")))
+        inputs = load_project_inputs(args.frozen_root, args.authentic_root)
         selected, _ = gateway_context(
-            load_project_inputs(args.frozen_root, args.authentic_root),
-            "r0", 37, "sensitivity",
+            inputs, "r0", 37, "sensitivity",
             contract_from_dict(json.loads(args.gateway_config.read_text(encoding="utf-8"))),
             fake=False)
         result.update(verify_private_report(
             result, args.output_root, args.private_report_sha256,
-            {p.node_id for p in load_project_inputs(args.frozen_root, args.authentic_root).pairs}))
+            {p.node_id for p in inputs.pairs}, selected))
         sha = freeze(result, args.output_root)
         print(json.dumps({"freeze_sha256": sha, **result}, ensure_ascii=False,
                          sort_keys=True, indent=2, allow_nan=False))

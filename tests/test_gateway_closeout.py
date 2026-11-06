@@ -47,7 +47,10 @@ class ReadOnlyCloseoutTests(unittest.TestCase):
             self.fixture.data, self.root, **self.options)
         result.update(gateway_closeout.verify_private_report(
             result, self.root, self.execution["private_report_sha256"],
-            {p.node_id for p in self.fixture.data.pairs}))
+            {p.node_id for p in self.fixture.data.pairs},
+            __import__("llmgnn_sara.sara3.gateway_run", fromlist=["gateway_context"]).gateway_context(
+                self.fixture.data, "r0", 37, "sensitivity",
+                self.fixture.config, fake=False)[0]))
         return result
 
     def test_complete_no_redispatch_and_sealed_proposals(self):
