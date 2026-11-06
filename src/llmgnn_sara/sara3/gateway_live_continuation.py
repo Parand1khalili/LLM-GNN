@@ -28,6 +28,7 @@ from .rich_evidence import RICH_PROMPT_V2, RICH_VERSION, rich_verifier_input_v2
 VERSION = "sara.gapgpt.cora140.live_continuation.v1"
 APPROVAL_VERSION = "sara.gapgpt.cora140.continuation_owner_approval.v1"
 OVERLAY = "continuation_amendment_v1"
+FROZEN_REJECTED_NODE = 1814
 OWNER_FLAGS = ("data_sharing_approved", "spend_approved",
                "explicit_continuation_dispatch_approved")
 
@@ -161,7 +162,7 @@ def execute(inputs, original_root, *, config, amendment, approval, key):
     original_phases = {(n, p): row[1][3] for (n, p), row in verifier.base_phases.items()}
     if (len(original_phases) != 53
             or any(states.get(key) != val for key, val in original_phases.items())
-            or states.get((1814, "compare")) != "REJECTED"
+            or states.get((FROZEN_REJECTED_NODE, "compare")) != "REJECTED"
             or verifier.dispatches > 16 or len(states) > 69):
         raise ValueError("Continuation final scope mismatch")
     new_states = {key: state for key, state in states.items()
@@ -184,7 +185,7 @@ def execute(inputs, original_root, *, config, amendment, approval, key):
                        for x in ("COMPLETED", "REJECTED", "UNCERTAIN")},
         "remaining_new_call_capacity": 16 - len(new_states),
         "cumulative_intents": len(states), "cumulative_cap": 69,
-        "historical_rejection_node_id": 1814,
+        "historical_rejection_node_id": FROZEN_REJECTED_NODE,
         "historical_rejection_code": "L1_DUPLICATE_EVIDENCE",
         "original_journal_write_operations": 0,
         "training_runs": 0, "GT_accessed": False,

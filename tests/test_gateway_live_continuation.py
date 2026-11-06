@@ -3,6 +3,8 @@ import hashlib
 import json
 from pathlib import Path
 import socket
+import sqlite3
+from contextlib import closing
 from unittest import TestCase
 from unittest.mock import patch
 
@@ -46,6 +48,8 @@ class LiveContinuationTests(TestCase):
             self.historical = self.fixture.historical_53()
         self.allowed = tuple(self.historical["not_attempted_after_halt_node_ids"])
         self.before = self.fixture.files()
+        with closing(sqlite3.connect(self.fixture.root / "journal" / "fixture_journal.sqlite")) as db:
+            self.rejected_node = db.execute("SELECT node_id FROM intents WHERE state='REJECTED'").fetchone()[0]
 
     def _admit(self, inputs, root, *, config, amendment, fake=False):
         report = continuation.inspect(
@@ -60,6 +64,7 @@ class LiveContinuationTests(TestCase):
         with (patch.object(live, "FROZEN_CONTEXT_SHA256", self.context_sha),
               patch.object(live, "FROZEN_CONTRACT_SHA256", digest(self.config)),
               patch.object(live, "FROZEN_BLINDS", self.allowed),
+              patch.object(live, "FROZEN_REJECTED_NODE", self.rejected_node),
               patch.object(live, "amendment_preflight", side_effect=self._admit),
               patch.object(socket.socket, "connect",
                            side_effect=AssertionError("Direct networking prohibited")),
