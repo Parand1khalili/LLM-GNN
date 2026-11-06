@@ -117,3 +117,28 @@ not proof of semantic entailment, meaning, or reviewer agreement.
 reviewer packets, source journals, or receipts. No GCN or Human L2 is
 executed by this scorer. The exact original graph file is not available
 to GitHub CI, so CI exercises synthetic labels and fail-closed tests only.
+
+## Safe failure diagnosis (no private payload output)
+
+A failed run remains fail-closed. The CLI now emits a **fixed stage identifier**
+along with `FAIL_CLOSED`; no exception text, traceback, node ID or truth label
+is printed. Example: `{"status":"FAIL_CLOSED","stage":"GRAPH_CLASS_OR_LABEL_SCHEMA"}`.
+
+- `SAFE_PATH_PREFLIGHT`: output paths or overlap restrictions rejected.
+- `FROZEN_CLOSEOUT_READ`, `PRIVATE_FINAL_REPORT_READ`,
+  `PINNED_PROJECT_INPUTS`, `FROZEN_CONTEXT_AND_SELECTION`,
+  `FIRST_VETO_RECONCILIATION`: a frozen-source/selection/provenance gate failed.
+- `GRAPH_PATH_OR_HASH`: graph path/file or SHA-256 rejected.
+- `GRAPH_TORCH_DESERIALIZATION`: importing/loading the *hash-verified*
+  historical .pt raised an exception. Check the local PyTorch/PyG environment;
+  never modify the graph to silence it.
+- `GRAPH_CLASS_OR_LABEL_SCHEMA`: original graph loaded, but its declared
+  class order or 2708-node integer label schema was not admitted.
+- `FROZEN_DECISION_SCORING`: decision/proposal/abstention alignment failed.
+- `PRIVATE_RESULT_PERSISTENCE`: private audit directory or digest write/read
+  failed.
+
+A `torch.jit.script` **FutureWarning** is a library warning, not proof of any
+one failing stage. Do not modify scientific pins or silently bypass GT gates.
+After a failed run, the command may be re-executed with the same paths:
+the scorer never alters frozen source files or existing content-addressed results.

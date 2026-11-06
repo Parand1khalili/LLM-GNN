@@ -1,5 +1,6 @@
 """Synthetic-only post-freeze Cora GT scoring; never uses actual Cora labels."""
 from copy import deepcopy
+import hashlib
 from pathlib import Path
 from types import SimpleNamespace
 import io
@@ -156,6 +157,52 @@ class GTShadowTests(unittest.TestCase):
                         "--graph-file", "none", "--score-root", "none"]
                 self.assertEqual(target.main(args), 1)
                 self.assertEqual(json.loads(err.getvalue()), {"status": "FAIL_CLOSED"})
+
+    def test_fail_closed_provides_only_fixed_stage_not_private_exception(self):
+        args = ["--frozen-root", "unused", "--authentic-root", "unused",
+                "--run-root", "unused", "--gateway-config", "unused",
+                "--graph-file", "unused", "--score-root", "unused"]
+        with patch.object(target, "run", side_effect=target.EvaluationStageError(
+                "FROZEN_DECISION_SCORING")), \
+             patch("sys.stdout", new_callable=io.StringIO) as stdout, \
+             patch("sys.stderr", new_callable=io.StringIO) as stderr:
+            self.assertEqual(target.main(args), 1)
+        self.assertEqual(stdout.getvalue(), "")
+        self.assertEqual(json.loads(stderr.getvalue()),
+                         {"status": "FAIL_CLOSED", "stage": "FROZEN_DECISION_SCORING"})
+        self.assertNotIn("label", stderr.getvalue())
+
+    def test_graph_error_stages_never_unpickle_wrong_hash_or_reveal_data(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "fake_graph.pt"
+            blob = b"synthetic fake bytes, not the original Cora graph"
+            path.write_bytes(blob)
+            with self.assertRaises(target.EvaluationStageError) as cm:
+                target._labels_from_original_graph(path)
+            self.assertEqual(cm.exception.stage, "GRAPH_PATH_OR_HASH")
+            with patch.object(target, "GRAPH_SHA256", hashlib.sha256(blob).hexdigest()):
+                fake_torch = SimpleNamespace(load=lambda *a, **kw: (_ for _ in ()).throw(
+                    ValueError("SENSITIVE GRAPH TEXT MUST NOT PRINT")))
+                with patch.dict("sys.modules", {"torch": fake_torch}):
+                    with self.assertRaises(target.EvaluationStageError) as cm:
+                        target._labels_from_original_graph(path)
+                    self.assertEqual(cm.exception.stage, "GRAPH_TORCH_DESERIALIZATION")
+                    self.assertNotIn("SENSITIVE", str(cm.exception))
+                fake_torch = SimpleNamespace(load=lambda *a, **kw: SimpleNamespace(
+                    label_names=["intentionally_invalid"], y=object()))
+                with patch.dict("sys.modules", {"torch": fake_torch}):
+                    with self.assertRaises(target.EvaluationStageError) as cm:
+                        target._labels_from_original_graph(path)
+                    self.assertEqual(cm.exception.stage, "GRAPH_CLASS_OR_LABEL_SCHEMA")
+
+    def test_run_path_prefight_failure_stays_stage_only(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / ".local_artifacts"
+            root.mkdir()
+            with self.assertRaises(target.EvaluationStageError) as cm:
+                target.run("not-frozen", "not-authentic", root, "not-config",
+                           "not-graph", root)
+            self.assertEqual(cm.exception.stage, "SAFE_PATH_PREFLIGHT")
 
     def test_score_does_not_import_or_execute_arbitration_policy(self):
         with patch("llmgnn_sara.evaluation.cora_gt_shadow._labels_from_original_graph",
