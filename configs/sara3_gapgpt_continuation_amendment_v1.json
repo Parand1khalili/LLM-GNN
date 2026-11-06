@@ -1,0 +1,25 @@
+{
+  "version": "sara.gapgpt.cora140.r0.continuation_amendment.v1",
+  "status": "PROPOSED_NOT_AUTHORIZED",
+  "execution_context_sha256": "c41b7a6ecec46a2a99c3b570f7e0b093756db4db98d692f4bb956135584599f8",
+  "gateway_contract_sha256": "59fd3de634a4aabae97fc9df02c396c5c435819e8b7f4cdbde1fe7837a8c165f",
+  "original_intents": 53,
+  "original_completed": 52,
+  "original_rejected_node_id": 1814,
+  "original_rejected_phase": "compare",
+  "original_reject_code": "L1_DUPLICATE_EVIDENCE",
+  "eligible_new_blind_node_ids": [
+    2487,
+    2396,
+    2238,
+    2317,
+    2022,
+    2379,
+    2490,
+    2534
+  ],
+  "maximum_new_calls": 16,
+  "maximum_cumulative_calls": 69,
+  "original_contract_call_cap": 74,
+  "owner_dispatch_approval": false
+}

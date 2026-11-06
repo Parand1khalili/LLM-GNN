@@ -246,6 +246,89 @@ class SyntheticContinuationVerifier(DurableGapGPTVerifier):
         return values
 
 
+AMENDMENT_VERSION = "sara.gapgpt.cora140.r0.continuation_amendment.v1"
+FROZEN_CONTEXT_SHA256 = "c41b7a6ecec46a2a99c3b570f7e0b093756db4db98d692f4bb956135584599f8"
+FROZEN_CONTRACT_SHA256 = "59fd3de634a4aabae97fc9df02c396c5c435819e8b7f4cdbde1fe7837a8c165f"
+FROZEN_BLINDS = (2487, 2396, 2238, 2317, 2022, 2379, 2490, 2534)
+
+
+def amendment_preflight(inputs, output_root, *, config, amendment, fake=False):
+    """Read-only exact-scope admission. This does not authorize live dispatch."""
+    cfg = contract_from_dict(config)
+    expected = {
+        "version": AMENDMENT_VERSION, "status": "PROPOSED_NOT_AUTHORIZED",
+        "execution_context_sha256": FROZEN_CONTEXT_SHA256,
+        "gateway_contract_sha256": FROZEN_CONTRACT_SHA256,
+        "original_intents": 53, "original_completed": 52,
+        "original_rejected_node_id": 1814,
+        "original_rejected_phase": "compare",
+        "original_reject_code": "L1_DUPLICATE_EVIDENCE",
+        "eligible_new_blind_node_ids": list(FROZEN_BLINDS),
+        "maximum_new_calls": 16, "maximum_cumulative_calls": 69,
+        "original_contract_call_cap": 74,
+        "owner_dispatch_approval": False,
+    }
+    if (type(amendment) is not dict or amendment != expected or
+            digest(cfg) != FROZEN_CONTRACT_SHA256 or cfg["max_calls"] != 74):
+        raise ValueError("Frozen unapproved amendment/contract mismatch")
+    checked = inspect(
+        inputs, output_root, config=cfg,
+        expected_context_sha256=FROZEN_CONTEXT_SHA256,
+        fake=fake, expected_rejection=(1814, "compare"))
+    if (checked["original_intents"] != 53 or
+            checked["completed_replayed_and_l1_verified"] != 52 or
+            checked["rejected_preserved"] != 1 or checked["uncertain"] != 0 or
+            checked["never_dispatched_blind_node_ids"] != list(FROZEN_BLINDS) or
+            checked["missing_comparison_after_completed_blind_node_ids"] or
+            checked["maximum_possible_new_calls"] != 16 or
+            checked["remaining_logical_capacity"] != 21):
+        raise ValueError("Actual original journal outside frozen amendment scope")
+    return {**checked, "amendment_version": AMENDMENT_VERSION,
+            "amendment_sha256": digest(amendment),
+            "maximum_cumulative_calls": 69, "maximum_new_calls": 16,
+            "original_call_cap": 74,
+            "live_dispatch_enabled": False, "owner_dispatch_approval": False,
+            "authorization": "NOT_GRANTED_REQUIRES_SEPARATE_OWNER_AMENDMENT"}
+
+
+class AmendedSyntheticContinuationVerifier(SyntheticContinuationVerifier):
+    """Strict 8-node, 16-request scope, fake transport ONLY."""
+    def __init__(self, inputs, config, original_root, overlay_audit,
+                 *, amendment, transport):
+        checked = amendment_preflight(
+            inputs, original_root, config=config, amendment=amendment, fake=True)
+        _, context = gateway_context(
+            inputs, "r0", 37, "sensitivity", config, fake=True)
+        self._allowed_nodes = frozenset(FROZEN_BLINDS)
+        super().__init__(config, context, original_root, overlay_audit,
+                         transport=transport, original_count=checked["original_intents"])
+        combined = super().phase_states()
+        additions = {(node, phase): state for (node, phase), state in combined.items()
+                     if (node, phase) not in self.base_phases}
+        if (len(additions) > 16 or len(self.base_phases) + len(additions) > 69
+                or any(node not in self._allowed_nodes for node, _ in additions)):
+            raise ValueError("Continuation overlay outside amended scope")
+        for (node, phase), _state in additions.items():
+            if phase == "compare" and additions.get((node, "blind")) != "COMPLETED":
+                raise ValueError("Comparison requires completed overlay Blind")
+
+    def _reserve(self, identity_sha, payload, dependency, phase, node):
+        if node not in self._allowed_nodes or phase not in ("blind", "compare"):
+            raise ValueError("Request outside amended eight-node scope")
+        if phase == "compare":
+            phases = super().phase_states()
+            if phases.get((node, "blind")) != "COMPLETED" or dependency is None:
+                raise ValueError("Comparison requires completed dependent Blind")
+        elif dependency is not None:
+            raise ValueError("Blind cannot have a dependency")
+        return super()._reserve(identity_sha, payload, dependency, phase, node)
+
+    def _budget_accepts_new_intent(self, overlay_count):
+        if overlay_count + 1 > 16 or 53 + overlay_count + 1 > 69:
+            raise ValueError("Amendment new/cumulative dispatch cap exhausted")
+        super()._budget_accepts_new_intent(overlay_count)
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--frozen-root", required=True, type=Path)
@@ -253,16 +336,25 @@ def main(argv=None):
     parser.add_argument("--output-root", required=True, type=Path)
     parser.add_argument("--gateway-config", required=True, type=Path)
     parser.add_argument("--expected-context-sha256", required=True)
+    parser.add_argument("--amendment-file", type=Path,
+                        help="Unapproved exact-scope amendment JSON for read-only preflight")
     args = parser.parse_args(argv)
     try:
         if args.gateway_config.is_symlink():
             raise ValueError("Unsafe config")
-        result = inspect(
-            load_project_inputs(args.frozen_root, args.authentic_root),
-            args.output_root,
-            config=json.loads(args.gateway_config.read_text(encoding="utf-8")),
-            expected_context_sha256=args.expected_context_sha256,
-            expected_rejection=(1814, "compare"))
+        inputs = load_project_inputs(args.frozen_root, args.authentic_root)
+        cfg = json.loads(args.gateway_config.read_text(encoding="utf-8"))
+        if args.amendment_file is not None:
+            if args.amendment_file.is_symlink() or args.expected_context_sha256 != FROZEN_CONTEXT_SHA256:
+                raise ValueError("Unsafe amendment or wrong context")
+            result = amendment_preflight(
+                inputs, args.output_root, config=cfg,
+                amendment=json.loads(args.amendment_file.read_text(encoding="utf-8")))
+        else:
+            result = inspect(
+                inputs, args.output_root, config=cfg,
+                expected_context_sha256=args.expected_context_sha256,
+                expected_rejection=(1814, "compare"))
         if (result["original_intents"] != 53 or
                 result["completed_replayed_and_l1_verified"] != 52 or
                 result["rejected_preserved"] != 1):
