@@ -69,3 +69,31 @@ No source journal writes, model calls, GT, Human L2 or GCN training. Do not comm
 Diagnostic-only third-class index distribution: **0:3, 1:1, 4:2, 5:1, 6:2**. These indices are not verified labels. The frozen first-veto policy stops at the first barrier, so later evidence-related flags may co-occur. `gateway_secondary_veto` (above) is a separate **metadata-only descriptive check** of those co-occurrences, not a rule change or estimate of how many cases would be accepted if a veto were suppressed.
 
 **Research progression (distinct protocols):** (1) classify co-occurring veto flags on the same frozen 20 nodes; (2) separately preregister an independent semantic evaluation and its GT isolation/bias controls without tuning on evaluation labels; (3) only after supporting evidence, preregister an experimental Arbitration policy and matched GCN ablation including coverage, per-class retention, seeds and evaluation separation. No new API calls or GCN training are part of the current diagnostic.
+
+## Owner-observed secondary veto co-occurrences (2026-11-06)
+
+The Windows owner executed `gateway_secondary_veto` against the SAME immutable freeze (`03625722e672f25acb1001b59a4f4a72dd18ab0286ddb9a58a402b73895a1abb`). The result reconciled `target_nodes=20`, `routed_nodes=37`, with zero provider, GT, Human L2 or GCN accesses; no individual text, quote or prediction was exported. This is an owner-supplied local aggregate, not direct GitHub access to private records.
+
+| Flag present | 11 counter-evidence first-veto nodes | 9 third-class first-veto nodes |
+| --- | ---: | ---: |
+| Counter-evidence in either phase | 11 | 9 |
+| Auxiliary warning in either phase | 11 | 9 |
+| Uncertainty reason in either phase | 1 | 0 |
+| Primary-topic *string* differs after trim/casefold | 11 | 8 |
+| No identical target supporting quote across phases | 4 | 4 |
+| Counter-evidence in both phases | 10 | 5 |
+| Auxiliary warning in both phases | 11 | 6 |
+
+These categories overlap. The exact-string topic-drift flag is NOT a semantic disagreement verdict. First-veto precedence means that removing a single veto does **not** imply that previously screened cases would produce accepted proposals. The frozen result remains **0 provisional proposals** and **0 training admissions**.
+
+## Separate prospective evaluation plan — NOT EXECUTED
+
+**Scientific question:** Do the third verifier's class decisions add correct, target-grounded information beyond frozen B1/Narrative labels, or do they mostly introduce correlated error and evidence ambiguity?
+
+1. **Population and reporting:** Audit all 37 R0-routed cases (the 20 focus cases plus all 17 other routed cases) to give a defined within-routed denominator; retain the distinct full Cora140 denominator. Do not extrapolate a conditional 9- or 20-node result to 140 nodes. Treat the nine third-class cases as a predeclared exploratory stratum, not a representative sample.
+2. **Independent reference protocol:** Before accessing any evaluation labels, freeze an adjudication rubric based on target paper's *primary research topic*, with auxiliary-method distinction, strength and polarity of exact supporting/counter evidence, and a permissible `UNRESOLVABLE` outcome. Use two separately blinded evaluators who see only the same authorized target source and class atlas (not B1/Narrative/Blind/Comparison outputs, veto reasons, or GT), then reconcile disagreement using a predeclared adjudicator. Store all per-case reviews and excerpts privately with explicit approval; do NOT commit reviews to GitHub. No Human Review is authorized or performed by this note.
+3. **Endpoints:** Report sample completeness and reviewer agreement, independent-reference evaluability, B1 correctness, Narrative v0 correctness, Blind correctness, Comparison correctness, third-class correctness (9 cases and the seven cross-phase-agreeing third-class cases), and net incremental correction vs the shared-baseline label. Include paired contingency counts: baseline-wrong/verifier-right, baseline-right/verifier-wrong, both-right, both-wrong, plus uncertainty/abstentions and class distribution; disclose small-`n` exact uncertainty and any unresolved adjudications. Because B1 and Narrative shared an underlying LLM, do not treat them as independent model votes.
+4. **Evaluation boundary:** No frozen GT access for inference, routing, evidence generation, arbitration, threshold selection or GCN admission. Any separately authorized GT-only benchmark must be performed after the qualitative protocol is frozen, completely isolated from decision-making; previously inspected test GT must NOT be reused to tune the next Arbitration policy. No test-set-driven policy selection.
+5. **Decision gate:** Only if independently reviewed third-class corrections show a defensible net benefit with manageable false-correction risk and adequate representativeness, draft a **separate experimental** Arbitration version with a frozen policy spec and matched GCN ablation plan (label coverage, per-class retention, graph/splits/seeds, training budget and evaluation separation). Do not alter V1, promote labels, or run GCN under this plan.
+
+**Current status:** Only step (1) GT-free aggregates exist. This protocol is a proposal; no semantic reviews, new API calls, GT analysis, new Arbitration version or GCN experiment have been executed.
