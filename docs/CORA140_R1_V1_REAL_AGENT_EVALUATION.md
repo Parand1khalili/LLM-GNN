@@ -86,7 +86,9 @@ BEFORE reading per-node labels.
 
 The report includes all 140 GT/B1/Narrative node labels, R1 selection
 and 37 Blind/Comparison results including abstentions, per-method
-correctness, paired correct/damaging changes, hypothetical Narrative
+correctness, paired correct/damaging changes, **per-GT-class and first-veto
+stratum diagnostics** (Counter-evidence, Third-class and Other), seven-class
+coverage, Third-class cross-phase agreement, hypothetical Narrative
 fallback, real V1 admissions and actual run status. Only AGGREGATES
 print to terminal. The node-level content-addressed JSON stays private.
 Never feed it to the LLM, an independent reviewer or GCN admission.

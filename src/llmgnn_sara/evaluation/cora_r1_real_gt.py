@@ -55,6 +55,36 @@ def _paired(prediction, baseline, truth):
     return "CORRECTED_BASELINE_ERROR" if prediction == truth else "BOTH_INCORRECT"
 
 
+def _bucket(rows):
+    """Stratified coverage/correctness and paired correction counts, all inclusive."""
+    result = {"n": len(rows), "arms": {}, "narrative_paired": {}}
+    for arm, field in (("b1", "b1_class_index"),
+                       ("narrative", "narrative_class_index"),
+                       ("blind", "blind_class_index"),
+                       ("comparison", "comparison_class_index")):
+        covered = sum(x[field] is not None for x in rows)
+        correct = sum(x[field] == x["gt_class_index"] for x in rows)
+        result["arms"][arm] = {
+            "covered": covered, "correct": correct,
+            "unavailable": len(rows) - covered,
+            "selective_accuracy_percent": _pct(correct, covered),
+            "per_true_class": [
+                {"class_index": cls,
+                 "support": sum(x["gt_class_index"] == cls for x in rows),
+                 "covered": sum(x["gt_class_index"] == cls and x[field] is not None
+                                for x in rows),
+                 "correct": sum(x["gt_class_index"] == cls and
+                                x[field] == cls for x in rows)}
+                for cls in range(7)]}
+    for phase in ("blind", "comparison"):
+        counts = Counter(x[f"narrative_vs_{phase}"] for x in rows)
+        result["narrative_paired"][phase] = {
+            **{kind: counts[kind] for kind in PAIRED},
+            "net_correct": counts["CORRECTED_BASELINE_ERROR"] -
+                           counts["DAMAGED_CORRECT_BASELINE"]}
+    return result
+
+
 def analyze(selected, decisions, pairs, labels, *, status):
     """Pure node-by-node scoring after validating pinned live provenance."""
     _require(status in ("COMPLETE_LIVE_UNASSESSED", "BLOCKED_NO_AUTOMATIC_RETRY"))
@@ -85,6 +115,8 @@ def analyze(selected, decisions, pairs, labels, *, status):
             _require(not accepted and training is None
                      and decision.get("l2_status") == "NOT_ASSESSED"
                      and decision.get("semantic_validation") == "NOT_PERFORMED")
+        if routed:
+            _require(type(decision.get("reason")) is str)
         blind = decision.get("blind_class_index")
         comp = decision.get("comparison_class_index")
         _require((blind is None or type(blind) is int and 0 <= blind < 7)
@@ -150,6 +182,20 @@ def analyze(selected, decisions, pairs, labels, *, status):
                     counts["CORRECTED_BASELINE_ERROR"] -
                     counts["DAMAGED_CORRECT_BASELINE"],
             }
+    first_veto_strata = {}
+    for name in ("COUNTER_EVIDENCE_UNRESOLVED",
+                 "THIRD_CLASS_DIAGNOSTIC_ONLY", "OTHER"):
+        group = [x for x in chosen if
+                 (x["decision_reason"] == name if name != "OTHER"
+                  else x["decision_reason"] not in (
+                      "COUNTER_EVIDENCE_UNRESOLVED",
+                      "THIRD_CLASS_DIAGNOSTIC_ONLY"))]
+        first_veto_strata[name] = _bucket(group)
+    _require(sum(x["n"] for x in first_veto_strata.values()) == BUDGET)
+    agreeing_third = [x for x in chosen
+                      if x["decision_reason"] == "THIRD_CLASS_DIAGNOSTIC_ONLY"
+                      and x["blind_class_index"] is not None
+                      and x["blind_class_index"] == x["comparison_class_index"]]
     baseline_narrative_correct = sum(row["narrative_class_index"] ==
                                       row["gt_class_index"] for row in rows)
     fallback = {}
@@ -173,6 +219,16 @@ def analyze(selected, decisions, pairs, labels, *, status):
             "oracle_router_detection": discovery,
             "r1_review_coverage_and_accuracy": arms,
             "paired_correction_vs_baselines": changes,
+            "first_veto_strata": first_veto_strata,
+            "third_class_phase_agree": _bucket(agreeing_third),
+            "selected_baseline_disagreements": discovery["baseline_disagreement"]["true_positive"],
+            "selected_high_confidence_agreements": sum(
+                row["b1_class_index"] == row["narrative_class_index"]
+                and min(row["b1_confidence"], row["narrative_confidence"]) >= 80
+                for row in chosen),
+            "all_140_b1_correct": sum(
+                row["b1_class_index"] == row["gt_class_index"] for row in rows),
+            "all_140_narrative_correct": baseline_narrative_correct,
             "hypothetical_narrative_fallback": fallback,
             "decision_reason_counts": dict(sorted(Counter(
                 row["decision_reason"] for row in chosen).items())),

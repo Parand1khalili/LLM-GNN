@@ -75,6 +75,20 @@ class R1RealGTTests(unittest.TestCase):
         self.assertEqual(summary["r1_review_coverage_and_accuracy"]["blind"]["covered"], 33)
         self.assertEqual(summary["r1_review_coverage_and_accuracy"]["comparison"]["covered"], 31)
         self.assertEqual(summary["reviewed_training_admissions"], 0)
+        self.assertEqual(sum(x["n"] for x in
+                             summary["first_veto_strata"].values()), 37)
+        self.assertEqual(summary["third_class_phase_agree"]["n"], 0)
+        for group in summary["first_veto_strata"].values():
+            for arm in ("b1", "narrative", "blind", "comparison"):
+                item = group["arms"][arm]
+                self.assertEqual(sum(x["support"] for x in
+                                     item["per_true_class"]), group["n"])
+                self.assertEqual(item["covered"] + item["unavailable"],
+                                 group["n"])
+            for phase in ("blind", "comparison"):
+                self.assertEqual(sum(group["narrative_paired"][phase][x]
+                                     for x in target.PAIRED), group["n"])
+        self.assertEqual(summary["selected_baseline_disagreements"], 0)
         for prefix in ("b1", "narrative"):
             for phase in ("blind", "comparison"):
                 d = summary["paired_correction_vs_baselines"][f"{prefix}_vs_{phase}"]
