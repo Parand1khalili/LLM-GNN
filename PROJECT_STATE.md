@@ -1,5 +1,39 @@
 # Project state
 
+## Full FeatProp / PS / WCE / Three-Agent GCN — 2026-11-07
+
+- Base main dcfc2fd8b8bb7d2360722ddec7fa724648cf2d60; remote77318 at start.
+  Exact authors'1f60eed source fetched read-only; paper sections3.2/3.4/3.5/4.1
+  and Table2 checked. Upstream conf+entropy/data.y and correctness filtering
+  excluded. See manifests/llmgnn_upstream_audit_v1.json and FULL_GCN_EXPERIMENT_V1.
+- Rulecc7fd6102299c6d7c6dadb6b764906c39e144c7a5f055eba9e054195296442d8:
+  historical_confidence.v1 unchanged requirements vs distinct experimental
+  missing_confidence_aware.v1. Unknown WCE unit weight is not confidence;
+  unknown PS samples protected,30 percent budget from scored subset, scored
+  class guard/capacity/shortfall explicit. No GT tuning or P1/P2/router changes.
+- Authentic full matrix960 rows:224 original seven-arm Natural/all-Matched,
+  672 pairwise-Matched,64 coverage-matched no-Agent rows.654 data-valid drafts,
+  48 confidence-blocked,258 common-mask-blocked;187 exact specs/1870 seed fits.
+  All data-valid rows NOT_RUN_BLOCKED_AUTHORIZATION; no GCN metrics or admission.
+- Private packagec78ff16df921bfcd661ce7981c5467f31c243bd812466ce0bbca747be576d413;
+  audit11ff6f593c792dcadf8e955f2fef9da10784044246e94bf34cfda3f7ff62eb26;
+  repeat byte-identical, source inputs unchanged. Public table reports/full_gcn_matrix_v1.csv
+  contains aggregate plans only. No actual GT evaluation, provider call or fit.
+- Separate LIMITED_PROVENANCE_EXPLORATORY approval requires owner acknowledgment
+  of unknown encoder execution and previously observed test, independent
+  experimental admission/real training, exact package and1870-fit scope. Blank
+  flags false; old gates retained. GT-free runner reuses historical optimization
+  loop, durable intent, NPZ checkpoint/logits/predictions before separate GT-only
+  evaluator; incomplete intents never automatically retried. Completed exact
+  fits only can be reused. CPU/one thread, seeds0..9,30 epochs, no early stopping.
+- Eight focused synthetic tests PASS29.959s; synthetic complete-report/paired-
+  delta self-check PASS. Full guarded suite558 tests,0 failures/errors,2 Windows
+  skips,475.939s; private receipt226750e5cddaaffe3a0f4ab7e6f680f358263b335b8d9a4ad346b7477a69c19f.
+  Source/graph/input hashes, repeated real preflight, public table allowlist and
+  syntax/diff checks passed. Owner-authorized scoped main push/CI verification
+  remains pending at commit; final SHA/status reported after remote readback.
+  User/GraphScope and all older results preserved; no Drive writes.
+
 ## Controlled GCN CE/noPS preflight — 2026-11-07
 
 - Base main77318de944505f50205fc034c6927166c2cc4334; P1/P2, prior policies,

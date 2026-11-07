@@ -1,4 +1,7 @@
 * text=auto
+
+# Preserve canonical CSV bytes/hashes produced by the full GCN exporter on all OSes.
+reports/full_gcn_*.csv -text whitespace=trailing-space,space-before-tab,cr-at-eol
 .gitattributes text eol=lf
 *.toml text eol=lf
 *.md text eol=lf

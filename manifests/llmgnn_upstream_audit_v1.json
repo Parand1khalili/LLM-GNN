@@ -1,0 +1,34 @@
+{
+  "schema": "sara.paper.upstream_audit.v1",
+  "repository": "CurryTang/LLMGNN",
+  "revision": "1f60eedb1452cdd997be18b5dd932a02666ee57e",
+  "source_bundle_sha256": "6e4e39628cac9460e121772c091df04e30298896becd8adbfa6e4c261c293e92",
+  "files": {
+    "src/helper/active.py": {
+      "sha256": "41cf27e3f5856898ab6b857b1ed79e75df879a90eb24cd0384d8d57c16252b5a",
+      "github_blob_sha": "af869aa7741e7865d7bd2b83fb11da349db65dfd",
+      "url": "https://github.com/CurryTang/LLMGNN/blob/1f60eedb1452cdd997be18b5dd932a02666ee57e/src/helper/active.py"
+    },
+    "src/helper/data.py": {
+      "sha256": "5f1d45cef814ba7e96c05b721c309aedf44354dd1e23d8c43127c314efd0a9c5",
+      "github_blob_sha": "8007854f4f447eb63521ee125b452efeb93a3aa6",
+      "url": "https://github.com/CurryTang/LLMGNN/blob/1f60eedb1452cdd997be18b5dd932a02666ee57e/src/helper/data.py"
+    },
+    "src/helper/train_utils.py": {
+      "sha256": "09272334eb2191a1dd35c7da13be5db57c35310e3e0c5613b3034b4da827deca",
+      "github_blob_sha": "200a91f8aa4828e00c82bf533ecf05cb115edca6",
+      "url": "https://github.com/CurryTang/LLMGNN/blob/1f60eedb1452cdd997be18b5dd932a02666ee57e/src/helper/train_utils.py"
+    },
+    "src/main.py": {
+      "sha256": "6f386a8aaff32b159a4a79de9ed77bb91b40d8054719b6e89fdd1032c56ef8ef",
+      "github_blob_sha": "a6496c6b5476eb2a71ce0cf2ba5c1362c7c3b578",
+      "url": "https://github.com/CurryTang/LLMGNN/blob/1f60eedb1452cdd997be18b5dd932a02666ee57e/src/main.py"
+    },
+    "src/models/nn.py": {
+      "sha256": "5d00c347e5a6aa504de9bf8c5abbd6e084efa1302e004c142567b9dc364b4b9b",
+      "github_blob_sha": "121940efc7fd2172c7385667b0648fa0924eb386",
+      "url": "https://github.com/CurryTang/LLMGNN/blob/1f60eedb1452cdd997be18b5dd932a02666ee57e/src/models/nn.py"
+    }
+  },
+  "executed": false
+}

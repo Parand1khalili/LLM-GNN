@@ -340,3 +340,42 @@ Replay آفلاین با شبکه، torch.load و train_gcn ممنوع، Hash ث
 `NOT_RUN_BLOCKED`؛ صفر Admission، صفر Fit، صفر GT Evaluation جدید. Confidence
 کلاس سوم ساخته نشد؛ WCE/PS مربوط همچنان Blocked هستند. جزئیات در
 `docs/CONTROLLED_GCN_CE_PREFLIGHT.md` ثبت شد.
+
+## 15. ماتریس کامل FeatProp × PS × WCE × Fusion؛ هنوز بدون Training
+
+مقالهٔ ICLR2024 و پنج فایل کد نویسندگان در Revision دقیق
+`1f60eedb1452cdd997be18b5dd932a02666ee57e` فقط خوانده شدند. FeatProp و PS بازیابی‌شده
+با توابع همان Revision از نظر AST یکسان‌اند. استفادهٔ GT در مسیر `conf+entropy`
+و Filtering مبتنی بر correctness تأیید شد؛ این Loaderها اجرا نشدند و GT وارد PS
+یا Loss ما نمی‌شود. بازسازی تاریخی PS پروژه، Class Guard و Tie-break صریح دارد؛
+نباید آن را اجرای بایت‌یکسان کد نویسندگان یا بازتولید Accuracy جدول2 معرفی کرد.
+مقاله سه Seed دارد، ولی پروتکل تاریخی پروژه ده Seed و30 Epoch را حفظ می‌کند.
+
+دو قرارداد مستقل پیش از هر Training/GT Evaluation جدید Freeze شدند:
+`historical_confidence.v1` و `missing_confidence_aware.v1`.
+در Extension، Missing Confidence همان null می‌ماند؛ وزن Loss برابر1 با وضعیت
+`UNWEIGHTED_MISSING_CONFIDENCE` است، نه Confidence جعلی. PS فقط scored subset را
+رتبه‌بندی می‌کند، گروه Missing را محافظت می‌کند و بودجهٔ حذف floor(0.30*scored)
+را با ظرفیت Class Guard محدود و Shortfall را ثبت می‌کند. این Extension، WCE/PS
+اصلی مقاله نیست و حفاظت یا وزن1 هیچ تضمین درستی برای Third-class ایجاد نمی‌کند.
+
+همهٔ هفت Arm، دو Cohort، CE/WCE و PS OFF/ON هم‌زمان آماده شدند؛ به‌همراه Natural،
+اشتراک کلی،21 جفت Matched و چهار Control هم‌تعداد بدون Agent،960 ردیف وجود دارد.
+654 ردیف از نظر داده قابل اجرا،48 ردیف Missing-confidence و258 ردیف Common-mask
+مسدودند. پس از Dedup دقیق187 Spec و1870 Fit با Seed مشخص باقی می‌ماند؛ **صفر Fit
+اجرا شده است**. جدول جامع `reports/full_gcn_matrix_v1.csv` معیارهای اجرا‌نشده را
+خالی نگه می‌دارد؛ هیچ pseudo-label Accuracy به‌عنوان GCN Accuracy درج نشده است.
+
+Rule: `cc7fd6102299c6d7c6dadb6b764906c39e144c7a5f055eba9e054195296442d8`؛
+Package: `c78ff16df921bfcd661ce7981c5467f31c243bd812466ce0bbca747be576d413`؛
+Audit: `11ff6f593c792dcadf8e955f2fef9da10784044246e94bf34cfda3f7ff62eb26`.
+تکرار GT-free همان Hash را تولید کرد. منشأ اجرای Encoder همچنان نامعلوم است؛
+قرارداد مجزای `LIMITED_PROVENANCE_EXPLORATORY` این محدودیت را صریح نگه می‌دارد و
+فقط با تأیید مستقل Owner، Admission آزمایشی و مجوز واقعی Training قابل استفاده
+است. تمام پرچم‌های Template فعلاً false هستند؛ هیچ مجوزی ساخته نشده است.
+
+Runner بدون ورودی GT، Intent پایدار و Checkpoint/Logits/Predictions خصوصی و Hash-pinned
+می‌سازد؛ Process ارزیابی جدا پس از تکمیل Freeze همهٔ Fitها به GT متصل می‌شود.
+هیچ Training، GT Evaluation جدید، API یا Human Review اجرا نشد. Test2568 تاریخی
+قبلاً مشاهده شده و تمام نتایج آینده `EXPLORATORY_NOT_INDEPENDENT` خواهند بود.
+شرح تطبیق، Leakage، قراردادها و دستورات در `docs/FULL_GCN_EXPERIMENT_V1.md` است.

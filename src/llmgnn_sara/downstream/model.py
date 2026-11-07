@@ -146,6 +146,59 @@ def train_gcn(graph: GraphInputs, plan: dict, seed: int, *, allow_training: bool
     for field in ("train_ids", "test_ids", "pseudo_y", "weights", "confidence_percent", "PS"):
         if plan.get(field) != verified[field]:
             raise ValueError(f"Plan integrity differs: {field}")
+    return _fit(graph, verified, config, seed)
+
+
+def train_matrix_fit(graph, package, fit_sha256, seed, *, allow_training=False):
+    """Separately gated explicit loss-weight extension; never imputes confidence.
+
+    The runner must first authenticate the full matrix against frozen inputs and
+    validate independent owner admission/training approval. Old train_gcn stays
+    restricted to its original confidence-derived weight contract.
+    """
+    if allow_training is not True:
+        raise PermissionError("Real training requires separate explicit user authorization")
+    from .full_matrix import VERSION, CONTRACT, reject_controls
+    from ..sara3.experiment import digest
+    from ..sara3.correction_features import require
+    from ..io.project import GRAPH_SHA256
+    reject_controls(package)
+    require(package["schema"] == VERSION and package["contract"] == CONTRACT
+            and package["rule_sha256"] == digest(CONTRACT))
+    spec = package["fits"][fit_sha256]["spec"]
+    require(digest(spec) == fit_sha256 and spec["graph_sha256"] == GRAPH_SHA256)
+    settings = dict(spec["config"]); settings["seeds"] = tuple(settings["seeds"])
+    config = GCNConfig(**settings)
+    ids, classes, weights = spec["train_ids"], spec["class_indices"], spec["weights"]
+    require(type(seed) is int and seed in config.seeds and len(ids) == len(set(ids)) > 0
+            and len(ids) == len(classes) == len(weights)
+            and all(type(i) is int and 0 <= i < 2708 for i in ids)
+            and all(type(c) is int and 0 <= c < 7 for c in classes)
+            and all(type(w) in (int, float) and 0 <= w <= 1 for w in weights)
+            and (config.loss != "ce" or all(w == 1 for w in weights)))
+    selected = package["selected_ids"]
+    test = [i for i in range(2708) if i not in set(selected)]
+    require(len(selected) == len(set(selected)) == 140 and len(test) == 2568
+            and all(type(i) is int and 0 <= i < 2708 for i in selected)
+            and package["test_ids"] == test and spec["test_ids_sha256"] == digest(test)
+            and set(ids) <= set(selected))
+    labels = dict(zip(ids, classes))
+    return _fit(graph, {"train_ids": ids, "pseudo_y": [labels.get(i, -1) for i in range(2708)],
+                        "weights": weights}, config, seed)
+
+
+def _parameter_hash(model):
+    import hashlib
+    h = hashlib.sha256()
+    for name, tensor in model.state_dict().items():
+        array = tensor.detach().cpu().numpy()
+        h.update(name.encode("utf-8")); h.update(str(array.dtype).encode("ascii"))
+        h.update(str(array.shape).encode("ascii")); h.update(array.tobytes())
+    return h.hexdigest()
+
+
+def _fit(graph, verified, config, seed):
+    """Shared historical optimization loop; callers validate their own contracts."""
     import numpy as np
     import torch
     import torch.nn.functional as F
@@ -161,6 +214,7 @@ def train_gcn(graph: GraphInputs, plan: dict, seed: int, *, allow_training: bool
     data = SimpleNamespace(x=graph.x.detach().clone(), edge_index=graph.edge_index.detach().clone(),
                            edge_weight=None if graph.edge_weight is None else graph.edge_weight.detach().clone())
     model = build_gcn(data.x.shape[1], config).to(data.x.device)
+    initial_sha = _parameter_hash(model)
     indices = torch.tensor(verified["train_ids"], dtype=torch.long, device=data.x.device)
     pseudo = torch.tensor(verified["pseudo_y"], dtype=torch.long, device=data.x.device)
     weights = torch.tensor(verified["weights"], dtype=data.x.dtype, device=data.x.device)
@@ -183,4 +237,5 @@ def train_gcn(graph: GraphInputs, plan: dict, seed: int, *, allow_training: bool
     if not torch.isfinite(logits).all().item():
         raise ValueError("Nonfinite final predictions")
     return {"model": model, "logits": logits, "losses": losses, "seed": seed,
+            "initial_parameter_sha256": initial_sha, "final_parameter_sha256": _parameter_hash(model),
             "GT_accessed": False, "evaluation_performed": False}
