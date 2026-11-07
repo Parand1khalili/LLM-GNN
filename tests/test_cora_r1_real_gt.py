@@ -3,6 +3,7 @@ from copy import deepcopy
 import io
 import json
 from pathlib import Path
+from types import SimpleNamespace
 import socket
 import tempfile
 import unittest
@@ -12,6 +13,7 @@ from llmgnn_sara.evaluation import cora_r1_real_gt as target
 from llmgnn_sara.sara2.policy import Annotation, Pair
 from llmgnn_sara.sara3.audit import PrivateAudit
 from llmgnn_sara.sara3.selection import select_router
+from llmgnn_sara.sara3.gateway_run import gateway_run, approval_template
 
 
 def fixture():
@@ -117,6 +119,43 @@ class R1RealGTTests(unittest.TestCase):
                            status="COMPLETE_LIVE_UNASSESSED")
         with self.assertRaises(ValueError):
             self.report("FAKE_RUN_CANNOT_SCORE_REAL")
+
+    def test_existing_gateway_r1_v1_full_fake_pipeline_and_no_unapproved_live(self):
+        """Positive end-to-end local fake, negative live consent before journal."""
+        cfg = json.loads((Path(__file__).resolve().parents[1] /
+                          "configs/gapgpt_rich_v2_output4096_proposed.json").read_text())
+        frozen = SimpleNamespace(by_arm=lambda name: ())
+        inputs = SimpleNamespace(pairs=tuple(self.pairs.values()),
+                                 provenance=(), frozen=frozen)
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / ".local_artifacts" / "r1_fake"
+            result = gateway_run(inputs, root, router="r1_v1",
+                                 budget=37, cohort="sensitivity",
+                                 config=cfg, fake=True)
+            self.assertEqual(result["status"], "COMPLETE_FAKE_HTTP")
+            self.assertEqual(result["router"], "r1_v1")
+            self.assertEqual(result["selected_node_ids"], self.selected)
+            self.assertEqual(result["selected_count"], 37)
+            self.assertTrue(result["no_training_label_for_routed_proposals"])
+            self.assertFalse(result["GT_accessed"])
+            self.assertEqual(result["training_runs"], 0)
+            self.assertGreater(result["new_dispatches"], 0)
+            second = gateway_run(inputs, root, router="r1_v1",
+                                 budget=37, cohort="sensitivity",
+                                 config=cfg, fake=True)
+            self.assertEqual(second["new_dispatches"], 0)
+            self.assertEqual(second["private_report_sha256"],
+                             result["private_report_sha256"])
+            live_root = Path(temp) / ".local_artifacts" / "r1_unapproved"
+            with self.assertRaises(ValueError):
+                gateway_run(inputs, live_root, router="r1_v1",
+                            budget=37, cohort="sensitivity",
+                            config=cfg, fake=False, approval=None)
+            self.assertFalse(live_root.exists())
+            owner = approval_template(inputs, "r1_v1", 37, "sensitivity", cfg)
+            self.assertFalse(owner["data_sharing_approved"])
+            self.assertFalse(owner["spend_approved"])
+            self.assertFalse(owner["explicit_batch_dispatch_approved"])
 
     def test_private_audit_readback_and_sanitized_cli_no_GT_stdout(self):
         report = self.report()
