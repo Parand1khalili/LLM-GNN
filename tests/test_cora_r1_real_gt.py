@@ -157,6 +157,26 @@ class R1RealGTTests(unittest.TestCase):
             self.assertFalse(owner["spend_approved"])
             self.assertFalse(owner["explicit_batch_dispatch_approved"])
 
+    def test_fake_gateway_report_is_rejected_before_any_GT_graph_access(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / ".local_artifacts"
+            run_root = root / "r1_fake_source"
+            journal = PrivateAudit(run_root / "journal")
+            # Valid content address but a fake source: it can never be
+            # scored as if it came from a real paid R1 run.
+            sha = journal.write({
+                "schema": target.CONTRACT,
+                "mode": "FAKE_HTTP", "router": "r1_v1",
+                "status": "COMPLETE_FAKE_HTTP"})
+            with patch.object(target, "_labels_from_original_graph",
+                              side_effect=AssertionError("No GT access before live trust")):
+                with self.assertRaises(target.EvaluationStageError) as raised:
+                    target.run(root / "frozen", root / "authentic",
+                               run_root, root / "cfg.json", sha,
+                               root / "original.pt", root / "gt_private")
+            self.assertEqual(raised.exception.stage,
+                             "R1_LIVE_REPORT_AND_PROVENANCE")
+
     def test_private_audit_readback_and_sanitized_cli_no_GT_stdout(self):
         report = self.report()
         with tempfile.TemporaryDirectory() as tmp:

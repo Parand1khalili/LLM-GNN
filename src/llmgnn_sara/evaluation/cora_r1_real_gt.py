@@ -216,7 +216,18 @@ def run(frozen_root, authentic_root, r1_root, gateway_config, summary_sha,
                  and summary.get("training_runs") == 0
                  and summary.get("no_training_label_for_routed_proposals") is True
                  and summary.get("selected_count") == BUDGET
-                 and summary.get("denominator") == COHORT)
+                 and summary.get("denominator") == COHORT
+                 and type(summary.get("attempted_calls")) is int
+                 and 1 <= summary["attempted_calls"] <= 74
+                 and type(summary.get("blind_completed")) is int
+                 and 0 <= summary["blind_completed"] <= BUDGET
+                 and type(summary.get("comparison_completed")) is int
+                 and 0 <= summary["comparison_completed"] <=
+                     summary["blind_completed"]
+                 and (summary["status"] != "COMPLETE_LIVE_UNASSESSED"
+                      or summary["blind_completed"] == BUDGET)
+                 and summary.get("prompt_version") == RICH_PROMPT_V2
+                 and summary.get("arbitration_version") == ARBITRATION_VERSION)
         report_sha = summary.get("private_report_sha256")
         report = _read_content_addressed(r1_root, ("journal",), report_sha)
         cfg_path = _safe_path(gateway_config)
@@ -242,6 +253,8 @@ def run(frozen_root, authentic_root, r1_root, gateway_config, summary_sha,
                  and report.get("data_kind") == "GAPGPT_LIVE_RAW_UNVERIFIED_SEMANTIC_L2"
                  and report.get("GT_accessed") is False
                  and report.get("training_runs") == 0
+                 and type(report.get("provider_calls")) is int
+                 and report["provider_calls"] == summary["attempted_calls"]
                  and len(report.get("decisions", [])) == COHORT)
         stage = "PINNED_GRAPH_GROUND_TRUTH"
         labels = _labels_from_original_graph(
