@@ -307,3 +307,36 @@ Candidate فقط از Baseline واقعی و با منشأ غیرکالیبره 
 `docs/THREE_AGENT_FUSION_RESULTS.md` و `reports/three_agent_fusion_v1.json` ثبت شد؛
 مرزهای معماری/مجوز/Confidence در `docs/THREE_AGENT_FUSION_GCN.md` است. منابع تاریخی،
 Ruleها و نتایج قبلی بدون تغییر حفظ شدند؛ API جدید و Human Review انجام نشد.
+
+## 14. آماده‌سازی Controlled GCN CE/noPS؛ بدون Training
+
+Slice با مبنای `77318de944505f50205fc034c6927166c2cc4334`، Ruleهای P1/P2 را تغییر نداد.
+روی ورودی واقعی GT-free، هفت Arm طبیعی برای هر دو Cohort با Seedهای0..9 آماده شد:
+تعداد Train در Primary برابر135/135/89/114/116/103/103 و در Sensitivity برابر
+140/140/93/118/120/108/108 است. P1/P2-R1 کلاس و Mask یکسان دارند؛ بنابراین60 Fit
+یکتا در هر Cohort برنامه‌ریزی شده، نه70. هیچ Fit تاریخی صرفاً با نام/Seed/Score
+قبلی پذیرفته نشد؛ تطابق کامل قرارداد، Mask، کلاس، Graph و محیط لازم است.
+
+کنترل کمکی نسخه‌دار Coverage-matched، دقیقاً Train IDs مربوط به Treatment را دارد
+و کلاس را تنها با توافق Baselineها یا Confidence واقعی بیشتر و Hash ثابت در تساوی
+می‌سازد. این کنترل جایگزین C/P1/P2 نیست، از GT استفاده نمی‌کند و Confidenceها
+کالیبره فرض نشده‌اند. اختلاف کلاس با Treatment در R0 برابر9 و R1 برابر6 است؛
+این عدد **Fix/Harm نیست**. همراه کنترل‌های اختیاری،90 Fit در هر Cohort نیاز است.
+روی Matched Mask برابر89/93، بردارهای R0 با C یکسان‌اند؛ اثر Labelهای اضافهٔ
+Agent با این مقایسه اندازه‌گیری نمی‌شود.
+
+ممیزی متن Runner تاریخی تأیید کرد Test complement2568 قبلاً برای امتیازدهی و
+مقایسهٔ نتایج استفاده شده است. جدایی فعلی Mask و نبود y در GraphInputs، استقلال
+Test را ثابت نمی‌کند؛ هر اجرای بعدی فقط `EXPLORATORY_NOT_INDEPENDENT` خواهد بود.
+صحت بایت x/edge تأیید شد، ولی Receipt تولید دقیق Embedding/پیش‌پردازش/Revision
+Encoder در دست نیست. این ابهام پیش از Training باید با شواهد یا پروتکل محدودیت‌دار
+مجزا بررسی شود؛ تبدیل برچسب UNVERIFIED به VERIFIED بدون شواهد مجاز نیست.
+
+بستهٔ Primary: `303e43ac1c5fca6e13dc8185c9d0997d7f4bf0028c521c269b82c776e3b7bb9a`؛
+Sensitivity: `18931fc9d06c91a8711ba19f4f69e398d0a5ef6741f21b948eebeedc070b9bd9`.
+Replay آفلاین با شبکه، torch.load و train_gcn ممنوع، Hash ثابت تولید کرد و15
+فایل اصلی بدون تغییر ماندند. Admission مستقل و `allow_training` حفظ شدند؛
+مجوز تازهٔ Real Training هنوز دریافت نشده است. همهٔ GCN Metricها
+`NOT_RUN_BLOCKED`؛ صفر Admission، صفر Fit، صفر GT Evaluation جدید. Confidence
+کلاس سوم ساخته نشد؛ WCE/PS مربوط همچنان Blocked هستند. جزئیات در
+`docs/CONTROLLED_GCN_CE_PREFLIGHT.md` ثبت شد.

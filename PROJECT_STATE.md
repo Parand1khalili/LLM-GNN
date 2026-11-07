@@ -1,5 +1,37 @@
 # Project state
 
+## Controlled GCN CE/noPS preflight — 2026-11-07
+
+- Base main77318de944505f50205fc034c6927166c2cc4334; P1/P2, prior policies,
+  original scientific files and unrelated GraphScope/user changes preserved.
+- Authentic GT-free preparation PASS for both cohorts, with network, torch.load
+  and train_gcn forbidden;15 original source artifacts byte-unchanged. Repeat
+  generated identical private packages, no admission/training/GT evaluation.
+- Primary package303e43ac1c5fca6e13dc8185c9d0997d7f4bf0028c521c269b82c776e3b7bb9a;
+  Sensitivity18931fc9d06c91a8711ba19f4f69e398d0a5ef6741f21b948eebeedc070b9bd9.
+  Seven natural CE/noPS arms, seeds0..9,60 unique seed fits per cohort: shared
+  baselines once; identical R1 P1/P2 share fits. No historical fit reuse admitted.
+- Separate coverage-matched no-Agent draft uses same Treatment IDs, agreement
+  then higher actual baseline confidence, fixed symmetric hash tie-break. No GT
+  tuning/new fusion rule. Labels differ at9(R0)/6(R1), not claimed fixes. Optional
+  controls raise schedule to90 seed fits/cohort; not authorized for training.
+- Matched89/93 masks exclude added-label effects; R0 class vectors equal C.
+  Historical2568 test previously observed: EXPLORATORY_NOT_INDEPENDENT only.
+  x/edge storage integrity PASS; exact encoder-generation provenance unresolved.
+- Independent approval validator binds actual audit/package/graph/test content,
+  not just hash syntax. Existing admission and allow_training gates unchanged.
+  Training NOT_RUN_BLOCKED pending feature provenance, exploratory-test review,
+  independent experimental admission and fresh explicit real-training approval.
+  Third-class confidence remains unknown; affected WCE/PS still blocked. No
+  fabricated proxy, changed PS, new API, human review or Drive write.
+- See docs/CONTROLLED_GCN_CE_PREFLIGHT.md for source audit and reproduction.
+  Focused6/6 PASS; complete guarded suite550 tests,0 failures/errors,2 Windows
+  skips,433.109s; private receiptacd6dceef9f77fc16bc42902762b3e54f3ff102e79ca642d4ec394ba663d5d9c.
+  Initial sandbox attempt failed ACL/temp permissions; authorized rerun above
+  passed. AST, source pins, secret scan, registry/diff and repeated authentic
+  preflight PASS. Prior main77318 CI success42393425961; new CI not run before
+  user-managed push. No Drive upload; GitHub backup PUSH_PENDING for this slice.
+
 ## Single-vector three-agent fusion / GCN preparation — 2026-11-07
 
 - Starts from afa60e38a62650abb3303fbb139e08ed467dfa76 on synchronized main.
