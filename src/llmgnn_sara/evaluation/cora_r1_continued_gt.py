@@ -110,32 +110,61 @@ def run(frozen_root, authentic_root, original_root, config_file,
                  len(overlay_phases) == summary["new_state_counts"]["COMPLETED"] and
                  summary["new_state_counts"]["REJECTED"] == 0 and
                  summary["new_state_counts"]["UNCERTAIN"] == 0)
-        audit = PrivateAudit(journal)
+        # Revalidate EVERY completed phase against its exact original/overlay
+        # receipt, then compare its actual class with the merged report.
+        # This prevents a content-addressed but doctored "decisions" list from
+        # being treated as a genuine Agent result.
+        base_audit = PrivateAudit(root / "journal")
+        overlay_audit = PrivateAudit(journal)
         pairs = {p.node_id: p for p in inputs.pairs}
-        for node in selected:
+        all_selected = list(gateway_context(
+            inputs, "r1_v1", BUDGET, "sensitivity", cfg, fake=False)[0])
+        decided = {x["node_id"]: x for x in run_data["decisions"]}
+        _require(len(decided) == COHORT and set(decided) == set(pairs))
+        for node in all_selected:
             pair = pairs[node]
+            saved_blind = overlay_phases.get((node, "blind"))
+            blind_audit = overlay_audit
+            if saved_blind is None:
+                saved_blind = base_phases.get((node, "blind"))
+                blind_audit = base_audit
+            _require(saved_blind is not None)
             bp = rich_verifier_input_v2(node, pair.text, pair.neighborhood)
             bw = wire_for(bp, cfg)
             bi = identity(context_sha, "blind", bp, bw, None)
-            row = overlay_phases.get((node, "blind"))
-            _require(row is not None)
-            blind = replay(audit, row, bi, bp, bw, None, context_sha,
-                           pair.text, cfg)
-            if (node, "compare") not in overlay_phases:
-                _require(blind["abstain"] is True)
-                continue
-            _require(blind["abstain"] is False)
-            cp = rich_verifier_input_v2(
-                node, pair.text, pair.neighborhood,
-                candidates=tuple(sorted({pair.b1.class_index,
-                                         pair.narrative_v0.class_index})),
-                blind_class=blind["class_index"])
-            cw = wire_for(cp, cfg)
-            ci = identity(context_sha, "compare", cp, cw, digest(blind))
-            replay(audit, overlay_phases[(node, "compare")], ci, cp, cw,
-                   digest(blind), context_sha, pair.text, cfg)
-        all_selected = list(gateway_context(
-            inputs, "r1_v1", BUDGET, "sensitivity", cfg, fake=False)[0])
+            blind = replay(blind_audit, saved_blind, bi, bp, bw, None,
+                           context_sha, pair.text, cfg,
+                           rejected_code=REJECT_CODE)
+            _require(type(blind) is dict)
+            saved_comparison = overlay_phases.get((node, "compare"))
+            compare_audit = overlay_audit
+            if saved_comparison is None:
+                saved_comparison = base_phases.get((node, "compare"))
+                compare_audit = base_audit
+            comparison_class = None
+            if blind["abstain"]:
+                _require(saved_comparison is None)
+            else:
+                _require(saved_comparison is not None)
+                cp = rich_verifier_input_v2(
+                    node, pair.text, pair.neighborhood,
+                    candidates=tuple(sorted({pair.b1.class_index,
+                                             pair.narrative_v0.class_index})),
+                    blind_class=blind["class_index"])
+                cw = wire_for(cp, cfg)
+                ci = identity(context_sha, "compare", cp, cw, digest(blind))
+                comparison = replay(
+                    compare_audit, saved_comparison, ci, cp, cw,
+                    digest(blind), context_sha, pair.text, cfg,
+                    rejected_code=REJECT_CODE)
+                if comparison is not None:
+                    comparison_class = comparison["class_index"]
+            decision = decided[node]
+            _require(decision.get("blind_class_index") == blind["class_index"]
+                     and decision.get("comparison_class_index") == comparison_class)
+            if node == amendment["original_rejected_node_id"]:
+                _require(decision.get("reason") == REJECT_CODE
+                         and saved_comparison == base_phases.get((node, "compare")))
         _require(run_data.get("selected_node_ids") == all_selected
                  and run_data.get("provider_calls") == summary["total_intents"]
                  and summary["blinds_completed"] == BUDGET

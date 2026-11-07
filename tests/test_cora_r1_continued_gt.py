@@ -1,5 +1,6 @@
 """R1 continued GT-only scorer must fail closed before reading GT on fake sources."""
 import io
+from copy import deepcopy
 import json
 from pathlib import Path
 from types import SimpleNamespace
@@ -13,7 +14,8 @@ from llmgnn_sara.evaluation.cora_r1_real_gt import analyze
 from llmgnn_sara.sara2.policy import Annotation, Pair
 from llmgnn_sara.sara3.selection import select_router
 from llmgnn_sara.sara3.gateway_run import SyntheticGapGPTHttp, gateway_run, approval_template
-from llmgnn_sara.sara3.gateway_r1_continuation import preflight, execute
+from llmgnn_sara.sara3.gateway_r1_continuation import preflight, execute, OVERLAY
+from llmgnn_sara.sara3.audit import PrivateAudit
 
 from test_gateway_r1_continuation import fixture, FailAt51
 from test_cora_r1_real_gt import fixture as scoring_fixture
@@ -114,6 +116,32 @@ class ContinuedGTTests(unittest.TestCase):
                 self.assertEqual(result["aggregate"]["r1_review_coverage_and_accuracy"]
                                  ["blind"]["covered"], 28)
                 self.assertEqual(result["aggregate"]["reviewed_training_admissions"], 0)
+                # Even perfectly rehashed tampering must fail before GT access.
+                audit = PrivateAudit(original / OVERLAY / "journal")
+                bad_report = deepcopy(audit.read(
+                    continued["private_combined_report_sha256"]))
+                target = bad_report["run"]["selected_node_ids"][0]
+                altered = next(d for d in bad_report["run"]["decisions"]
+                               if d["node_id"] == target)
+                current = altered["blind_class_index"]
+                altered["blind_class_index"] = ((current + 1) % 7
+                                                if current is not None else 0)
+                altered_sha = audit.write(bad_report)
+                bad_summary = deepcopy(audit.read(
+                    continued["private_summary_sha256"]))
+                bad_summary["private_combined_report_sha256"] = altered_sha
+                bad_summary_sha = audit.write(bad_summary)
+                with patch.object(scorer, "load_project_inputs", return_value=inputs), \
+                     patch.object(scorer, "_expected_graph_names",
+                                  return_value=("synthetic",)), \
+                     patch.object(scorer, "_labels_from_original_graph",
+                                  side_effect=AssertionError("GT accessed before trust")):
+                    with self.assertRaises(scorer.EvaluationStageError) as raised:
+                        scorer.run(root/"frozen", root/"authentic",
+                                   original, cfg_file, bad_summary_sha, graph,
+                                   root/"r1_rejected_bad_report")
+                self.assertEqual(raised.exception.stage,
+                                 "R1_OVERLAY_REPLAY_AND_TRUST")
 
     def test_pure_scoring_uses_real_continuation_status_as_explicit_new_arm(self):
         selected, decisions, pairs, labels = scoring_fixture()
