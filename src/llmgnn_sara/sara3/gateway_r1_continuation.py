@@ -344,7 +344,7 @@ def execute(inputs, original_root, *, config, amendment, approval, key,
         automated_arbitration_version=AUTOMATED_VERSION)
     states = verifier.phase_states()
     original, original_phases = journal_rows(root, verifier.context_digest, cfg["max_calls"])
-    if (digest([[k, *v] for k, v in sorted(original.items()]]) !=
+    if (digest([[k, *v] for k, v in sorted(original.items())]) !=
             amendment["original_journal_rows_sha256"]):
         raise ValueError("Original R1 journal changed during continuation")
     added = {(n, p): v for (n, p), v in states.items()
