@@ -181,3 +181,32 @@ GT-only نتیجه را با SHA
 در V1، V2 اصلی و Variant، Switch/Fix/Harm/Net همگی صفر باقی ماندند. هیچ آستانه‌ای
 پس از مشاهدهٔ نتیجه تغییر نکرد. این نتیجه اکتشافی و غیرمستقل است؛ هیچ Human Review،
 API جدید، Admission یا GCN انجام نشد و نتایج قبلی بدون تغییر حفظ شدند.
+
+## ۱۱. Evidence-only Arbitration V3 Shadow — ۲۰۲۶-۱۱-۰۷
+
+Inventory محدود منابع موجود محلی برای ۲۱۱ همسایهٔ یکتای ۵۷ نود، فقط یک رکورد
+Baseline نگاشت‌شده نشان داد؛ آن هم پایین‌تر از Confidence=80 موجود بود. منبع
+اضافی واجد شرایط پیدا نشد؛ زمان تولید تک‌پاسخ‌ها از Manifestهای بررسی‌شده اثبات
+نشد. Preparation timestamp معادل زمان Inference نیست. GT و Checkpoint هرگز
+به‌عنوان pseudo-label استفاده نشدند؛ هیچ ادعای مفقودبودن کل آرشیو Drive نداریم.
+
+Rule مستقل `sara.arbitration.evidence.v3` با فرمول ثابت
+`2Q + 2T + P + N - A - 2C - U` و آستانه‌های ۳/۴ پیش از محاسبه Freeze شد.
+P/N الزامی نیستند؛ هر دو فاز باید معتبر، L1 PASS، غیر Abstain، هم‌کلاس و دارای
+Supporting Quote معتبر باشند. Third-class می‌تواند در خروجی آزمایشی Switch شود،
+ولی Training Admission همچنان صفر است. تست مثبت مصنوعی بدون P/N این مسیر را
+تأیید می‌کند؛ صحت معنایی یا مزیت علمی را ثابت نمی‌کند.
+
+Contract SHA: `ff13e8719a2abc1e0baa2dedb87c0d7d02de1a3f5bfcd3737b8f125920382e92`؛
+Score Freeze: `ac1842e6456cbda58379b214977fc5a6a5ea07da04833f47bceb6cfccbf2cbe4`؛
+GT-only در Process جدا: `348a3d49e35dac90c0b6c19ac75bd9cbab78c68df601ec56accb48b399e0e221`.
+در R0 و R1، Switch/Third-class Switch/Fix/Harm/Net همگی صفر ماندند؛ نتایج V1،
+Weighted V2 و Direct-seed بدون تغییر حفظ شدند. تمام ۱۰/۶ کاندیدای تغییرِ توافق‌شده
+Warning غیرخالی و Counter-evidence دارند و زیر Threshold ثابت ماندند. Presence
+این فیلدها Proxy است، نه اثبات Warning واقعی یا تناقض معنایی حل‌نشده. T نیز تطابق
+متنی دقیق پس از Strip/Casefold است، نه ارزیابی معنایی مستقل.
+
+نتیجه `EXPLORATORY_NOT_INDEPENDENT` است: ۷۴ مشاهده با ۱۷ نود مشترک. صفر Switch
+به معنی اثبات بی‌ارزشی همهٔ پیشنهادهای Agent نیست؛ Coverage اصلاح صفر است.
+Threshold/Weight پس از مشاهده تغییر نکرد. Human Review، API، Admission و GCN
+خارج Scope ماندند. گزارش تفصیلی: `docs/EVIDENCE_ARBITRATION_V3.md`.

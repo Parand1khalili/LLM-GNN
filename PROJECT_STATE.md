@@ -1,5 +1,33 @@
 # Project state
 
+## Evidence-only Arbitration V3 Shadow — 2026-11-07
+
+- Continues from443eed2ef8f1b2f11a4dfa6f3fe05a961a0dcb1e; existing main was
+  synchronized. V1/V2/direct-seed sources, all zero-switch history, frozen
+  data and unrelated GraphScope/user modifications preserved.
+- Bounded local provenance audit:211 distinct actual neighbors of57 selected
+  nodes; only1 mapped frozen baseline record, below existing80 confidence.
+  No eligible additional source; generation timestamps not established by the
+  inspected manifests. No new archive-wide missing-file claim or seed expansion.
+  Inventory8cfbbca6c7128588b595c9a5a03f9ad939778c1ca27c169f52e9dc142245970a.
+- sara.arbitration.evidence.v3 fixed before scores/GT:2Q+2T+P+N-A-2C-U,
+  candidate/third thresholds3/4, valid same-class L1-supported phases mandatory,
+  P/N optional. Contractff13e8719a2abc1e0baa2dedb87c0d7d02de1a3f5bfcd3737b8f125920382e92;
+  scoreac1842e6456cbda58379b214977fc5a6a5ea07da04833f47bceb6cfccbf2cbe4.
+- Separate GT-only evaluation348a3d49e35dac90c0b6c19ac75bd9cbab78c68df601ec56accb48b399e0e221:
+  R0/R1 V3 zero switches/third switches/fixes/harms/net, as all three controls.
+  All10/6 agreed changed candidates have A/C presence; all fall below fixed
+  thresholds. No subsequent tuning. EXPLORATORY_NOT_INDEPENDENT,17 shared nodes.
+- Focused8/8 PASS; guarded authentic replay reproduced identical score hash
+  with GT/review/network forbidden. Full suite528 tests,0 failures/errors,
+  2 Windows platform skips,438.000s; private test receipt
+  cfac5e84e41b5b7bbb8a2bf872fb1ab713a7c2edc47c7ae96045d8f590c604ab.
+  AST3/source-control immutability/diff/secret checks and4 private hash/ACL
+  readback checks PASS. New SHA remote/CI results reported after normal push;
+  pending at local commit. No Drive upload.
+  No human reviews, new inference, admission, original-label overwrite or GCN.
+  Details/reproduction/limitations: docs/EVIDENCE_ARBITRATION_V3.md.
+
 ## Graph support coverage / direct-seed shadow — 2026-11-07
 
 - Preserves f6b028f9 and f6129ff1, their zero-switch findings and user GraphScope
