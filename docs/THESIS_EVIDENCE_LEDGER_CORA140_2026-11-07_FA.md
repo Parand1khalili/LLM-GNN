@@ -1,5 +1,17 @@
 # دفتر شواهد پایان‌نامه — Cora140 / B1 / Narrative-v0 / SARA-3 / Routing
 
+## Revision: receipt-derived correction slice — 2026-11-07
+
+An independently executed GT-free extraction froze 74 router observations /57
+unique nodes before a separate GT-only process reproduced Narrative-to-Blind
+five-outcome counts R0=7/6/12/5/7 and R1=3/2/14/6/12 (fix/harm/both-correct/
+both-incorrect/no-class). Feature SHA e4b2724a7b05abb4eeede9ed53e93592cdb94911a673ba9b245aa17e6d86e7fe;
+private outcome SHA1501dac6d417511503cfb8a9a03bf3310beba6b6927ab956d9b1b131c668109c.
+The conservative eligibility is V1-equivalent: zero shadow changes, no new V2,
+no admissions and no GCN training. This is EXPLORATORY_NOT_INDEPENDENT, not a
+confirmation on new data. Details/limitations: docs/CORRECTION_FEATURES_V1.md.
+Historical figures below are preserved. Code reference before slice:8f88007.
+
 **وضعیت:** ۲۰۲۶-۱۱-۰۷؛ داده‌های مشاهداتی واقعیِ گزارش‌شده از Windows مالک، به‌همراه ارزیابی GT-only آفلاین. این سند عمومی فقط آمار تجمیعی، محدودیت‌ها و مسیرهای بازتولید را نگه می‌دارد؛ **هیچ GT نودبه‌نود، متن خصوصی مقاله، Receipt مدل، کلید API یا گزارش owner-private را شامل نمی‌شود.**
 
 ## ۱. تعریف داده، منشأ و مرزهای ادعا

@@ -1,5 +1,22 @@
 # Project state
 
+## Correction features / post-hoc outcomes slice — 2026-11-07
+
+- Fast-forwarded existing main to 8f880075dd6494efbb48912e757957634c93dea3;
+  both mandatory handoff/ledger documents read, unrelated user work retained.
+- Actual R0/R1 original+overlay receipt replay froze74 GT-free observations /57
+  unique nodes at e4b2724a7b05abb4eeede9ed53e93592cdb94911a673ba9b245aa17e6d86e7fe.
+  Separate evaluator then reproduced Narrative->Blind fix/harm7/6 and3/2,
+  all five outcomes retained; private outcome SHA1501dac6d417511503cfb8a9a03bf3310beba6b6927ab956d9b1b131c668109c.
+- Conservative eligibility equals V1; no duplicate V2. All74 shadow abstain,
+  zero admissions. No-op Control/Treatment plans identical per router (93/78
+  existing baseline labels), seeds0..9; actual GCN NOT_RUN_BLOCKED pending
+  independent training approval, graph-feature and test-contamination audit.
+- No API calls, router/policy changes, historical writes or human-review access.
+  Final synthetic checks16/16 PASS (18.249s), syntax/diff checks PASS; full suite
+  and GitHub Actions not run in this slice. Local commit remains PUSH_PENDING.
+  See docs/CORRECTION_FEATURES_V1.md for scope, hashes and remaining test/report gaps.
+
 ## Independent semantic Blind Review Pack V1 — 2026-11-06
 
 - Small offline CLI sara3.blind_review_pack reuses pinned input admission,
