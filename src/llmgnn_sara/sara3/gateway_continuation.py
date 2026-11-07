@@ -64,7 +64,8 @@ def identity(context_sha, phase, payload, wire, dependency):
                    "blind_response_sha256": dependency})
 
 
-def replay(audit, row, expected_id, payload, wire, dependency, context_sha, text, cfg):
+def replay(audit, row, expected_id, payload, wire, dependency, context_sha, text, cfg,
+           *, rejected_code="L1_DUPLICATE_EVIDENCE"):
     record_id, values = row
     payload_sha, saved_dep, phase, state, receipt_id = values
     if (record_id != expected_id or payload_sha != digest(payload)
@@ -83,12 +84,12 @@ def replay(audit, row, expected_id, payload, wire, dependency, context_sha, text
     if hashlib.sha256(raw).hexdigest() != receipt.get("response_sha256"):
         raise ValueError("Original response hash mismatch")
     if state == "REJECTED":
-        if receipt.get("reject_code") != "L1_DUPLICATE_EVIDENCE":
+        if receipt.get("reject_code") != rejected_code:
             raise ValueError("Unexpected rejection code")
         try:
             strict_envelope(receipt.get("http_status"), raw, cfg, _SENTINEL, text)
         except EvidenceError as exc:
-            if exc.code == "L1_DUPLICATE_EVIDENCE":
+            if exc.code == rejected_code:
                 return None
         raise ValueError("Rejected L1 failure not reproducible")
     if state != "COMPLETED":
@@ -101,7 +102,7 @@ def replay(audit, row, expected_id, payload, wire, dependency, context_sha, text
 
 def inspect(inputs, output_root, *, config, expected_context_sha256,
             router="r0", budget=37, cohort="sensitivity", fake=False,
-            expected_rejection=None):
+            expected_rejection=None, expected_reject_code="L1_DUPLICATE_EVIDENCE"):
     """Validate every saved request, including a failed comparison, without writes."""
     cfg = contract_from_dict(config)
     selected, ctx = gateway_context(inputs, router, budget, cohort, cfg, fake=fake)
@@ -134,7 +135,8 @@ def inspect(inputs, output_root, *, config, expected_context_sha256,
         seen.add(bi)
         if br[1][3] != "COMPLETED":
             raise ValueError("Non-completed blind forbids continuation")
-        blind = replay(audit, br, bi, bp, bw, None, sha, pair.text, cfg)
+        blind = replay(audit, br, bi, bp, bw, None, sha, pair.text, cfg,
+                       rejected_code=expected_reject_code)
         completed += 1
         if blind["abstain"]:
             if (node, "compare") in phases:
@@ -152,7 +154,8 @@ def inspect(inputs, output_root, *, config, expected_context_sha256,
             missing_compares.append(node)
             continue
         seen.add(ci)
-        replay(audit, cr, ci, cp, cw, dep, sha, pair.text, cfg)
+        replay(audit, cr, ci, cp, cw, dep, sha, pair.text, cfg,
+               rejected_code=expected_reject_code)
         if cr[1][3] == "COMPLETED":
             completed += 1
         else:
@@ -175,7 +178,7 @@ def inspect(inputs, output_root, *, config, expected_context_sha256,
             "completed_replayed_and_l1_verified": completed,
             "rejected_preserved": len(rejected),
             "rejected_phases": [{"node_id": n, "phase": p,
-                                "reason": "L1_DUPLICATE_EVIDENCE"} for n, p in rejected],
+                                "reason": expected_reject_code} for n, p in rejected],
             "uncertain": 0, "never_dispatched_blind_node_ids": missing_blinds,
             "missing_comparison_after_completed_blind_node_ids": missing_compares,
             "abstained_blind_node_ids": abstained,

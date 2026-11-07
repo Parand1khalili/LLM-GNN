@@ -87,7 +87,8 @@ def _bucket(rows):
 
 def analyze(selected, decisions, pairs, labels, *, status):
     """Pure node-by-node scoring after validating pinned live provenance."""
-    _require(status in ("COMPLETE_LIVE_UNASSESSED", "BLOCKED_NO_AUTOMATIC_RETRY"))
+    _require(status in ("COMPLETE_LIVE_UNASSESSED", "BLOCKED_NO_AUTOMATIC_RETRY",
+                        "CONTINUED_PRESERVING_REJECTED_COMPARISON"))
     _require(type(pairs) is dict and len(pairs) == COHORT
              and type(labels) in (list, tuple) and len(labels) == 2708
              and all(type(x) is int and 0 <= x < 7 for x in labels)
