@@ -1,5 +1,35 @@
 # Project state
 
+## Consensus-only diagnostic ablation — 2026-11-07
+
+- Starts from db4fb124810f5df2c499d391fcc6085cdb119c1d on synchronized main;
+  V1-V3/direct-seed rules/results and unrelated user/GraphScope work unchanged.
+  sara.ablation.consensus_only.v1 is NOT V4 or an admission policy. Only valid,
+  same-class, non-abstaining two-phase L1-supported changes switch experimentally;
+  Q/A/C/T/P/N/U are diagnostic only. Rule frozen before any GT read.
+- 32 authentic phase responses for16 candidates replayed against exact original
+  context/request/wire/raw hashes and L1; source feature and journal-row hashes
+  match. Private source fields retained; no semantic classification fabricated.
+  Independent before/after byte hashes:4 SQLite +32 receipts unchanged. Guarded
+  real replay with GT/review/network forbidden reproduced identical hashes.
+- Rule7de9f37650239e8feb74ba95c2e7476c35f436bc6670dc6005e78ae115f803c3;
+  decision0040fdab2a45340256c5087135ff06ff2fab706c219196278bb81a9278654130;
+  private diagnostic434ea5402334ea086a31c9c49ff2242a965979bb042f1298a83d2b2fb850d867.
+  Separate GT-only outcome d05ff62fa0b1b1d6b47b4ed5ba4f9afa3aff4536237f80ad1ee9ac9da2defefc:
+  R0 switches10/fix4/harm4/net0; R1 switches6/fix2/harm2/net0.
+- Aggregate A/C and comparison-phase flags constant1: cannot discriminate
+  fixes/harms in these candidates. Topic strings differ lexically15/16, semantic
+  difference NOT_ASSESSED.16 switch observations concern13 nodes,3 shared;
+  full router cohorts share17. EXPLORATORY_NOT_INDEPENDENT, no pooled inference.
+- Research decision: consensus alone not reliable on current evidence; record
+  limitations instead of more rule tuning. No API/human review/admission/GCN,
+  original-label changes or Drive writes. Focused7/7 PASS; full535 tests,
+  0 failures/errors,2 Windows platform skips,424.500s. Private test receipt
+  c3bd99b9b1389b99cf8a8cc7070f9b619fb57b41966bad9d6469be5d6330cbc0.
+  AST3/prior-rule immutability/diff/staged secret-pattern checks and4 private
+  hash/ACL/replay checks PASS. Remote CI pending at local commit; readback
+  reported after normal main push. Details: docs/CONSENSUS_ONLY_ABLATION_V1.md.
+
 ## Evidence-only Arbitration V3 Shadow — 2026-11-07
 
 - Continues from443eed2ef8f1b2f11a4dfa6f3fe05a961a0dcb1e; existing main was

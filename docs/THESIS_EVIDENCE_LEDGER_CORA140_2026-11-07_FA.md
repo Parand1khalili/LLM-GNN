@@ -210,3 +210,42 @@ Warning غیرخالی و Counter-evidence دارند و زیر Threshold ثاب
 به معنی اثبات بی‌ارزشی همهٔ پیشنهادهای Agent نیست؛ Coverage اصلاح صفر است.
 Threshold/Weight پس از مشاهده تغییر نکرد. Human Review، API، Admission و GCN
 خارج Scope ماندند. گزارش تفصیلی: `docs/EVIDENCE_ARBITRATION_V3.md`.
+
+## ۱۲. Consensus-only Shadow Ablation — ۲۰۲۶-۱۱-۰۷
+
+این Ablation پس از مشاهدهٔ V1–V3 طراحی شد؛ V4 یا Policy جدید Admission نیست.
+شرط Switch آزمایشی فقط دو فاز COMPLETED/L1 PASS/غیر Abstain، Supporting Quote
+معتبر، کلاس یکسان معتبر و متفاوت از Narrative است؛ Third-class مجاز و Q/A/C/T/P/N
+صرفاً تشخیصی‌اند. Rule قبل از GT با SHA
+`7de9f37650239e8feb74ba95c2e7476c35f436bc6670dc6005e78ae115f803c3` و خروجی GT-free با SHA
+`0040fdab2a45340256c5087135ff06ff2fab706c219196278bb81a9278654130` Freeze شد.
+Audit خصوصی ۳۲ پاسخ معتبر با هویت Request/Wire/Raw/Receipt و L1 با SHA
+`434ea5402334ea086a31c9c49ff2242a965979bb042f1298a83d2b2fb850d867` ثبت شد؛ Hash چهار SQLite
+و ۳۲ Receipt اصلی در Replay مجدد تغییر نکرد. Process جداگانهٔ GT-only نتیجه را با SHA
+`d05ff62fa0b1b1d6b47b4ed5ba4f9afa3aff4536237f80ad1ee9ac9da2defefc` ثبت کرد.
+
+| Router | Switch | Fix | Harm | Both wrong after switch | Net |
+|---|---:|---:|---:|---:|---:|
+|R0|10|4|4|2|0|
+|R1-v1|6|2|2|2|0|
+
+Third-class: در R0 هفت Switch با سه Fix، دو Harm و دو Both Wrong؛ در R1 چهار
+Switch با یک Fix، یک Harm و دو Both Wrong. Shared Quote در R0 هشت مورد با Fix/Harm=4/4
+و در R1 سه مورد با 2/1 داشت؛ بدون Shared Quote به‌ترتیب دو مورد با 0/0 و سه مورد با
+0/1 بودند. این زیرگروه‌های کوچک و Post-hoc مجوز Filter جدید نیستند.
+
+A/C تجمیعی و Warning/Counter در فاز Comparison برای همهٔ ۱۶ کاندیدا مثبت‌اند؛
+بنابراین در همین مجموعه بین اصلاح مفید و تخریب تفکیک نمی‌کنند. Counter در Blind
+متغیر است؛ همراهی توصیفی R0 (وجود:3/0، نبود:1/4 Fix/Harm) در R1 به همان تفکیک
+تکرار نشد (وجود:1/1، نبود:1/1) و مبنای Tuning قرار نگرفت. Warning متن آزاد مدل است؛
+Counter دارای Quote/Claim معتبر L1، ولی اعتبار معنایی تأییدنشده است. ۱۵ اختلاف
+Primary-topic شامل تغییر واژه‌هاست؛ از آن نمی‌توان Paraphrase یا Topic Drift معنایی
+را بدون روش معتبر نتیجه گرفت.
+
+**تصمیم پژوهشی:** توافق Blind/Comparison به‌تنهایی با شواهد فعلی Arbitration
+قابل‌اعتماد نیست؛ در هر دو Router سود خالص صفر و تخریب واقعی وجود دارد. به‌جای
+Rule Tuning بیشتر، این محدودیت ثبت شد. کل Cohortها ۱۷ نود مشترک دارند؛ ۱۶ مشاهدهٔ
+Switch مربوط به ۱۳ نود یکتا و سه نود مشترک است. نتیجه فقط
+`EXPLORATORY_NOT_INDEPENDENT` است، نه مجوز Training یا ادعای تعمیم‌پذیری. تمام
+Ruleها و نتایج قبلی حفظ شدند؛ هیچ API، Human Review، Admission یا GCN انجام نشد.
+جزئیات و Reproduction: `docs/CONSENSUS_ONLY_ABLATION_V1.md`.
