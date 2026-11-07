@@ -1,5 +1,45 @@
 # Project state
 
+## Single-vector three-agent fusion / GCN preparation — 2026-11-07
+
+- Starts from afa60e38a62650abb3303fbb139e08ed467dfa76 on synchronized main.
+  Three functional agents, one final_class/source per node. B1/Narrative are
+  comparison references, never separate B1+Agent/Narrative+Agent pipelines.
+  All old policies, frozen data, routes and GraphScope/user work preserved.
+- Conservative P1 and deterministic relaxed P2 frozen before new GT evaluation:
+  rule31ac6ae09ccf5d002867b0f3c739b4762c64fff290c93eea2bc6fdf36c4ce6b2;
+  label reportbc16870399416620ed67f8799ed9bd0f17c2b7cf3c5849b2debe93ac14d96c2c;
+  supplemental input traceebe9baf2c521d8a7ba791ab689373a1adfabad0cfce9520b24c03b3bdbbcc43e.
+  No P2 outcome-based tuning; no scores/confidence-gap rule. Third classes
+  permitted experimentally, not admitted. P2 Blind fallback is candidate-only
+  and comparison absent/rejected; completed comparison abstention is not bypassed.
+- Actual separate GT-only outcomeae731ac5c0ade855088e7a18af57ccbb91e4b874af43576c326655f1e57ecf2a:
+  A96/140,B101/140; C72/93 accepted; P1-R0=88/118,P2-R0=89/120;
+  P1/P2-R1=82/108. Selective metrics must be read with coverage.
+  Agent Fix/Harm vs B1=5/2(R0),3/1(R1); vs Narrative=4/4,2/2.
+  These are references for the same final vectors. EXPLORATORY_NOT_INDEPENDENT,
+  17 shared routed nodes; no claim of P2/GCN superiority or independent test.
+- Gridc7f51377905a7d5a224d86ef9342dfdf0430fa1ce518f22ccac6647bf227ca0e:
+  112 natural/matched CE/WCE/PS/cohort rows,56 valid drafts,56 blocked.
+  36 effective fit specs/360 possible seed fits after deduplication;0 executed.
+  CE/noPS common masks93/89 (Sensitivity/Primary); fixed test complement2568.
+  Historical PS deletion/order/class/confidence parity PASS for both baselines
+  and cohorts. Missing third-class confidence blocks affected WCE/PS plans.
+- New separate hash-bound admission adapter is default-deny; no real approval
+  record or admission executed. Existing allow_training gate unchanged.
+  Training NOT_RUN_BLOCKED: independent admission/training authorization and
+  test-contamination audit absent. No provider calls, human reviews or Drive writes.
+- Source graph x2708x384 /edges2x10858 verified without pickle, original byte
+  hashes/order match. Guarded authentic replay unchanged15 original JSON/SQLite
+  files and frozen hashes. Final focused9/9 PASS; final full544 tests0 failures/errors,
+  2 Windows skips,414.125s; private receipt
+  40b7758237a67d35015b182d863c1ad6bfd3e7b2b936bee430f378a49ee057d7.
+  Final suite repeated after graph/provenance/export completion; earlier pass
+  retained. AST4/old-source immutability/public allowlist/diff checks PASS.
+  CI/remote readback reported after scoped main commit/push (pending at commit).
+  See docs/THREE_AGENT_FUSION_GCN.md, docs/THREE_AGENT_FUSION_RESULTS.md and
+  reports/three_agent_fusion_v1.json for all aggregate results and112 plan statuses.
+
 ## Consensus-only diagnostic ablation — 2026-11-07
 
 - Starts from db4fb124810f5df2c499d391fcc6085cdb119c1d on synchronized main;

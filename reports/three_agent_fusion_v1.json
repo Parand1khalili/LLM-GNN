@@ -1,0 +1,3349 @@
+{
+  "gcn_config": {
+    "dropout": 0.5,
+    "epochs": 30,
+    "hidden_dimension": 64,
+    "learning_rate": 0.01,
+    "loss": "ce",
+    "node_count": 2708,
+    "num_classes": 7,
+    "num_layers": 2,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "strict_historical": true,
+    "weight_decay": 0.0005
+  },
+  "gcn_matrix": [
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "A_B1",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 140,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "B_NARRATIVE",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 140,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "C_BASELINE_FUSION",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 93,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "D_P1_r0",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 118,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "E_P2_r0",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 120,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "D_P1_r1_v1",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 108,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "E_P2_r1_v1",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 108,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "A_B1",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 93,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "B_NARRATIVE",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 93,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "C_BASELINE_FUSION",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 93,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "D_P1_r0",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 93,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "E_P2_r0",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 93,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "D_P1_r1_v1",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 93,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "E_P2_r1_v1",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 93,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "A_B1",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 98,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "B_NARRATIVE",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 98,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "C_BASELINE_FUSION",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 66,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "D_P1_r0",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "E_P2_r0",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "D_P1_r1_v1",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "E_P2_r1_v1",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "A_B1",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "B_NARRATIVE",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "C_BASELINE_FUSION",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "D_P1_r0",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "E_P2_r0",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "D_P1_r1_v1",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "E_P2_r1_v1",
+      "cohort": "sensitivity",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "A_B1",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 140,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "B_NARRATIVE",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 140,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "C_BASELINE_FUSION",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 93,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "D_P1_r0",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "E_P2_r0",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "D_P1_r1_v1",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "E_P2_r1_v1",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "A_B1",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 93,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "B_NARRATIVE",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 93,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "C_BASELINE_FUSION",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 93,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "D_P1_r0",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 93,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "E_P2_r0",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 93,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "D_P1_r1_v1",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "E_P2_r1_v1",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "A_B1",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 98,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "B_NARRATIVE",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 98,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "C_BASELINE_FUSION",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 66,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "D_P1_r0",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "E_P2_r0",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "D_P1_r1_v1",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "E_P2_r1_v1",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "A_B1",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "B_NARRATIVE",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "C_BASELINE_FUSION",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "D_P1_r0",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "E_P2_r0",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "D_P1_r1_v1",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "E_P2_r1_v1",
+      "cohort": "sensitivity",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "A_B1",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 135,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "B_NARRATIVE",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 135,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "C_BASELINE_FUSION",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 89,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "D_P1_r0",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 114,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "E_P2_r0",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 116,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "D_P1_r1_v1",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 103,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "E_P2_r1_v1",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 103,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "A_B1",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 89,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "B_NARRATIVE",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 89,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "C_BASELINE_FUSION",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 89,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "D_P1_r0",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 89,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "E_P2_r0",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 89,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "D_P1_r1_v1",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 89,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "E_P2_r1_v1",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 89,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "A_B1",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 95,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "B_NARRATIVE",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 95,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "C_BASELINE_FUSION",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 63,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "D_P1_r0",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "E_P2_r0",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "D_P1_r1_v1",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "E_P2_r1_v1",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "A_B1",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "B_NARRATIVE",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "C_BASELINE_FUSION",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "D_P1_r0",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "E_P2_r0",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "D_P1_r1_v1",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "E_P2_r1_v1",
+      "cohort": "primary",
+      "loss": "ce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "A_B1",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 135,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "B_NARRATIVE",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 135,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "C_BASELINE_FUSION",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 89,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "D_P1_r0",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "E_P2_r0",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "D_P1_r1_v1",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "E_P2_r1_v1",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "A_B1",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 89,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "B_NARRATIVE",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 89,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "C_BASELINE_FUSION",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 89,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "D_P1_r0",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 89,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "E_P2_r0",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 89,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "D_P1_r1_v1",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": false,
+      "accuracy": null,
+      "arm": "E_P2_r1_v1",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "A_B1",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 95,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "B_NARRATIVE",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 95,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "C_BASELINE_FUSION",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": 63,
+      "sd": null,
+      "status": "DRAFT_NOT_ADMITTED"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "D_P1_r0",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "E_P2_r0",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "D_P1_r1_v1",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "E_P2_r1_v1",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "natural",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "A_B1",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "B_NARRATIVE",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "C_BASELINE_FUSION",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "D_P1_r0",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "E_P2_r0",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "D_P1_r1_v1",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    },
+    {
+      "PS": true,
+      "accuracy": null,
+      "arm": "E_P2_r1_v1",
+      "cohort": "primary",
+      "loss": "wce",
+      "macro_f1": null,
+      "mask_mode": "matched_all_arms",
+      "mean": null,
+      "paired_delta": null,
+      "per_seed_results": [],
+      "planned_train_count": null,
+      "sd": null,
+      "status": "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK"
+    }
+  ],
+  "gcn_status": "NOT_RUN_BLOCKED",
+  "label_quality": {
+    "primary": {
+      "A_B1": {
+        "abstained": 0,
+        "accepted": 135,
+        "agent3_selected": 0,
+        "agent3_selected_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          }
+        },
+        "all_final_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 135,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 92,
+              "BOTH_INCORRECT": 43
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 9,
+            "denominator": 135,
+            "fixes": 1,
+            "harms": 6,
+            "net": -5,
+            "outcomes": {
+              "BOTH_CORRECT": 91,
+              "BOTH_INCORRECT": 37,
+              "CORRECTED_BASELINE_ERROR": 1,
+              "DAMAGED_CORRECT_BASELINE": 6
+            }
+          }
+        },
+        "class_distribution": {
+          "0": 9,
+          "1": 31,
+          "2": 15,
+          "3": 12,
+          "4": 33,
+          "5": 5,
+          "6": 30
+        },
+        "cohort_size": 135,
+        "correct_accepted": 92,
+        "correct_per_cohort_percent": 68.14814814814815,
+        "coverage": 1.0,
+        "disagreement_resolution": {
+          "B1": 9,
+          "NOT_APPLICABLE": 126
+        },
+        "label_sources": {
+          "B1_ONLY": 135
+        },
+        "macro_f1_accepted_only_7_classes": 0.6663274601355097,
+        "relative_to_C": {
+          "ADDED_TO_C": 46,
+          "KEPT_C": 89
+        },
+        "selective_accuracy_percent": 68.14814814814815,
+        "third_class": 0,
+        "third_class_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          }
+        }
+      },
+      "B_NARRATIVE": {
+        "abstained": 0,
+        "accepted": 135,
+        "agent3_selected": 0,
+        "agent3_selected_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          }
+        },
+        "all_final_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 9,
+            "denominator": 135,
+            "fixes": 6,
+            "harms": 1,
+            "net": 5,
+            "outcomes": {
+              "BOTH_CORRECT": 91,
+              "BOTH_INCORRECT": 37,
+              "CORRECTED_BASELINE_ERROR": 6,
+              "DAMAGED_CORRECT_BASELINE": 1
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 135,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 97,
+              "BOTH_INCORRECT": 38
+            }
+          }
+        },
+        "class_distribution": {
+          "0": 9,
+          "1": 34,
+          "2": 14,
+          "3": 12,
+          "4": 33,
+          "5": 4,
+          "6": 29
+        },
+        "cohort_size": 135,
+        "correct_accepted": 97,
+        "correct_per_cohort_percent": 71.85185185185185,
+        "coverage": 1.0,
+        "disagreement_resolution": {
+          "NARRATIVE": 9,
+          "NOT_APPLICABLE": 126
+        },
+        "label_sources": {
+          "NARRATIVE_ONLY": 135
+        },
+        "macro_f1_accepted_only_7_classes": 0.6979127221984365,
+        "relative_to_C": {
+          "ADDED_TO_C": 46,
+          "KEPT_C": 89
+        },
+        "selective_accuracy_percent": 71.85185185185185,
+        "third_class": 0,
+        "third_class_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          }
+        }
+      },
+      "C_BASELINE_FUSION": {
+        "abstained": 46,
+        "accepted": 89,
+        "agent3_selected": 0,
+        "agent3_selected_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          }
+        },
+        "all_final_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 46,
+            "changed_nonabstaining": 0,
+            "denominator": 135,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 69,
+              "BOTH_INCORRECT": 20,
+              "NO_CLASS_PREDICTION": 46
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 46,
+            "changed_nonabstaining": 0,
+            "denominator": 135,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 69,
+              "BOTH_INCORRECT": 20,
+              "NO_CLASS_PREDICTION": 46
+            }
+          }
+        },
+        "class_distribution": {
+          "0": 7,
+          "1": 23,
+          "2": 12,
+          "3": 8,
+          "4": 15,
+          "5": 3,
+          "6": 21
+        },
+        "cohort_size": 135,
+        "correct_accepted": 69,
+        "correct_per_cohort_percent": 51.111111111111114,
+        "coverage": 0.6592592592592592,
+        "disagreement_resolution": {
+          "ABSTAIN": 9,
+          "NOT_APPLICABLE": 126
+        },
+        "label_sources": {
+          "ABSTAIN": 46,
+          "BASELINE_AGREEMENT": 89
+        },
+        "macro_f1_accepted_only_7_classes": 0.7688989878741878,
+        "relative_to_C": {
+          "ABSTAINED_C": 46,
+          "KEPT_C": 89
+        },
+        "selective_accuracy_percent": 77.52808988764045,
+        "third_class": 0,
+        "third_class_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          }
+        }
+      },
+      "D_P1_r0": {
+        "abstained": 21,
+        "accepted": 114,
+        "agent3_selected": 25,
+        "agent3_selected_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 10,
+            "denominator": 25,
+            "fixes": 5,
+            "harms": 2,
+            "net": 3,
+            "outcomes": {
+              "BOTH_CORRECT": 11,
+              "BOTH_INCORRECT": 7,
+              "CORRECTED_BASELINE_ERROR": 5,
+              "DAMAGED_CORRECT_BASELINE": 2
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 10,
+            "denominator": 25,
+            "fixes": 4,
+            "harms": 4,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 12,
+              "BOTH_INCORRECT": 5,
+              "CORRECTED_BASELINE_ERROR": 4,
+              "DAMAGED_CORRECT_BASELINE": 4
+            }
+          }
+        },
+        "all_final_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 21,
+            "changed_nonabstaining": 10,
+            "denominator": 135,
+            "fixes": 5,
+            "harms": 2,
+            "net": 3,
+            "outcomes": {
+              "BOTH_CORRECT": 80,
+              "BOTH_INCORRECT": 27,
+              "CORRECTED_BASELINE_ERROR": 5,
+              "DAMAGED_CORRECT_BASELINE": 2,
+              "NO_CLASS_PREDICTION": 21
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 21,
+            "changed_nonabstaining": 10,
+            "denominator": 135,
+            "fixes": 4,
+            "harms": 4,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 81,
+              "BOTH_INCORRECT": 25,
+              "CORRECTED_BASELINE_ERROR": 4,
+              "DAMAGED_CORRECT_BASELINE": 4,
+              "NO_CLASS_PREDICTION": 21
+            }
+          }
+        },
+        "class_distribution": {
+          "0": 11,
+          "1": 29,
+          "2": 14,
+          "3": 11,
+          "4": 19,
+          "5": 5,
+          "6": 25
+        },
+        "cohort_size": 135,
+        "correct_accepted": 85,
+        "correct_per_cohort_percent": 62.96296296296296,
+        "coverage": 0.8444444444444444,
+        "disagreement_resolution": {
+          "ABSTAIN": 3,
+          "B1": 3,
+          "NARRATIVE": 3,
+          "NOT_APPLICABLE": 126
+        },
+        "label_sources": {
+          "ABSTAIN": 21,
+          "AGENT3_CONSENSUS": 25,
+          "BASELINE_AGREEMENT": 89
+        },
+        "macro_f1_accepted_only_7_classes": 0.717854578824177,
+        "relative_to_C": {
+          "ABSTAINED_C": 21,
+          "ADDED_TO_C": 25,
+          "KEPT_C": 89
+        },
+        "selective_accuracy_percent": 74.56140350877193,
+        "third_class": 7,
+        "third_class_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 7,
+            "denominator": 7,
+            "fixes": 3,
+            "harms": 2,
+            "net": 1,
+            "outcomes": {
+              "BOTH_INCORRECT": 2,
+              "CORRECTED_BASELINE_ERROR": 3,
+              "DAMAGED_CORRECT_BASELINE": 2
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 7,
+            "denominator": 7,
+            "fixes": 3,
+            "harms": 2,
+            "net": 1,
+            "outcomes": {
+              "BOTH_INCORRECT": 2,
+              "CORRECTED_BASELINE_ERROR": 3,
+              "DAMAGED_CORRECT_BASELINE": 2
+            }
+          }
+        }
+      },
+      "D_P1_r1_v1": {
+        "abstained": 32,
+        "accepted": 103,
+        "agent3_selected": 22,
+        "agent3_selected_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 7,
+            "denominator": 22,
+            "fixes": 3,
+            "harms": 1,
+            "net": 2,
+            "outcomes": {
+              "BOTH_CORRECT": 11,
+              "BOTH_INCORRECT": 7,
+              "CORRECTED_BASELINE_ERROR": 3,
+              "DAMAGED_CORRECT_BASELINE": 1
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 6,
+            "denominator": 22,
+            "fixes": 2,
+            "harms": 2,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 12,
+              "BOTH_INCORRECT": 6,
+              "CORRECTED_BASELINE_ERROR": 2,
+              "DAMAGED_CORRECT_BASELINE": 2
+            }
+          }
+        },
+        "all_final_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 32,
+            "changed_nonabstaining": 7,
+            "denominator": 135,
+            "fixes": 3,
+            "harms": 1,
+            "net": 2,
+            "outcomes": {
+              "BOTH_CORRECT": 75,
+              "BOTH_INCORRECT": 24,
+              "CORRECTED_BASELINE_ERROR": 3,
+              "DAMAGED_CORRECT_BASELINE": 1,
+              "NO_CLASS_PREDICTION": 32
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 32,
+            "changed_nonabstaining": 6,
+            "denominator": 135,
+            "fixes": 2,
+            "harms": 2,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 76,
+              "BOTH_INCORRECT": 23,
+              "CORRECTED_BASELINE_ERROR": 2,
+              "DAMAGED_CORRECT_BASELINE": 2,
+              "NO_CLASS_PREDICTION": 32
+            }
+          }
+        },
+        "class_distribution": {
+          "0": 11,
+          "1": 27,
+          "2": 13,
+          "3": 8,
+          "4": 18,
+          "5": 3,
+          "6": 23
+        },
+        "cohort_size": 135,
+        "correct_accepted": 78,
+        "correct_per_cohort_percent": 57.77777777777778,
+        "coverage": 0.762962962962963,
+        "disagreement_resolution": {
+          "ABSTAIN": 4,
+          "B1": 2,
+          "NARRATIVE": 3,
+          "NOT_APPLICABLE": 126
+        },
+        "label_sources": {
+          "ABSTAIN": 32,
+          "AGENT3_CONSENSUS": 22,
+          "BASELINE_AGREEMENT": 81
+        },
+        "macro_f1_accepted_only_7_classes": 0.7564101502670033,
+        "relative_to_C": {
+          "ABSTAINED_C": 32,
+          "ADDED_TO_C": 14,
+          "KEPT_C": 87,
+          "REVISED_C": 2
+        },
+        "selective_accuracy_percent": 75.72815533980582,
+        "third_class": 4,
+        "third_class_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 4,
+            "denominator": 4,
+            "fixes": 1,
+            "harms": 1,
+            "net": 0,
+            "outcomes": {
+              "BOTH_INCORRECT": 2,
+              "CORRECTED_BASELINE_ERROR": 1,
+              "DAMAGED_CORRECT_BASELINE": 1
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 4,
+            "denominator": 4,
+            "fixes": 1,
+            "harms": 1,
+            "net": 0,
+            "outcomes": {
+              "BOTH_INCORRECT": 2,
+              "CORRECTED_BASELINE_ERROR": 1,
+              "DAMAGED_CORRECT_BASELINE": 1
+            }
+          }
+        }
+      },
+      "E_P2_r0": {
+        "abstained": 19,
+        "accepted": 116,
+        "agent3_selected": 27,
+        "agent3_selected_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 10,
+            "denominator": 27,
+            "fixes": 5,
+            "harms": 2,
+            "net": 3,
+            "outcomes": {
+              "BOTH_CORRECT": 12,
+              "BOTH_INCORRECT": 8,
+              "CORRECTED_BASELINE_ERROR": 5,
+              "DAMAGED_CORRECT_BASELINE": 2
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 10,
+            "denominator": 27,
+            "fixes": 4,
+            "harms": 4,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 13,
+              "BOTH_INCORRECT": 6,
+              "CORRECTED_BASELINE_ERROR": 4,
+              "DAMAGED_CORRECT_BASELINE": 4
+            }
+          }
+        },
+        "all_final_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 19,
+            "changed_nonabstaining": 10,
+            "denominator": 135,
+            "fixes": 5,
+            "harms": 2,
+            "net": 3,
+            "outcomes": {
+              "BOTH_CORRECT": 81,
+              "BOTH_INCORRECT": 28,
+              "CORRECTED_BASELINE_ERROR": 5,
+              "DAMAGED_CORRECT_BASELINE": 2,
+              "NO_CLASS_PREDICTION": 19
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 19,
+            "changed_nonabstaining": 10,
+            "denominator": 135,
+            "fixes": 4,
+            "harms": 4,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 82,
+              "BOTH_INCORRECT": 26,
+              "CORRECTED_BASELINE_ERROR": 4,
+              "DAMAGED_CORRECT_BASELINE": 4,
+              "NO_CLASS_PREDICTION": 19
+            }
+          }
+        },
+        "class_distribution": {
+          "0": 11,
+          "1": 30,
+          "2": 14,
+          "3": 11,
+          "4": 20,
+          "5": 5,
+          "6": 25
+        },
+        "cohort_size": 135,
+        "correct_accepted": 86,
+        "correct_per_cohort_percent": 63.7037037037037,
+        "coverage": 0.8592592592592593,
+        "disagreement_resolution": {
+          "ABSTAIN": 3,
+          "B1": 3,
+          "NARRATIVE": 3,
+          "NOT_APPLICABLE": 126
+        },
+        "label_sources": {
+          "ABSTAIN": 19,
+          "AGENT3_COMPARISON_RESOLVER": 2,
+          "AGENT3_CONSENSUS": 25,
+          "BASELINE_AGREEMENT": 89
+        },
+        "macro_f1_accepted_only_7_classes": 0.7148677253866594,
+        "relative_to_C": {
+          "ABSTAINED_C": 19,
+          "ADDED_TO_C": 27,
+          "KEPT_C": 89
+        },
+        "selective_accuracy_percent": 74.13793103448276,
+        "third_class": 7,
+        "third_class_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 7,
+            "denominator": 7,
+            "fixes": 3,
+            "harms": 2,
+            "net": 1,
+            "outcomes": {
+              "BOTH_INCORRECT": 2,
+              "CORRECTED_BASELINE_ERROR": 3,
+              "DAMAGED_CORRECT_BASELINE": 2
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 7,
+            "denominator": 7,
+            "fixes": 3,
+            "harms": 2,
+            "net": 1,
+            "outcomes": {
+              "BOTH_INCORRECT": 2,
+              "CORRECTED_BASELINE_ERROR": 3,
+              "DAMAGED_CORRECT_BASELINE": 2
+            }
+          }
+        }
+      },
+      "E_P2_r1_v1": {
+        "abstained": 32,
+        "accepted": 103,
+        "agent3_selected": 22,
+        "agent3_selected_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 7,
+            "denominator": 22,
+            "fixes": 3,
+            "harms": 1,
+            "net": 2,
+            "outcomes": {
+              "BOTH_CORRECT": 11,
+              "BOTH_INCORRECT": 7,
+              "CORRECTED_BASELINE_ERROR": 3,
+              "DAMAGED_CORRECT_BASELINE": 1
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 6,
+            "denominator": 22,
+            "fixes": 2,
+            "harms": 2,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 12,
+              "BOTH_INCORRECT": 6,
+              "CORRECTED_BASELINE_ERROR": 2,
+              "DAMAGED_CORRECT_BASELINE": 2
+            }
+          }
+        },
+        "all_final_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 32,
+            "changed_nonabstaining": 7,
+            "denominator": 135,
+            "fixes": 3,
+            "harms": 1,
+            "net": 2,
+            "outcomes": {
+              "BOTH_CORRECT": 75,
+              "BOTH_INCORRECT": 24,
+              "CORRECTED_BASELINE_ERROR": 3,
+              "DAMAGED_CORRECT_BASELINE": 1,
+              "NO_CLASS_PREDICTION": 32
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 32,
+            "changed_nonabstaining": 6,
+            "denominator": 135,
+            "fixes": 2,
+            "harms": 2,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 76,
+              "BOTH_INCORRECT": 23,
+              "CORRECTED_BASELINE_ERROR": 2,
+              "DAMAGED_CORRECT_BASELINE": 2,
+              "NO_CLASS_PREDICTION": 32
+            }
+          }
+        },
+        "class_distribution": {
+          "0": 11,
+          "1": 27,
+          "2": 13,
+          "3": 8,
+          "4": 18,
+          "5": 3,
+          "6": 23
+        },
+        "cohort_size": 135,
+        "correct_accepted": 78,
+        "correct_per_cohort_percent": 57.77777777777778,
+        "coverage": 0.762962962962963,
+        "disagreement_resolution": {
+          "ABSTAIN": 4,
+          "B1": 2,
+          "NARRATIVE": 3,
+          "NOT_APPLICABLE": 126
+        },
+        "label_sources": {
+          "ABSTAIN": 32,
+          "AGENT3_CONSENSUS": 22,
+          "BASELINE_AGREEMENT": 81
+        },
+        "macro_f1_accepted_only_7_classes": 0.7564101502670033,
+        "relative_to_C": {
+          "ABSTAINED_C": 32,
+          "ADDED_TO_C": 14,
+          "KEPT_C": 87,
+          "REVISED_C": 2
+        },
+        "selective_accuracy_percent": 75.72815533980582,
+        "third_class": 4,
+        "third_class_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 4,
+            "denominator": 4,
+            "fixes": 1,
+            "harms": 1,
+            "net": 0,
+            "outcomes": {
+              "BOTH_INCORRECT": 2,
+              "CORRECTED_BASELINE_ERROR": 1,
+              "DAMAGED_CORRECT_BASELINE": 1
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 4,
+            "denominator": 4,
+            "fixes": 1,
+            "harms": 1,
+            "net": 0,
+            "outcomes": {
+              "BOTH_INCORRECT": 2,
+              "CORRECTED_BASELINE_ERROR": 1,
+              "DAMAGED_CORRECT_BASELINE": 1
+            }
+          }
+        }
+      }
+    },
+    "sensitivity": {
+      "A_B1": {
+        "abstained": 0,
+        "accepted": 140,
+        "agent3_selected": 0,
+        "agent3_selected_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          }
+        },
+        "all_final_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 140,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 96,
+              "BOTH_INCORRECT": 44
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 9,
+            "denominator": 140,
+            "fixes": 1,
+            "harms": 6,
+            "net": -5,
+            "outcomes": {
+              "BOTH_CORRECT": 95,
+              "BOTH_INCORRECT": 38,
+              "CORRECTED_BASELINE_ERROR": 1,
+              "DAMAGED_CORRECT_BASELINE": 6
+            }
+          }
+        },
+        "class_distribution": {
+          "0": 9,
+          "1": 32,
+          "2": 15,
+          "3": 12,
+          "4": 33,
+          "5": 6,
+          "6": 33
+        },
+        "cohort_size": 140,
+        "correct_accepted": 96,
+        "correct_per_cohort_percent": 68.57142857142857,
+        "coverage": 1.0,
+        "disagreement_resolution": {
+          "B1": 9,
+          "NOT_APPLICABLE": 131
+        },
+        "label_sources": {
+          "B1_ONLY": 140
+        },
+        "macro_f1_accepted_only_7_classes": 0.6765436665680634,
+        "relative_to_C": {
+          "ADDED_TO_C": 47,
+          "KEPT_C": 93
+        },
+        "selective_accuracy_percent": 68.57142857142857,
+        "third_class": 0,
+        "third_class_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          }
+        }
+      },
+      "B_NARRATIVE": {
+        "abstained": 0,
+        "accepted": 140,
+        "agent3_selected": 0,
+        "agent3_selected_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          }
+        },
+        "all_final_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 9,
+            "denominator": 140,
+            "fixes": 6,
+            "harms": 1,
+            "net": 5,
+            "outcomes": {
+              "BOTH_CORRECT": 95,
+              "BOTH_INCORRECT": 38,
+              "CORRECTED_BASELINE_ERROR": 6,
+              "DAMAGED_CORRECT_BASELINE": 1
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 140,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 101,
+              "BOTH_INCORRECT": 39
+            }
+          }
+        },
+        "class_distribution": {
+          "0": 9,
+          "1": 35,
+          "2": 14,
+          "3": 12,
+          "4": 33,
+          "5": 5,
+          "6": 32
+        },
+        "cohort_size": 140,
+        "correct_accepted": 101,
+        "correct_per_cohort_percent": 72.14285714285714,
+        "coverage": 1.0,
+        "disagreement_resolution": {
+          "NARRATIVE": 9,
+          "NOT_APPLICABLE": 131
+        },
+        "label_sources": {
+          "NARRATIVE_ONLY": 140
+        },
+        "macro_f1_accepted_only_7_classes": 0.7072798967880934,
+        "relative_to_C": {
+          "ADDED_TO_C": 47,
+          "KEPT_C": 93
+        },
+        "selective_accuracy_percent": 72.14285714285714,
+        "third_class": 0,
+        "third_class_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          }
+        }
+      },
+      "C_BASELINE_FUSION": {
+        "abstained": 47,
+        "accepted": 93,
+        "agent3_selected": 0,
+        "agent3_selected_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          }
+        },
+        "all_final_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 47,
+            "changed_nonabstaining": 0,
+            "denominator": 140,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 72,
+              "BOTH_INCORRECT": 21,
+              "NO_CLASS_PREDICTION": 47
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 47,
+            "changed_nonabstaining": 0,
+            "denominator": 140,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 72,
+              "BOTH_INCORRECT": 21,
+              "NO_CLASS_PREDICTION": 47
+            }
+          }
+        },
+        "class_distribution": {
+          "0": 7,
+          "1": 24,
+          "2": 12,
+          "3": 8,
+          "4": 15,
+          "5": 4,
+          "6": 23
+        },
+        "cohort_size": 140,
+        "correct_accepted": 72,
+        "correct_per_cohort_percent": 51.42857142857143,
+        "coverage": 0.6642857142857143,
+        "disagreement_resolution": {
+          "ABSTAIN": 9,
+          "NOT_APPLICABLE": 131
+        },
+        "label_sources": {
+          "ABSTAIN": 47,
+          "BASELINE_AGREEMENT": 93
+        },
+        "macro_f1_accepted_only_7_classes": 0.7707514520959899,
+        "relative_to_C": {
+          "ABSTAINED_C": 47,
+          "KEPT_C": 93
+        },
+        "selective_accuracy_percent": 77.41935483870968,
+        "third_class": 0,
+        "third_class_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 0,
+            "denominator": 0,
+            "fixes": 0,
+            "harms": 0,
+            "net": 0,
+            "outcomes": {}
+          }
+        }
+      },
+      "D_P1_r0": {
+        "abstained": 22,
+        "accepted": 118,
+        "agent3_selected": 25,
+        "agent3_selected_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 10,
+            "denominator": 25,
+            "fixes": 5,
+            "harms": 2,
+            "net": 3,
+            "outcomes": {
+              "BOTH_CORRECT": 11,
+              "BOTH_INCORRECT": 7,
+              "CORRECTED_BASELINE_ERROR": 5,
+              "DAMAGED_CORRECT_BASELINE": 2
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 10,
+            "denominator": 25,
+            "fixes": 4,
+            "harms": 4,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 12,
+              "BOTH_INCORRECT": 5,
+              "CORRECTED_BASELINE_ERROR": 4,
+              "DAMAGED_CORRECT_BASELINE": 4
+            }
+          }
+        },
+        "all_final_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 22,
+            "changed_nonabstaining": 10,
+            "denominator": 140,
+            "fixes": 5,
+            "harms": 2,
+            "net": 3,
+            "outcomes": {
+              "BOTH_CORRECT": 83,
+              "BOTH_INCORRECT": 28,
+              "CORRECTED_BASELINE_ERROR": 5,
+              "DAMAGED_CORRECT_BASELINE": 2,
+              "NO_CLASS_PREDICTION": 22
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 22,
+            "changed_nonabstaining": 10,
+            "denominator": 140,
+            "fixes": 4,
+            "harms": 4,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 84,
+              "BOTH_INCORRECT": 26,
+              "CORRECTED_BASELINE_ERROR": 4,
+              "DAMAGED_CORRECT_BASELINE": 4,
+              "NO_CLASS_PREDICTION": 22
+            }
+          }
+        },
+        "class_distribution": {
+          "0": 11,
+          "1": 30,
+          "2": 14,
+          "3": 11,
+          "4": 19,
+          "5": 6,
+          "6": 27
+        },
+        "cohort_size": 140,
+        "correct_accepted": 88,
+        "correct_per_cohort_percent": 62.857142857142854,
+        "coverage": 0.8428571428571429,
+        "disagreement_resolution": {
+          "ABSTAIN": 3,
+          "B1": 3,
+          "NARRATIVE": 3,
+          "NOT_APPLICABLE": 131
+        },
+        "label_sources": {
+          "ABSTAIN": 22,
+          "AGENT3_CONSENSUS": 25,
+          "BASELINE_AGREEMENT": 93
+        },
+        "macro_f1_accepted_only_7_classes": 0.7216708065758745,
+        "relative_to_C": {
+          "ABSTAINED_C": 22,
+          "ADDED_TO_C": 25,
+          "KEPT_C": 93
+        },
+        "selective_accuracy_percent": 74.57627118644068,
+        "third_class": 7,
+        "third_class_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 7,
+            "denominator": 7,
+            "fixes": 3,
+            "harms": 2,
+            "net": 1,
+            "outcomes": {
+              "BOTH_INCORRECT": 2,
+              "CORRECTED_BASELINE_ERROR": 3,
+              "DAMAGED_CORRECT_BASELINE": 2
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 7,
+            "denominator": 7,
+            "fixes": 3,
+            "harms": 2,
+            "net": 1,
+            "outcomes": {
+              "BOTH_INCORRECT": 2,
+              "CORRECTED_BASELINE_ERROR": 3,
+              "DAMAGED_CORRECT_BASELINE": 2
+            }
+          }
+        }
+      },
+      "D_P1_r1_v1": {
+        "abstained": 32,
+        "accepted": 108,
+        "agent3_selected": 23,
+        "agent3_selected_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 7,
+            "denominator": 23,
+            "fixes": 3,
+            "harms": 1,
+            "net": 2,
+            "outcomes": {
+              "BOTH_CORRECT": 12,
+              "BOTH_INCORRECT": 7,
+              "CORRECTED_BASELINE_ERROR": 3,
+              "DAMAGED_CORRECT_BASELINE": 1
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 6,
+            "denominator": 23,
+            "fixes": 2,
+            "harms": 2,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 13,
+              "BOTH_INCORRECT": 6,
+              "CORRECTED_BASELINE_ERROR": 2,
+              "DAMAGED_CORRECT_BASELINE": 2
+            }
+          }
+        },
+        "all_final_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 32,
+            "changed_nonabstaining": 7,
+            "denominator": 140,
+            "fixes": 3,
+            "harms": 1,
+            "net": 2,
+            "outcomes": {
+              "BOTH_CORRECT": 79,
+              "BOTH_INCORRECT": 25,
+              "CORRECTED_BASELINE_ERROR": 3,
+              "DAMAGED_CORRECT_BASELINE": 1,
+              "NO_CLASS_PREDICTION": 32
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 32,
+            "changed_nonabstaining": 6,
+            "denominator": 140,
+            "fixes": 2,
+            "harms": 2,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 80,
+              "BOTH_INCORRECT": 24,
+              "CORRECTED_BASELINE_ERROR": 2,
+              "DAMAGED_CORRECT_BASELINE": 2,
+              "NO_CLASS_PREDICTION": 32
+            }
+          }
+        },
+        "class_distribution": {
+          "0": 11,
+          "1": 28,
+          "2": 13,
+          "3": 8,
+          "4": 18,
+          "5": 4,
+          "6": 26
+        },
+        "cohort_size": 140,
+        "correct_accepted": 82,
+        "correct_per_cohort_percent": 58.57142857142857,
+        "coverage": 0.7714285714285715,
+        "disagreement_resolution": {
+          "ABSTAIN": 4,
+          "B1": 2,
+          "NARRATIVE": 3,
+          "NOT_APPLICABLE": 131
+        },
+        "label_sources": {
+          "ABSTAIN": 32,
+          "AGENT3_CONSENSUS": 23,
+          "BASELINE_AGREEMENT": 85
+        },
+        "macro_f1_accepted_only_7_classes": 0.7594033475459149,
+        "relative_to_C": {
+          "ABSTAINED_C": 32,
+          "ADDED_TO_C": 15,
+          "KEPT_C": 91,
+          "REVISED_C": 2
+        },
+        "selective_accuracy_percent": 75.92592592592592,
+        "third_class": 4,
+        "third_class_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 4,
+            "denominator": 4,
+            "fixes": 1,
+            "harms": 1,
+            "net": 0,
+            "outcomes": {
+              "BOTH_INCORRECT": 2,
+              "CORRECTED_BASELINE_ERROR": 1,
+              "DAMAGED_CORRECT_BASELINE": 1
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 4,
+            "denominator": 4,
+            "fixes": 1,
+            "harms": 1,
+            "net": 0,
+            "outcomes": {
+              "BOTH_INCORRECT": 2,
+              "CORRECTED_BASELINE_ERROR": 1,
+              "DAMAGED_CORRECT_BASELINE": 1
+            }
+          }
+        }
+      },
+      "E_P2_r0": {
+        "abstained": 20,
+        "accepted": 120,
+        "agent3_selected": 27,
+        "agent3_selected_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 10,
+            "denominator": 27,
+            "fixes": 5,
+            "harms": 2,
+            "net": 3,
+            "outcomes": {
+              "BOTH_CORRECT": 12,
+              "BOTH_INCORRECT": 8,
+              "CORRECTED_BASELINE_ERROR": 5,
+              "DAMAGED_CORRECT_BASELINE": 2
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 10,
+            "denominator": 27,
+            "fixes": 4,
+            "harms": 4,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 13,
+              "BOTH_INCORRECT": 6,
+              "CORRECTED_BASELINE_ERROR": 4,
+              "DAMAGED_CORRECT_BASELINE": 4
+            }
+          }
+        },
+        "all_final_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 20,
+            "changed_nonabstaining": 10,
+            "denominator": 140,
+            "fixes": 5,
+            "harms": 2,
+            "net": 3,
+            "outcomes": {
+              "BOTH_CORRECT": 84,
+              "BOTH_INCORRECT": 29,
+              "CORRECTED_BASELINE_ERROR": 5,
+              "DAMAGED_CORRECT_BASELINE": 2,
+              "NO_CLASS_PREDICTION": 20
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 20,
+            "changed_nonabstaining": 10,
+            "denominator": 140,
+            "fixes": 4,
+            "harms": 4,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 85,
+              "BOTH_INCORRECT": 27,
+              "CORRECTED_BASELINE_ERROR": 4,
+              "DAMAGED_CORRECT_BASELINE": 4,
+              "NO_CLASS_PREDICTION": 20
+            }
+          }
+        },
+        "class_distribution": {
+          "0": 11,
+          "1": 31,
+          "2": 14,
+          "3": 11,
+          "4": 20,
+          "5": 6,
+          "6": 27
+        },
+        "cohort_size": 140,
+        "correct_accepted": 89,
+        "correct_per_cohort_percent": 63.57142857142857,
+        "coverage": 0.8571428571428571,
+        "disagreement_resolution": {
+          "ABSTAIN": 3,
+          "B1": 3,
+          "NARRATIVE": 3,
+          "NOT_APPLICABLE": 131
+        },
+        "label_sources": {
+          "ABSTAIN": 20,
+          "AGENT3_COMPARISON_RESOLVER": 2,
+          "AGENT3_CONSENSUS": 25,
+          "BASELINE_AGREEMENT": 93
+        },
+        "macro_f1_accepted_only_7_classes": 0.7188217423841546,
+        "relative_to_C": {
+          "ABSTAINED_C": 20,
+          "ADDED_TO_C": 27,
+          "KEPT_C": 93
+        },
+        "selective_accuracy_percent": 74.16666666666667,
+        "third_class": 7,
+        "third_class_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 7,
+            "denominator": 7,
+            "fixes": 3,
+            "harms": 2,
+            "net": 1,
+            "outcomes": {
+              "BOTH_INCORRECT": 2,
+              "CORRECTED_BASELINE_ERROR": 3,
+              "DAMAGED_CORRECT_BASELINE": 2
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 7,
+            "denominator": 7,
+            "fixes": 3,
+            "harms": 2,
+            "net": 1,
+            "outcomes": {
+              "BOTH_INCORRECT": 2,
+              "CORRECTED_BASELINE_ERROR": 3,
+              "DAMAGED_CORRECT_BASELINE": 2
+            }
+          }
+        }
+      },
+      "E_P2_r1_v1": {
+        "abstained": 32,
+        "accepted": 108,
+        "agent3_selected": 23,
+        "agent3_selected_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 7,
+            "denominator": 23,
+            "fixes": 3,
+            "harms": 1,
+            "net": 2,
+            "outcomes": {
+              "BOTH_CORRECT": 12,
+              "BOTH_INCORRECT": 7,
+              "CORRECTED_BASELINE_ERROR": 3,
+              "DAMAGED_CORRECT_BASELINE": 1
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 6,
+            "denominator": 23,
+            "fixes": 2,
+            "harms": 2,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 13,
+              "BOTH_INCORRECT": 6,
+              "CORRECTED_BASELINE_ERROR": 2,
+              "DAMAGED_CORRECT_BASELINE": 2
+            }
+          }
+        },
+        "all_final_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 32,
+            "changed_nonabstaining": 7,
+            "denominator": 140,
+            "fixes": 3,
+            "harms": 1,
+            "net": 2,
+            "outcomes": {
+              "BOTH_CORRECT": 79,
+              "BOTH_INCORRECT": 25,
+              "CORRECTED_BASELINE_ERROR": 3,
+              "DAMAGED_CORRECT_BASELINE": 1,
+              "NO_CLASS_PREDICTION": 32
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 32,
+            "changed_nonabstaining": 6,
+            "denominator": 140,
+            "fixes": 2,
+            "harms": 2,
+            "net": 0,
+            "outcomes": {
+              "BOTH_CORRECT": 80,
+              "BOTH_INCORRECT": 24,
+              "CORRECTED_BASELINE_ERROR": 2,
+              "DAMAGED_CORRECT_BASELINE": 2,
+              "NO_CLASS_PREDICTION": 32
+            }
+          }
+        },
+        "class_distribution": {
+          "0": 11,
+          "1": 28,
+          "2": 13,
+          "3": 8,
+          "4": 18,
+          "5": 4,
+          "6": 26
+        },
+        "cohort_size": 140,
+        "correct_accepted": 82,
+        "correct_per_cohort_percent": 58.57142857142857,
+        "coverage": 0.7714285714285715,
+        "disagreement_resolution": {
+          "ABSTAIN": 4,
+          "B1": 2,
+          "NARRATIVE": 3,
+          "NOT_APPLICABLE": 131
+        },
+        "label_sources": {
+          "ABSTAIN": 32,
+          "AGENT3_CONSENSUS": 23,
+          "BASELINE_AGREEMENT": 85
+        },
+        "macro_f1_accepted_only_7_classes": 0.7594033475459149,
+        "relative_to_C": {
+          "ABSTAINED_C": 32,
+          "ADDED_TO_C": 15,
+          "KEPT_C": 91,
+          "REVISED_C": 2
+        },
+        "selective_accuracy_percent": 75.92592592592592,
+        "third_class": 4,
+        "third_class_vs_references": {
+          "b1_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 4,
+            "denominator": 4,
+            "fixes": 1,
+            "harms": 1,
+            "net": 0,
+            "outcomes": {
+              "BOTH_INCORRECT": 2,
+              "CORRECTED_BASELINE_ERROR": 1,
+              "DAMAGED_CORRECT_BASELINE": 1
+            }
+          },
+          "narrative_class": {
+            "abstentions_not_counted_as_harm": 0,
+            "changed_nonabstaining": 4,
+            "denominator": 4,
+            "fixes": 1,
+            "harms": 1,
+            "net": 0,
+            "outcomes": {
+              "BOTH_INCORRECT": 2,
+              "CORRECTED_BASELINE_ERROR": 1,
+              "DAMAGED_CORRECT_BASELINE": 1
+            }
+          }
+        }
+      }
+    }
+  },
+  "schema": "sara.public.three_agent_fusion.v1",
+  "shared_routed_nodes": 17,
+  "source_fusion_sha256": "bc16870399416620ed67f8799ed9bd0f17c2b7cf3c5849b2debe93ac14d96c2c",
+  "source_grid_sha256": "c7f51377905a7d5a224d86ef9342dfdf0430fa1ce518f22ccac6647bf227ca0e",
+  "source_outcome_sha256": "ae731ac5c0ade855088e7a18af57ccbb91e4b874af43576c326655f1e57ecf2a",
+  "status": "EXPLORATORY_NOT_INDEPENDENT",
+  "training_admissions": 0,
+  "training_runs": 0,
+  "unique_planned_fit_specs": 36,
+  "unique_planned_seed_fits": 360
+}

@@ -249,3 +249,61 @@ Switch مربوط به ۱۳ نود یکتا و سه نود مشترک است. ن
 `EXPLORATORY_NOT_INDEPENDENT` است، نه مجوز Training یا ادعای تعمیم‌پذیری. تمام
 Ruleها و نتایج قبلی حفظ شدند؛ هیچ API، Human Review، Admission یا GCN انجام نشد.
 جزئیات و Reproduction: `docs/CONSENSUS_ONLY_ABLATION_V1.md`.
+
+## ۱۳. Three-Agent Fusion P1/P2 و آماده‌سازی GCN — ۲۰۲۶-۱۱-۰۷
+
+تعریف معماری تثبیت شد: سه نقش B1، Narrative-v0 و SARA-3؛ Blind/Comparison دو فاز
+مرتبط Agent سوم‌اند. هر Arm برای هر نود فقط یک `final_class` و `label_source` دارد.
+مقایسهٔ Fix/Harm با دو Baseline صرفاً دو مرجع ارزیابی برای **همان بردار نهایی** است،
+نه دو Pipeline مستقل B1+Agent و Narrative+Agent. انتخاب FeatProp و Routerها ثابت‌اند.
+
+P1 توافق معتبر دو فاز را انتخاب می‌کند؛ در نبود آن توافق B1/Narrative با حداقل
+Confidence=80 حفظ می‌شود و سایر موارد Abstain هستند. P2 ابتدا Consensus؛ سپس
+Comparison معتبر انتخاب‌کنندهٔ Candidate تاریخی هنگام اختلاف دو فاز؛ سپس Blind
+معتبر منطبق با یک Candidate فقط در نبود یا Rejection مقایسه؛ سپس توافق معتبر
+Baseline یا Abstain. Comparisonِ Abstaining دور زده نمی‌شود. Third-class در Consensus
+آزمایشی مجاز است؛ L1 و اصالت شواهد الزامی، A/C/T/P/N فاقد Veto هستند.
+
+Rule پیش از مشاهدهٔ Outcomeهای جدید Freeze شد:
+`31ac6ae09ccf5d002867b0f3c739b4762c64fff290c93eea2bc6fdf36c4ce6b2`؛
+بردارهای نهایی `bc16870399416620ed67f8799ed9bd0f17c2b7cf3c5849b2debe93ac14d96c2c`؛
+GT-only در Process جدا `ae731ac5c0ade855088e7a18af57ccbb91e4b874af43576c326655f1e57ecf2a`.
+
+| Arm روی Sensitivity140 | Accepted /Abstained | Correct accepted | Selective Accuracy | Macro-F1 accepted-only |
+|---|---:|---:|---:|---:|
+|A B1|140 /0|96|68.5714%|0.676544|
+|B Narrative|140 /0|101|72.1429%|0.707280|
+|C Fusion بدون Agent3|93 /47|72|77.4194%|0.770751|
+|D P1-R0|118 /22|88|74.5763%|0.721671|
+|E P2-R0|120 /20|89|74.1667%|0.718822|
+|D P1-R1|108 /32|82|75.9259%|0.759403|
+|E P2-R1|108 /32|82|75.9259%|0.759403|
+
+این معیارها **کیفیت pseudo-label** هستند، نه GCN Accuracy. تغییر Coverage مقایسهٔ
+مستقیم Selective Accuracy را محدود می‌کند. P2-R0 دو Label بیشتر از P1 دارد، یکی
+صحیح و یکی غلط؛ برتری P2 ثابت نشده است. تغییر کلاسِ Agent نسبت به Narrative در
+هر دو Policy همان Fix/Harm=4/4 در R0 و2/2 در R1 است؛ نسبت به B1 برابر5/2 و3/1.
+این اختلاف مراجع به معنی دو سیستم SARA متفاوت نیست. C در R0 با25/27 Label اضافه
+گسترش می‌یابد؛ در R1 پانزده Label اضافه و دو کلاس C بازنگری می‌شود؛ حذف C صفر است.
+
+Grid به SHA `c7f51377905a7d5a224d86ef9342dfdf0430fa1ce518f22ccac6647bf227ca0e` شامل112
+ردیف Natural/Matched، CE/WCE، PS OFF/ON، Primary135/Sensitivity140 است:56 Draft و56
+Blocked؛ پس از Dedup دقیق36 Fit Spec و360 Seed Fit صرفاً **برنامه‌ریزی‌شده**، صفر
+اجرا. Baselineهای A/B/C بین Routerها مشترک‌اند. CE/noPS Matched Mask برابر93/89
+نود است؛ Test همیشه Complement تمام140 نود، یعنی2568 نود باقی می‌ماند. FeatProp
+روش انتخاب Target است، Toggle Loss یا PS نیست. PS تاریخی هر دو Arm/Cohort از نظر
+ترتیب حذف، Class Guard، Tie-breaking، Label و Confidence دقیقاً بازتولید شد.
+
+Confidence کلاس سوم ناموجود است؛ برای WCE/PS جایگزین ساختگی ساخته نشد. Confidence
+Candidate فقط از Baseline واقعی و با منشأ غیرکالیبره است؛ A/B مقدار Arm خود را
+دارند. CE نیازمند Confidence نیست. Adapter مستقل Admission با نسخه و Hash و مجوز
+صریح، Default-Deny است؛ Gate قدیمی `allow_training` تغییر نکرد. هیچ Admission واقعی
+یا آموزش GCN انجام نشد. تمام GCN Metricها و Seed Resultها `NOT_RUN_BLOCKED` هستند:
+مجوز مستقل و Audit معتبر Test هنوز موجود نیست. GT این140 نود قبلاً دیده شده و
+استقلال Complement2568 نیز بدون ممیزی قابل ادعا نیست.
+
+نتایج فقط `EXPLORATORY_NOT_INDEPENDENT` هستند؛17 نود Routed مشترک باقی مانده‌اند.
+جزئیات همهٔ Armها، توزیع کلاس، مراجع Fix/Harm، Primary و Grid کامل در
+`docs/THREE_AGENT_FUSION_RESULTS.md` و `reports/three_agent_fusion_v1.json` ثبت شد؛
+مرزهای معماری/مجوز/Confidence در `docs/THREE_AGENT_FUSION_GCN.md` است. منابع تاریخی،
+Ruleها و نتایج قبلی بدون تغییر حفظ شدند؛ API جدید و Human Review انجام نشد.

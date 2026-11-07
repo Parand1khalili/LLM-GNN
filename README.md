@@ -8,6 +8,12 @@ Status reviewed: **2026-11-06**. Historical experiments, synthetic software chec
 
 [Website](#graphscope-research-website) · [Workflow](#research-workflow) · [Results](#historical-results) · [Quick start](#quick-start) · [Architecture](#repository-map) · [Reproducibility](#reproducibility-and-scientific-boundaries)
 
+**2026-11-07 experimental update:** [Three-agent Fusion P1/P2](docs/THREE_AGENT_FUSION_GCN.md)
+combines B1, Narrative and frozen Agent3 evidence into one final label per node.
+[Executed label-quality tables and the GCN plan matrix](docs/THREE_AGENT_FUSION_RESULTS.md)
+separate coverage from corrections. GCN training/admission remains blocked pending
+independent authorization and test audit; no downstream improvement is claimed.
+
 ## Research question and development path
 
 Can an LLM annotate nodes in a text-attributed graph without access to ground-truth labels, and can local graph context and selective verification improve pseudo-labels and downstream GNN performance?
