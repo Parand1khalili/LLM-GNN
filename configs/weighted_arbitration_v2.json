@@ -1,0 +1,17 @@
+{
+  "version": "sara.arbitration.weighted.v2",
+  "weights": {"P": 2, "N": 1, "Q": 1, "T": 1, "A": -1, "C": -2, "U": -1},
+  "candidate_threshold": 3,
+  "third_class_threshold": 4,
+  "seed_min_confidence": 80,
+  "prototype_min_samples": 5,
+  "prototype_cosine_min": 0.20,
+  "prototype_cosine_margin": 0.05,
+  "neighbor_min_samples": 3,
+  "neighbor_support_fraction": 0.6666666666666666,
+  "neighbor_density_min": 0.10,
+  "seed_policy": "UNROUTED_FROZEN_HIGH_CONFIDENCE_AGREEMENT",
+  "topic_rule": "STRIP_CASEFOLD_EXACT_EQUALITY",
+  "missing_rule": "NULL_WITH_NEUTRAL_ZERO_CONTRIBUTION_REQUIRE_OBSERVED_P_OR_N",
+  "mode": "EXPERIMENTAL_SHADOW_NO_TRAINING_AUTHORIZATION"
+}

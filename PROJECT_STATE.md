@@ -1,5 +1,27 @@
 # Project state
 
+## Automatic Weighted Arbitration V2 — 2026-11-07
+
+- Continues implementation reference f6b028f9a706d64bc47862d19fa671f7ed352cbc.
+  V1, routers, source seals and unrelated user work preserved. No human-review
+  access, API calls, new embeddings or training. See docs/WEIGHTED_ARBITRATION_V2.md.
+- Fixed GT-free rule2P+N+Q+T-A-2C-U permits experimental third-class switches;
+  requires observed P/N support, thresholds3/4. Missing evidence stays null.
+  Existing embedding/edge storages extracted without unpickling or GT decoding.
+- Actual score freeze56e485e635ac915d07a0bb1b8849f5beb9017bd6f1ca9028192a64de335c0417;
+  separate GT-only receipt4f909e83ff9ce6245f62b1ee7a2d4202c200100f9cab79f86d1e8db3d15f5451.
+  R0/R1: zero switches/fixes/harms/net gain, matching V1 switch count.
+  P positive5/4; N unknown37/37. No thresholds changed after observation.
+- EXPLORATORY_NOT_INDEPENDENT:74 observations,57 unique nodes,17 shared.
+  No new Treatment plan because no switch; GCN NOT_RUN_BLOCKED pending separate
+  authorization/admission and contamination audit. All training admissions zero.
+- Guarded full discovery511 tests:0 failures/errors,2 platform skips (Windows
+  POSIX-permission case and unavailable OS symlink creation),475.838s. Final
+  focused9/9 PASS also covers the two evaluator-integrity tests added after full
+  discovery began. AST3 files and diff checks PASS. Private full-test receipt
+  364f45af0b1ae758432f992726958c8a7d276ce5cd4876775ce6d0be2432718b.
+  GitHub Actions NOT_RUN for this unpushed slice; PUSH_PENDING. Drive not updated.
+
 ## Correction features / post-hoc outcomes slice — 2026-11-07
 
 - Fast-forwarded existing main to 8f880075dd6494efbb48912e757957634c93dea3;
