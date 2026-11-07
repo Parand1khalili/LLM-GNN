@@ -160,3 +160,24 @@ Admission صفر و GCN `NOT_RUN_BLOCKED` است. به‌دلیل نبود Switc
 لازم نشد. مجوز مستقل آموزش و ممیزی آلودگی Split همچنان ضروری است. Human Review،
 API و تغییر Receipt/Journal انجام نشده‌اند. تست مثبت مصنوعی امکان Switch کلاس سوم
 را نشان می‌دهد، نه صحت علمی آن را.
+
+## ۱۰. ممیزی پوشش Graph Support — ۲۰۲۶-۱۱-۰۷
+
+علت اصلی UNKNOWN بودن N، نبود Seed مستقیم است: در هر Router تمام ۳۷ نود Routed
+دقیقاً صفر همسایه از Seed pool مجاز دارند. Density در ۲۶/۳۷ و ۲۸/۳۷ حداقل ۰٫۱
+دارد؛ بنابراین حذف Density به‌تنهایی اطلاعات همسایگی ایجاد نمی‌کند. نگاشت Neighbor
+و Degree هر ۱۴۰ نود با گراف Canonical سازگار و تمام ۲۷۰۸ Embedding معتبر و غیرصفرند.
+تنها Prototype کلاس ۵ در هر دو Seed pool چهار نمونه دارد و شرط پنج نمونه را ندارد؛
+نبود نمونه از خرابی Embedding جدا ثبت شد. جدول هفت کلاس در
+`docs/GRAPH_SUPPORT_COVERAGE_V1.md` آمده است.
+
+Variant مستقل `sara.arbitration.weighted.v2.direct_seed.v1` فقط شرط اتصال همسایه‌ها
+به یکدیگر را حذف کرد؛ حداقل سه Seed مستقیم، رأی دوسوم و برتری نسبت به Narrative
+و همهٔ وزن‌ها و آستانه‌ها ثابت ماندند. تعریف پیش از محاسبه و بدون GT مشخص شد.
+پس از Freeze امتیازها با SHA
+`71c9b21516f18b7bf16d2f6f6e773a7a0168aca6e1c488fb66641c013765a64b`، Process جداگانهٔ
+GT-only نتیجه را با SHA
+`ab00f759fd2f3fb5a48745d2ea2e49050ce8b1e24bd1ca508747bba8f192074e` ثبت کرد.
+در V1، V2 اصلی و Variant، Switch/Fix/Harm/Net همگی صفر باقی ماندند. هیچ آستانه‌ای
+پس از مشاهدهٔ نتیجه تغییر نکرد. این نتیجه اکتشافی و غیرمستقل است؛ هیچ Human Review،
+API جدید، Admission یا GCN انجام نشد و نتایج قبلی بدون تغییر حفظ شدند.

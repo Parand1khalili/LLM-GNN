@@ -1,5 +1,32 @@
 # Project state
 
+## Graph support coverage / direct-seed shadow — 2026-11-07
+
+- Preserves f6b028f9 and f6129ff1, their zero-switch findings and user GraphScope
+  work. Initial fetch: origin/main8f880075,2 local commits pending; approved
+  destination verified private Parand1khalili/LLM-GNN. Push/readback status is
+  reported separately after scoped commit; no force/history rewrite.
+- Every routed observation has0 direct admitted seed neighbors:37/37 per router.
+  Density>=0.10 in26/28; it is not the binding limitation. Canonical adjacency
+  matches all140 frozen degree/neighbor records;2708 finite nonzero embeddings.
+  Prototype class5 has4 seeds in both pools, below5; other classes pass.
+- Prespecified sara.arbitration.weighted.v2.direct_seed.v1 removes only density
+  gate; unchanged3 seeds,2/3 vote, strict class-count advantage, weights/thresholds.
+  Rule304eceb336b25ec29b2432b0a9cd1ad8316b6625c8605a2aa385f798f84a830b;
+  score71c9b21516f18b7bf16d2f6f6e773a7a0168aca6e1c488fb66641c013765a64b.
+  Separate GT-only evaluation ab00f759fd2f3fb5a48745d2ea2e49050ce8b1e24bd1ca508747bba8f192074e:
+  V1/V2/variant all0 switches/fixes/harms/net. EXPLORATORY_NOT_INDEPENDENT.
+- No human reviews, inference, GT-derived runtime features, label admission,
+  training, original receipt changes or Drive uploads. Documentation/reproduction:
+  docs/GRAPH_SUPPORT_COVERAGE_V1.md. Next: assess availability/provenance of
+  additional existing GT-free neighbor annotations, without inventing support.
+- Verification: new focused7/7 and unchanged V2 tests9/9 PASS. Guarded full
+  suite520 tests,0 failures/errors,2 Windows platform skips,434.140s. Private
+  test receipt d1c12a64321828d6503165ae6b9bf2b0f4ce4d457e351e9ea17980c968977c0f.
+  AST/diff/secret-pattern checks and4 private hash/ACL/replay checks PASS.
+  CI for the new SHA is pending at local commit; final remote/CI readback is
+  reported after push. No new Treatment plan or GCN execution.
+
 ## Automatic Weighted Arbitration V2 — 2026-11-07
 
 - Continues implementation reference f6b028f9a706d64bc47862d19fa671f7ed352cbc.
