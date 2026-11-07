@@ -12,7 +12,8 @@ from llmgnn_sara.evaluation import cora_r1_continued_gt as scorer
 from llmgnn_sara.evaluation.cora_r1_real_gt import analyze
 from llmgnn_sara.sara2.policy import Annotation, Pair
 from llmgnn_sara.sara3.selection import select_router
-from llmgnn_sara.sara3.gateway_run import SyntheticGapGPTHttp, gateway_run
+from llmgnn_sara.sara3.gateway_run import SyntheticGapGPTHttp, gateway_run, approval_template
+from llmgnn_sara.sara3.gateway_r1_continuation import preflight, execute
 
 from test_gateway_r1_continuation import fixture, FailAt51
 from test_cora_r1_real_gt import fixture as scoring_fixture
@@ -47,6 +48,72 @@ class ContinuedGTTests(unittest.TestCase):
                                root / "r1_gt_private")
                 self.assertEqual(got.exception.stage,
                                  "R1_ORIGINAL_PRE_GT_RECONCILIATION")
+
+    def test_mocked_live_original_and_continuation_full_gt_provenance_flow(self):
+        """All 65 calls via mock: full provider-shaped live + owner-only GT."""
+        inputs, cfg, selected, skip = fixture()
+        key = "synthetic-local-key-unknown"
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp) / ".local_artifacts"
+            original = root / "original_r1"
+            cfg_file = root / "gateway.json"
+            cfg_file.parent.mkdir(parents=True, exist_ok=True)
+            cfg_file.write_text(json.dumps(cfg))
+            graph = root / "owner_original_graph_test_dummy.pt"
+            graph.write_bytes(b"synthetic graph sentinel - never deserialize")
+            original_transport = FailAt51(cfg["model"], skip)
+            batch_approval = approval_template(inputs, "r1_v1", 37, "sensitivity", cfg)
+            for key_name in ("data_sharing_approved", "spend_approved",
+                             "explicit_batch_dispatch_approved"):
+                batch_approval[key_name] = True
+            with patch.object(socket.socket, "connect",
+                              side_effect=AssertionError("External networking forbidden")), \
+                 patch("llmgnn_sara.sara3.gapgpt_live.post_once",
+                       side_effect=lambda wire, key, **kwargs: original_transport(wire, key)):
+                real_shaped = gateway_run(
+                    inputs, original, router="r1_v1", budget=37,
+                    cohort="sensitivity", config=cfg, fake=False,
+                    approval=batch_approval, key=key)
+                self.assertEqual(real_shaped["status"], "BLOCKED_NO_AUTOMATIC_RETRY")
+                self.assertEqual(real_shaped["attempted_calls"], 51)
+                checked = preflight(inputs, original, config=cfg, fake=False)
+                amendment = checked["amendment_template"]
+                self.assertIsNotNone(amendment["original_summary_sha256"])
+                self.assertIsNotNone(amendment["original_report_sha256"])
+                self.assertEqual(amendment["original_intents"], 51)
+                consent = checked["approval_template"]
+                for flag in ("data_sharing_approved", "spend_approved",
+                             "explicit_continuation_dispatch_approved"):
+                    consent[flag] = True
+                new_transport = SyntheticGapGPTHttp(cfg["model"])
+                with patch("llmgnn_sara.sara3.gapgpt_live.post_once",
+                           side_effect=lambda wire, key, **kwargs: new_transport(wire, key)):
+                    continued = execute(
+                        inputs, original, config=cfg, amendment=amendment,
+                        approval=consent, key=key)
+                self.assertEqual(continued["status"],
+                                 "CONTINUED_PRESERVING_REJECTED_COMPARISON")
+                self.assertEqual(continued["total_intents"], 65)
+                self.assertEqual(continued["new_dispatches"], 14)
+                truth = [n % 7 for n in range(2708)]
+                with patch.object(scorer, "load_project_inputs", return_value=inputs), \
+                     patch.object(scorer, "_expected_graph_names",
+                                  return_value=("synthetic",)), \
+                     patch.object(scorer, "_labels_from_original_graph",
+                                  return_value=truth):
+                    result = scorer.run(
+                        root / "frozen", root / "authentic",
+                        original, cfg_file,
+                        continued["private_summary_sha256"],
+                        graph, root / "r1_owner_private_score")
+                self.assertEqual(
+                    result["status"],
+                    "R1_CONTINUED_GT_NODE_JOURNEY_VERIFIED_PRIVATE")
+                self.assertEqual(result["aggregate"]["real_live_attempts_total"], 65)
+                self.assertEqual(result["aggregate"]["new_live_dispatches"], 14)
+                self.assertEqual(result["aggregate"]["r1_review_coverage_and_accuracy"]
+                                 ["blind"]["covered"], 28)
+                self.assertEqual(result["aggregate"]["reviewed_training_admissions"], 0)
 
     def test_pure_scoring_uses_real_continuation_status_as_explicit_new_arm(self):
         selected, decisions, pairs, labels = scoring_fixture()
