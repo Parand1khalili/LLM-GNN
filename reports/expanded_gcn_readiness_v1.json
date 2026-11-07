@@ -1,0 +1,259 @@
+{
+  "schema": "sara.gcn.expanded_inventory.v1",
+  "inventory_sha256": "789a6aea4715c1e7537ede75d82f5e552859c392a0e27acd8cbbbc03b568da83",
+  "arms": 17,
+  "distinct_label_confidence_vectors": 9,
+  "matrix_rows": 5232,
+  "status_counts": {
+    "DRAFT_NOT_ADMITTED": 4044,
+    "BLOCKED_UNAVAILABLE_FINAL_LABEL_CONFIDENCE": 72,
+    "BLOCKED_UNDEFINED_COMMON_POST_PS_MASK": 1116
+  },
+  "fit_specs": 359,
+  "verified_reusable_specs": 187,
+  "new_specs": 172,
+  "new_seed_fits": 1720,
+  "unseen_unique_nodes": 23,
+  "routers": [
+    {
+      "authentic_blind_completed": 37,
+      "authentic_comparison_completed": 29,
+      "comparison_rejected": 1,
+      "cross_router_reuse": "NOT_ASSUMED_REQUIRES_EFFECTIVE_REQUEST_IDENTITY_PROOF",
+      "not_permitted_abstention": 7,
+      "router": "r0",
+      "selected_count": 37,
+      "status": "RECONSTRUCTABLE_PRESERVING_REJECTIONS",
+      "unseen_count": 0
+    },
+    {
+      "authentic_blind_completed": 0,
+      "authentic_comparison_completed": 0,
+      "comparison_rejected": 0,
+      "cross_router_reuse": "NOT_ASSUMED_REQUIRES_EFFECTIVE_REQUEST_IDENTITY_PROOF",
+      "not_permitted_abstention": 0,
+      "router": "semantic",
+      "selected_count": 37,
+      "status": "BLOCKED_NO_ROUTER_BOUND_AUTHENTIC_RESPONSE_SET",
+      "unseen_count": 11
+    },
+    {
+      "authentic_blind_completed": 37,
+      "authentic_comparison_completed": 24,
+      "comparison_rejected": 1,
+      "cross_router_reuse": "NOT_ASSUMED_REQUIRES_EFFECTIVE_REQUEST_IDENTITY_PROOF",
+      "not_permitted_abstention": 12,
+      "router": "r1_v1",
+      "selected_count": 37,
+      "status": "RECONSTRUCTABLE_PRESERVING_REJECTIONS",
+      "unseen_count": 0
+    },
+    {
+      "authentic_blind_completed": 0,
+      "authentic_comparison_completed": 0,
+      "comparison_rejected": 0,
+      "cross_router_reuse": "NOT_ASSUMED_REQUIRES_EFFECTIVE_REQUEST_IDENTITY_PROOF",
+      "not_permitted_abstention": 0,
+      "router": "r1_v2",
+      "selected_count": 37,
+      "status": "BLOCKED_NO_ROUTER_BOUND_AUTHENTIC_RESPONSE_SET",
+      "unseen_count": 21
+    },
+    {
+      "authentic_blind_completed": 0,
+      "authentic_comparison_completed": 0,
+      "comparison_rejected": 0,
+      "cross_router_reuse": "NOT_ASSUMED_REQUIRES_EFFECTIVE_REQUEST_IDENTITY_PROOF",
+      "not_permitted_abstention": 0,
+      "router": "r2_v1",
+      "selected_count": 37,
+      "status": "BLOCKED_NO_ROUTER_BOUND_AUTHENTIC_RESPONSE_SET",
+      "unseen_count": 6
+    },
+    {
+      "authentic_blind_completed": 0,
+      "authentic_comparison_completed": 0,
+      "comparison_rejected": 0,
+      "cross_router_reuse": "NOT_ASSUMED_REQUIRES_EFFECTIVE_REQUEST_IDENTITY_PROOF",
+      "not_permitted_abstention": 0,
+      "router": "r1_neutral_v1",
+      "selected_count": 37,
+      "status": "BLOCKED_NO_ROUTER_BOUND_AUTHENTIC_RESPONSE_SET",
+      "unseen_count": 11
+    }
+  ],
+  "equivalence_groups": [
+    [
+      "A_B1"
+    ],
+    [
+      "B_NARRATIVE",
+      "V2_r0",
+      "V2_DIRECT_r0",
+      "V3_r0",
+      "V2_r1_v1",
+      "V2_DIRECT_r1_v1",
+      "V3_r1_v1"
+    ],
+    [
+      "C_BASELINE_FUSION",
+      "V1_r0"
+    ],
+    [
+      "D_P1_r0"
+    ],
+    [
+      "D_P1_r1_v1",
+      "E_P2_r1_v1"
+    ],
+    [
+      "E_P2_r0"
+    ],
+    [
+      "CONSENSUS_r0"
+    ],
+    [
+      "V1_r1_v1"
+    ],
+    [
+      "CONSENSUS_r1_v1"
+    ]
+  ],
+  "native_arm_counts": {
+    "A_B1": 140,
+    "B_NARRATIVE": 140,
+    "CONSENSUS_r0": 140,
+    "CONSENSUS_r1_v1": 140,
+    "C_BASELINE_FUSION": 93,
+    "D_P1_r0": 118,
+    "D_P1_r1_v1": 108,
+    "E_P2_r0": 120,
+    "E_P2_r1_v1": 108,
+    "V1_r0": 93,
+    "V1_r1_v1": 78,
+    "V2_DIRECT_r0": 140,
+    "V2_DIRECT_r1_v1": 140,
+    "V2_r0": 140,
+    "V2_r1_v1": 140,
+    "V3_r0": 140,
+    "V3_r1_v1": 140
+  },
+  "new_training_runs": 0,
+  "new_api_calls": 0,
+  "new_GT_evaluations": 0,
+  "approval_status": "NOT_AUTHORIZED",
+  "journal_catalog": [
+    {
+      "path": ".local_artifacts\\gapgpt_app_canary_637\\intent.sqlite",
+      "records": 1,
+      "fields": [
+        "state"
+      ]
+    },
+    {
+      "path": ".local_artifacts\\gapgpt_app_t1_canary_637\\intent.sqlite",
+      "records": 1,
+      "fields": [
+        "state"
+      ]
+    },
+    {
+      "path": ".local_artifacts\\gapgpt_canary_637\\intent.sqlite",
+      "records": 1,
+      "fields": [
+        "state"
+      ]
+    },
+    {
+      "path": ".local_artifacts\\gapgpt_four_unattempted_v1\\intent.sqlite",
+      "records": 1,
+      "fields": [
+        "state"
+      ]
+    },
+    {
+      "path": ".local_artifacts\\gapgpt_outstanding_l1_v1\\intent.sqlite",
+      "records": 1,
+      "fields": [
+        "state"
+      ]
+    },
+    {
+      "path": ".local_artifacts\\gapgpt_post130_v1\\intent.sqlite",
+      "records": 1,
+      "fields": [
+        "state"
+      ]
+    },
+    {
+      "path": ".local_artifacts\\gapgpt_remaining_pilot_v1\\intent.sqlite",
+      "records": 1,
+      "fields": [
+        "state"
+      ]
+    },
+    {
+      "path": ".local_artifacts\\gapgpt_three_blind_only_v1\\intent.sqlite",
+      "records": 3,
+      "fields": [
+        "state"
+      ]
+    },
+    {
+      "path": ".local_artifacts\\sara3_gapgpt_live_cora140_r0_20261105\\journal\\fixture_journal.sqlite",
+      "records": 1,
+      "fields": [
+        "node_id",
+        "phase",
+        "state"
+      ]
+    },
+    {
+      "path": ".local_artifacts\\sara3_gapgpt_live_cora140_r0_4096_20261105\\journal\\fixture_journal.sqlite",
+      "records": 53,
+      "fields": [
+        "node_id",
+        "phase",
+        "state"
+      ]
+    },
+    {
+      "path": ".local_artifacts\\sara3_gapgpt_live_cora140_r0_4096_20261105\\continuation_amendment_v1\\journal\\fixture_journal.sqlite",
+      "records": 14,
+      "fields": [
+        "node_id",
+        "phase",
+        "state"
+      ]
+    },
+    {
+      "path": ".local_artifacts\\sara3_gapgpt_live_cora140_r1_v1_4096_20261107\\journal\\fixture_journal.sqlite",
+      "records": 51,
+      "fields": [
+        "node_id",
+        "phase",
+        "state"
+      ]
+    },
+    {
+      "path": ".local_artifacts\\sara3_gapgpt_live_cora140_r1_v1_4096_20261107\\r1_v1_continuation_v1\\journal\\fixture_journal.sqlite",
+      "records": 11,
+      "fields": [
+        "node_id",
+        "phase",
+        "state"
+      ]
+    }
+  ],
+  "unverified_router_union_nodes": 66,
+  "unverified_router_selection_slots": 148,
+  "new_native_arm_vectors_vs_full_v1": 3,
+  "estimated_training_seconds_at_previous_observed_rate": 3546.695187165775,
+  "missingness_interpretation": "23_UNIQUE_NODES_WITHOUT_COMPATIBLE_AUTHENTIC_RICH4096_RECORDS; OTHER_CACHED_NODES_REQUIRE_REQUEST_CONTEXT_REUSE_PROOF",
+  "blocked_router_policy_crossovers": 28,
+  "missing_agent_versions": [
+    "LEGACY_SIX_NODE_NOT_COMPLETE_37_NODE_ROUTER_CONTRACT",
+    "RICH_PROMPT_V2_512_TOKEN_PARTIAL_NOT_4096_EQUIVALENT",
+    "HISTORICAL_P0_JUDGE002_WIRE_MISSING_EVIDENCE"
+  ]
+}
