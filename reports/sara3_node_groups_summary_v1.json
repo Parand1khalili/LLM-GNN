@@ -1,0 +1,325 @@
+{
+  "private_groups_sha256": "0f6eaa34bd55fe84b83c9e39d8251d8e768dfae954ddd7419b2e388575715eca",
+  "counts": {
+    "B1_wrong_Narrative_correct": 6,
+    "Narrative_wrong_B1_correct": 1,
+    "both_wrong": 38,
+    "both_wrong_same_class": 36,
+    "joint_errors_removed_by_C": 17,
+    "joint_errors_remaining_in_C": 21,
+    "R0_only": 20,
+    "R1_only": 20,
+    "R0_R1_common": 17,
+    "CONSENSUS_r0_fix_vs_B1": 7,
+    "CONSENSUS_r0_harm_vs_B1": 2,
+    "CONSENSUS_r0_remove_correct_vs_B1": 0,
+    "CONSENSUS_r0_fix_vs_Narrative": 4,
+    "CONSENSUS_r0_harm_vs_Narrative": 4,
+    "CONSENSUS_r0_remove_correct_vs_Narrative": 0,
+    "CONSENSUS_r0_fix_vs_C": 0,
+    "CONSENSUS_r0_harm_vs_C": 0,
+    "CONSENSUS_r0_remove_correct_vs_C": 0,
+    "CONSENSUS_r1_v1_fix_vs_B1": 6,
+    "CONSENSUS_r1_v1_harm_vs_B1": 1,
+    "CONSENSUS_r1_v1_remove_correct_vs_B1": 0,
+    "CONSENSUS_r1_v1_fix_vs_Narrative": 2,
+    "CONSENSUS_r1_v1_harm_vs_Narrative": 2,
+    "CONSENSUS_r1_v1_remove_correct_vs_Narrative": 0,
+    "CONSENSUS_r1_v1_fix_vs_C": 1,
+    "CONSENSUS_r1_v1_harm_vs_C": 0,
+    "CONSENSUS_r1_v1_remove_correct_vs_C": 0,
+    "D_P1_r0_fix_vs_B1": 5,
+    "D_P1_r0_harm_vs_B1": 2,
+    "D_P1_r0_remove_correct_vs_B1": 11,
+    "D_P1_r0_fix_vs_Narrative": 4,
+    "D_P1_r0_harm_vs_Narrative": 4,
+    "D_P1_r0_remove_correct_vs_Narrative": 13,
+    "D_P1_r0_fix_vs_C": 0,
+    "D_P1_r0_harm_vs_C": 0,
+    "D_P1_r0_remove_correct_vs_C": 0,
+    "D_P1_r1_v1_fix_vs_B1": 3,
+    "D_P1_r1_v1_harm_vs_B1": 1,
+    "D_P1_r1_v1_remove_correct_vs_B1": 16,
+    "D_P1_r1_v1_fix_vs_Narrative": 2,
+    "D_P1_r1_v1_harm_vs_Narrative": 2,
+    "D_P1_r1_v1_remove_correct_vs_Narrative": 19,
+    "D_P1_r1_v1_fix_vs_C": 1,
+    "D_P1_r1_v1_harm_vs_C": 0,
+    "D_P1_r1_v1_remove_correct_vs_C": 0,
+    "E_P2_r0_fix_vs_B1": 5,
+    "E_P2_r0_harm_vs_B1": 2,
+    "E_P2_r0_remove_correct_vs_B1": 10,
+    "E_P2_r0_fix_vs_Narrative": 4,
+    "E_P2_r0_harm_vs_Narrative": 4,
+    "E_P2_r0_remove_correct_vs_Narrative": 12,
+    "E_P2_r0_fix_vs_C": 0,
+    "E_P2_r0_harm_vs_C": 0,
+    "E_P2_r0_remove_correct_vs_C": 0,
+    "E_P2_r1_v1_fix_vs_B1": 3,
+    "E_P2_r1_v1_harm_vs_B1": 1,
+    "E_P2_r1_v1_remove_correct_vs_B1": 16,
+    "E_P2_r1_v1_fix_vs_Narrative": 2,
+    "E_P2_r1_v1_harm_vs_Narrative": 2,
+    "E_P2_r1_v1_remove_correct_vs_Narrative": 19,
+    "E_P2_r1_v1_fix_vs_C": 1,
+    "E_P2_r1_v1_harm_vs_C": 0,
+    "E_P2_r1_v1_remove_correct_vs_C": 0,
+    "V1_r0_fix_vs_B1": 0,
+    "V1_r0_harm_vs_B1": 0,
+    "V1_r0_remove_correct_vs_B1": 24,
+    "V1_r0_fix_vs_Narrative": 0,
+    "V1_r0_harm_vs_Narrative": 0,
+    "V1_r0_remove_correct_vs_Narrative": 29,
+    "V1_r0_fix_vs_C": 0,
+    "V1_r0_harm_vs_C": 0,
+    "V1_r0_remove_correct_vs_C": 0,
+    "V1_r1_v1_fix_vs_B1": 0,
+    "V1_r1_v1_harm_vs_B1": 0,
+    "V1_r1_v1_remove_correct_vs_B1": 29,
+    "V1_r1_v1_fix_vs_Narrative": 0,
+    "V1_r1_v1_harm_vs_Narrative": 0,
+    "V1_r1_v1_remove_correct_vs_Narrative": 34,
+    "V1_r1_v1_fix_vs_C": 0,
+    "V1_r1_v1_harm_vs_C": 0,
+    "V1_r1_v1_remove_correct_vs_C": 5,
+    "V2_DIRECT_r0_fix_vs_B1": 6,
+    "V2_DIRECT_r0_harm_vs_B1": 1,
+    "V2_DIRECT_r0_remove_correct_vs_B1": 0,
+    "V2_DIRECT_r0_fix_vs_Narrative": 0,
+    "V2_DIRECT_r0_harm_vs_Narrative": 0,
+    "V2_DIRECT_r0_remove_correct_vs_Narrative": 0,
+    "V2_DIRECT_r0_fix_vs_C": 0,
+    "V2_DIRECT_r0_harm_vs_C": 0,
+    "V2_DIRECT_r0_remove_correct_vs_C": 0,
+    "V2_DIRECT_r1_v1_fix_vs_B1": 6,
+    "V2_DIRECT_r1_v1_harm_vs_B1": 1,
+    "V2_DIRECT_r1_v1_remove_correct_vs_B1": 0,
+    "V2_DIRECT_r1_v1_fix_vs_Narrative": 0,
+    "V2_DIRECT_r1_v1_harm_vs_Narrative": 0,
+    "V2_DIRECT_r1_v1_remove_correct_vs_Narrative": 0,
+    "V2_DIRECT_r1_v1_fix_vs_C": 0,
+    "V2_DIRECT_r1_v1_harm_vs_C": 0,
+    "V2_DIRECT_r1_v1_remove_correct_vs_C": 0,
+    "V2_r0_fix_vs_B1": 6,
+    "V2_r0_harm_vs_B1": 1,
+    "V2_r0_remove_correct_vs_B1": 0,
+    "V2_r0_fix_vs_Narrative": 0,
+    "V2_r0_harm_vs_Narrative": 0,
+    "V2_r0_remove_correct_vs_Narrative": 0,
+    "V2_r0_fix_vs_C": 0,
+    "V2_r0_harm_vs_C": 0,
+    "V2_r0_remove_correct_vs_C": 0,
+    "V2_r1_v1_fix_vs_B1": 6,
+    "V2_r1_v1_harm_vs_B1": 1,
+    "V2_r1_v1_remove_correct_vs_B1": 0,
+    "V2_r1_v1_fix_vs_Narrative": 0,
+    "V2_r1_v1_harm_vs_Narrative": 0,
+    "V2_r1_v1_remove_correct_vs_Narrative": 0,
+    "V2_r1_v1_fix_vs_C": 0,
+    "V2_r1_v1_harm_vs_C": 0,
+    "V2_r1_v1_remove_correct_vs_C": 0,
+    "V3_r0_fix_vs_B1": 6,
+    "V3_r0_harm_vs_B1": 1,
+    "V3_r0_remove_correct_vs_B1": 0,
+    "V3_r0_fix_vs_Narrative": 0,
+    "V3_r0_harm_vs_Narrative": 0,
+    "V3_r0_remove_correct_vs_Narrative": 0,
+    "V3_r0_fix_vs_C": 0,
+    "V3_r0_harm_vs_C": 0,
+    "V3_r0_remove_correct_vs_C": 0,
+    "V3_r1_v1_fix_vs_B1": 6,
+    "V3_r1_v1_harm_vs_B1": 1,
+    "V3_r1_v1_remove_correct_vs_B1": 0,
+    "V3_r1_v1_fix_vs_Narrative": 0,
+    "V3_r1_v1_harm_vs_Narrative": 0,
+    "V3_r1_v1_remove_correct_vs_Narrative": 0,
+    "V3_r1_v1_fix_vs_C": 0,
+    "V3_r1_v1_harm_vs_C": 0,
+    "V3_r1_v1_remove_correct_vs_C": 0,
+    "r0_blind_fix_vs_B1": 8,
+    "r0_blind_harm_vs_B1": 4,
+    "r0_blind_remove_correct_vs_B1": 1,
+    "r0_blind_fix_vs_Narrative": 7,
+    "r0_blind_harm_vs_Narrative": 6,
+    "r0_blind_remove_correct_vs_Narrative": 3,
+    "r0_blind_fix_vs_C": 0,
+    "r0_blind_harm_vs_C": 0,
+    "r0_blind_remove_correct_vs_C": 0,
+    "r0_compare_fix_vs_B1": 5,
+    "r0_compare_harm_vs_B1": 2,
+    "r0_compare_remove_correct_vs_B1": 0,
+    "r0_compare_fix_vs_Narrative": 4,
+    "r0_compare_harm_vs_Narrative": 4,
+    "r0_compare_remove_correct_vs_Narrative": 0,
+    "r0_compare_fix_vs_C": 0,
+    "r0_compare_harm_vs_C": 0,
+    "r0_compare_remove_correct_vs_C": 0,
+    "r1_v1_blind_fix_vs_B1": 4,
+    "r1_v1_blind_harm_vs_B1": 1,
+    "r1_v1_blind_remove_correct_vs_B1": 0,
+    "r1_v1_blind_fix_vs_Narrative": 3,
+    "r1_v1_blind_harm_vs_Narrative": 2,
+    "r1_v1_blind_remove_correct_vs_Narrative": 1,
+    "r1_v1_blind_fix_vs_C": 1,
+    "r1_v1_blind_harm_vs_C": 0,
+    "r1_v1_blind_remove_correct_vs_C": 0,
+    "r1_v1_compare_fix_vs_B1": 3,
+    "r1_v1_compare_harm_vs_B1": 2,
+    "r1_v1_compare_remove_correct_vs_B1": 0,
+    "r1_v1_compare_fix_vs_Narrative": 2,
+    "r1_v1_compare_harm_vs_Narrative": 3,
+    "r1_v1_compare_remove_correct_vs_Narrative": 0,
+    "r1_v1_compare_fix_vs_C": 1,
+    "r1_v1_compare_harm_vs_C": 0,
+    "r1_v1_compare_remove_correct_vs_C": 0
+  },
+  "phase_agreement": {
+    "r0": {
+      "None": 10,
+      "True": 25,
+      "False": 2
+    },
+    "r1_v1": {
+      "True": 23,
+      "None": 13,
+      "False": 1
+    }
+  },
+  "consensus_change_features": {
+    "r0": {
+      "count": 10,
+      "warning": 10,
+      "counter": 10,
+      "shared_quote": 8,
+      "literal_topic_consistency": 1,
+      "third_class": 7
+    },
+    "r1_v1": {
+      "count": 6,
+      "warning": 6,
+      "counter": 6,
+      "shared_quote": 3,
+      "literal_topic_consistency": 0,
+      "third_class": 4
+    }
+  },
+  "third_class_final": {
+    "A_B1": {
+      "count": 0,
+      "correct": 0,
+      "wrong": 0
+    },
+    "B_NARRATIVE": {
+      "count": 0,
+      "correct": 0,
+      "wrong": 0
+    },
+    "CONSENSUS_r0": {
+      "count": 7,
+      "correct": 3,
+      "wrong": 4
+    },
+    "CONSENSUS_r1_v1": {
+      "count": 4,
+      "correct": 1,
+      "wrong": 3
+    },
+    "C_BASELINE_FUSION": {
+      "count": 0,
+      "correct": 0,
+      "wrong": 0
+    },
+    "D_P1_r0": {
+      "count": 7,
+      "correct": 3,
+      "wrong": 4
+    },
+    "D_P1_r1_v1": {
+      "count": 4,
+      "correct": 1,
+      "wrong": 3
+    },
+    "E_P2_r0": {
+      "count": 7,
+      "correct": 3,
+      "wrong": 4
+    },
+    "E_P2_r1_v1": {
+      "count": 4,
+      "correct": 1,
+      "wrong": 3
+    },
+    "V1_r0": {
+      "count": 0,
+      "correct": 0,
+      "wrong": 0
+    },
+    "V1_r1_v1": {
+      "count": 0,
+      "correct": 0,
+      "wrong": 0
+    },
+    "V2_DIRECT_r0": {
+      "count": 0,
+      "correct": 0,
+      "wrong": 0
+    },
+    "V2_DIRECT_r1_v1": {
+      "count": 0,
+      "correct": 0,
+      "wrong": 0
+    },
+    "V2_r0": {
+      "count": 0,
+      "correct": 0,
+      "wrong": 0
+    },
+    "V2_r1_v1": {
+      "count": 0,
+      "correct": 0,
+      "wrong": 0
+    },
+    "V3_r0": {
+      "count": 0,
+      "correct": 0,
+      "wrong": 0
+    },
+    "V3_r1_v1": {
+      "count": 0,
+      "correct": 0,
+      "wrong": 0
+    },
+    "r0_blind": {
+      "count": 12,
+      "correct": 6,
+      "wrong": 6
+    },
+    "r0_compare": {
+      "count": 7,
+      "correct": 3,
+      "wrong": 4
+    },
+    "r1_v1_blind": {
+      "count": 5,
+      "correct": 2,
+      "wrong": 3
+    },
+    "r1_v1_compare": {
+      "count": 5,
+      "correct": 1,
+      "wrong": 4
+    }
+  },
+  "observed_repairability": {
+    "r0": {
+      "selected_narrative_wrong": 16,
+      "narrative_wrong_blind_correct": 7,
+      "both_baselines_wrong_any_valid_phase_correct": 6
+    },
+    "r1_v1": {
+      "selected_narrative_wrong": 20,
+      "narrative_wrong_blind_correct": 3,
+      "both_baselines_wrong_any_valid_phase_correct": 2
+    }
+  }
+}
