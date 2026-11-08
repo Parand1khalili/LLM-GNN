@@ -917,3 +917,11 @@ This section **supersedes earlier sections** describing the seven R1 Blind attem
 - V1+R1 Sensitivity/Natural/WCE/noPS74.376947% accuracy;coverage-matched no-Agent is identical. No independent Agent class-correction benefit established.
 - 487 guarded regression tests:0 failures/errors,2 skips;6 private pilot modules excluded. See docs/GCN_EXPANDED_EXECUTION_COMPLETION_FA.md. No API or push. LIMITED_PROVENANCE_EXPLORATORY / EXPLORATORY_NOT_INDEPENDENT.
 - Existing user changes in this file and GraphScope preserved;this combined state file is not staged with the scoped execution commit.
+
+
+## Narrative v1 paired prompt preparation - 2026-11-08
+
+- GT-free offline A/B prompts frozen for140 targets;428 authentic neighbor snippets,296 truncated. Same evidence and taxonomy, instructions differ. K4,128 snippet tokens,4096 common ceiling, cached cl100k_base.
+- Spec c4c5a61670f6aacb95a66d20677522f6bf224bfc463c7a209ff920b9cc68e1c4;private freeze916ef67f164202861dfb16e7144ad99d28f82c84a71e9b4d3a110fa3d0a40900. Text list extracted statically without unpickling/label storage;all140 target texts exact.
+-6 builder tests,1 tokenizer test,6 CLI tests PASS. No paid inference, GT evaluation or GCN. Model revision/decoding, privacy and spending approval unresolved for future execution.
+-See docs/NARRATIVE_V1_METHODS_FA.md and reports/narrative_v1_prompt_audit.json. Historical prompts untouched. No accuracy claims.

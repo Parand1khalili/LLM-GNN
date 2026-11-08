@@ -1,0 +1,43 @@
+{
+  "spec_sha256": "c4c5a61670f6aacb95a66d20677522f6bf224bfc463c7a209ff920b9cc68e1c4",
+  "freeze_sha256": "916ef67f164202861dfb16e7144ad99d28f82c84a71e9b4d3a110fa3d0a40900",
+  "targets": 140,
+  "independent_neighbor_texts": {
+    "2": 23,
+    "4": 69,
+    "1": 19,
+    "3": 29
+  },
+  "truncated_neighbors": 296,
+  "token_stats": {
+    "v1-A": {
+      "min": 418,
+      "max": 1737,
+      "mean": 1132.4785714285715
+    },
+    "v1-B": {
+      "min": 461,
+      "max": 1780,
+      "mean": 1175.4785714285715
+    }
+  },
+  "historical_tokens": {
+    "min": 246,
+    "max": 1046
+  },
+  "historical_selected_distribution": {
+    "2": 23,
+    "3": 98,
+    "1": 19
+  },
+  "historical_connected_pairs": 166,
+  "historical_disconnected_pairs": 151,
+  "degree": {
+    "min": 1,
+    "max": 78
+  },
+  "no_gt": true,
+  "api_calls": 0,
+  "training_runs": 0,
+  "readiness": "NOT_AUTHORIZED_FOR_PAID_EXECUTION"
+}
