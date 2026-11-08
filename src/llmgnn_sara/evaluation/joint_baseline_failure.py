@@ -179,6 +179,15 @@ def analyze(inputs, truth, historical_features, expanded_phases, frozen, *,
         old[r["router"]][r["node_id"]] = r
     require(set(old) == {"r0", "r1_v1"}
             and all(len(r) == 37 for r in old.values()))
+    for router, records in old.items():
+        require(set(records) <= set(by_id))
+        for node, record in records.items():
+            pair = by_id[node]
+            require(record["b1_class"] == pair.b1.class_index
+                    and record["narrative_class"] == pair.narrative_v0.class_index
+                    and record["b1_confidence"] == pair.b1.confidence
+                    and record["narrative_confidence"] == pair.narrative_v0.confidence
+                    and record["baseline_agrees"] == pair.agrees)
     new_selected = set(frozen["selected"])
     require(len(new_selected) == 37 and set(expanded_phases) == new_selected)
     joint = sorted(node for node, p in by_id.items()
