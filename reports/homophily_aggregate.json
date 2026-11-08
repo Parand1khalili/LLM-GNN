@@ -1,0 +1,2334 @@
+{
+  "protocol": {
+    "version": "sara.homophily.diagnostic.v1",
+    "neighbors": "unique undirected direct; exclude self loops",
+    "strata": "heterophilic h<0.5; mixed h=0.5; homophilic h>0.5; isolated undefined",
+    "degree_bins": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        5
+      ],
+      [
+        6,
+        10
+      ],
+      [
+        11,
+        2707
+      ]
+    ],
+    "status": "EXPLORATORY_NOT_INDEPENDENT"
+  },
+  "protocol_sha256": "62c93b11937c36dfbcb3b69ec56117699010a9d33a47a9bf290c02f66eb21557",
+  "graph_sha256": "9285c2afae1bdd9e01ee1b805ace7bd1308a49895b1f11fa22bd0e5bd0adf466",
+  "graph": {
+    "self_loops_removed": 0,
+    "duplicate_directed_edges": 302,
+    "unique_directed_edges": 10556,
+    "reciprocal_directed_edges": 10556,
+    "undirected_edges": 5278
+  },
+  "proposal_features": {
+    "True": {
+      "count": 2,
+      "mean_text_length": 1089,
+      "counter_present": 1,
+      "auxiliary_present": 2,
+      "uncertainty_present": 0,
+      "shared_quote_present": 2,
+      "literal_topic_agreement": 0
+    },
+    "False": {
+      "count": 3,
+      "mean_text_length": 944.3333333333334,
+      "counter_present": 3,
+      "auxiliary_present": 3,
+      "uncertainty_present": 0,
+      "shared_quote_present": 1,
+      "literal_topic_agreement": 0
+    }
+  },
+  "aggregates": {
+    "both_correct": {
+      "count": 95,
+      "isolated": 0,
+      "mean": 0.9061287250760935,
+      "median": 1.0,
+      "strata": {
+        "homophilic": 88,
+        "heterophilic": 6,
+        "mixed": 1
+      },
+      "mean_degree": 5.08421052631579
+    },
+    "both_wrong": {
+      "count": 38,
+      "isolated": 0,
+      "mean": 0.8214912280701754,
+      "median": 1.0,
+      "strata": {
+        "mixed": 6,
+        "homophilic": 29,
+        "heterophilic": 3
+      },
+      "mean_degree": 4.2368421052631575
+    },
+    "only_b1_wrong": {
+      "count": 6,
+      "isolated": 0,
+      "mean": 0.8333333333333334,
+      "median": 1.0,
+      "strata": {
+        "homophilic": 5,
+        "heterophilic": 1
+      },
+      "mean_degree": 2.3333333333333335
+    },
+    "only_narrative_wrong": {
+      "count": 1,
+      "isolated": 0,
+      "mean": 0.0,
+      "median": 0.0,
+      "strata": {
+        "heterophilic": 1
+      },
+      "mean_degree": 3
+    },
+    "r0_selected": {
+      "count": 37,
+      "isolated": 0,
+      "mean": 0.8229086229086229,
+      "median": 1.0,
+      "strata": {
+        "mixed": 2,
+        "homophilic": 30,
+        "heterophilic": 5
+      },
+      "mean_degree": 3.7567567567567566
+    },
+    "r0_unselected": {
+      "count": 103,
+      "isolated": 0,
+      "mean": 0.8917599660318107,
+      "median": 1.0,
+      "strata": {
+        "homophilic": 92,
+        "heterophilic": 6,
+        "mixed": 5
+      },
+      "mean_degree": 5.067961165048544
+    },
+    "r1_v1_selected": {
+      "count": 37,
+      "isolated": 0,
+      "mean": 0.7968468468468468,
+      "median": 1.0,
+      "strata": {
+        "heterophilic": 6,
+        "homophilic": 29,
+        "mixed": 2
+      },
+      "mean_degree": 3.5945945945945947
+    },
+    "r1_v1_unselected": {
+      "count": 103,
+      "isolated": 0,
+      "mean": 0.9011219632578856,
+      "median": 1.0,
+      "strata": {
+        "mixed": 5,
+        "homophilic": 93,
+        "heterophilic": 5
+      },
+      "mean_degree": 5.12621359223301
+    },
+    "expanded_selected": {
+      "count": 37,
+      "isolated": 0,
+      "mean": 0.8175675675675675,
+      "median": 1.0,
+      "strata": {
+        "mixed": 3,
+        "homophilic": 29,
+        "heterophilic": 5
+      },
+      "mean_degree": 3.4864864864864864
+    },
+    "expanded_unselected": {
+      "count": 103,
+      "isolated": 0,
+      "mean": 0.8936785975620927,
+      "median": 1.0,
+      "strata": {
+        "homophilic": 93,
+        "heterophilic": 6,
+        "mixed": 4
+      },
+      "mean_degree": 5.165048543689321
+    },
+    "B1_correct": {
+      "count": 96,
+      "isolated": 0,
+      "mean": 0.8966898841898842,
+      "median": 1.0,
+      "strata": {
+        "homophilic": 88,
+        "heterophilic": 7,
+        "mixed": 1
+      },
+      "mean_degree": 5.0625
+    },
+    "B1_wrong": {
+      "count": 44,
+      "isolated": 0,
+      "mean": 0.8231060606060606,
+      "median": 1.0,
+      "strata": {
+        "mixed": 6,
+        "homophilic": 34,
+        "heterophilic": 4
+      },
+      "mean_degree": 3.977272727272727
+    },
+    "B1_abstain": {
+      "count": 0,
+      "isolated": 0,
+      "mean": null,
+      "median": null,
+      "strata": {},
+      "mean_degree": null
+    },
+    "Narrative_correct": {
+      "count": 101,
+      "isolated": 0,
+      "mean": 0.9018042463587018,
+      "median": 1.0,
+      "strata": {
+        "homophilic": 93,
+        "heterophilic": 7,
+        "mixed": 1
+      },
+      "mean_degree": 4.920792079207921
+    },
+    "Narrative_wrong": {
+      "count": 39,
+      "isolated": 0,
+      "mean": 0.8004273504273505,
+      "median": 1.0,
+      "strata": {
+        "mixed": 6,
+        "heterophilic": 4,
+        "homophilic": 29
+      },
+      "mean_degree": 4.205128205128205
+    },
+    "Narrative_abstain": {
+      "count": 0,
+      "isolated": 0,
+      "mean": null,
+      "median": null,
+      "strata": {},
+      "mean_degree": null
+    },
+    "C_correct": {
+      "count": 72,
+      "isolated": 0,
+      "mean": 0.9248914665581333,
+      "median": 1.0,
+      "strata": {
+        "homophilic": 68,
+        "heterophilic": 3,
+        "mixed": 1
+      },
+      "mean_degree": 4.833333333333333
+    },
+    "C_wrong": {
+      "count": 21,
+      "isolated": 0,
+      "mean": 0.8317460317460318,
+      "median": 1.0,
+      "strata": {
+        "homophilic": 17,
+        "mixed": 2,
+        "heterophilic": 2
+      },
+      "mean_degree": 4.809523809523809
+    },
+    "C_abstain": {
+      "count": 47,
+      "isolated": 0,
+      "mean": 0.8136179423413465,
+      "median": 1.0,
+      "strata": {
+        "mixed": 4,
+        "homophilic": 37,
+        "heterophilic": 6
+      },
+      "mean_degree": 4.51063829787234
+    },
+    "Expanded_V1_correct": {
+      "count": 67,
+      "isolated": 0,
+      "mean": 0.9230176954057551,
+      "median": 1.0,
+      "strata": {
+        "homophilic": 63,
+        "heterophilic": 3,
+        "mixed": 1
+      },
+      "mean_degree": 5.044776119402985
+    },
+    "Expanded_V1_wrong": {
+      "count": 12,
+      "isolated": 0,
+      "mean": 0.7680555555555556,
+      "median": 0.9,
+      "strata": {
+        "homophilic": 9,
+        "mixed": 2,
+        "heterophilic": 1
+      },
+      "mean_degree": 4.75
+    },
+    "Expanded_V1_abstain": {
+      "count": 61,
+      "isolated": 0,
+      "mean": 0.8400007096728408,
+      "median": 1.0,
+      "strata": {
+        "mixed": 4,
+        "homophilic": 50,
+        "heterophilic": 7
+      },
+      "mean_degree": 4.360655737704918
+    },
+    "V1_Relaxed_correct": {
+      "count": 69,
+      "isolated": 0,
+      "mean": 0.9180026897418202,
+      "median": 1.0,
+      "strata": {
+        "mixed": 2,
+        "homophilic": 64,
+        "heterophilic": 3
+      },
+      "mean_degree": 5
+    },
+    "V1_Relaxed_wrong": {
+      "count": 15,
+      "isolated": 0,
+      "mean": 0.8144444444444444,
+      "median": 1.0,
+      "strata": {
+        "homophilic": 12,
+        "mixed": 2,
+        "heterophilic": 1
+      },
+      "mean_degree": 5.4
+    },
+    "V1_Relaxed_abstain": {
+      "count": 56,
+      "isolated": 0,
+      "mean": 0.8346436301793445,
+      "median": 1.0,
+      "strata": {
+        "homophilic": 46,
+        "heterophilic": 7,
+        "mixed": 3
+      },
+      "mean_degree": 4.196428571428571
+    },
+    "agent_blind_correct": {
+      "count": 16,
+      "isolated": 0,
+      "mean": 0.875,
+      "median": 1.0,
+      "strata": {
+        "homophilic": 14,
+        "mixed": 1,
+        "heterophilic": 1
+      },
+      "mean_degree": 2.75
+    },
+    "agent_blind_wrong": {
+      "count": 12,
+      "isolated": 0,
+      "mean": 0.6875,
+      "median": 1.0,
+      "strata": {
+        "heterophilic": 3,
+        "homophilic": 7,
+        "mixed": 2
+      },
+      "mean_degree": 4.583333333333333
+    },
+    "agent_compare_correct": {
+      "count": 14,
+      "isolated": 0,
+      "mean": 0.8035714285714286,
+      "median": 1.0,
+      "strata": {
+        "homophilic": 11,
+        "heterophilic": 2,
+        "mixed": 1
+      },
+      "mean_degree": 2.5714285714285716
+    },
+    "agent_compare_wrong": {
+      "count": 9,
+      "isolated": 0,
+      "mean": 0.75,
+      "median": 1.0,
+      "strata": {
+        "mixed": 1,
+        "homophilic": 6,
+        "heterophilic": 2
+      },
+      "mean_degree": 5.444444444444445
+    },
+    "fusion_removed_errors": {
+      "count": 24,
+      "isolated": 0,
+      "mean": 0.78125,
+      "median": 1.0,
+      "strata": {
+        "mixed": 4,
+        "heterophilic": 3,
+        "homophilic": 17
+      },
+      "mean_degree": 3.2083333333333335
+    },
+    "fusion_retained_errors": {
+      "count": 21,
+      "isolated": 0,
+      "mean": 0.8317460317460318,
+      "median": 1.0,
+      "strata": {
+        "homophilic": 17,
+        "mixed": 2,
+        "heterophilic": 2
+      },
+      "mean_degree": 4.809523809523809
+    },
+    "third_correct": {
+      "count": 2,
+      "isolated": 0,
+      "mean": 0.75,
+      "median": 0.75,
+      "strata": {
+        "homophilic": 1,
+        "mixed": 1
+      },
+      "mean_degree": 3.5
+    },
+    "third_wrong": {
+      "count": 3,
+      "isolated": 0,
+      "mean": 1.0,
+      "median": 1.0,
+      "strata": {
+        "homophilic": 3
+      },
+      "mean_degree": 8
+    }
+  },
+  "degree_conditioned": {
+    "both_correct": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 27,
+        "isolated": 0,
+        "mean": 0.9074074074074074,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 24,
+          "heterophilic": 2,
+          "mixed": 1
+        },
+        "mean_degree": 1.5555555555555556
+      },
+      "[3, 5]": {
+        "count": 48,
+        "isolated": 0,
+        "mean": 0.8979166666666667,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 45,
+          "heterophilic": 3
+        },
+        "mean_degree": 3.8958333333333335
+      },
+      "[6, 10]": {
+        "count": 16,
+        "isolated": 0,
+        "mean": 0.9246031746031746,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 15,
+          "heterophilic": 1
+        },
+        "mean_degree": 6.625
+      },
+      "[11, 2707]": {
+        "count": 4,
+        "isolated": 0,
+        "mean": 0.9221445221445221,
+        "median": 0.9212121212121211,
+        "strata": {
+          "homophilic": 4
+        },
+        "mean_degree": 37
+      }
+    },
+    "both_wrong": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 11,
+        "isolated": 0,
+        "mean": 0.8181818181818182,
+        "median": 1.0,
+        "strata": {
+          "mixed": 4,
+          "homophilic": 7
+        },
+        "mean_degree": 1.6363636363636365
+      },
+      "[3, 5]": {
+        "count": 20,
+        "isolated": 0,
+        "mean": 0.7858333333333334,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 15,
+          "heterophilic": 3,
+          "mixed": 2
+        },
+        "mean_degree": 3.9
+      },
+      "[6, 10]": {
+        "count": 5,
+        "isolated": 0,
+        "mean": 0.95,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 5
+        },
+        "mean_degree": 8.2
+      },
+      "[11, 2707]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 0.875,
+        "median": 0.875,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 12
+      }
+    },
+    "only_b1_wrong": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 4,
+        "isolated": 0,
+        "mean": 0.75,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 3,
+          "heterophilic": 1
+        },
+        "mean_degree": 1.25
+      },
+      "[3, 5]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 4.5
+      },
+      "[6, 10]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[11, 2707]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      }
+    },
+    "only_narrative_wrong": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[3, 5]": {
+        "count": 1,
+        "isolated": 0,
+        "mean": 0.0,
+        "median": 0.0,
+        "strata": {
+          "heterophilic": 1
+        },
+        "mean_degree": 3
+      },
+      "[6, 10]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[11, 2707]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      }
+    },
+    "r0_selected": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 15,
+        "isolated": 0,
+        "mean": 0.8666666666666667,
+        "median": 1.0,
+        "strata": {
+          "mixed": 2,
+          "homophilic": 12,
+          "heterophilic": 1
+        },
+        "mean_degree": 1.5333333333333334
+      },
+      "[3, 5]": {
+        "count": 16,
+        "isolated": 0,
+        "mean": 0.753125,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 12,
+          "heterophilic": 4
+        },
+        "mean_degree": 4
+      },
+      "[6, 10]": {
+        "count": 5,
+        "isolated": 0,
+        "mean": 0.8928571428571429,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 5
+        },
+        "mean_degree": 7.4
+      },
+      "[11, 2707]": {
+        "count": 1,
+        "isolated": 0,
+        "mean": 0.9333333333333333,
+        "median": 0.9333333333333333,
+        "strata": {
+          "homophilic": 1
+        },
+        "mean_degree": 15
+      }
+    },
+    "r0_unselected": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 27,
+        "isolated": 0,
+        "mean": 0.8703703703703703,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 22,
+          "heterophilic": 2,
+          "mixed": 3
+        },
+        "mean_degree": 1.5555555555555556
+      },
+      "[3, 5]": {
+        "count": 55,
+        "isolated": 0,
+        "mean": 0.8866666666666667,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 50,
+          "heterophilic": 3,
+          "mixed": 2
+        },
+        "mean_degree": 3.8727272727272726
+      },
+      "[6, 10]": {
+        "count": 16,
+        "isolated": 0,
+        "mean": 0.9424603174603174,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 15,
+          "heterophilic": 1
+        },
+        "mean_degree": 6.875
+      },
+      "[11, 2707]": {
+        "count": 5,
+        "isolated": 0,
+        "mean": 0.901048951048951,
+        "median": 0.9090909090909091,
+        "strata": {
+          "homophilic": 5
+        },
+        "mean_degree": 31.4
+      }
+    },
+    "r1_v1_selected": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 11,
+        "isolated": 0,
+        "mean": 0.9090909090909091,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 9,
+          "mixed": 2
+        },
+        "mean_degree": 1.4545454545454546
+      },
+      "[3, 5]": {
+        "count": 22,
+        "isolated": 0,
+        "mean": 0.7454545454545455,
+        "median": 1.0,
+        "strata": {
+          "heterophilic": 5,
+          "homophilic": 17
+        },
+        "mean_degree": 3.772727272727273
+      },
+      "[6, 10]": {
+        "count": 4,
+        "isolated": 0,
+        "mean": 0.7708333333333334,
+        "median": 0.875,
+        "strata": {
+          "homophilic": 3,
+          "heterophilic": 1
+        },
+        "mean_degree": 8.5
+      },
+      "[11, 2707]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      }
+    },
+    "r1_v1_unselected": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 31,
+        "isolated": 0,
+        "mean": 0.8548387096774194,
+        "median": 1.0,
+        "strata": {
+          "mixed": 3,
+          "homophilic": 25,
+          "heterophilic": 3
+        },
+        "mean_degree": 1.5806451612903225
+      },
+      "[3, 5]": {
+        "count": 49,
+        "isolated": 0,
+        "mean": 0.9064625850340136,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 45,
+          "heterophilic": 2,
+          "mixed": 2
+        },
+        "mean_degree": 3.9591836734693877
+      },
+      "[6, 10]": {
+        "count": 17,
+        "isolated": 0,
+        "mean": 0.9682539682539683,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 17
+        },
+        "mean_degree": 6.647058823529412
+      },
+      "[11, 2707]": {
+        "count": 6,
+        "isolated": 0,
+        "mean": 0.9064296814296814,
+        "median": 0.9212121212121211,
+        "strata": {
+          "homophilic": 6
+        },
+        "mean_degree": 28.666666666666668
+      }
+    },
+    "expanded_selected": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 15,
+        "isolated": 0,
+        "mean": 0.8333333333333334,
+        "median": 1.0,
+        "strata": {
+          "mixed": 3,
+          "homophilic": 11,
+          "heterophilic": 1
+        },
+        "mean_degree": 1.4666666666666666
+      },
+      "[3, 5]": {
+        "count": 18,
+        "isolated": 0,
+        "mean": 0.7777777777777778,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 14,
+          "heterophilic": 4
+        },
+        "mean_degree": 3.7222222222222223
+      },
+      "[6, 10]": {
+        "count": 3,
+        "isolated": 0,
+        "mean": 0.9166666666666666,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 3
+        },
+        "mean_degree": 9.333333333333334
+      },
+      "[11, 2707]": {
+        "count": 1,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 1
+        },
+        "mean_degree": 12
+      }
+    },
+    "expanded_unselected": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 27,
+        "isolated": 0,
+        "mean": 0.8888888888888888,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 23,
+          "heterophilic": 2,
+          "mixed": 2
+        },
+        "mean_degree": 1.5925925925925926
+      },
+      "[3, 5]": {
+        "count": 53,
+        "isolated": 0,
+        "mean": 0.8833333333333333,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 48,
+          "heterophilic": 3,
+          "mixed": 2
+        },
+        "mean_degree": 3.9622641509433962
+      },
+      "[6, 10]": {
+        "count": 18,
+        "isolated": 0,
+        "mean": 0.9329805996472663,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 17,
+          "heterophilic": 1
+        },
+        "mean_degree": 6.611111111111111
+      },
+      "[11, 2707]": {
+        "count": 5,
+        "isolated": 0,
+        "mean": 0.8877156177156177,
+        "median": 0.9090909090909091,
+        "strata": {
+          "homophilic": 5
+        },
+        "mean_degree": 32
+      }
+    },
+    "B1_correct": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 27,
+        "isolated": 0,
+        "mean": 0.9074074074074074,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 24,
+          "heterophilic": 2,
+          "mixed": 1
+        },
+        "mean_degree": 1.5555555555555556
+      },
+      "[3, 5]": {
+        "count": 49,
+        "isolated": 0,
+        "mean": 0.8795918367346939,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 45,
+          "heterophilic": 4
+        },
+        "mean_degree": 3.877551020408163
+      },
+      "[6, 10]": {
+        "count": 16,
+        "isolated": 0,
+        "mean": 0.9246031746031746,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 15,
+          "heterophilic": 1
+        },
+        "mean_degree": 6.625
+      },
+      "[11, 2707]": {
+        "count": 4,
+        "isolated": 0,
+        "mean": 0.9221445221445221,
+        "median": 0.9212121212121211,
+        "strata": {
+          "homophilic": 4
+        },
+        "mean_degree": 37
+      }
+    },
+    "B1_wrong": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 15,
+        "isolated": 0,
+        "mean": 0.8,
+        "median": 1.0,
+        "strata": {
+          "mixed": 4,
+          "homophilic": 10,
+          "heterophilic": 1
+        },
+        "mean_degree": 1.5333333333333334
+      },
+      "[3, 5]": {
+        "count": 22,
+        "isolated": 0,
+        "mean": 0.8053030303030303,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 17,
+          "heterophilic": 3,
+          "mixed": 2
+        },
+        "mean_degree": 3.9545454545454546
+      },
+      "[6, 10]": {
+        "count": 5,
+        "isolated": 0,
+        "mean": 0.95,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 5
+        },
+        "mean_degree": 8.2
+      },
+      "[11, 2707]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 0.875,
+        "median": 0.875,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 12
+      }
+    },
+    "B1_abstain": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[3, 5]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[6, 10]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[11, 2707]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      }
+    },
+    "Narrative_correct": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 31,
+        "isolated": 0,
+        "mean": 0.8870967741935484,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 27,
+          "heterophilic": 3,
+          "mixed": 1
+        },
+        "mean_degree": 1.5161290322580645
+      },
+      "[3, 5]": {
+        "count": 50,
+        "isolated": 0,
+        "mean": 0.902,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 47,
+          "heterophilic": 3
+        },
+        "mean_degree": 3.92
+      },
+      "[6, 10]": {
+        "count": 16,
+        "isolated": 0,
+        "mean": 0.9246031746031746,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 15,
+          "heterophilic": 1
+        },
+        "mean_degree": 6.625
+      },
+      "[11, 2707]": {
+        "count": 4,
+        "isolated": 0,
+        "mean": 0.9221445221445221,
+        "median": 0.9212121212121211,
+        "strata": {
+          "homophilic": 4
+        },
+        "mean_degree": 37
+      }
+    },
+    "Narrative_wrong": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 11,
+        "isolated": 0,
+        "mean": 0.8181818181818182,
+        "median": 1.0,
+        "strata": {
+          "mixed": 4,
+          "homophilic": 7
+        },
+        "mean_degree": 1.6363636363636365
+      },
+      "[3, 5]": {
+        "count": 21,
+        "isolated": 0,
+        "mean": 0.7484126984126984,
+        "median": 1.0,
+        "strata": {
+          "heterophilic": 4,
+          "homophilic": 15,
+          "mixed": 2
+        },
+        "mean_degree": 3.857142857142857
+      },
+      "[6, 10]": {
+        "count": 5,
+        "isolated": 0,
+        "mean": 0.95,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 5
+        },
+        "mean_degree": 8.2
+      },
+      "[11, 2707]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 0.875,
+        "median": 0.875,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 12
+      }
+    },
+    "Narrative_abstain": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[3, 5]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[6, 10]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[11, 2707]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      }
+    },
+    "C_correct": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 22,
+        "isolated": 0,
+        "mean": 0.8863636363636364,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 19,
+          "heterophilic": 2,
+          "mixed": 1
+        },
+        "mean_degree": 1.5454545454545454
+      },
+      "[3, 5]": {
+        "count": 35,
+        "isolated": 0,
+        "mean": 0.9285714285714286,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 34,
+          "heterophilic": 1
+        },
+        "mean_degree": 3.942857142857143
+      },
+      "[6, 10]": {
+        "count": 13,
+        "isolated": 0,
+        "mean": 0.9804639804639804,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 13
+        },
+        "mean_degree": 6.6923076923076925
+      },
+      "[11, 2707]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 0.9230769230769231,
+        "median": 0.9230769230769231,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 44.5
+      }
+    },
+    "C_wrong": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 1.5
+      },
+      "[3, 5]": {
+        "count": 15,
+        "isolated": 0,
+        "mean": 0.7811111111111111,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 11,
+          "mixed": 2,
+          "heterophilic": 2
+        },
+        "mean_degree": 3.8
+      },
+      "[6, 10]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 8.5
+      },
+      "[11, 2707]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 0.875,
+        "median": 0.875,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 12
+      }
+    },
+    "C_abstain": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 18,
+        "isolated": 0,
+        "mean": 0.8333333333333334,
+        "median": 1.0,
+        "strata": {
+          "mixed": 4,
+          "homophilic": 13,
+          "heterophilic": 1
+        },
+        "mean_degree": 1.5555555555555556
+      },
+      "[3, 5]": {
+        "count": 21,
+        "isolated": 0,
+        "mean": 0.7904761904761904,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 17,
+          "heterophilic": 4
+        },
+        "mean_degree": 3.9047619047619047
+      },
+      "[6, 10]": {
+        "count": 6,
+        "isolated": 0,
+        "mean": 0.7996031746031746,
+        "median": 0.875,
+        "strata": {
+          "homophilic": 5,
+          "heterophilic": 1
+        },
+        "mean_degree": 7.166666666666667
+      },
+      "[11, 2707]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 0.9212121212121211,
+        "median": 0.9212121212121211,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 29.5
+      }
+    },
+    "Expanded_V1_correct": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 19,
+        "isolated": 0,
+        "mean": 0.868421052631579,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 16,
+          "heterophilic": 2,
+          "mixed": 1
+        },
+        "mean_degree": 1.631578947368421
+      },
+      "[3, 5]": {
+        "count": 33,
+        "isolated": 0,
+        "mean": 0.9318181818181818,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 32,
+          "heterophilic": 1
+        },
+        "mean_degree": 3.9696969696969697
+      },
+      "[6, 10]": {
+        "count": 13,
+        "isolated": 0,
+        "mean": 0.9804639804639804,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 13
+        },
+        "mean_degree": 6.6923076923076925
+      },
+      "[11, 2707]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 0.9230769230769231,
+        "median": 0.9230769230769231,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 44.5
+      }
+    },
+    "Expanded_V1_wrong": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 1,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 1
+        },
+        "mean_degree": 2
+      },
+      "[3, 5]": {
+        "count": 9,
+        "isolated": 0,
+        "mean": 0.7185185185185186,
+        "median": 0.8,
+        "strata": {
+          "homophilic": 6,
+          "mixed": 2,
+          "heterophilic": 1
+        },
+        "mean_degree": 4
+      },
+      "[6, 10]": {
+        "count": 1,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 1
+        },
+        "mean_degree": 7
+      },
+      "[11, 2707]": {
+        "count": 1,
+        "isolated": 0,
+        "mean": 0.75,
+        "median": 0.75,
+        "strata": {
+          "homophilic": 1
+        },
+        "mean_degree": 12
+      }
+    },
+    "Expanded_V1_abstain": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 22,
+        "isolated": 0,
+        "mean": 0.8636363636363636,
+        "median": 1.0,
+        "strata": {
+          "mixed": 4,
+          "homophilic": 17,
+          "heterophilic": 1
+        },
+        "mean_degree": 1.4545454545454546
+      },
+      "[3, 5]": {
+        "count": 29,
+        "isolated": 0,
+        "mean": 0.8137931034482758,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 24,
+          "heterophilic": 5
+        },
+        "mean_degree": 3.793103448275862
+      },
+      "[6, 10]": {
+        "count": 7,
+        "isolated": 0,
+        "mean": 0.8282312925170068,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 6,
+          "heterophilic": 1
+        },
+        "mean_degree": 7.571428571428571
+      },
+      "[11, 2707]": {
+        "count": 3,
+        "isolated": 0,
+        "mean": 0.9474747474747475,
+        "median": 0.9333333333333333,
+        "strata": {
+          "homophilic": 3
+        },
+        "mean_degree": 23.666666666666668
+      }
+    },
+    "V1_Relaxed_correct": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 20,
+        "isolated": 0,
+        "mean": 0.85,
+        "median": 1.0,
+        "strata": {
+          "mixed": 2,
+          "homophilic": 16,
+          "heterophilic": 2
+        },
+        "mean_degree": 1.65
+      },
+      "[3, 5]": {
+        "count": 34,
+        "isolated": 0,
+        "mean": 0.9338235294117647,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 33,
+          "heterophilic": 1
+        },
+        "mean_degree": 4
+      },
+      "[6, 10]": {
+        "count": 13,
+        "isolated": 0,
+        "mean": 0.9804639804639804,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 13
+        },
+        "mean_degree": 6.6923076923076925
+      },
+      "[11, 2707]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 0.9230769230769231,
+        "median": 0.9230769230769231,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 44.5
+      }
+    },
+    "V1_Relaxed_wrong": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 2
+      },
+      "[3, 5]": {
+        "count": 9,
+        "isolated": 0,
+        "mean": 0.7185185185185186,
+        "median": 0.8,
+        "strata": {
+          "homophilic": 6,
+          "mixed": 2,
+          "heterophilic": 1
+        },
+        "mean_degree": 4
+      },
+      "[6, 10]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 8.5
+      },
+      "[11, 2707]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 0.875,
+        "median": 0.875,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 12
+      }
+    },
+    "V1_Relaxed_abstain": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 20,
+        "isolated": 0,
+        "mean": 0.875,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 16,
+          "mixed": 3,
+          "heterophilic": 1
+        },
+        "mean_degree": 1.4
+      },
+      "[3, 5]": {
+        "count": 28,
+        "isolated": 0,
+        "mean": 0.8071428571428572,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 23,
+          "heterophilic": 5
+        },
+        "mean_degree": 3.75
+      },
+      "[6, 10]": {
+        "count": 6,
+        "isolated": 0,
+        "mean": 0.7996031746031746,
+        "median": 0.875,
+        "strata": {
+          "homophilic": 5,
+          "heterophilic": 1
+        },
+        "mean_degree": 7.166666666666667
+      },
+      "[11, 2707]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 0.9212121212121211,
+        "median": 0.9212121212121211,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 29.5
+      }
+    },
+    "agent_blind_correct": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 7,
+        "isolated": 0,
+        "mean": 0.9285714285714286,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 6,
+          "mixed": 1
+        },
+        "mean_degree": 1.4285714285714286
+      },
+      "[3, 5]": {
+        "count": 9,
+        "isolated": 0,
+        "mean": 0.8333333333333334,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 8,
+          "heterophilic": 1
+        },
+        "mean_degree": 3.7777777777777777
+      },
+      "[6, 10]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[11, 2707]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      }
+    },
+    "agent_blind_wrong": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 5,
+        "isolated": 0,
+        "mean": 0.6,
+        "median": 0.5,
+        "strata": {
+          "heterophilic": 1,
+          "homophilic": 2,
+          "mixed": 2
+        },
+        "mean_degree": 1.6
+      },
+      "[3, 5]": {
+        "count": 4,
+        "isolated": 0,
+        "mean": 0.5625,
+        "median": 0.625,
+        "strata": {
+          "heterophilic": 2,
+          "homophilic": 2
+        },
+        "mean_degree": 3.75
+      },
+      "[6, 10]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 10
+      },
+      "[11, 2707]": {
+        "count": 1,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 1
+        },
+        "mean_degree": 12
+      }
+    },
+    "agent_compare_correct": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 7,
+        "isolated": 0,
+        "mean": 0.7857142857142857,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 5,
+          "heterophilic": 1,
+          "mixed": 1
+        },
+        "mean_degree": 1.2857142857142858
+      },
+      "[3, 5]": {
+        "count": 7,
+        "isolated": 0,
+        "mean": 0.8214285714285714,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 6,
+          "heterophilic": 1
+        },
+        "mean_degree": 3.857142857142857
+      },
+      "[6, 10]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[11, 2707]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      }
+    },
+    "agent_compare_wrong": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 3,
+        "isolated": 0,
+        "mean": 0.8333333333333334,
+        "median": 1.0,
+        "strata": {
+          "mixed": 1,
+          "homophilic": 2
+        },
+        "mean_degree": 1.6666666666666667
+      },
+      "[3, 5]": {
+        "count": 3,
+        "isolated": 0,
+        "mean": 0.4166666666666667,
+        "median": 0.25,
+        "strata": {
+          "heterophilic": 2,
+          "homophilic": 1
+        },
+        "mean_degree": 4
+      },
+      "[6, 10]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 10
+      },
+      "[11, 2707]": {
+        "count": 1,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 1
+        },
+        "mean_degree": 12
+      }
+    },
+    "fusion_removed_errors": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 13,
+        "isolated": 0,
+        "mean": 0.7692307692307693,
+        "median": 1.0,
+        "strata": {
+          "mixed": 4,
+          "homophilic": 8,
+          "heterophilic": 1
+        },
+        "mean_degree": 1.5384615384615385
+      },
+      "[3, 5]": {
+        "count": 8,
+        "isolated": 0,
+        "mean": 0.75,
+        "median": 1.0,
+        "strata": {
+          "heterophilic": 2,
+          "homophilic": 6
+        },
+        "mean_degree": 4.125
+      },
+      "[6, 10]": {
+        "count": 3,
+        "isolated": 0,
+        "mean": 0.9166666666666666,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 3
+        },
+        "mean_degree": 8
+      },
+      "[11, 2707]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      }
+    },
+    "fusion_retained_errors": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 1.5
+      },
+      "[3, 5]": {
+        "count": 15,
+        "isolated": 0,
+        "mean": 0.7811111111111111,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 11,
+          "mixed": 2,
+          "heterophilic": 2
+        },
+        "mean_degree": 3.8
+      },
+      "[6, 10]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 8.5
+      },
+      "[11, 2707]": {
+        "count": 2,
+        "isolated": 0,
+        "mean": 0.875,
+        "median": 0.875,
+        "strata": {
+          "homophilic": 2
+        },
+        "mean_degree": 12
+      }
+    },
+    "third_correct": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 1,
+        "isolated": 0,
+        "mean": 0.5,
+        "median": 0.5,
+        "strata": {
+          "mixed": 1
+        },
+        "mean_degree": 2
+      },
+      "[3, 5]": {
+        "count": 1,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 1
+        },
+        "mean_degree": 5
+      },
+      "[6, 10]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[11, 2707]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      }
+    },
+    "third_wrong": {
+      "[0, 0]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[1, 2]": {
+        "count": 1,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 1
+        },
+        "mean_degree": 2
+      },
+      "[3, 5]": {
+        "count": 0,
+        "isolated": 0,
+        "mean": null,
+        "median": null,
+        "strata": {},
+        "mean_degree": null
+      },
+      "[6, 10]": {
+        "count": 1,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 1
+        },
+        "mean_degree": 10
+      },
+      "[11, 2707]": {
+        "count": 1,
+        "isolated": 0,
+        "mean": 1.0,
+        "median": 1.0,
+        "strata": {
+          "homophilic": 1
+        },
+        "mean_degree": 12
+      }
+    }
+  },
+  "error_rates": {
+    "heterophilic": {
+      "B1": {
+        "accepted": 11,
+        "wrong": 4,
+        "total": 11
+      },
+      "C": {
+        "accepted": 5,
+        "wrong": 2,
+        "total": 11
+      },
+      "Class_count_matched": {
+        "accepted": 5,
+        "wrong": 2,
+        "total": 11
+      },
+      "Coverage_no_agent": {
+        "accepted": 4,
+        "wrong": 1,
+        "total": 11
+      },
+      "Expanded_V1": {
+        "accepted": 4,
+        "wrong": 1,
+        "total": 11
+      },
+      "Narrative": {
+        "accepted": 11,
+        "wrong": 4,
+        "total": 11
+      },
+      "Old_V1_R1": {
+        "accepted": 2,
+        "wrong": 0,
+        "total": 11
+      },
+      "Router_only": {
+        "accepted": 4,
+        "wrong": 1,
+        "total": 11
+      },
+      "V1_Relaxed": {
+        "accepted": 4,
+        "wrong": 1,
+        "total": 11
+      }
+    },
+    "mixed": {
+      "B1": {
+        "accepted": 7,
+        "wrong": 6,
+        "total": 7
+      },
+      "C": {
+        "accepted": 3,
+        "wrong": 2,
+        "total": 7
+      },
+      "Class_count_matched": {
+        "accepted": 3,
+        "wrong": 2,
+        "total": 7
+      },
+      "Coverage_no_agent": {
+        "accepted": 4,
+        "wrong": 3,
+        "total": 7
+      },
+      "Expanded_V1": {
+        "accepted": 3,
+        "wrong": 2,
+        "total": 7
+      },
+      "Narrative": {
+        "accepted": 7,
+        "wrong": 6,
+        "total": 7
+      },
+      "Old_V1_R1": {
+        "accepted": 3,
+        "wrong": 2,
+        "total": 7
+      },
+      "Router_only": {
+        "accepted": 3,
+        "wrong": 2,
+        "total": 7
+      },
+      "V1_Relaxed": {
+        "accepted": 4,
+        "wrong": 2,
+        "total": 7
+      }
+    },
+    "homophilic": {
+      "B1": {
+        "accepted": 122,
+        "wrong": 34,
+        "total": 122
+      },
+      "C": {
+        "accepted": 85,
+        "wrong": 17,
+        "total": 122
+      },
+      "Class_count_matched": {
+        "accepted": 71,
+        "wrong": 8,
+        "total": 122
+      },
+      "Coverage_no_agent": {
+        "accepted": 76,
+        "wrong": 13,
+        "total": 122
+      },
+      "Expanded_V1": {
+        "accepted": 72,
+        "wrong": 9,
+        "total": 122
+      },
+      "Narrative": {
+        "accepted": 122,
+        "wrong": 29,
+        "total": 122
+      },
+      "Old_V1_R1": {
+        "accepted": 73,
+        "wrong": 9,
+        "total": 122
+      },
+      "Router_only": {
+        "accepted": 72,
+        "wrong": 9,
+        "total": 122
+      },
+      "V1_Relaxed": {
+        "accepted": 76,
+        "wrong": 12,
+        "total": 122
+      }
+    },
+    "isolated": {
+      "B1": {
+        "accepted": 0,
+        "wrong": 0,
+        "total": 0
+      },
+      "C": {
+        "accepted": 0,
+        "wrong": 0,
+        "total": 0
+      },
+      "Class_count_matched": {
+        "accepted": 0,
+        "wrong": 0,
+        "total": 0
+      },
+      "Coverage_no_agent": {
+        "accepted": 0,
+        "wrong": 0,
+        "total": 0
+      },
+      "Expanded_V1": {
+        "accepted": 0,
+        "wrong": 0,
+        "total": 0
+      },
+      "Narrative": {
+        "accepted": 0,
+        "wrong": 0,
+        "total": 0
+      },
+      "Old_V1_R1": {
+        "accepted": 0,
+        "wrong": 0,
+        "total": 0
+      },
+      "Router_only": {
+        "accepted": 0,
+        "wrong": 0,
+        "total": 0
+      },
+      "V1_Relaxed": {
+        "accepted": 0,
+        "wrong": 0,
+        "total": 0
+      }
+    }
+  },
+  "private_sha256": "0f0f800f8af1ad07f5e9d08cbcb693de0e605a6cc0488cd4c7aa29d45a5d8af9",
+  "limitations": [
+    "LIMITED_PROVENANCE_EXPLORATORY",
+    "EXPLORATORY_NOT_INDEPENDENT"
+  ]
+}
