@@ -28,7 +28,7 @@ def main():
  template=FrozenPromptTemplate.from_receipt('.local_artifacts/frozen/preparation_receipt.json')
  references={arm:read_pinned_json('.local_artifacts/authentic/'+name,PINS[name]) for arm,name in [('B1','b1_prompts.json'),('v0','narrative_prompts.json')]}
  framed=_local_counter('.local_artifacts/tokenizer_cache');count=lambda s:framed(s)-64
- requests=[];stats={};provisional=dict(endpoint='https://api.gapgpt.app/v1/chat/completions',model='gpt-6-luna',allowed_returned_models=['gpt-6-luna','gpt-6-luna-2026-09-22'],temperature=1,n=1,max_tokens=4096,max_input_tokens=32768,availability='UNVERIFIED_CURRENT',pricing='OWNER_HISTORICAL_UNVERIFIED',spending_cap='NOT_APPROVED')
+ requests=[];stats={};provisional=dict(endpoint='https://api.gapgpt.app/v1/chat/completions',model='gpt-6-luna',allowed_returned_models=['gpt-6-luna','gpt-6-luna-2026-09-22'],temperature=0.7,n=1,max_tokens=4096,max_input_tokens=32768,availability='UNVERIFIED_CURRENT',pricing='OWNER_HISTORICAL_UNVERIFIED',spending_cap='NOT_APPROVED')
  for row in source['rows']:
   node=row['node_id'];arms=build(row,template,count)
   for arm,reference in references.items():arms[arm]=reference['prompts_by_target_id'][str(node)]

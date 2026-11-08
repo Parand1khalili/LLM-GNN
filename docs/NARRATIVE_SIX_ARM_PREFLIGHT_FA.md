@@ -1,7 +1,7 @@
 # پیش‌پرواز شش‌Arm — 2026-11-08
 
 Manifest خصوصی شامل2520 درخواست Draft است؛ هیچ درخواست پولی اجرا نشده است.
-SHA `d5cddb404c55e03cd3356aa01fc2958c4a73895809e651c728b1efcc2a5f0ae1`
+SHA `33169f5a87a53e86a0eea81447fd250200afce05159f03e5e0be8e74856fae1c`
 
 B1 و v0 از Promptهای Frozen اصیل خوانده شدند. A/B عین Freeze قبلی‌اند.
 C/D فقط دستور را تغییر می‌دهند و همان Bundle، ترتیب همسایه، truncation،
@@ -20,8 +20,8 @@ taxonomy و schema سه answer/confidence را دارند. سقف هر چهار 
 Provider موجود GapGPT با endpoint https://api.gapgpt.app/v1/chat/completions
 و مدل درخواستی gpt-6-luna است. alias و revision گزارش‌شدهٔ تاریخی
 gpt-6-luna-2026-09-22 تنها شناسه‌های مطرح موجودند؛ دسترسی فعلی احراز نشده است.
-طرح decoding جدید temperature1/n1/output4096 مشترک برای همهٔ Armها پیشنهاد شده؛
-این نسبت به B1/v0 تاریخی با temperature0.7 یک تغییر اجرای صریح است.
+طبق اصلاح صریح مالک، temperature0.7/n1/output4096 برای تمام Armها تعیین شد.
+Temperature با B1/v0 تاریخی یکسان است؛ output4096 همچنان تنظیم پیشنهادی جدید است.
 قبل از اجرا مالک باید مدل، تنظیمات و cap را تأیید کند.
 
 صفحهٔ https://gapgpt.app/platform-v2/pricing در بررسی فعلی فقط Loader داد.
@@ -56,3 +56,6 @@ Voting موجود annotation/voting.py باید در تمام Armها یکسان
 Primary مقایسه paired B−A روی140 Target است. GT تنها بعد از Prediction Freeze
 در Evaluator جدا باز می‌شود. نتیجه، Accuracy، Usage واقعی، هزینهٔ واقعی و
 GT Evaluation فعلاً NOT_RUN هستند. هیچ GCN اجرا نمی‌شود.
+
+
+اصلاح مالک: هیچ fallback خودکار به temperature1 مجاز نیست. اگر مدل0.7 را رد کند، اجرا برای بررسی مالک متوقف می‌شود. Freeze قبلی CAS حفظ شد.

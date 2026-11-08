@@ -8,7 +8,7 @@
       "gpt-6-luna",
       "gpt-6-luna-2026-09-22"
     ],
-    "temperature": 1,
+    "temperature": 0.7,
     "n": 1,
     "max_tokens": 4096,
     "max_input_tokens": 32768,
@@ -71,5 +71,5 @@
   "execution": "BLOCKED_MODEL_PRICING_AND_SPENDING_APPROVAL",
   "training_runs": 0,
   "provider_calls": 0,
-  "manifest_sha256": "d5cddb404c55e03cd3356aa01fc2958c4a73895809e651c728b1efcc2a5f0ae1"
+  "manifest_sha256": "33169f5a87a53e86a0eea81447fd250200afce05159f03e5e0be8e74856fae1c"
 }
