@@ -59,3 +59,16 @@ GT Evaluation فعلاً NOT_RUN هستند. هیچ GCN اجرا نمی‌شود
 
 
 اصلاح مالک: هیچ fallback خودکار به temperature1 مجاز نیست. اگر مدل0.7 را رد کند، اجرا برای بررسی مالک متوقف می‌شود. Freeze قبلی CAS حفظ شد.
+
+
+## اجرای temperature1 مجاز مالک
+
+مالک temperature1، reasoning_effort حذف‌شده، Smoke36 و حداکثر2520 درخواست با cap15 دلار را تأیید کرد. اجرا از Manifest خصوصی33169f5a87a53e86a0eea81447fd250200afce05159f03e5e0be8e74856fae1c فقط متن Prompt را استفاده می‌کند؛ config اجرای جدید و wire hash مستقل ثبت می‌شود. temperature0.7 Manifest پایه در wire استفاده نمی‌شود.
+
+فرمان اولیه: .venv\Scripts\python.exe -B -m llmgnn_sara.annotation.six_arm_run --stage smoke
+
+کلید فقط از GAPGPT_API_KEY فرآیند یا getpass مخفی Terminal خوانده می‌شود. Privacy و cap در Terminal تأیید می‌شوند. مدل‌های برگشتی فقط دو شناسهٔ دقیق مجاز تاریخی‌اند. Intent پیش از dispatch و Raw پاسخ با hash ذخیره می‌شود. timeout/Crash به Intent حل‌نشده می‌رسد؛ auto retry وجود ندارد. Completedها در Resume hash-check و parse می‌شوند. هر پاسخ نامعتبر موجب توقف می‌شود. Parser این Runner JSON کامل سه answer/confidence معتبر با مجموع100 را الزام می‌کند؛ salvage متن آزاد انجام نمی‌شود. Voting همان تابع تاریخی بازسازی‌شده است. Concurrency یک است؛ retry خودکار صفر انتخاب شده تا هزینهٔ مبهم تکرار نشود.
+
+فقط پس از بازبینی Smoke، فرمان --stage full همراه تأیید APPROVE SCALE اجرا شود.36 درخواست موفق Smoke دوباره ارسال نمی‌شوند. Full سه نمونهٔ هر Target/Arm را رأی‌گیری و Prediction Freeze خصوصی ایجاد می‌کند. GT evaluator شش‌Arm هنوز تکمیل نشده و این Runner هیچ GT باز نمی‌کند. هزینهٔ واقعی Provider همچنان نامعلوم؛ برآورد Usage با نرخ موقت محاسبه می‌شود.
+
+دوازده تست Mock/CLI/Preflight PASS؛ هیچ ارسال واقعی در مرحلهٔ پیاده‌سازی انجام نشد.
