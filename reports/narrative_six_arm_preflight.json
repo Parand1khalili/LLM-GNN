@@ -1,0 +1,75 @@
+{
+  "schema": "sara.prompt.six_arm.preflight.v1",
+  "source_freeze_sha256": "916ef67f164202861dfb16e7144ad99d28f82c84a71e9b4d3a110fa3d0a40900",
+  "configuration": {
+    "endpoint": "https://api.gapgpt.app/v1/chat/completions",
+    "model": "gpt-6-luna",
+    "allowed_returned_models": [
+      "gpt-6-luna",
+      "gpt-6-luna-2026-09-22"
+    ],
+    "temperature": 1,
+    "n": 1,
+    "max_tokens": 4096,
+    "max_input_tokens": 32768,
+    "availability": "UNVERIFIED_CURRENT",
+    "pricing": "OWNER_HISTORICAL_UNVERIFIED",
+    "spending_cap": "NOT_APPROVED"
+  },
+  "per_arm": {
+    "v1-A": {
+      "calls": 420,
+      "input_prompt_tokens": 475641,
+      "max_prompt_tokens": 1737,
+      "estimated_input_usd_at_unverified_rate": "0.0529401",
+      "scenario_output_512_usd": "0.10752",
+      "declared_reservation_usd": "2.236416"
+    },
+    "v1-B": {
+      "calls": 420,
+      "input_prompt_tokens": 493701,
+      "max_prompt_tokens": 1780,
+      "estimated_input_usd_at_unverified_rate": "0.0547461",
+      "scenario_output_512_usd": "0.10752",
+      "declared_reservation_usd": "2.236416"
+    },
+    "v1-C": {
+      "calls": 420,
+      "input_prompt_tokens": 486141,
+      "max_prompt_tokens": 1762,
+      "estimated_input_usd_at_unverified_rate": "0.0539901",
+      "scenario_output_512_usd": "0.10752",
+      "declared_reservation_usd": "2.236416"
+    },
+    "v1-D": {
+      "calls": 420,
+      "input_prompt_tokens": 486141,
+      "max_prompt_tokens": 1762,
+      "estimated_input_usd_at_unverified_rate": "0.0539901",
+      "scenario_output_512_usd": "0.10752",
+      "declared_reservation_usd": "2.236416"
+    },
+    "B1": {
+      "calls": 420,
+      "input_prompt_tokens": 122622,
+      "max_prompt_tokens": 748,
+      "estimated_input_usd_at_unverified_rate": "0.0176382",
+      "scenario_output_512_usd": "0.10752",
+      "declared_reservation_usd": "2.236416"
+    },
+    "v0": {
+      "calls": 420,
+      "input_prompt_tokens": 234255,
+      "max_prompt_tokens": 1046,
+      "estimated_input_usd_at_unverified_rate": "0.0288015",
+      "scenario_output_512_usd": "0.10752",
+      "declared_reservation_usd": "2.236416"
+    }
+  },
+  "stage_b": "2 targets by SHA256 six-arm-smoke-v1|node_id order; 6 arms x3 samples =36 calls included in2520 total",
+  "primary": "v1-B minus v1-A top1 all140 paired accuracy after independent prediction freeze",
+  "execution": "BLOCKED_MODEL_PRICING_AND_SPENDING_APPROVAL",
+  "training_runs": 0,
+  "provider_calls": 0,
+  "manifest_sha256": "d5cddb404c55e03cd3356aa01fc2958c4a73895809e651c728b1efcc2a5f0ae1"
+}
