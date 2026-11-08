@@ -161,8 +161,11 @@ class SyntheticGapGPTHttp:
 
 
 def gateway_run(inputs, output_root, *, router, budget, cohort, config,
-                fake=True, transport=None, approval=None, key=None):
+                fake=True, transport=None, approval=None, key=None,
+                continue_verified_l1_rejection=False):
     cfg = contract_from_dict(config)
+    if type(continue_verified_l1_rejection) is not bool:
+        raise TypeError("Explicit boolean required for Atlas continuation")
     selected, context = gateway_context(inputs, router, budget, cohort, cfg, fake=fake)
     # No private journal or HTTP transport is initialized before this bound.
     validate_batch_wire(inputs, router, budget, cfg)
@@ -183,6 +186,13 @@ def gateway_run(inputs, output_root, *, router, budget, cohort, config,
     root = Path(output_root).resolve(strict=False)
     if ".local_artifacts" not in root.parts or root.is_symlink():
         raise ValueError("Private .local_artifacts output directory required")
+    if continue_verified_l1_rejection and (
+            fake or root.name != "expanded_atlas_agent3_v1"
+            or router != "r1_v1" or budget != 37 or cohort != "sensitivity"
+            or cfg["max_calls"] != 74 or cfg["max_tokens"] != 4096
+            or cfg["model"] != "gpt-6-luna"
+            or not (root / "journal" / "fixture_journal.sqlite").is_file()):
+        raise ValueError("Atlas continuation requires the existing exact live batch")
     journal = PrivateAudit(root / "journal")
     if not fake:
         # Durable private authorization receipt must exist before any network
@@ -199,8 +209,16 @@ def gateway_run(inputs, output_root, *, router, budget, cohort, config,
         if journal.read(journal.write(approved)) != approved:
             raise ValueError("Unverifiable owner authorization receipt")
     phases = PrivateAudit(root / "phases")
-    verifier = DurableGapGPTVerifier(cfg, context, journal,
-                                   transport=transport, key=key, authorized_fake=fake)
+    if continue_verified_l1_rejection:
+        from .expanded_atlas_resume import ExpandedAtlasResumeVerifier
+        verifier = ExpandedAtlasResumeVerifier(
+            cfg, context, journal, transport=transport, key=key,
+            authorized_fake=False)
+        verifier.verify_saved_batch(inputs.pairs, selected)
+    else:
+        verifier = DurableGapGPTVerifier(
+            cfg, context, journal, transport=transport, key=key,
+            authorized_fake=fake)
     run = run_offline(inputs.pairs, budget, router=router, verifier=verifier,
                       audit=phases, response_version=RICH_VERSION,
                       prompt_version=RICH_PROMPT_V2,
@@ -210,7 +228,8 @@ def gateway_run(inputs, output_root, *, router, budget, cohort, config,
     run["verifier_phase_attempts"] = run.pop("mock_verifier_calls")
     stats = verifier.stats()
     states = stats["state_counts"]
-    blocked = verifier.halted or states["UNCERTAIN"] or states["REJECTED"]
+    blocked = (verifier.halted or states["UNCERTAIN"]
+               or (states["REJECTED"] and not continue_verified_l1_rejection))
     # Halted verifiers refuse unreserved nodes with a generic uncertainty code.
     # Reconcile report-only classifications against durable intents; never alter
     # SQLite terminal states, L1 decisions, or scientific label admission.
@@ -265,7 +284,10 @@ def gateway_run(inputs, output_root, *, router, budget, cohort, config,
     # adapter, never silently remove the existing provider_calls==0 restriction.
     summary = {"schema": CONTRACT,
                "status": ("BLOCKED_NO_AUTOMATIC_RETRY" if blocked else
-                          "COMPLETE_FAKE_HTTP" if fake else "COMPLETE_LIVE_UNASSESSED"),
+                          "COMPLETE_FAKE_HTTP" if fake else
+                          "COMPLETE_LIVE_WITH_VERIFIED_L1_REJECTION"
+                          if continue_verified_l1_rejection and states["REJECTED"] else
+                          "COMPLETE_LIVE_UNASSESSED"),
                "mode": "FAKE_HTTP" if fake else "LIVE_HTTPS",
                "router": router, "selected_node_ids": list(selected),
                "selected_count": len(selected), "denominator": len(inputs.pairs),
@@ -312,6 +334,9 @@ def gateway_run(inputs, output_root, *, router, budget, cohort, config,
                                "NO_VALID_PLAN"),
                "scientific_status": ("SYNTHETIC_NOT_ACCURACY" if fake else
                                     "LIVE_NO_SEMANTIC_L2_OR_GT_EVALUATION")}
+    if continue_verified_l1_rejection:
+        from .expanded_atlas_resume import VERSION as RESUME_VERSION
+        summary["verified_resume_version"] = RESUME_VERSION
     summary_sha = journal.write(summary)
     summary["private_summary_sha256"] = summary_sha
     return summary

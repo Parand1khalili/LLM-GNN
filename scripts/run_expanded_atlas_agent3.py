@@ -20,14 +20,20 @@ def main():
             value=journal.read(path.stem)
             if value.get('schema')=='sara.runner.gapgpt_transport.v1':
                 summaries.append((path.stem,value))
-        if len(summaries)!=1:
-            raise RuntimeError('Expected one immutable summary; manual audit required')
-        sha,value=summaries[0]
+        if not summaries:
+            raise RuntimeError('Missing immutable summary; manual audit required')
+        latest=max(value['attempted_calls'] for _,value in summaries)
+        candidates=[(sha,value) for sha,value in summaries if value['attempted_calls']==latest]
+        if any((item['journal_states'],item['usage']) !=
+               (candidates[0][1]['journal_states'],candidates[0][1]['usage'])
+               for _,item in candidates):
+            raise RuntimeError('Conflicting latest summaries; manual audit required')
+        sha,value=candidates[0]
         print(json.dumps({k:value.get(k) for k in ('status','attempted_calls','blind_completed','comparison_completed','journal_states','rejection_codes','usage','estimated_cost_usd')}))
         print('PRIVATE_SUMMARY_SHA256',sha)
         return
-    if Path('.local_artifacts/expanded_atlas_agent3_v1/journal/fixture_journal.sqlite').exists():
-        raise RuntimeError('Existing execution requires --inspect-only; no automatic restart')
+    existing=Path('.local_artifacts/expanded_atlas_agent3_v1/journal/fixture_journal.sqlite').is_file()
+    # Resume only from the saved, receipt-verified journal; no new context.
     frozen=PrivateAudit('.local_artifacts/expanded_atlas_ablation').read('6b624adac49e9a8e3a78de6d7628e4fc1b654b21b5307a33ebd9b5ef4a007fe0')
     inputs=load_project_inputs('.local_artifacts/frozen','.local_artifacts/authentic')
     entries=tuple(replace(c,keywords=tuple(v)) for c,v in zip(atlas.ATLAS,frozen['expanded']['vocab']))
@@ -44,7 +50,7 @@ def main():
             if not sys.stdin.isatty():raise RuntimeError('Interactive owner terminal required')
             key=getpass.getpass('GapGPT API key (hidden): ')
         if not key:raise RuntimeError('Credential unavailable')
-        result=gateway_run(inputs,'.local_artifacts/expanded_atlas_agent3_v1',router='r1_v1',budget=37,cohort='sensitivity',config=cfg,fake=False,approval=approval,key=key)
+        result=gateway_run(inputs,'.local_artifacts/expanded_atlas_agent3_v1',router='r1_v1',budget=37,cohort='sensitivity',config=cfg,fake=False,approval=approval,key=key,continue_verified_l1_rejection=existing)
         print('PRIVATE_SUMMARY_SHA256',result['private_summary_sha256'])
 
 if __name__=='__main__':main()
