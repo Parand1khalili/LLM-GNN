@@ -2,6 +2,10 @@
 from dataclasses import dataclass
 import hashlib
 import re
+from contextvars import ContextVar
+
+EXACT_FIRST_VERSION = "sara.l1.source_exact_first.v2"
+EXACT_FIRST = ContextVar("sara_l1_exact_first", default=False)
 
 from ..io.frozen import reject_gt
 
@@ -88,7 +92,7 @@ def validate_claims(claims, approved_sources):
         words = re.findall(r"[^\W_]+", quote, re.UNICODE)
         if len(quote) > 512 or len(words) < 2 or sum(map(len, words)) < 8:
             raise EvidenceError("L1_TRIVIAL_QUOTE")
-        matching_quote = quote_for_matching(quote)
+        matching_quote = quote if EXACT_FIRST.get() and quote in source.text else quote_for_matching(quote)
         if matching_quote not in source.text:
             raise EvidenceError("L1_QUOTE_NOT_FOUND")
         item = (source.source_id, source.field, source.sha256, quote)

@@ -1,0 +1,3189 @@
+{
+  "date": "2026-11-05",
+  "scope": "READ_ONLY_LOCAL_HANDOFF_AUDIT_NO_NETWORK_NO_GT_NO_TRAINING",
+  "head": "2373b9685b195080d81f3fcecd88001a9b04a8ff",
+  "authenticated_inputs": 9,
+  "cohort": 140,
+  "frozen_replay": {
+    "schema": "sara.frozen_sample_replay.v1",
+    "status": "PASS",
+    "scope": "STORED_PARSED_SAMPLES_ONLY",
+    "evidence": "OFFLINE_REPLAYED",
+    "input_evidence": "HASH_VERIFIED",
+    "target_count": 140,
+    "predictions_checked": 280,
+    "predictions_matched": 280,
+    "confidence_abs_tolerance": 1e-12,
+    "mismatches": [],
+    "predictions": [
+      {
+        "target_id": 25,
+        "arm": "b1",
+        "class_index": 5,
+        "prediction": "reinforcement_learning",
+        "confidence_percent": 73.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 27,
+        "arm": "b1",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 55.833333333333336,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 47,
+        "arm": "b1",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 97.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 62,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 95.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 81,
+        "arm": "b1",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 91.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 90,
+        "arm": "b1",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 95.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 94,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 69.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 114,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 65.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 130,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 49.166666666666664,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 160,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 93.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 181,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 88.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 200,
+        "arm": "b1",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 95.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 207,
+        "arm": "b1",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 63.333333333333336,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 222,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 97.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 252,
+        "arm": "b1",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 97.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 267,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 59.166666666666664,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 273,
+        "arm": "b1",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 96.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 295,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 97.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 302,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 98.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 351,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 65.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 357,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 60.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 375,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 80.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 383,
+        "arm": "b1",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 96.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 417,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 86.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 420,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 96.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 430,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 97.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 436,
+        "arm": "b1",
+        "class_index": 5,
+        "prediction": "reinforcement_learning",
+        "confidence_percent": 96.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 445,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 90.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 457,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 97.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 552,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 80.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 568,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 59.166666666666664,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 575,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 89.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 578,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 91.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 607,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 93.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 614,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 60.833333333333336,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 637,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 63.333333333333336,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 653,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 51.666666666666664,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 655,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 96.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 664,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 91.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 682,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 55.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 695,
+        "arm": "b1",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 51.666666666666664,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 698,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 97.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 711,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 92.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 717,
+        "arm": "b1",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 75.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 722,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 60.833333333333336,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 734,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 61.666666666666664,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 743,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 75.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 765,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 86.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 783,
+        "arm": "b1",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 92.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 785,
+        "arm": "b1",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 79.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 862,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 94.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 866,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 80.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 881,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 80.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 907,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 82.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 913,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 87.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 917,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 60.833333333333336,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 932,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 93.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 967,
+        "arm": "b1",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 97.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 972,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 85.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 979,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 90.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 997,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 86.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1013,
+        "arm": "b1",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 91.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1031,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 91.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1066,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 84.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1091,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 75.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1118,
+        "arm": "b1",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 96.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1120,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 61.666666666666664,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1226,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 96.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1240,
+        "arm": "b1",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 81.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1243,
+        "arm": "b1",
+        "class_index": 5,
+        "prediction": "reinforcement_learning",
+        "confidence_percent": 73.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1254,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 94.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1260,
+        "arm": "b1",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 96.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1269,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 85.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1283,
+        "arm": "b1",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 52.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1308,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 75.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1328,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 95.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1384,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 94.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1433,
+        "arm": "b1",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 96.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1505,
+        "arm": "b1",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 96.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1528,
+        "arm": "b1",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 50.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1556,
+        "arm": "b1",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 95.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1559,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 58.333333333333336,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1589,
+        "arm": "b1",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 85.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1649,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 64.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1690,
+        "arm": "b1",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 65.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1702,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 93.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1716,
+        "arm": "b1",
+        "class_index": 5,
+        "prediction": "reinforcement_learning",
+        "confidence_percent": 93.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1719,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 91.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1751,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 87.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1757,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 93.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1764,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 92.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1776,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 96.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1793,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 91.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1814,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 75.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1816,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 89.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1880,
+        "arm": "b1",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 94.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1926,
+        "arm": "b1",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 97.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1946,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 92.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1951,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 78.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1958,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 97.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2006,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 87.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2014,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 96.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2022,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 61.666666666666664,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2034,
+        "arm": "b1",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 96.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2062,
+        "arm": "b1",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 95.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2070,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 80.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2145,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 98.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2166,
+        "arm": "b1",
+        "class_index": 5,
+        "prediction": "reinforcement_learning",
+        "confidence_percent": 95.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2177,
+        "arm": "b1",
+        "class_index": 5,
+        "prediction": "reinforcement_learning",
+        "confidence_percent": 94.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2238,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 52.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2241,
+        "arm": "b1",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 96.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2270,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 86.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2287,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 95.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2291,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 78.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2306,
+        "arm": "b1",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 97.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2317,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 75.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2319,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 86.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2327,
+        "arm": "b1",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 97.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2379,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 59.166666666666664,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2395,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 85.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2396,
+        "arm": "b1",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 75.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2409,
+        "arm": "b1",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 96.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2425,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 94.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2434,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 84.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2461,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 91.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2476,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 98.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2487,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 66.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2490,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 65.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2499,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 97.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2500,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 77.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2513,
+        "arm": "b1",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 82.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2534,
+        "arm": "b1",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 65.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2564,
+        "arm": "b1",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 95.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2576,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 97.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2603,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 97.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2628,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 74.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2643,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 95.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2685,
+        "arm": "b1",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 80.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2695,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 95.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2698,
+        "arm": "b1",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 86.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 25,
+        "arm": "narrative_v0",
+        "class_index": 5,
+        "prediction": "reinforcement_learning",
+        "confidence_percent": 65.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 27,
+        "arm": "narrative_v0",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 59.166666666666664,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 47,
+        "arm": "narrative_v0",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 96.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 62,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 96.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 81,
+        "arm": "narrative_v0",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 89.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 90,
+        "arm": "narrative_v0",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 96.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 94,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 89.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 114,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 75.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 130,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 65.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 160,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 90.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 181,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 96.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 200,
+        "arm": "narrative_v0",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 94.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 207,
+        "arm": "narrative_v0",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 55.833333333333336,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 222,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 98.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 252,
+        "arm": "narrative_v0",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 98.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 267,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 52.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 273,
+        "arm": "narrative_v0",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 96.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 295,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 98.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 302,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 97.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 351,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 88.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 357,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 58.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 375,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 82.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 383,
+        "arm": "narrative_v0",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 96.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 417,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 91.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 420,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 97.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 430,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 97.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 436,
+        "arm": "narrative_v0",
+        "class_index": 5,
+        "prediction": "reinforcement_learning",
+        "confidence_percent": 95.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 445,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 93.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 457,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 93.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 552,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 74.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 568,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 70.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 575,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 92.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 578,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 94.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 607,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 93.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 614,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 66.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 637,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 47.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 653,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 55.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 655,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 96.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 664,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 95.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 682,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 72.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 695,
+        "arm": "narrative_v0",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 61.666666666666664,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 698,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 96.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 711,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 94.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 717,
+        "arm": "narrative_v0",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 92.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 722,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 70.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 734,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 86.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 743,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 79.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 765,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 94.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 783,
+        "arm": "narrative_v0",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 96.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 785,
+        "arm": "narrative_v0",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 85.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 862,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 93.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 866,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 92.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 881,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 89.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 907,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 95.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 913,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 92.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 917,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 65.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 932,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 95.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 967,
+        "arm": "narrative_v0",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 97.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 972,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 89.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 979,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 94.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 997,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 85.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1013,
+        "arm": "narrative_v0",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 94.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1031,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 93.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1066,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 86.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1091,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 75.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1118,
+        "arm": "narrative_v0",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 96.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1120,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 59.166666666666664,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1226,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 96.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1240,
+        "arm": "narrative_v0",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 80.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1243,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 47.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1254,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 97.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1260,
+        "arm": "narrative_v0",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 95.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1269,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 70.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1283,
+        "arm": "narrative_v0",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 76.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1308,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 80.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1328,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 93.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1384,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 92.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1433,
+        "arm": "narrative_v0",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 96.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1505,
+        "arm": "narrative_v0",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 97.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1528,
+        "arm": "narrative_v0",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 60.833333333333336,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1556,
+        "arm": "narrative_v0",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 97.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1559,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 70.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1589,
+        "arm": "narrative_v0",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 80.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1649,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 68.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1690,
+        "arm": "narrative_v0",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 74.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1702,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 94.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1716,
+        "arm": "narrative_v0",
+        "class_index": 5,
+        "prediction": "reinforcement_learning",
+        "confidence_percent": 95.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1719,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 96.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1751,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 60.833333333333336,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1757,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 94.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1764,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 97.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1776,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 94.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1793,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 95.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1814,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 60.666666666666664,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1816,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 97.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1880,
+        "arm": "narrative_v0",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 86.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1926,
+        "arm": "narrative_v0",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 98.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1946,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 97.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1951,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 84.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 1958,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 96.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2006,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 94.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2014,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 97.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2022,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 55.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2034,
+        "arm": "narrative_v0",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 97.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2062,
+        "arm": "narrative_v0",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 96.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2070,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 92.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2145,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 98.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2166,
+        "arm": "narrative_v0",
+        "class_index": 5,
+        "prediction": "reinforcement_learning",
+        "confidence_percent": 95.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2177,
+        "arm": "narrative_v0",
+        "class_index": 5,
+        "prediction": "reinforcement_learning",
+        "confidence_percent": 90.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2238,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 75.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2241,
+        "arm": "narrative_v0",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 96.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2270,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 92.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2287,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 97.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2291,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 83.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2306,
+        "arm": "narrative_v0",
+        "class_index": 3,
+        "prediction": "genetic_algorithms",
+        "confidence_percent": 97.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2317,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 54.166666666666664,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2319,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 92.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2327,
+        "arm": "narrative_v0",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 95.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2379,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 85.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2395,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 84.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2396,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 69.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2409,
+        "arm": "narrative_v0",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 98.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2425,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 92.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2434,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 80.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2461,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 93.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2476,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 98.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2487,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 71.66666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2490,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 75.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2499,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 97.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2500,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 80.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2513,
+        "arm": "narrative_v0",
+        "class_index": 0,
+        "prediction": "rule_learning",
+        "confidence_percent": 88.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2534,
+        "arm": "narrative_v0",
+        "class_index": 6,
+        "prediction": "probabilistic_methods",
+        "confidence_percent": 65.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2564,
+        "arm": "narrative_v0",
+        "class_index": 2,
+        "prediction": "case_based",
+        "confidence_percent": 95.83333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2576,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 98.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2603,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 97.16666666666667,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2628,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 77.0,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2643,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 97.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2685,
+        "arm": "narrative_v0",
+        "class_index": 1,
+        "prediction": "neural_networks",
+        "confidence_percent": 77.5,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2695,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 97.33333333333333,
+        "fallback_count": 0
+      },
+      {
+        "target_id": 2698,
+        "arm": "narrative_v0",
+        "class_index": 4,
+        "prediction": "theory",
+        "confidence_percent": 82.5,
+        "fallback_count": 0
+      }
+    ],
+    "artifact_sha256": {
+      "b1": "c6bc236ac5f8c1615067a10750cb150ecaf54fbe458afd4df7e750f92ce4b141",
+      "narrative_v0": "181806c4622449c8f9cdc9bdabb725232666fdc95394b3a8d7b78067b385ff02",
+      "selection": "dc8260974c7c0ca2e828f2d069e2896e9bcf2c363b15ca81d9f09d2803c9b12c"
+    },
+    "raw_response_provenance": "RAW_PROVENANCE_PARTIAL",
+    "raw_hashes_verified_by_this_replay": 0,
+    "raw_response_parsing": "NOT_RUN",
+    "GT_accessed": false,
+    "provider_calls": 0,
+    "training_runs": 0
+  },
+  "historical_p0": {
+    "status": "PASS",
+    "scope": "RECONSTRUCTED_P0_SELECTION_ONLY_NOT_P1_WIRE_REPRODUCTION",
+    "unique_nodes": 8,
+    "logical_records": 12,
+    "arm_counts": {
+      "Judge002": 4,
+      "SARA3_V1": 8
+    },
+    "cohort_size": 140,
+    "group_b_checks": [
+      {
+        "node_id": 1031,
+        "agreement": true,
+        "hh": true,
+        "b1_confidence_percent": 91.0,
+        "narrative_v0_confidence_percent": 93.16666666666667
+      },
+      {
+        "node_id": 655,
+        "agreement": true,
+        "hh": true,
+        "b1_confidence_percent": 96.0,
+        "narrative_v0_confidence_percent": 96.66666666666667
+      },
+      {
+        "node_id": 1013,
+        "agreement": true,
+        "hh": true,
+        "b1_confidence_percent": 91.16666666666667,
+        "narrative_v0_confidence_percent": 94.66666666666667
+      },
+      {
+        "node_id": 1328,
+        "agreement": true,
+        "hh": true,
+        "b1_confidence_percent": 95.33333333333333,
+        "narrative_v0_confidence_percent": 93.33333333333333
+      }
+    ],
+    "historical_r1_membership": "REPORTED_UNVERIFIED",
+    "historical_outside_r0_membership": "REPORTED_UNVERIFIED",
+    "v1_generation_calls_per_record": "UNKNOWN_DO_NOT_ASSUME_TWO",
+    "frozen_input_sha256": {
+      "b1": "c6bc236ac5f8c1615067a10750cb150ecaf54fbe458afd4df7e750f92ce4b141",
+      "narrative_v0": "181806c4622449c8f9cdc9bdabb725232666fdc95394b3a8d7b78067b385ff02",
+      "selection": "dc8260974c7c0ca2e828f2d069e2896e9bcf2c363b15ca81d9f09d2803c9b12c"
+    },
+    "missing_evidence": {
+      "judge002_prompt": "MISSING_EVIDENCE",
+      "judge002_schema": "MISSING_EVIDENCE",
+      "v1_historical_prompt_and_schema": "MISSING_EVIDENCE",
+      "policy_002_complete_rules": "MISSING_EVIDENCE",
+      "r1_node_level_selection_and_formula": "MISSING_EVIDENCE",
+      "p0_original_selection_algorithm_and_hashes": "MISSING_EVIDENCE",
+      "p1_original_wire_bytes_and_per_request_hashes": "MISSING_EVIDENCE",
+      "v1_historical_arbitration_table": "MISSING_EVIDENCE"
+    },
+    "provider_calls": 0,
+    "token_count_requests": 0,
+    "training_runs": 0,
+    "ground_truth_accessed": false,
+    "manifest_sha256": "7affacee222dbec3ecb5710b038968543c19d252190ee6eab76c5b03a4307410"
+  },
+  "recovered_source_hashes": {
+    "verified": 25,
+    "expected": 25,
+    "all_match": true
+  },
+  "seals": [
+    {
+      "path": ".local_artifacts/pilot-gapapi",
+      "members": 31,
+      "manifest_sha256": "29fa95c7d34f5826b628509e6bad2baced83ac986ebfbc7cadc4bb36d4c31b41",
+      "pass": true
+    },
+    {
+      "path": ".local_artifacts/pilot-gapapi/pilot",
+      "members": 13,
+      "manifest_sha256": "9fd65d82e3cab296afc503813b97b0c0af9e8f4dcb41cd0be1aa20ac34ef1f96",
+      "pass": true
+    }
+  ],
+  "batches": [
+    {
+      "path": ".local_artifacts\\sara3_gapgpt_live_cora140_r0_20261105",
+      "context_sha256": "5e41ae8ab228ce607897df7015e4fe56972147811e2367f5fd8da88d01fb4abe",
+      "states": {
+        "REJECTED": 1
+      },
+      "phase_states": {
+        "blind_REJECTED": 1
+      },
+      "content_addressed_receipts_verified": 5,
+      "all_receipt_hashes_match": true,
+      "all_request_response_bindings_verified": 1,
+      "l1_replay": {
+        "NOT_ASSESSED_NONFINAL": 1
+      },
+      "blind_abstentions": 0,
+      "comparison_abstentions": 0,
+      "reported_usage_including_rejected_envelopes": {
+        "prompt_tokens": 1522,
+        "completion_tokens": 512,
+        "reasoning_tokens": 512
+      },
+      "provisional_estimate_all_observed_envelopes_usd": "0.0004082",
+      "billing": "UNKNOWN_NOT_PROVIDER_INVOICE",
+      "all_models": {
+        "gpt-6-luna": 1
+      },
+      "phase_metadata": [
+        {
+          "node": 25,
+          "phase": "blind",
+          "original_state": "REJECTED",
+          "l1_replay": "NOT_ASSESSED_NONFINAL",
+          "abstain": null
+        }
+      ],
+      "files_unchanged_during_check": true
+    },
+    {
+      "path": ".local_artifacts\\sara3_gapgpt_live_cora140_r0_4096_20261105",
+      "context_sha256": "c41b7a6ecec46a2a99c3b570f7e0b093756db4db98d692f4bb956135584599f8",
+      "states": {
+        "COMPLETED": 52,
+        "REJECTED": 1
+      },
+      "phase_states": {
+        "blind_COMPLETED": 29,
+        "compare_COMPLETED": 23,
+        "compare_REJECTED": 1
+      },
+      "content_addressed_receipts_verified": 109,
+      "all_receipt_hashes_match": true,
+      "all_request_response_bindings_verified": 53,
+      "l1_replay": {
+        "PASS": 52,
+        "L1_DUPLICATE_EVIDENCE": 1
+      },
+      "blind_abstentions": 5,
+      "comparison_abstentions": 1,
+      "reported_usage_including_rejected_envelopes": {
+        "prompt_tokens": 80760,
+        "completion_tokens": 33192,
+        "reasoning_tokens": 18619
+      },
+      "provisional_estimate_all_observed_envelopes_usd": "0.024672",
+      "billing": "UNKNOWN_NOT_PROVIDER_INVOICE",
+      "all_models": {
+        "gpt-6-luna-2026-09-22": 30,
+        "gpt-6-luna": 23
+      },
+      "phase_metadata": [
+        {
+          "node": 25,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 25,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 27,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 27,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 94,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": true
+        },
+        {
+          "node": 114,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 114,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 130,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 130,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 207,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 207,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 267,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 267,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 351,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 351,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 357,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 357,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 552,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": true
+        },
+        {
+          "node": 568,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": true
+        },
+        {
+          "node": 614,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 614,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 637,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": true
+        },
+        {
+          "node": 653,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 653,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 682,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 682,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 695,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 695,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 722,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 722,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 734,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": true
+        },
+        {
+          "node": 917,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 917,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1120,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1120,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1243,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1243,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1269,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1269,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1283,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1283,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1528,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1528,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1559,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1559,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1649,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1649,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1690,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1690,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1751,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1751,
+          "phase": "compare",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": true
+        },
+        {
+          "node": 1814,
+          "phase": "blind",
+          "original_state": "COMPLETED",
+          "l1_replay": "PASS",
+          "abstain": false
+        },
+        {
+          "node": 1814,
+          "phase": "compare",
+          "original_state": "REJECTED",
+          "l1_replay": "L1_DUPLICATE_EVIDENCE",
+          "abstain": null
+        }
+      ],
+      "files_unchanged_during_check": true
+    }
+  ],
+  "completed_live_review_structure": {
+    "state": "RESPONSES_VERIFIED_READ_ONLY",
+    "responses": 6,
+    "independence": "SELF_DECLARED_NOT_EXTERNALLY_VERIFIED",
+    "overall_agreement": {
+      "agreed": 2,
+      "cases": 3
+    },
+    "topic_agreement": {
+      "agreed": 2,
+      "cases": 3
+    },
+    "quote_agreement": {
+      "agreed": 4,
+      "paired_quotes": 6
+    },
+    "label_acceptance": "NONE",
+    "arbitration": "NOT_PERFORMED",
+    "no_ledger_modified": true,
+    "no_network_requests": true
+  },
+  "runtime_files_parsed": 71,
+  "router_selected_ids": {
+    "r0": [
+      637,
+      1243,
+      130,
+      682,
+      722,
+      734,
+      351,
+      2487,
+      2396,
+      1528,
+      653,
+      695,
+      267,
+      1283,
+      2238,
+      2317,
+      2022,
+      27,
+      207,
+      357,
+      1559,
+      568,
+      1120,
+      2379,
+      1814,
+      614,
+      917,
+      1751,
+      1649,
+      25,
+      1690,
+      2490,
+      2534,
+      114,
+      94,
+      1269,
+      552
+    ],
+    "semantic": [
+      682,
+      2396,
+      637,
+      1243,
+      130,
+      653,
+      267,
+      1120,
+      722,
+      917,
+      1751,
+      734,
+      25,
+      351,
+      2487,
+      94,
+      2291,
+      881,
+      2319,
+      181,
+      81,
+      2177,
+      2287,
+      1649,
+      1240,
+      979,
+      1946,
+      1764,
+      47,
+      1528,
+      695,
+      1283,
+      2238,
+      2317,
+      2022,
+      27,
+      207
+    ],
+    "r1_v1": [
+      351,
+      637,
+      734,
+      722,
+      160,
+      207,
+      267,
+      295,
+      375,
+      430,
+      552,
+      682,
+      743,
+      783,
+      862,
+      932,
+      1013,
+      1031,
+      1066,
+      1120,
+      1269,
+      1283,
+      1308,
+      1776,
+      1814,
+      1951,
+      1958,
+      2291,
+      2317,
+      2327,
+      2396,
+      2434,
+      2490,
+      2534,
+      2685,
+      2698,
+      130
+    ],
+    "r1_v2": [
+      722,
+      267,
+      682,
+      1120,
+      2291,
+      2396,
+      130,
+      1243,
+      653,
+      2319,
+      2487,
+      25,
+      47,
+      62,
+      972,
+      979,
+      1240,
+      1260,
+      1649,
+      1719,
+      1764,
+      1946,
+      2425,
+      2695,
+      81,
+      90,
+      94,
+      181,
+      436,
+      568,
+      614,
+      698,
+      711,
+      785,
+      881,
+      917,
+      1226
+    ],
+    "r2_v1": [
+      1013,
+      1958,
+      1283,
+      1031,
+      722,
+      267,
+      682,
+      1120,
+      2291,
+      2396,
+      130,
+      1243,
+      653,
+      2319,
+      2487,
+      25,
+      47,
+      62,
+      972,
+      979,
+      1240,
+      637,
+      734,
+      351,
+      1528,
+      695,
+      2238,
+      2317,
+      2022,
+      27,
+      207,
+      357,
+      1559,
+      568,
+      2379,
+      1814,
+      614
+    ]
+  },
+  "live4096_descriptive_decisions": {
+    "accepted_baseline": 93,
+    "provisional_count": 0,
+    "reasons": {
+      "THIRD_CLASS_DIAGNOSTIC_ONLY": 7,
+      "AUXILIARY_METHOD_WARNING": 5,
+      "UNREVIEWED_AGREEMENT": 93,
+      "BLIND_ABSTENTION": 5,
+      "COUNTER_EVIDENCE_UNRESOLVED": 10,
+      "UNREVIEWED_ABSTENTION": 10,
+      "VERIFIER_ABSTAINED": 1,
+      "L1_DUPLICATE_EVIDENCE": 1,
+      "TIMEOUT_UNCERTAIN_NO_RETRY": 8
+    },
+    "selected_node_ids": [
+      637,
+      1243,
+      130,
+      682,
+      722,
+      734,
+      351,
+      2487,
+      2396,
+      1528,
+      653,
+      695,
+      267,
+      1283,
+      2238,
+      2317,
+      2022,
+      27,
+      207,
+      357,
+      1559,
+      568,
+      1120,
+      2379,
+      1814,
+      614,
+      917,
+      1751,
+      1649,
+      25,
+      1690,
+      2490,
+      2534,
+      114,
+      94,
+      1269,
+      552
+    ],
+    "not_attempted_blind_ids": [
+      2487,
+      2396,
+      2238,
+      2317,
+      2022,
+      2379,
+      2490,
+      2534
+    ]
+  },
+  "untracked_user_scripts": {
+    "closeout_sara3_feasibility.py": {
+      "sha256": "3e092e0f3e1bc28488f6d69aa8e7a3fff4f992764758a47b70df67f151bb1b52",
+      "syntax": "PASS",
+      "executed_as_cli": false
+    },
+    "diagnose_closeout_readiness_v2.py": {
+      "sha256": "faa32ffc17eebe3044dc5788935de1e43fa61e7d63c68dd8876a7c42a3b0c652",
+      "syntax": "PASS",
+      "executed_as_cli": false
+    },
+    "diagnose_gapgpt_post130.py": {
+      "sha256": "1186a6967301d8a8c698c241e3a606e47ac37063c82efc8b6190c522380fc47e",
+      "syntax": "PASS",
+      "executed_as_cli": false
+    },
+    "diagnose_sara3_closeout_readonly.py": {
+      "sha256": "df5bc8fa3390bafc440747745a4944ab241e79c126cbb78cf99b9720e158c278",
+      "syntax": "PASS",
+      "executed_as_cli": false
+    },
+    "verify_human_l2_readonly.py": {
+      "sha256": "c8794b7f47c95293097e7a9dd61922f9e5effb6936539422a360ff9aba0551ea",
+      "syntax": "PASS",
+      "executed_as_cli": false
+    }
+  },
+  "limitations": [
+    "Remote GitHub SHA/visibility not independently queried",
+    "Drive not queried; backup not verified",
+    "No real API request, GT decoding or GCN training performed in this audit",
+    "Unfinished human-review session and original consensus submissions not opened",
+    "180 historical model weights not independently reread in this audit",
+    "Not a line-by-line security proof or semantic accuracy evaluation"
+  ],
+  "regression": {
+    "tests_run": 422,
+    "failures": 1,
+    "errors": 1,
+    "skipped": 2,
+    "seconds": 207.344,
+    "log": "C:\\Users\\Admin\\AppData\\Local\\Temp\\sara_handoff_regression_local_20261105.txt",
+    "network_guard": true,
+    "actual_human_files_guard": true,
+    "skips": [
+      [
+        "test_insecure_existing_posix_file_is_not_silently_repaired (test_durable_fixture.DurableFixtureTests.test_insecure_existing_posix_file_is_not_silently_repaired)",
+        "Windows uses PrivateAudit ACL inheritance"
+      ],
+      [
+        "test_real_filesystem_symlink_rejected (test_raw_recovery.BundleAndAdmissionTests.test_real_filesystem_symlink_rejected)",
+        "OS account cannot create symbolic links; ZIP symlink rejection is tested separately"
+      ]
+    ],
+    "passed": 418
+  },
+  "initial_sandbox_test_attempt": {
+    "tests_run": 415,
+    "failures": 0,
+    "errors": 419,
+    "seconds": 84.985,
+    "status": "FAILED_WINDOWS_SANDBOX_ACL_AUDIT_AND_CLEANUP_ERRORS"
+  },
+  "frontend_checks": {
+    "javascript_tests_run": 14,
+    "javascript_tests_passed": 14,
+    "typescript_no_emit": "PASS",
+    "production_build_this_audit": "NOT_RUN",
+    "browser_qa_this_audit": "NOT_RUN"
+  },
+  "regression_findings": [
+    {
+      "test": "test_five_selections_keep_actual_runtime_requests_and_conditional_protocol",
+      "kind": "ASSERTION_FAILURE",
+      "observed_calls": 61,
+      "expected_calls": 64,
+      "root_cause": "Test patches pipeline.route_r0, but current run_offline dispatches via pipeline.select_router; intended alternate selection not injected. Read-only independent selector check reproduces this."
+    },
+    {
+      "test": "test_rejected_receipt_diagnostic_refuses_wrong_scope_and_tampering",
+      "kind": "CLEANUP_ERROR_WINERROR_32",
+      "root_cause": "SQLite connection remains open during temporary-directory cleanup; both diagnostic helper and test use sqlite3 connection context without explicit close."
+    }
+  ],
+  "git": {
+    "branch": "main",
+    "remote_url": "https://github.com/Parand1khalili/LLM-GNN.git",
+    "tracking_origin_main": "2373b9685b195080d81f3fcecd88001a9b04a8ff",
+    "remote_network_verification": "NOT_PERFORMED",
+    "new_commit_this_audit": false,
+    "tracked_diff_empty": true
+  },
+  "historical_secondary_documents_read": {
+    "SARA_LLMGNN_Research_Results_2026-10-29_FA.md": {
+      "sha256": "5bc8245aff43217751c25079210fb0ca7aa6e41696728d082a75e71475aa17e3",
+      "scope": "Targeted method/results/instruction sections; no GT dataset or node labels decoded"
+    },
+    "CODEX_SARA_IMPLEMENTATION_HANDOFF_V2_SCIENTIFIC_2026-10-30.md": {
+      "sha256": "2b28f3df1a9a6f17136f404cfb3a11319b66c61c87ae32abb229d3254369996a",
+      "scope": "Targeted method/results/instruction sections; no GT dataset or node labels decoded"
+    }
+  },
+  "handoff_file": "C:\\Users\\Admin\\Documents\\ChatGPT\\llm-gnn\\docs\\PROJECT_HANDOFF_2026-11-05_FA.md",
+  "handoff_sha256": "b25ece86eab240c665fbd64de09823a2345aef7073cf52e5c911d0ecb683d542"
+}

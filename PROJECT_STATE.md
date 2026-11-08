@@ -1,6 +1,22 @@
 # Project state
 
-## Full FeatProp / PS / WCE / Three-Agent GCN — 2026-11-07
+## Final Full GCN evaluation — 2026-11-08
+
+- All1870 fits independently readback-verified;30 finite nonnegative losses,
+  checkpoint/logit/prediction hashes and same-seed initialization PASS;0 incomplete.
+  Audit9c5f35f308cfed2a8a019ae147f8d5ec55c27471f3d3b7e9524984215642ebda.
+- One separately authorized GT-only evaluator completed; result
+  7be9973675521a59db735ca21477bd14e8cc2b0d4054323441df992c651d41e9.
+  654 scored rows/6540 seed rows/3773 paired comparisons;306 remain blocked.
+- No positive natural Agent-minus-C accuracy delta in40 comparisons; no positive
+  coverage-control delta in40 comparisons (range-4.4938 to-0.7632pp).
+  Best natural C/Sensitivity/WCE/noPS73.7850%; all-cell best Narrative pairwise
+  Sensitivity/WCE/PS74.0382%, exploratory selection only.
+- LIMITED_PROVENANCE_EXPLORATORY / EXPLORATORY_NOT_INDEPENDENT. No retraining,
+  policy changes or model calls. See docs/FULL_GCN_FINAL_RESULTS_FA.md and
+  reports/full_gcn_results_v1.{csv,json}. Outputs remain local, not pushed.
+
+## Full FeatProp / PS / WCE / Three-Agent GCN â€” 2026-11-07
 
 - Base main dcfc2fd8b8bb7d2360722ddec7fa724648cf2d60; remote77318 at start.
   Exact authors'1f60eed source fetched read-only; paper sections3.2/3.4/3.5/4.1
@@ -34,7 +50,7 @@
   remains pending at commit; final SHA/status reported after remote readback.
   User/GraphScope and all older results preserved; no Drive writes.
 
-## Controlled GCN CE/noPS preflight — 2026-11-07
+## Controlled GCN CE/noPS preflight â€” 2026-11-07
 
 - Base main77318de944505f50205fc034c6927166c2cc4334; P1/P2, prior policies,
   original scientific files and unrelated GraphScope/user changes preserved.
@@ -66,7 +82,7 @@
   preflight PASS. Prior main77318 CI success42393425961; new CI not run before
   user-managed push. No Drive upload; GitHub backup PUSH_PENDING for this slice.
 
-## Single-vector three-agent fusion / GCN preparation — 2026-11-07
+## Single-vector three-agent fusion / GCN preparation â€” 2026-11-07
 
 - Starts from afa60e38a62650abb3303fbb139e08ed467dfa76 on synchronized main.
   Three functional agents, one final_class/source per node. B1/Narrative are
@@ -106,7 +122,7 @@
   See docs/THREE_AGENT_FUSION_GCN.md, docs/THREE_AGENT_FUSION_RESULTS.md and
   reports/three_agent_fusion_v1.json for all aggregate results and112 plan statuses.
 
-## Consensus-only diagnostic ablation — 2026-11-07
+## Consensus-only diagnostic ablation â€” 2026-11-07
 
 - Starts from db4fb124810f5df2c499d391fcc6085cdb119c1d on synchronized main;
   V1-V3/direct-seed rules/results and unrelated user/GraphScope work unchanged.
@@ -136,7 +152,7 @@
   hash/ACL/replay checks PASS. Remote CI pending at local commit; readback
   reported after normal main push. Details: docs/CONSENSUS_ONLY_ABLATION_V1.md.
 
-## Evidence-only Arbitration V3 Shadow — 2026-11-07
+## Evidence-only Arbitration V3 Shadow â€” 2026-11-07
 
 - Continues from443eed2ef8f1b2f11a4dfa6f3fe05a961a0dcb1e; existing main was
   synchronized. V1/V2/direct-seed sources, all zero-switch history, frozen
@@ -164,7 +180,7 @@
   No human reviews, new inference, admission, original-label overwrite or GCN.
   Details/reproduction/limitations: docs/EVIDENCE_ARBITRATION_V3.md.
 
-## Graph support coverage / direct-seed shadow — 2026-11-07
+## Graph support coverage / direct-seed shadow â€” 2026-11-07
 
 - Preserves f6b028f9 and f6129ff1, their zero-switch findings and user GraphScope
   work. Initial fetch: origin/main8f880075,2 local commits pending; approved
@@ -191,7 +207,7 @@
   CI for the new SHA is pending at local commit; final remote/CI readback is
   reported after push. No new Treatment plan or GCN execution.
 
-## Automatic Weighted Arbitration V2 — 2026-11-07
+## Automatic Weighted Arbitration V2 â€” 2026-11-07
 
 - Continues implementation reference f6b028f9a706d64bc47862d19fa671f7ed352cbc.
   V1, routers, source seals and unrelated user work preserved. No human-review
@@ -213,7 +229,7 @@
   364f45af0b1ae758432f992726958c8a7d276ce5cd4876775ce6d0be2432718b.
   GitHub Actions NOT_RUN for this unpushed slice; PUSH_PENDING. Drive not updated.
 
-## Correction features / post-hoc outcomes slice — 2026-11-07
+## Correction features / post-hoc outcomes slice â€” 2026-11-07
 
 - Fast-forwarded existing main to 8f880075dd6494efbb48912e757957634c93dea3;
   both mandatory handoff/ledger documents read, unrelated user work retained.
@@ -230,7 +246,7 @@
   and GitHub Actions not run in this slice. Local commit remains PUSH_PENDING.
   See docs/CORRECTION_FEATURES_V1.md for scope, hashes and remaining test/report gaps.
 
-## Independent semantic Blind Review Pack V1 — 2026-11-06
+## Independent semantic Blind Review Pack V1 â€” 2026-11-06
 
 - Small offline CLI sara3.blind_review_pack reuses pinned input admission,
   R0/context, frozen closeout/final-report proof and existing PrivateAudit.
@@ -787,7 +803,7 @@ The owner reports a halted, local-only Cora-140 R0 Rich V2/4096 live run: 53 rec
 
 The corrected run-report layer distinguishes nodes with no persisted intent after halt from genuine UNCERTAIN intents. The new `python -B -m llmgnn_sara.sara3.gateway_usage_report` reconciles only local, content-hash-verified private receipts with declared tariff inputs. COMPLETED/REJECTED/UNCERTAIN and ALL ATTEMPTS are separate, and incomplete provider usage produces a null total estimate rather than a fabricated invoice. Historical summary JSON and terminal states remain immutable. The reported 80760 input / 33192 output / 18619 reasoning tokens and USD 0.0246720 are **owner-provided observations**, pending local read-only reconciliation, not independently verified by this GitHub change. L1/prompt/router/arbitration remain unchanged.
 
-## Slice 2 continuation preparation — 2026-11-06
+## Slice 2 continuation preparation â€” 2026-11-06
 
 Historical Cora140/R0 Rich V2/4096 remains halted: owner read-only evidence reports 52 COMPLETED, one L1_DUPLICATE_EVIDENCE REJECTED (node 1814 / compare), zero UNCERTAIN. This is a valid structural L1 rejection; the semantic polarity of its claims is NOT established. No reclassification, retry or training proposal for node 1814.
 
@@ -795,7 +811,7 @@ Historical Cora140/R0 Rich V2/4096 remains halted: owner read-only evidence repo
 
 A minimal **synthetic-only** continuation overlay verifier exists for regression: original SQLite/receipts are read-only, any new fixture intents are appended exclusively under a distinct continuation directory tied to the original run; original REJECTED remains a terminal abstention. This is NOT a new experiment or a fresh 74-call budget. It does not enable live dispatch or create an owner approval. A separate amendment and explicit future authorization are required before extending this adapter to live traffic; do not invoke the old live runner to resume the halted run. No GT, GCN, L1, Prompt, Router or Arbitration modifications were made.
 
-## Slice 3 — frozen, unapproved continuation amendment (2026-11-06)
+## Slice 3 â€” frozen, unapproved continuation amendment (2026-11-06)
 
 `configs/sara3_gapgpt_continuation_amendment_v1.json` is a PROPOSAL, never a live authorization. It binds the exact original context/contract SHA, Cora140 R0 Rich V2 4096, 53 historical intents (52 L1-passing COMPLETED, node 1814 comparison terminal REJECTED), and exactly eight no-intent Blind nodes (2487,2396,2238,2317,2022,2379,2490,2534). At most 16 new logical calls (8 Blind plus conditional comparison), cumulative at most 69 of the original 74; the five spare slots cannot be repurposed. The node 1814 rejection is a valid structural L1 failure, not evidence of semantic polarity disagreement; no label promotion/retry.
 
@@ -803,7 +819,7 @@ Read-only local command: `python -B -m llmgnn_sara.sara3.gateway_continuation --
 
 `AmendedSyntheticContinuationVerifier` enforces the eight-ID 16-call/69-cumulative scope only in fake-wire offline tests, with exact dependency and no retry; no live constructor or runner mode is enabled. A separate prospective owner-reviewed live authorization and integration is REQUIRED in a future slice, never inherited from the earlier stopped batch. Original journal/receipts/prompt/L1/router/arbitration remain untouched.
 
-## Slice 4 — separately approved live continuation adapter (2026-11-06)
+## Slice 4 â€” separately approved live continuation adapter (2026-11-06)
 
 `src/llmgnn_sara/sara3/gateway_live_continuation.py` adds a real-network adapter over the existing `DurableGapGPTVerifier`, but does **not** automatically authorize or invoke any request. It preserves the original 53-intent journal/receipts read-only; all new intent/response writes go only to the deterministic private `continuation_amendment_v1/journal` overlay. Exact amendment SHA, execution context, model/price/call contract, frozen eight nodes, cumulative 69/74 ceiling, 16-new-call ceiling, prior node 1814 L1 rejection, completed blind dependency and existing strict L1 are enforced. Preflight replays all 52 original completions and checks the rejected receipt before any network dispatch. It re-verifies saved continuation receipts on restart. An unresolved/REJECTED new attempt stops further dispatch (no retry). No GT, GCN, L1, router, prompt or arbitration changes.
 
@@ -848,9 +864,9 @@ R1-v1 has the best descriptive detection on this 140-node cohort: +2 caught erro
 
 **Only 37 R0 nodes have actual frozen SARA-3 Blind/Comparison outputs.** Do not use the existing 17 shared nodes to claim an R1-specific Agent evaluation, and do not fabricate completion on non-R0 selections. No new provider calls, Human L2, policy revision, label admission, or GCN training was performed. Full nodewise GT stays solely in owner-private `.local_artifacts/sara3_all_routers_gt_v1/`. Next scientific gate: preregister independent evaluation to compare R1 candidate routing and conditional SARA-3 corrections before training effects. This section records owner-supplied aggregate output only and supersedes older "real multi-router GT audit pending" notes; see `docs/CORA140_ALL_ROUTERS_GT_EVALUATION.md`.
 
-## R1-v1 full real Agent assessment protocol — 2026-11-07; live R1 NOT YET DISPATCHED
+## R1-v1 full real Agent assessment protocol â€” 2026-11-07; live R1 NOT YET DISPATCHED
 
-The owner requested the same 140-node detection → 37-node actual Blind/Comparison → paired GT label correction → freeze/admission/fallback analysis as the successful R0 run. The prior six-router owner-local GT audit established for R1-v1 (fixed37/140): 24/45 either-baseline errors captured (64.8649% precision, 53.3333% recall), 13 false alarms, 21 missed, 82 true negatives and17/36 agreed-wrong errors captured. **These are ROUTER results only.** R1-v1 selected nodes have no genuine frozen R1-model results yet. The previously recorded R0 37-node real Agent run is NOT a reusable R1 response or new R1 call.
+The owner requested the same 140-node detection â†’ 37-node actual Blind/Comparison â†’ paired GT label correction â†’ freeze/admission/fallback analysis as the successful R0 run. The prior six-router owner-local GT audit established for R1-v1 (fixed37/140): 24/45 either-baseline errors captured (64.8649% precision, 53.3333% recall), 13 false alarms, 21 missed, 82 true negatives and17/36 agreed-wrong errors captured. **These are ROUTER results only.** R1-v1 selected nodes have no genuine frozen R1-model results yet. The previously recorded R0 37-node real Agent run is NOT a reusable R1 response or new R1 call.
 
 The existing `sara3.runner` / `gateway_run` already accepts router `r1_v1`, supports a separate private journal and explicitly owner-approved `--owner-approval-file`, and must NOT borrow the R0-only `scoped_owner_authorization`. The new standalone post-run module `src/llmgnn_sara/evaluation/cora_r1_real_gt.py` (existing main `a9104bc` and subsequent checks) validates SHA-addressed real R1 Gateway report, its source selection/context, *real positive provider-attempt counts*, no GT/admission in inference, then reads the historical pinned Graph only for an isolated owner-private post-hoc evaluation. Reports complete/partial run status, 140-node baseline GT and R1 flags, 37-node Blind/Comparison selective accuracy/abstentions and paired corrections/damage vs both Baselines, frozen V1 admissions and fixed hypothetical Narrative fallback. No fictitious calls or R1 outcomes. Owner-only node GT stays in private content-addressed JSON, stdout is aggregates only. `docs/CORA140_R1_V1_REAL_AGENT_EVALUATION.md` documents a distinct `live-preflight`, a separate human opt-in for up to 74 possible R1 calls under UNVERIFIED user-declared USD0.40 budget/model/retention conditions, a distinct private R1 journal, no automatic retry and post-run GT stage. R0 freeze, all router policies, response schema, source artifacts and training are unchanged.
 
@@ -862,9 +878,9 @@ Owner Windows transcript confirms fast-forward to `e607d8a`, all 6 focused R1 sy
 
 R1-v1 router detection, fixed 37/140: of45 nodes where B1 OR Narrative is wrong, TP24 FP13 FN21 TN82, precision64.8649%, recall53.3333%. For the 36 nodes both Baselines agree wrongly, found17 and missed19. R1 selected23/44 B1 errors,20/39 Narrative errors,19/38 both-wrong and7/9 baseline disagreement. R0 in contrast found22/45 and13/36 agreed-wrong, but **its actual verifier run has a different selected cohort and coverage**, so direct selective Accuracy is not a matched causal R1-vs-R0 inference.
 
-R1-v1 GT scoring on its **37 actually routed**: B1 14/37, Narrative17/37; Blind15 correct of21 class predictions (71.4286% selective, 15/37 on all selected, 16 no class including9 abstentions and7 not attempted), Comparison13 correct of20 (65.0% selective, 13/37 on all selected, 17 no class). Paired B1→Blind: 4 corrected /1 damaged, net+3; Narrative→Blind:3/2 net+1; B1→Comparison:3/2 net+1; Narrative→Comparison:2/3 net−1. With fixed hypothetical keep-Narrative fallback, full140 true-label count: Narrative101 →102 (Blind substitutions when available) or100 (Comparison). **These are descriptive label counts, not V1 admission, GCN outcome, or independent held-out validation.** Real V1 admissions for 37 routed=0; total frozen baseline admissions across140=78, so do not misinterpret the latter as Agent admission.
+R1-v1 GT scoring on its **37 actually routed**: B1 14/37, Narrative17/37; Blind15 correct of21 class predictions (71.4286% selective, 15/37 on all selected, 16 no class including9 abstentions and7 not attempted), Comparison13 correct of20 (65.0% selective, 13/37 on all selected, 17 no class). Paired B1â†’Blind: 4 corrected /1 damaged, net+3; Narrativeâ†’Blind:3/2 net+1; B1â†’Comparison:3/2 net+1; Narrativeâ†’Comparison:2/3 netâˆ’1. With fixed hypothetical keep-Narrative fallback, full140 true-label count: Narrative101 â†’102 (Blind substitutions when available) or100 (Comparison). **These are descriptive label counts, not V1 admission, GCN outcome, or independent held-out validation.** Real V1 admissions for 37 routed=0; total frozen baseline admissions across140=78, so do not misinterpret the latter as Agent admission.
 
-First-veto counts on routed37: AUXILIARY_METHOD_WARNING12, BLIND_ABSTENTION9, COUNTER_EVIDENCE_UNRESOLVED4, L1_QUOTE_NOT_FOUND1, NOT_ATTEMPTED_AFTER_HALT7, THIRD_CLASS_DIAGNOSTIC_ONLY4. Counter-evidence4/4 Blind/Comparison correct but Narrative also4/4; zero net fixes in that stratum. Third-class: Blind2/4, Comparison1/4, Narrative2/4; net Blind0, Comparison−1. Three same-third-class Blind/Comparison cases: Blind/Comparison1/3 correct and Narrative1/3; agreement is not independent evidence. OTHER 29 cases: Blind9/13 class predictions, Comparison8/12, Narrative11/29; net Blind+1, Comparison0. These strata are small and post-hoc; they do not validate a new Arbitration threshold.
+First-veto counts on routed37: AUXILIARY_METHOD_WARNING12, BLIND_ABSTENTION9, COUNTER_EVIDENCE_UNRESOLVED4, L1_QUOTE_NOT_FOUND1, NOT_ATTEMPTED_AFTER_HALT7, THIRD_CLASS_DIAGNOSTIC_ONLY4. Counter-evidence4/4 Blind/Comparison correct but Narrative also4/4; zero net fixes in that stratum. Third-class: Blind2/4, Comparison1/4, Narrative2/4; net Blind0, Comparisonâˆ’1. Three same-third-class Blind/Comparison cases: Blind/Comparison1/3 correct and Narrative1/3; agreement is not independent evidence. OTHER 29 cases: Blind9/13 class predictions, Comparison8/12, Narrative11/29; net Blind+1, Comparison0. These strata are small and post-hoc; they do not validate a new Arbitration threshold.
 
 This supersedes the prior note that real R1 outputs do not exist: **a blocked partial live run now EXISTS** and was evaluated. Preserve private approval and immutable R1 journal, do not automatically retry or route GT to inference. No additional GCN training, Human L2, new Router, GT-informed admission or policy modification. Independent final GCN validation will require a frozen GT-free policy, clean data partitions and matched seeds.
 
@@ -884,10 +900,20 @@ The owner's Windows transcript verifies the **actual** isolated R1-v1 continuati
 
 Fixed R1-v1 37/140 routing (unchanged): total45 where either frozen B1/Narrative wrong; TP24, FP13, FN21, TN82, Precision 64.8649%, Recall53.3333%. B1 wrong23/44 selected; Narrative wrong20/39; both wrong19/38; agreed-wrong17/36; disagreements7/9. Selected high-confidence baseline agreements15. R1 v1 remains a prospective reconstruction, not the missing exact historical R1.
 
-**Actual R1 Agent results on routed37:** B114/37 correct, Narrative17/37; **Blind17/25** correct (68% accuracy conditional on a valid class; 17/37 on all selected), **Comparison15/24** correct (62.5% conditional; 15/37 overall). Paired, relative to B1: Blind4 corrections/1 damaged, net+3; Comparison3/2, net+1. Relative to Narrative: Blind3/2, net+1; Comparison2/3, net−1. Other paired outcomes Narrative-vs-Blind: BOTH_CORRECT14, BOTH_INCORRECT6, NO_CLASS12. Narrative-vs-Comparison: BOTH_CORRECT13, BOTH_INCORRECT6, NO_CLASS13. Descriptive, nonadmitted Narrative fallback on all140: Narrative101/140 correct, available Blind substitution102/140 (+1), available Comparison substitution100/140 (−1). **Zero reviewed R1-v1 training admissions**; reported `total_frozen_training_admissions=78` are pre-existing eligible baseline labels, NOT 78 corrected Agent labels. No GCN training.
+**Actual R1 Agent results on routed37:** B114/37 correct, Narrative17/37; **Blind17/25** correct (68% accuracy conditional on a valid class; 17/37 on all selected), **Comparison15/24** correct (62.5% conditional; 15/37 overall). Paired, relative to B1: Blind4 corrections/1 damaged, net+3; Comparison3/2, net+1. Relative to Narrative: Blind3/2, net+1; Comparison2/3, netâˆ’1. Other paired outcomes Narrative-vs-Blind: BOTH_CORRECT14, BOTH_INCORRECT6, NO_CLASS12. Narrative-vs-Comparison: BOTH_CORRECT13, BOTH_INCORRECT6, NO_CLASS13. Descriptive, nonadmitted Narrative fallback on all140: Narrative101/140 correct, available Blind substitution102/140 (+1), available Comparison substitution100/140 (âˆ’1). **Zero reviewed R1-v1 training admissions**; reported `total_frozen_training_admissions=78` are pre-existing eligible baseline labels, NOT 78 corrected Agent labels. No GCN training.
 
-Final first-veto reasons among selected37: AUXILIARY_METHOD_WARNING15, BLIND_ABSTENTION12, COUNTER_EVIDENCE_UNRESOLVED4, THIRD_CLASS_DIAGNOSTIC_ONLY5, L1_QUOTE_NOT_FOUND1. Counter-evidence stratum: 4/4 Narrative, Blind and Comparison correct; no net correction relative to Narrative. Third-class stratum: 5 nodes, Narrative2/5, Blind2/5, Comparison1/5; Blind +1 correct/−1 harmed (=0 net), Comparison+1/−2 (=−1 net). In 4 third-class Blind/Comparison same-class agreements, only1/4 was correct (not independent agreement evidence). Other28 nodes: 16 Blind classes with11 correct and15 Comparison classes with10 correct; 12 and13 respectively no class; Narrative11/28. New continuation added **four Blind class answers (2 correct)** and **four Comparison class answers (2 correct)**, without changing either narrative substitution net.
+Final first-veto reasons among selected37: AUXILIARY_METHOD_WARNING15, BLIND_ABSTENTION12, COUNTER_EVIDENCE_UNRESOLVED4, THIRD_CLASS_DIAGNOSTIC_ONLY5, L1_QUOTE_NOT_FOUND1. Counter-evidence stratum: 4/4 Narrative, Blind and Comparison correct; no net correction relative to Narrative. Third-class stratum: 5 nodes, Narrative2/5, Blind2/5, Comparison1/5; Blind +1 correct/âˆ’1 harmed (=0 net), Comparison+1/âˆ’2 (=âˆ’1 net). In 4 third-class Blind/Comparison same-class agreements, only1/4 was correct (not independent agreement evidence). Other28 nodes: 16 Blind classes with11 correct and15 Comparison classes with10 correct; 12 and13 respectively no class; Narrative11/28. New continuation added **four Blind class answers (2 correct)** and **four Comparison class answers (2 correct)**, without changing either narrative substitution net.
 
 **R0 vs R1 are different routed cohorts.** R0 detected22/45 baseline errors vs R1 24/45; R0 Blind19/30 and Comparison17/27 correct, R1 Blind17/25 and Comparison15/24 correct, while both narrative-vs-Blind descriptive fallback net+1 over140. These comparisons do NOT establish matched R1 superiority or causal GCN improvement. This cohort has been used post-hoc with GT; any V2 Arbitration rule designed with these outcomes must be labelled exploratory and evaluated on independent untouched test data. Do not retry the now-completed continuation, reuse the original overlay, feed GT to agent/policy, change Router/Admission without a separate experiment plan, or claim a GCN outcome.
 
 This section **supersedes earlier sections** describing the seven R1 Blind attempts as pending or the initial R1 run as blocked/incomplete. Existing main and all Freeze artifacts, original graph, GraphScope and training were unchanged by the local completion.
+
+
+## Expanded GCN actual execution completion - 2026-11-08
+
+- Frozen package789a6aea4715c1e7537ede75d82f5e552859c392a0e27acd8cbbbc03b568da83 independently admitted;1720 new CPU fits executed and verified;1870 old fits reused.359 unique specs/3590 seed fits,0 pending/invalid.
+- Global coverage remains PARTIAL_BLOCKED:1188 config constraints plus31 missing response arms/versions. Eligible-fit scope complete. Gate c742b010473c8d6f99205530cff108dedb440d74e7f5f402dabc7aaebc8f2a8e.
+- GT-only result d68e87b4cb070556409bb3d8fd4e013b3b87b1420bba1ec47d51682680949a18;4044 scored rows/40440 seed observations;all1870 historical seed metrics exactly reproduced.
+- V1+R1 Sensitivity/Natural/WCE/noPS74.376947% accuracy;coverage-matched no-Agent is identical. No independent Agent class-correction benefit established.
+- 487 guarded regression tests:0 failures/errors,2 skips;6 private pilot modules excluded. See docs/GCN_EXPANDED_EXECUTION_COMPLETION_FA.md. No API or push. LIMITED_PROVENANCE_EXPLORATORY / EXPLORATORY_NOT_INDEPENDENT.
+- Existing user changes in this file and GraphScope preserved;this combined state file is not staged with the scoped execution commit.

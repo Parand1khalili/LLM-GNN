@@ -1,3 +1,4 @@
+import { MethodFigure } from './MethodFigure';
 import type { Topology } from './topology';
 import { TOPOLOGY_SHA256 } from './topology-pin';
 import { validateTopology, topologyAtlas } from './topology';
@@ -9,15 +10,15 @@ import { AnnotationView, Badge, Inspector } from './Inspector';
 import { methods, paperUrl, stages } from './content';
 
 type SelectionProps = { data: Atlas; selected: number | null; onSelect: (id: number) => void };
-export function PageHeading({ number, title, italic, children }: { number: string; title: string; italic: string; children: React.ReactNode }) {
-  return <header className="page-heading"><div><p className="eyebrow">{number} / THE RESEARCH ATLAS</p><h1>{title} <em>{italic}</em></h1></div><p>{children}</p></header>;
+export function PageHeading({ title, italic, children }: { number: string; title: string; italic: string; children: React.ReactNode }) {
+  return <header className="page-heading"><div><h1>{title} <em>{italic}</em></h1></div><p>{children}</p></header>;
 }
 export function SourceTrail({ data, filter }: { data: Atlas; filter?: string }) {
   const sources = data.sources.filter(s => !filter || s.id === filter);
   return <details className="source-trail"><summary>Source records & provenance <span>{sources.length} pinned artifact{sources.length === 1 ? '' : 's'}</span></summary>
     <p className="small">RECOVERED_EXACT means the source bytes match the pinned recovery hash. It does not establish scientific validity or a new execution.</p>
     <div className="source-list">{sources.map(s => <div key={s.id}><span>{s.id} · {s.status}</span><code>{s.sha256}</code></div>)}</div>
-    <p className="small">Export adapter and screen layouts are RECONSTRUCTED. Statistics are REPRODUCED calculations over saved historical accuracies. Graph bytes were not independently loaded; identity follows pinned records.</p>
+    <p className="small">Export adapter and screen layouts are RECONSTRUCTED. Statistics are REPRODUCED calculations over saved historical accuracies. Full topology has a separate hash-admitted source and identity receipt.</p>
   </details>;
 }
 
@@ -25,7 +26,7 @@ export function Overview({ data, selected, onSelect, navigate }: SelectionProps 
   const primary = data.experiments.find(e => e.id === 'primary-ce-nops')!;
   return <>
     <section className="overview-hero"><div className="hero-copy"><p className="eyebrow"><span className="tiny-line" /> LLM–GNN / SARA RESEARCH</p>
-      <h1>A node is text.<br />And a network<br />of <em>evidence.</em></h1>
+      <h1>Follow a node.<br />Examine the evidence.</h1>
       <p className="hero-lead">Can local graph structure help a language model create better labels—and a GCN learn from them?</p>
       <div className="hero-actions"><button className="button primary" onClick={() => navigate('explore')}>Explore the evidence <span aria-hidden="true">↗</span></button><button className="text-button" onClick={() => navigate('workflow')}>Read the workflow <span aria-hidden="true">→</span></button></div>
       <p className="hero-note">An interactive research publication.<br />Recorded evidence. Visible boundaries.</p>
@@ -35,7 +36,7 @@ export function Overview({ data, selected, onSelect, navigate }: SelectionProps 
     <section className="editorial-section intro-grid"><div><p className="eyebrow">01 / THE FOUNDATION</p><h2>Same pipeline.<br /><em>A different question.</em></h2></div><div><p>Chen et al.’s LLM-GNN framework turns a small set of language-model annotations into training labels for a graph neural network. Our intervention is the evidence shown to the annotator.</p><p>We compare <strong>B1</strong>, which sees target text, with <strong>Narrative v0</strong>, which also sees authentic local graph evidence. Both arms use the same underlying LLM. The primary outcome is downstream GCN accuracy.</p><a className="inline-link" href={paperUrl} target="_blank" rel="noreferrer">Chen et al. · ICLR 2024 <span aria-hidden="true">↗</span></a></div></section>
     <section className="editorial-section"><div className="section-heading"><div><p className="eyebrow">02 / FOLLOW THE EVIDENCE</p><h2>From selection to <em>prediction.</em></h2></div><button className="text-button" onClick={() => navigate('workflow')}>Inspect each stage ↗</button></div><div className="pipeline-mini">{stages.map((s, i) => <button key={s.title} onClick={() => { navigate('workflow'); }}><span className="eyebrow">0{i + 1}</span><strong>{s.title}</strong><span className="small">{i === 3 ? 'Separate PS / noPS conditions' : 'Historical recorded'}</span></button>)}</div></section>
     <section className="editorial-section result-feature"><div><p className="eyebrow">03 / A MATCHED HISTORICAL STUDY</p><h2>Read the result.<br /><em>Keep the context.</em></h2><Badge>Historical recorded · FeatProp</Badge><p>Primary 135 · CE · no post-filter · ten paired GCN seeds. The frozen treatment changes the annotation prompt.</p><button className="text-button" onClick={() => navigate('experiments')}>Open the experiment ledger ↗</button></div><div><div className="result-pair"><div><span>B1 · target text</span><strong>{format(primary.summary.b1.mean)}<small>%</small></strong><span>± {format(primary.summary.b1.sd)} pp population SD</span></div><div><span>Narrative v0 · local evidence</span><strong>{format(primary.summary.narrative.mean)}<small>%</small></strong><span>± {format(primary.summary.narrative.sd)} pp population SD</span></div></div><p className="small muted">Historical saved accuracy; no model was trained by this atlas. Development evidence does not establish SARA-3 improvement or generalization.</p></div></section>
-    <section className="reading-note"><span className="eyebrow">HOW TO READ THIS ATLAS</span><p>Inspect the node. Follow its sources. Keep historical results, offline replay and prospective research separate.</p><button className="text-button" onClick={() => navigate('methods')}>Evidence status guide ↗</button></section>
+    <section className="agent-entry"><h2>Who reviews the evidence?</h2><p>Follow SARA routing, blind verification, evidence validation and arbitration. Implementation and recorded outcomes remain separate.</p><button className="button primary" onClick={() => navigate('agents')}>Inspect agents & decisions</button></section><section className="reading-note"><span className="eyebrow">HOW TO READ THIS ATLAS</span><p>Inspect the node. Follow its sources. Keep historical results, offline replay and prospective research separate.</p><button className="text-button" onClick={() => navigate('methods')}>Evidence status guide ↗</button></section>
   </>;
 }
 
@@ -69,6 +70,7 @@ export function Explore({ data, selected, onSelect, navigate }: SelectionProps &
   const matches = searchNodes(displayData, query, filter);
   const node = data.nodes.find(n => n.id === selected);
   return <><PageHeading number="01" title="A closer look at" italic="the evidence.">Full topology. Selected research evidence.<br />Choose a view, then follow its source trail.</PageHeading>
+    <nav className="evidence-destinations" aria-label="Follow the selected node"><span>Follow node #{selected ?? "�"}</span><button onClick={() => navigate("workflow")}>Research workflow</button><button onClick={() => navigate("agents")}>SARA agents & decisions</button><button onClick={() => navigate("desk")}>Prediction comparison</button></nav>
     <div className="method-filters" aria-label="Graph scope"><button aria-pressed={scope==='evidence'} onClick={()=>setScope('evidence')}>Research Evidence</button><button aria-pressed={scope==='full'} onClick={()=>setScope('full')}>Full Cora Graph</button><button aria-pressed={focus} onClick={()=>setFocus(!focus)}>Selected node + neighbors</button></div>
     {scope==='full' && !full && <section className="unavailable" role="status"><h2>Full topology unavailable</h2><p>{topologyError || (TOPOLOGY_SHA256 ? 'Loading and validating admitted topology…' : 'No verified full topology has been admitted. Missing: cora_topology.json, containing all canonical global node IDs and edges, plus its reviewed manifest and node-ID mapping evidence. Pickle and .pt files are not opened.')}</p><p>The Research Evidence subgraph remains available below; it is not the full Cora graph.</p></section>}
     {scope==='full' && full && <p className="unavailable">Full admitted topology · {full.nodes.length} nodes · {full.edges.length} unique undirected edges. Full-topology adjacency is separate from the selected prompt evidence in the research inspector.</p>}
@@ -94,6 +96,7 @@ export function Workflow({ data, selected, onSelect, navigate }: SelectionProps 
   const [stage, setStage] = useState(0);
   const current = stages[stage];
   return <><PageHeading number="02" title="From a graph to" italic="a saved prediction.">One historical pipeline. Distinct research extensions.<br />Choose a stage to inspect its purpose and limits.</PageHeading>
+    <MethodFigure onStage={setStage} onAgents={() => navigate("agents")} />
     <div className="workflow-caption"><Badge>Recorded workflow · no execution</Badge><span>Method figure / FeatProp study</span></div>
     <div className="workflow-tabs" role="tablist" aria-label="Historical pipeline stages">{stages.map((s, i) => <button role="tab" id={`stage-${i}`} aria-controls="stage-detail" aria-selected={stage === i} tabIndex={stage === i ? 0 : -1} key={s.title} onClick={() => setStage(i)} onKeyDown={e => {
       if (['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(e.key)) { e.preventDefault(); const next = e.key === 'Home' ? 0 : e.key === 'End' ? 4 : (i + (e.key === 'ArrowRight' ? 1 : 4)) % 5; setStage(next); document.getElementById(`stage-${next}`)?.focus(); }

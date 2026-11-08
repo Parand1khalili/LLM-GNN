@@ -4,9 +4,11 @@ import type { Atlas } from './data';
 import { validateAtlas } from './data';
 import { ATLAS_SHA256 } from './data-pin';
 import { Desk, Experiments, Explore, Methods, Overview, Workflow } from './sections';
+import { Agents } from './Agents';
 import './style.css';
+import './atlas-design.css';
 
-const pages = [['overview', 'Overview'], ['explore', 'Explore'], ['workflow', 'Workflow'], ['methods', 'Methods'], ['experiments', 'Experiments'], ['desk', 'Prediction Desk']];
+const pages = [['overview', 'Overview'], ['explore', 'Explore'], ['workflow', 'Workflow'], ['agents', 'Agents & Decisions'], ['methods', 'Methods'], ['experiments', 'Experiments'], ['desk', 'Prediction Desk']];
 function readLocation() {
   const [path, query] = location.hash.slice(1).split('?');
   const params = new URLSearchParams(query);
@@ -56,7 +58,7 @@ function App() {
   const props = data ? { data, selected, onSelect: (id: number) => update(route.page, id, experimentId), navigate: (page: string) => update(page, route.selected, experimentId) } : null;
   return <><a className="skip-link" href="#main" onClick={event => { event.preventDefault(); document.getElementById('main')?.focus(); }}>Skip to research content</a>
     <header className="site-header"><a className="brand" href="#overview" aria-label="GraphScope overview"><Mark /><span>GraphScope<small>A LIVING RESEARCH ATLAS <b> / V2</b></small></span></a><button className="menu-toggle" aria-expanded={menu} aria-controls="site-nav" onClick={() => setMenu(!menu)}>{menu ? 'Close' : 'Menu'} <span aria-hidden="true">{menu ? '×' : '☰'}</span></button>
-      <nav id="site-nav" className={menu ? 'is-open' : ''} aria-label="Research sections">{pages.map(([id, title], i) => <a key={id} href={`#${id}?node=${route.selected}&experiment=${experimentId}`} aria-current={route.page === id ? 'page' : undefined}><span>{String(i).padStart(2, '0')}</span>{title}</a>)}</nav></header>
+      <nav id="site-nav" className={menu ? 'is-open' : ''} aria-label="Research sections">{pages.map(([id, title]) => <a key={id} href={`#${id}?node=${route.selected}&experiment=${experimentId}`} aria-current={route.page === id ? 'page' : undefined}>{title}</a>)}</nav></header>
     <div className="context-bar"><span><b className="cora-label">C</b> CORA <span className="context-divider" /> FeatProp historical study</span><span><i className="status-dot" /> Frozen snapshot · 30 Oct 2026</span></div>
     <main id="main" tabIndex={-1}>
       {error ? <section className="empty-state error-state" role="alert"><p className="eyebrow">DATA INTEGRITY CHECK</p><h1>Evidence unavailable.</h1><p>{error}</p><button className="button primary" onClick={() => location.reload()}>Retry loading</button><p className="small">No fallback or synthetic research data is displayed.</p></section> : !props ? <section className="empty-state" role="status"><h1>Opening the research record…</h1><p>Checking the export checksum and evidence schema.</p></section> : <>
@@ -64,6 +66,7 @@ function App() {
         {route.page === 'overview' && <Overview {...props} />}
         {route.page === 'explore' && <Explore {...props} />}
         {route.page === 'workflow' && <Workflow {...props} />}
+        {route.page === 'agents' && <Agents {...props} />}
         {route.page === 'methods' && <Methods data={props.data} />}
         {route.page === 'experiments' && <Experiments data={props.data} experimentId={experimentId} setExperimentId={id => update(route.page, route.selected, id)} />}
         {route.page === 'desk' && <Desk {...props} experimentId={experimentId} setExperimentId={id => update(route.page, route.selected, id)} />}
