@@ -28,4 +28,17 @@ class RunnerTests(unittest.TestCase):
     with self.assertRaises(ValueError):call(Path(temp)/'budget',self.entry,self.cfg,self.key)
    with self.assertRaises(ValueError):call(Path(temp)/'bad',self.entry,self.cfg,self.key,lambda *a,**kw:(400,b'{}'))
    with self.assertRaises(ValueError):parse(200,b'{}')
+ def test_continue_main_preserves_unresolved_and_no_vote(self):
+  from unittest.mock import MagicMock
+  import llmgnn_sara.annotation.six_arm_run as runner
+  entries=[dict(node_id=i,arm='B1',sample_index=0,draft_identity=str(i)) for i in (1,2,3)]
+  store=MagicMock();store.read.return_value={'requests':entries};store.write.return_value='a'*64
+  rec={'validated':{'usage':{'prompt_tokens':1,'completion_tokens':1}}}
+  with patch.object(runner,'PrivateAudit',return_value=store),patch.object(runner,'call',side_effect=[ValueError('EXISTING_INTENT_UNCERTAIN_OR_REJECTED_NO_RETRY'),(rec,False),(rec,True)]),patch('sys.argv',['run','--stage','full','--continue-unattempted']),patch('builtins.input',side_effect=['APPROVE PRIVACY','15','APPROVE SCALE']),patch.dict('os.environ',{'GAPGPT_API_KEY':'synthetic-fixture'}):
+   runner.main()
+  result=store.write.call_args.args[0]
+  self.assertEqual(result['status'],'PARTIAL_UNRESOLVED_NO_PREDICTION_FREEZE')
+  self.assertEqual(result['completed'],2);self.assertEqual(result['new_dispatches'],1)
+  self.assertNotIn('predictions',result)
+
 if __name__=='__main__':unittest.main()

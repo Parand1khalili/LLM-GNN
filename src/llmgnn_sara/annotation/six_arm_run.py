@@ -46,7 +46,9 @@ def call(root,entry,config,key,transport=post_once):
         raw=bytes.fromhex(rec['raw_hex'])
         if hashlib.sha256(raw).hexdigest()!=rec['raw_sha256'] or parse(rec['http_status'],raw)!=rec['validated']:raise ValueError('RECEIPT_INTEGRITY')
         return rec,False
-    if intent.exists():raise ValueError('EXISTING_INTENT_UNCERTAIN_OR_REJECTED_NO_RETRY')
+    if intent.exists():
+        if json.loads(intent.read_bytes())!=binding:raise ValueError('INTENT_BINDING_MISMATCH')
+        raise ValueError('EXISTING_INTENT_UNCERTAIN_OR_REJECTED_NO_RETRY')
     if len(list(Path(root).glob('calls/*/intent.json')))>=2520 or RESERVATION*(1+len(list(Path(root).glob('calls/*/intent.json'))))>Decimal('15'):raise ValueError('BUDGET_EXHAUSTED')
     exclusive(intent,canonical_bytes(binding))
     # Intent remains durable on timeout, crash, parser failure or audit failure.
@@ -61,7 +63,9 @@ def call(root,entry,config,key,transport=post_once):
     return rec,True
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--stage',choices=['smoke','full'],default='smoke');args=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--stage',choices=['smoke','full'],default='smoke')
+    p.add_argument('--continue-unattempted',action='store_true',help='Preserve unresolved intents without dispatching them; no complete prediction freeze')
+    args=p.parse_args()
     source=PrivateAudit('.local_artifacts/narrative_six_arm').read(PIN)
     config=dict(endpoint='https://api.gapgpt.app/v1/chat/completions',model='gpt-6-luna',temperature=1,n=1,max_tokens=4096,input_cap=32768,max_calls=2520,cap_usd='15',reasoning_effort='OMITTED',owner_approved=True,prices='OWNER_PROVISIONAL_UNVERIFIED',retention='UNVERIFIED_OWNER_RISK_ACCEPTANCE_REQUIRED')
     store=PrivateAudit(ROOT);cfgsha=store.write(config)
@@ -78,16 +82,24 @@ def main():
         import sys
         if not sys.stdin.isatty():raise ValueError('SECURE_TERMINAL_REQUIRED')
         key=getpass.getpass('GapGPT API key (hidden): ')
-    records=[];new=0
+    records=[];new=0;unresolved=[];completed_entries=[]
     for entry in ordered:
-        rec,sent=call(ROOT,entry,config,key);records.append(rec);new+=int(sent)
+        try:rec,sent=call(ROOT,entry,config,key)
+        except ValueError as error:
+            if not args.continue_unattempted or str(error)!='EXISTING_INTENT_UNCERTAIN_OR_REJECTED_NO_RETRY':raise
+            unresolved.append(entry['draft_identity'])
+            continue
+        records.append(rec);completed_entries.append(entry);new+=int(sent)
+        if len(records)%25==0:print(json.dumps(dict(completed=len(records),new_dispatches=new,unresolved=len(unresolved))),flush=True)
     result=dict(config_sha256=cfgsha,source_manifest_sha256=PIN,stage=args.stage,completed=len(records),new_dispatches=new,input_tokens=sum(r['validated']['usage']['prompt_tokens'] for r in records),output_tokens=sum(r['validated']['usage']['completion_tokens'] for r in records),billing='NOT_VERIFIED')
     result['estimated_cost_usd']=str((Decimal(result['input_tokens'])*Decimal('.10')+Decimal(result['output_tokens'])*Decimal('.50'))/1000000)
-    if args.stage=='full':
+    result['unresolved_request_ids']=unresolved
+    result['status']='PARTIAL_UNRESOLVED_NO_PREDICTION_FREEZE' if unresolved else 'COMPLETED'
+    if args.stage=='full' and not unresolved:
         predictions=[]
         for node in sorted({e['node_id'] for e in ordered}):
             for arm in sorted({e['arm'] for e in ordered}):
-                samples=[r['validated']['parsed'] for e,r in zip(ordered,records) if e['node_id']==node and e['arm']==arm]
+                samples=[r['validated']['parsed'] for e,r in zip(completed_entries,records) if e['node_id']==node and e['arm']==arm]
                 predictions.append(dict(node_id=node,arm=arm,**asdict(vote_parsed_samples(samples))))
         result['predictions']=predictions
     sha=store.write(result);print(json.dumps({k:v for k,v in result.items() if k!='predictions'}));print('PRIVATE_FREEZE_SHA256',sha)
