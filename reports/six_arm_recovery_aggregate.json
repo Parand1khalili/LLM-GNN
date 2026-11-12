@@ -1,0 +1,111 @@
+{
+  "freeze_sha256": "aebcd301608c4b27a877c584ced5afde85b66e103e05c2bd5edf569f472fed8e",
+  "protocol_sha256": "a9530d3ee3b2e7cd1bd7813fb11a28ce89b7f7b1c5e1c72cb7f6d096d8535dda",
+  "expected_requests": 2520,
+  "targets": 140,
+  "states": {
+    "COMPLETED_VALID": 2515,
+    "AMBIGUOUS_DISPATCH": 1,
+    "COMPLETED_OUTPUT_INVALID": 4
+  },
+  "per_arm": {
+    "B1": {
+      "request_states": {
+        "COMPLETED_VALID": 420
+      },
+      "predicted": 140,
+      "unavailable": 0,
+      "valid_samples_distribution": {
+        "3": 140
+      },
+      "prompt_tokens": 122622,
+      "recorded_input_tokens": 124422,
+      "recorded_output_tokens": 65814,
+      "recorded_reasoning_tokens": 44476
+    },
+    "v0": {
+      "request_states": {
+        "COMPLETED_VALID": 420
+      },
+      "predicted": 140,
+      "unavailable": 0,
+      "valid_samples_distribution": {
+        "3": 140
+      },
+      "prompt_tokens": 234255,
+      "recorded_input_tokens": 234996,
+      "recorded_output_tokens": 73944,
+      "recorded_reasoning_tokens": 51882
+    },
+    "v1-A": {
+      "request_states": {
+        "COMPLETED_VALID": 418,
+        "AMBIGUOUS_DISPATCH": 1,
+        "COMPLETED_OUTPUT_INVALID": 1
+      },
+      "predicted": 138,
+      "unavailable": 2,
+      "valid_samples_distribution": {
+        "3": 138,
+        "2": 2
+      },
+      "prompt_tokens": 475641,
+      "recorded_input_tokens": 476478,
+      "recorded_output_tokens": 79359,
+      "recorded_reasoning_tokens": 59665
+    },
+    "v1-B": {
+      "request_states": {
+        "COMPLETED_VALID": 420
+      },
+      "predicted": 140,
+      "unavailable": 0,
+      "valid_samples_distribution": {
+        "3": 140
+      },
+      "prompt_tokens": 493701,
+      "recorded_input_tokens": 494658,
+      "recorded_output_tokens": 101168,
+      "recorded_reasoning_tokens": 82664
+    },
+    "v1-C": {
+      "request_states": {
+        "COMPLETED_VALID": 419,
+        "COMPLETED_OUTPUT_INVALID": 1
+      },
+      "predicted": 139,
+      "unavailable": 1,
+      "valid_samples_distribution": {
+        "3": 139,
+        "2": 1
+      },
+      "prompt_tokens": 486141,
+      "recorded_input_tokens": 487518,
+      "recorded_output_tokens": 79245,
+      "recorded_reasoning_tokens": 62017
+    },
+    "v1-D": {
+      "request_states": {
+        "COMPLETED_VALID": 418,
+        "COMPLETED_OUTPUT_INVALID": 2
+      },
+      "predicted": 138,
+      "unavailable": 2,
+      "valid_samples_distribution": {
+        "3": 138,
+        "2": 2
+      },
+      "prompt_tokens": 486141,
+      "recorded_input_tokens": 487938,
+      "recorded_output_tokens": 85358,
+      "recorded_reasoning_tokens": 67598
+    }
+  },
+  "recovered_additional_valid": 0,
+  "billing": "NOT_VERIFIED",
+  "status": "PARTIAL_STRICT_THREE_SAMPLE_ANALYSIS",
+  "limitations": [
+    "LIMITED_PROVENANCE_EXPLORATORY",
+    "EXPLORATORY_NOT_INDEPENDENT"
+  ]
+}

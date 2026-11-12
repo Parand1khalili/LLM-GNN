@@ -1,5 +1,25 @@
 # Project state
 
+## Six-arm offline recovery and GT-only evaluation — 2026-11-12
+
+- Read-only reconciliation verified all2520 expected identities:2515 valid,
+  4 HTTP200 parser-invalid responses,1 ambiguous intent;0 never dispatched.
+  Original receipts, terminal states and source files remain unchanged.
+- Strict-three-sample protocol frozen before GT; no partial vote or imputation.
+  Freeze aebcd301608c4b27a877c584ced5afde85b66e103e05c2bd5edf569f472fed8e;
+  GT-only result c23a830725122beb7ad2c5380bfb33efe175236d7d3d1f2002337e271dccdb42.
+- Correct/140: contemporaneous B1=94,v0=103,A=97,B=91,C=95,D=94.
+  Missing predictions A=2,C=1,D=2; other arms0. Primary B-minus-A on138
+  common targets:1 improvement/9 regressions,-5.7971pp. No improvement claim.
+- Historical voting/parser unchanged; source-file immutability and independent
+  CAS/count/confusion/F1 readback PASS.43 relevant tests PASS; full suite not run.
+  No new API, retry, admission or GCN. Billing remains unverified.
+- See docs/NARRATIVE_SIX_ARM_OFFLINE_RESULTS_FA.md and reports/six_arm_*.
+  Private source/freeze/evaluation remain under .local_artifacts only.
+  LIMITED_PROVENANCE_EXPLORATORY / EXPLORATORY_NOT_INDEPENDENT.
+  No independent Drive backup performed in this slice. Next: thesis reporting;
+  any new inference/training requires separate authorization.
+
 ## Final Full GCN evaluation — 2026-11-08
 
 - All1870 fits independently readback-verified;30 finite nonnegative losses,

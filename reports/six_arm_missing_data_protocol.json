@@ -1,0 +1,22 @@
+{
+  "version": "sara.six_arm.strict_partial_analysis.v1",
+  "primary": "v1-B minus v1-A on common targets with three valid samples each",
+  "three_valid": "unchanged vote_parsed_samples; sample_index ascending",
+  "zero_one_two_valid": "UNAVAILABLE; no vote, no imputation, no partial-sample sensitivity",
+  "ties": "historical first appearance in sample_index order",
+  "invalid": "historical parser rejects malformed output, invalid class or confidence",
+  "ambiguous": "no authentic response; no replay; unavailable",
+  "integrity_failure": "fail closed before prediction freeze or GT",
+  "confidence": "historical vote-derived uncalibrated value; missing stays null",
+  "all_target_accuracy": "correct / all manifest targets; unavailable is not labelled wrong",
+  "selective_accuracy": "correct / valid strict-three predictions",
+  "paired": "common strict-three mask; also report all-target difference and mask sizes",
+  "classwise": "7x8 confusion: final column unavailable; unavailable counts as recall FN",
+  "strata": "posthoc h<0.5 heterophilic, h=0.5 mixed, h>0.5 homophilic; isolated separate",
+  "limitations": [
+    "LIMITED_PROVENANCE_EXPLORATORY",
+    "EXPLORATORY_NOT_INDEPENDENT"
+  ],
+  "new_api_calls": 0,
+  "training_runs": 0
+}
