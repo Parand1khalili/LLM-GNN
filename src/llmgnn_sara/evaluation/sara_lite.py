@@ -36,6 +36,11 @@ def main():
         switches=len(switches),switch_correct=sum(vectors['C'][n]==truth[n] for n in switches),
         router=dict(selected=len(selected),selected_baseline_wrong=sum(vectors['A'][n]!=truth[n] for n in selected),
             unselected=len(truth)-len(selected),unselected_baseline_wrong=sum(vectors['A'][n]!=truth[n] for n in truth if n not in selected)),
+        third_class_switches=len(frozen['third_class_switch_ids']),
+        third_class_correct=sum(vectors['C'][n]==truth[n] for n in frozen['third_class_switch_ids']),
+        recorded_valid_usage=frozen['recorded_valid_usage'],
+        estimated_valid_response_cost_usd=(frozen['recorded_valid_usage']['input_tokens']*.10+frozen['recorded_valid_usage']['output_tokens']*.50)/1000000,
+        accounting_limit='invalid/ambiguous usage not included; not verified billing',
         actual_billing_usd=None,limitations=['LIMITED_PROVENANCE_EXPLORATORY','EXPLORATORY_NOT_INDEPENDENT'])
     store=PrivateAudit(ROOT+'/gt_evaluation');sha=store.write(result)
     Path('reports/sara_lite_evaluation.json').write_text(json.dumps(dict(result_sha256=sha,**result),indent=2)+'\n',encoding='utf8')

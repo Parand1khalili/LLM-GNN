@@ -97,10 +97,11 @@ def main():
     for e in entries[:2] if args.stage=='smoke' else entries:
         r,sent=call(RUN,e,key,pairs[e['node_id']].text,baseline[e['node_id']]);records.append(r);new+=sent
         print(json.dumps(dict(processed=len(records),new_dispatches=new,status=r['status'])),flush=True)
-        if r['status']=='REJECTED':raise ValueError('REJECTED_REVIEW_REQUIRED')
+        if r['status']=='REJECTED' and args.stage=='smoke':raise ValueError('REJECTED_SMOKE_REVIEW_REQUIRED')
     summary=dict(stage=args.stage,manifest_sha256=MANIFEST,approval_sha256=digest(APPROVAL),
-        processed=len(records),new_dispatches=new,input_tokens=sum(r['validated']['usage']['prompt_tokens'] for r in records),
-        output_tokens=sum(r['validated']['usage']['completion_tokens'] for r in records),billing='NOT_VERIFIED')
+        processed=len(records),new_dispatches=new,input_tokens=sum(r['validated']['usage']['prompt_tokens'] for r in records if 'validated' in r),
+        output_tokens=sum(r['validated']['usage']['completion_tokens'] for r in records if 'validated' in r),
+        rejected=sum(r['status']=='REJECTED' for r in records),usage_scope='validated responses only; rejected usage unknown here',billing='NOT_VERIFIED')
     print(json.dumps(summary));print('PRIVATE_RECEIPT_SHA256',run.write(summary))
 
 

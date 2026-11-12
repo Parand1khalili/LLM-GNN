@@ -47,11 +47,19 @@ def build():
             if str(err) not in ('AMBIGUOUS_NO_RETRY','READ_ONLY_MISSING_RECEIPT'):raise
             receipts[str(n)]=dict(status=str(err))
             decisions[n]=dict(action='UNAVAILABLE',class_index=None)
+    valid=[r['validated'] for r in receipts.values() if r.get('status')=='COMPLETED']
+    response_ids=[r['provider_response_id'] for r in valid]
+    if len(set(response_ids))!=len(response_ids):raise ValueError('DUPLICATE_PROVIDER_RESPONSE_ID')
+    b1={r['node_id']:r['class_index'] for r in base['predictions'] if r['arm']=='B1'}
+    third=[n for n,d in decisions.items() if d['action']=='SWITCH' and d['class_index'] not in (baseline[n],b1[n])]
     vectors,capacity=controls(baseline,manifest['selected_ids'],decisions)
     result=dict(schema='sara.lite.prediction_freeze.v1',manifest_sha256=MANIFEST,
         protocol_sha256=digest(PROTOCOL),approval_sha256=digest(APPROVAL),
         baseline_sha256=BASE,receipts=receipts,decisions={str(n):v for n,v in decisions.items()},
         vectors={k:{str(n):c for n,c in v.items()} for k,v in vectors.items()},class_count_control=capacity,
+        third_class_switch_ids=sorted(third),
+        recorded_valid_usage=dict(input_tokens=sum(r['usage']['prompt_tokens'] for r in valid),
+            output_tokens=sum(r['usage']['completion_tokens'] for r in valid)),
         l2_status='NOT_ASSESSED',training_admission='NOT_ADMITTED',
         status='PARTIAL' if any(d['action']=='UNAVAILABLE' for d in decisions.values()) else 'COMPLETED')
     result['vectors_sha256']=digest(result['vectors'])
