@@ -35,6 +35,26 @@ Provider منتخب مالک GapGPT است؛ نام OPENAI_API_KEY به معنی
 .venv\Scripts\python.exe -B -m llmgnn_sara.annotation.sara_lite
 ```
 
-چهار تست Synthetic فعلی KEEP/SWITCH/Third-class/ABSTAIN، Quote نامعتبر، تناقض، Missing، Schema و Confidence را پاس کردند. تست‌های Resume/Budget/Controls و Runner پولی هنوز تکمیل نشده‌اند؛ این فایل مجوز Dispatch نیست. بعد از تأیید بودجه و Privacy، Adapter محدود با زیرساخت موجود تکمیل و تست می‌شود، سپس Smoke محلی با ورود مخفی کلید قابل اجرا خواهد بود. هیچ Training خودکاری وجود ندارد.
+مالک سقف تجمعی USD0.25 و ارسال همان ۳۷ Target/Context را صریحاً تأیید کرد؛ این مجوز در قرارداد مستقل Runner ثبت شده است، نه در Freeze تاریخی. هشت تست Synthetic شامل policy، Quote، Third-class، Missing، Receipt binding، Resume، Timeout، Budget و Matched controls پاس شدند. هیچ درخواست واقعی هنوز اجرا نشده است؛ کلید در محیط این نشست موجود نیست.
+
+```powershell
+.venv\Scripts\python.exe -B -m unittest discover -s tests -p "test_sara_lite*.py" -v
+.venv\Scripts\python.exe -B -m llmgnn_sara.annotation.sara_lite_run --stage smoke
+```
+
+کلید فقط با getpass مخفی یا GAPGPT_API_KEY فرآیند دریافت می‌شود. پس از مشاهدهٔ دو پاسخ Smoke معتبر و Usage و بازبینی آن، ادامهٔ همان Manifest، بدون تکرار Smoke:
+
+```powershell
+.venv\Scripts\python.exe -B -m llmgnn_sara.annotation.sara_lite_run --stage full
+.venv\Scripts\python.exe -B -m llmgnn_sara.annotation.sara_lite_freeze
+```
+
+فرمان Full تأیید محلی `APPROVE LITE SCALE` و سپس `APPROVE LITE V1` می‌خواهد. Smoke فقط دومی را می‌خواهد. در صورت خطا، Receiptها را بررسی کنید؛ Intent مبهم را تکرار نکنید. پس از Freeze موفق، ارزیابی جداگانه (SHA واقعی چاپ‌شده را جایگزین کنید):
+
+```powershell
+.venv\Scripts\python.exe -B -m llmgnn_sara.evaluation.sara_lite --freeze SHA_FROM_FREEZE
+```
+
+این فرمان GT فقط پس از بازاجرای آفلاین کامل Receiptها و Vectorها Graph اصلی SHA-pinned را باز می‌کند. نتایج Aggregate در reports/sara_lite_evaluation.json و Receiptهای خصوصی در .local_artifacts/sara_lite_v1 باقی می‌مانند. تا اجرای واقعی، Freeze پیش‌بینی، GT نتیجه، هزینه و عملکرد Lite همگی NOT_RUN هستند. Full Suite و CI این تغییرات هنوز تأیید نشده‌اند؛ اجرای واقعی Parser جدید و Compatibility در Smoke بررسی می‌شود. هیچ Training خودکاری وجود ندارد.
 
 Admission مستقل، مشخصات ثابت CE/WCE و کنترل Mask برای هر GCN آینده لازم است. SWITCHها Confidence معتبر تاریخی ندارند. هیچ نتیجه یا برتری Lite هنوز اثبات نشده است. LIMITED_PROVENANCE_EXPLORATORY / EXPLORATORY_NOT_INDEPENDENT.

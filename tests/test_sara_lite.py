@@ -2,6 +2,12 @@ import unittest
 from llmgnn_sara.annotation.sara_lite import decide,PROTOCOL
 
 class LiteTests(unittest.TestCase):
+    def test_existing_router_is_order_independent(self):
+        from llmgnn_sara.sara2.policy import Pair,Annotation
+        from llmgnn_sara.sara3.r1_candidate import route_r1_candidate
+        pairs=[Pair(Annotation(i,i%7,80),Annotation(i,(i+1)%7,90),'synthetic neural network') for i in range(40)]
+        self.assertEqual(route_r1_candidate(pairs),route_r1_candidate(reversed(pairs)))
+        self.assertEqual(len(route_r1_candidate(pairs)),37)
     def value(self,action='SWITCH',c=2):
         return dict(action=action,proposed_class_index=c,support_quotes=['retrieving prior cases'],counter_quotes=[],primary_topic='Adaptation of previously observed cases',reason_code='TARGET_SUPPORT' if action=='SWITCH' else 'BASELINE_SUPPORTED',uncertainty='NONE')
     def test_keep_and_candidate_or_third_switch(self):
@@ -25,5 +31,13 @@ class LiteTests(unittest.TestCase):
         self.assertIsNone(d['confidence']);self.assertEqual(d['training_admission_status'],'NOT_ADMITTED')
         self.assertIsNone(PROTOCOL['execution']['approved_cap_usd'])
         self.assertEqual(PROTOCOL['budget'],37)
+    def test_matched_controls_and_capacity(self):
+        from llmgnn_sara.annotation.sara_lite_freeze import controls
+        v,status=controls({0:0,1:1,2:1},{0},{0:dict(class_index=1)})
+        self.assertEqual(v['D'],{0:0,1:1,2:1})
+        self.assertEqual(status['status'],'BLOCKED_CLASS_CAPACITY')
+        v,status=controls({0:0,1:1,2:1},{0},{0:dict(class_index=None)})
+        self.assertEqual(sum(c is not None for c in v['C'].values()),sum(c is not None for c in v['D'].values()))
+        self.assertEqual(status['status'],'AVAILABLE')
 
 if __name__=='__main__':unittest.main()
