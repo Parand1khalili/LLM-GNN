@@ -1,0 +1,19 @@
+{
+  "protocol_sha256": "9a2258be64b73583b1c4fd014ca7caa1aab179f90b909fc24e222244f0d7dadd",
+  "baseline_sha256": "aebcd301608c4b27a877c584ced5afde85b66e103e05c2bd5edf569f472fed8e",
+  "selected_sha256": "eb57ee91d4726b0cfa1983ce563656c895b2e61e94667b0fd5575b9775f56201",
+  "estimated_input_tokens": 42241,
+  "tokenizer": "local cached tokenizer including framing allowance",
+  "maximum_declared_output_tokens": 151552,
+  "estimated_usd_at_512_output": "0.0136961",
+  "conservative_usd": "0.1970176",
+  "rate_source": "https://gapgpt.app/platform-v2/pricing",
+  "rates_checked": "2026-11-12",
+  "actual_billing": "UNKNOWN",
+  "approved_cap_usd": null,
+  "status": "BLOCKED_SPENDING_PRIVACY_APPROVAL_AND_PAID_RUNNER",
+  "manifest_sha256": "dea21474fc5027237f3ea8e69999eb98dd18e7ebb40e0ead18400600f2e0088a",
+  "requests": 37,
+  "api_calls": 0,
+  "training_runs": 0
+}

@@ -1,5 +1,16 @@
 # Project state
 
+## SARA-Lite v1 pre-dispatch preparation — 2026-11-12
+
+- Owner selected GapGPT/gpt-6-luna. No new spending/privacy approval yet.
+- GT-free protocol9a2258be64b73583b1c4fd014ca7caa1aab179f90b909fc24e222244f0d7dadd;
+  manifest dea21474fc5027237f3ea8e69999eb98dd18e7ebb40e0ead18400600f2e0088a.
+  Existing confidence-independent R1-v1 selects37 contemporaneous baseline targets.
+- Pure prompt/quote-policy and offline manifest preparation implemented;4 synthetic
+  tests PASS. Paid runner/resume/control integration remains unfinished, not ready
+  for dispatch. Proposed aggregate USD0.25; declared estimate USD0.1970176.
+- No new GT, API, admission or training. See docs/SARA_LITE_V1_FA.md.
+
 ## Six-arm offline recovery and GT-only evaluation — 2026-11-12
 
 - Read-only reconciliation verified all2520 expected identities:2515 valid,
