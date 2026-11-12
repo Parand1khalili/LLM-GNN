@@ -1,5 +1,25 @@
 # Project state
 
+## SARA-Lite v1 actual closeout — 2026-11-13
+
+- All37 authorized reviews dispatched once (2 smoke +35 full);27 completed,
+  10 rejected:9 unapproved provider model IDs openai/gpt-6-luna,1 SOURCE_QUOTE.
+  No identity relaxation, quote repair, retry or additional architecture.
+- Frozen actions:22 KEEP,4 SWITCH,1 ABSTAIN,10 UNAVAILABLE. Partial prediction
+  freeze00daac8087163980123bdcb4796f99c4bb36854ec2382876be4dc75ee6390db5;
+  separate GT result71e62298fd407341d7fbba616be54fc9b9ff62d49f85af812891586006ca43f4.
+- C=96 correct/33 wrong/1 abstained/10 unavailable. Exact-mask no-Agent D
+  also96 correct/33 wrong on129 labels;2 fixes/2 harms,net0;one correct third-class.
+  Narrative103/140;Router-only84/103. No incremental accuracy benefit established.
+- All-response usage40194 input/13387 output;estimated USD0.0107129 at listed
+  rates,not verified billing;owner aggregate capUSD0.25 unchanged.
+-36 relevant tests PASS;independent CAS/count/confusion and receipt/vector replay
+  PASS. No new inference during audit,no admission or GCN. See
+  docs/SARA_LITE_V1_RESULTS_FA.md and reports/sara_lite_*. Private data local only.
+  LIMITED_PROVENANCE_EXPLORATORY / EXPLORATORY_NOT_INDEPENDENT. Stop Agent design;
+  next phase thesis/GraphScope or separately authorized independent validation.
+  No independent Drive backup performed in this slice.
+
 ## SARA-Lite v1 pre-dispatch preparation — 2026-11-12
 
 - Owner selected GapGPT/gpt-6-luna and explicitly approved aggregate USD0.25

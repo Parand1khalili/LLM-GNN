@@ -1,0 +1,15 @@
+{
+  "freeze_sha256": "00daac8087163980123bdcb4796f99c4bb36854ec2382876be4dc75ee6390db5",
+  "status": "PARTIAL",
+  "manifest_sha256": "dea21474fc5027237f3ea8e69999eb98dd18e7ebb40e0ead18400600f2e0088a",
+  "actions": {
+    "KEEP": 22,
+    "SWITCH": 4,
+    "UNAVAILABLE": 10,
+    "ABSTAIN": 1
+  },
+  "class_count_control": {
+    "status": "AVAILABLE",
+    "selection": "prespecified per-class SHA order; different IDs, not causal mask match"
+  }
+}

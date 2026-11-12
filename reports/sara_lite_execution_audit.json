@@ -1,0 +1,26 @@
+{
+  "schema": "sara.lite.execution_audit.v1",
+  "private_diagnostic_sha256": "71a0472ce76e3fc604bc98f56c56e37f268e09be6158053c70febca5722f249d",
+  "private_rejection_audit_sha256": "e9fa258568925421868fff333f7ac4ccc70b428eb414e142f3226753c34cb189",
+  "states": {
+    "COMPLETED": 27,
+    "REJECTED": 10
+  },
+  "models": {
+    "gpt-6-luna": 28,
+    "openai/gpt-6-luna": 9
+  },
+  "reasons": {
+    "MODEL_IDENTITY": 9,
+    "SOURCE_QUOTE": 1
+  },
+  "recorded_all_usage": {
+    "completion_tokens": 13387,
+    "prompt_tokens": 40194
+  },
+  "estimated_all_response_usd": 0.0107129,
+  "actual_billed_usd": null,
+  "total_intents": 37,
+  "new_dispatches_this_audit": 0,
+  "execution_snapshot_sha256": "4bc9db03242fb71a2bf4b8210121d47587d810762e611accfb357748fbe46458"
+}
