@@ -1,0 +1,58 @@
+{
+  "package_sha256": "d3eaca9ce2e87f98d73af6d7664a80ac377b297fe252ba7911b6ee24693eca7e",
+  "approval_sha256": "31ee42791d4b02a82eb0a0a400f193cf6184d21ef5dba13f615e3afbcf39921d",
+  "features": {
+    "edge_sha256": "258b5d9415df74687c6a3c697f08c71a3a83ce8df4ed9537381b1be3948110c3",
+    "graph_sha256": "9285c2afae1bdd9e01ee1b805ace7bd1308a49895b1f11fa22bd0e5bd0adf466",
+    "x_sha256": "4088144fea27f4a2f6f176a22a29847e5030756c84ba50984f77488d7b01f570",
+    "x_shape": [
+      2708,
+      384
+    ]
+  },
+  "test_ids_sha256": "4f0c41896441c216f074f4445648d08f7097c1b396ef7b255da2aaead98638e7",
+  "runtime": {
+    "code_sha256": {
+      "downstream/ce_preflight.py": "bf1cb2669f9a8bee6850f101d4570502cd851188c15eca394b8980b5d36b44f5",
+      "downstream/full_matrix.py": "977e0e0f7c9694391d1b1fed2f09f70ae0e2d87b787ea1a16f1e9615b2a5b83a",
+      "downstream/full_run.py": "791d86fdc698189c810cb1b1734e71d12f6376e8a0617d7a64de4e0ccc96fac7",
+      "downstream/fusion.py": "72108655b158a5f98de1f88567d9c5b1d864f90484409237201b26fc45e6659d",
+      "downstream/model.py": "6a19c144c09a8008593d91f23d5911268905c1c9bbad38eeca2146c3547e4158",
+      "downstream/plan.py": "4b271582445c5c1d95a3473422f29d775d31b1def9d9aae78f7410144b1fecf3",
+      "filtering/ps.py": "a638eca79d25b0c7a950b9f491f48fb6df41073ebf05ae6aa44f66073e31a5cb",
+      "io/frozen.py": "2c7ebd39792f4d06a320997129b48b94705c8e50b34566b2875a9665b7cfd067",
+      "io/project.py": "90a531f048fd269d3e46973881fcd4c580cac18aff1015a4f608e4c800427996",
+      "sara3/fusion.py": "c3fa58e4f0fc31bc752e0aefdc057f401cc2ba345fcfa7a8e9600f2671b26efe"
+    },
+    "deterministic_algorithms": true,
+    "device": "cpu",
+    "python": "3.12.14",
+    "threads": 1,
+    "versions": {
+      "numpy": "2.3.5",
+      "torch": "2.15.0+cpu",
+      "torch-geometric": "2.7.0"
+    }
+  },
+  "adapter_sha256": "412c3de500f1d85de7e5880743355dc1b5b4420bd96930ab1bc51d077847eac1",
+  "source_pins": {
+    "atlas": "677a683959cc80691d726d3e02e23b55e02a0bb01e6e17f4c16c57ca567c4ccc",
+    "expanded": "789a6aea4715c1e7537ede75d82f5e552859c392a0e27acd8cbbbc03b568da83",
+    "historical": "c78ff16df921bfcd661ce7981c5467f31c243bd812466ce0bbca747be576d413",
+    "lite": "00daac8087163980123bdcb4796f99c4bb36854ec2382876be4dc75ee6390db5",
+    "six": "aebcd301608c4b27a877c584ced5afde85b66e103e05c2bd5edf569f472fed8e"
+  },
+  "source_status": "LIMITED_PROVENANCE_EXPLORATORY",
+  "encoder_receipt": "UNAVAILABLE",
+  "test_status": "HISTORICALLY_OBSERVED_NOT_INDEPENDENT",
+  "new_seed_fits": 110,
+  "reused_seed_fits": 40,
+  "unique_specs": 15,
+  "arm_count": 16,
+  "cpu_threads": 1,
+  "gpu_used": false,
+  "peak_ram": "NOT_MEASURED",
+  "new_model_training_seconds": 99.4759999999078,
+  "runner_seconds": 129.141,
+  "new_api_calls": 0
+}

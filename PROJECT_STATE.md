@@ -1,5 +1,29 @@
 # Project state
 
+## Final Cora downstream CE benchmark — 2026-11-13
+
+- Owner explicitly authorized local training and separately accepted limited
+  encoder provenance/historically observed test for this benchmark. No API.
+- Frozen package d3eaca9ce2e87f98d73af6d7664a80ac377b297fe252ba7911b6ee24693eca7e;
+  admission31ee42791d4b02a82eb0a0a400f193cf6184d21ef5dba13f615e3afbcf39921d.
+ 16 arms,15 distinct specs,seeds0..9:110 newly trained fits,40 exact verified reuses.
+  Sensitivity140/Natural/CE/noPS,original384-feature graph,30 epochs,CPU1 thread.
+- All150 fits independently readback verified;30 finite losses,checkpoint/logit/
+  prediction hashes,same-seed initialization and no orphan/pending intents PASS.
+  Training freeze4c022a209098db9f6526b1e399156fdfdb647c43d632d0d5d7e23a2223500e3f;
+  separate GT result bf2f25c1fadc231f8921bd06caf324b52aecccb424d26cb569feaab27e42ee7b.
+- Best observed mean:Lite Router-only74.1005% +/-0.2300pp;current Narrative72.4377%.
+  Lite72.9011% vs exact-mask control72.5078%:paired+0.3933pp(9/10 positive),
+  but Lite-minus-Router-only -1.1994pp(10/10 negative). No new architecture/tuning.
+-39 focused/regression tests PASS;independent confusion/F1 and160 arm-seed rows
+  verified. Common WCE not scheduled:switched confidence unavailable. Historical
+ 74.3769% WCE is not a loss-matched CE reference;historical V1/R1 CE73.4268%.
+- See docs/FINAL_CORA_GCN_BENCHMARK_FA.md and reports/final_cora_gcn_*.
+  LIMITED_PROVENANCE_EXPLORATORY / EXPLORATORY_NOT_INDEPENDENT. Full encoder
+  execution provenance unavailable;no independent-test claim. Private artifacts
+  remain local;no independent Drive backup performed. Stop Cora architecture search;
+  next phase thesis/GraphScope and separately authorized cross-dataset validation.
+
 ## SARA-Lite v1 actual closeout — 2026-11-13
 
 - All37 authorized reviews dispatched once (2 smoke +35 full);27 completed,

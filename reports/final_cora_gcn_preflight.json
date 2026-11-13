@@ -1,0 +1,295 @@
+{
+  "package_sha256": "d3eaca9ce2e87f98d73af6d7664a80ac377b297fe252ba7911b6ee24693eca7e",
+  "arms": {
+    "current_B1": {
+      "train_count": 140,
+      "class_counts": {
+        "5": 6,
+        "3": 12,
+        "0": 8,
+        "6": 32,
+        "2": 14,
+        "4": 33,
+        "1": 35
+      },
+      "vector_sha256": "aea8869a94703e4da092a697b550bc1d93a2c11cdad50ae69758256dfbc83e45",
+      "fit_sha256": "0e0016e830422946d407697c6ed5609921d6bcddb4e87c460e503ef4e422e4e0"
+    },
+    "current_v0": {
+      "train_count": 140,
+      "class_counts": {
+        "5": 6,
+        "3": 13,
+        "0": 12,
+        "6": 32,
+        "2": 13,
+        "4": 29,
+        "1": 35
+      },
+      "vector_sha256": "eb65360463c821bf46686481e39c4a5c7fe45feab2493360b88b33a192b410b9",
+      "fit_sha256": "e7431d02f7cafb05a099baa391388572331e92392667b90403abaafa5ae1e6cc"
+    },
+    "current_v1-A": {
+      "train_count": 138,
+      "class_counts": {
+        "5": 6,
+        "3": 11,
+        "0": 11,
+        "6": 29,
+        "2": 14,
+        "4": 33,
+        "1": 34
+      },
+      "vector_sha256": "2545e29efdb8c248f274da9da6a3f757b33384673516316bfd044ab652643062",
+      "fit_sha256": "9b719ffb39cbb17c21970f42e0fa7700fc18006a0b491d28a7ffe45cb72b645c"
+    },
+    "current_v1-B": {
+      "train_count": 140,
+      "class_counts": {
+        "5": 6,
+        "4": 33,
+        "0": 11,
+        "6": 34,
+        "2": 14,
+        "1": 32,
+        "3": 10
+      },
+      "vector_sha256": "1a9f7eac6bdad7f1433a83adf67e0253bdf560196f1629d1216f22068df57213",
+      "fit_sha256": "0de98e8353ec47fb67618b8d245272c2cf4a49b04b7f042e2a8fda214f5b66e8"
+    },
+    "current_v1-C": {
+      "train_count": 139,
+      "class_counts": {
+        "5": 5,
+        "3": 13,
+        "0": 10,
+        "6": 35,
+        "2": 14,
+        "4": 31,
+        "1": 31
+      },
+      "vector_sha256": "c3c187fc4b8b5bec6fadf52a8c3eda4dd82a009e43fbb1fb3151e32f6a7496b4",
+      "fit_sha256": "79b87753b2c6e766bc3718f99c9d248e99358134c57c2646894e31c4b0538861"
+    },
+    "current_v1-D": {
+      "train_count": 138,
+      "class_counts": {
+        "5": 6,
+        "4": 34,
+        "0": 10,
+        "6": 32,
+        "2": 14,
+        "1": 32,
+        "3": 10
+      },
+      "vector_sha256": "0863e6368b9c75d0090d9ebbc49131686d62599c548efb1ecf65d41ad2894821",
+      "fit_sha256": "8253e5894c478b6b279fbc88a995be3b56a0d9628508b9a25a99ca112f1921a7"
+    },
+    "lite_router_only": {
+      "train_count": 103,
+      "class_counts": {
+        "5": 6,
+        "3": 12,
+        "0": 7,
+        "6": 25,
+        "2": 11,
+        "4": 13,
+        "1": 29
+      },
+      "vector_sha256": "9499f4aad0e231a0857c29720c1d12094f5aba9bd764da12b7590adc64cf447f",
+      "fit_sha256": "fade885c7495d78627c36a7afcc3c8f09ff45ac9d469ca160904bc4b2d1ab3c2"
+    },
+    "lite": {
+      "train_count": 129,
+      "class_counts": {
+        "5": 6,
+        "3": 12,
+        "0": 11,
+        "6": 30,
+        "2": 13,
+        "4": 24,
+        "1": 33
+      },
+      "vector_sha256": "da3270ffeeb01addf36c3001b8348f45d6c4f2f1703a1639b1b3d1335f1986f5",
+      "fit_sha256": "40ffc6c58a78f0fe419c0bbf54356207076d7b2b1eb68ab9a1336e608771603b"
+    },
+    "lite_exact_mask_control": {
+      "train_count": 129,
+      "class_counts": {
+        "5": 6,
+        "3": 12,
+        "0": 12,
+        "6": 29,
+        "2": 12,
+        "4": 25,
+        "1": 33
+      },
+      "vector_sha256": "bc859bcdd05e778f11d5f32be4ef16a715dd9170998f584101690beac2a4bb2d",
+      "fit_sha256": "3d84304d7c7fe00386ee39579f8612a2d221ff05a9d308a8054239e0f37b7044"
+    },
+    "lite_class_count_control": {
+      "train_count": 129,
+      "class_counts": {
+        "5": 6,
+        "3": 12,
+        "0": 11,
+        "6": 30,
+        "2": 13,
+        "1": 33,
+        "4": 24
+      },
+      "vector_sha256": "971ecf45cecacc89ec91f7cef627a93372ccb1c0446aede717d00998a5de70c0",
+      "fit_sha256": "65670518199c96912ac05e02b192b997b0918766a6502ff0702f4cb640280998"
+    },
+    "historical_A_B1": {
+      "train_count": 140,
+      "class_counts": {
+        "5": 6,
+        "3": 12,
+        "0": 9,
+        "6": 33,
+        "2": 15,
+        "4": 33,
+        "1": 32
+      },
+      "vector_sha256": "5d763c8dfd8ab85f20616d4a8e064032dbea9070da8acdedac9d75c24ff9dfa8",
+      "fit_sha256": "b469ae2de38ffd685a854618f8c9fbb9666525e3784707d26324d65bae06e076"
+    },
+    "historical_B_NARRATIVE": {
+      "train_count": 140,
+      "class_counts": {
+        "5": 5,
+        "3": 12,
+        "0": 9,
+        "6": 32,
+        "2": 14,
+        "4": 33,
+        "1": 35
+      },
+      "vector_sha256": "1e907a8c0c2e48b588c9162ad255374def73eb9e77f37582ebe755f0281dc728",
+      "fit_sha256": "475b6989626f7114be33074874e2beb677691af014503b63a2b50684df46c7b6"
+    },
+    "historical_C_BASELINE_FUSION": {
+      "train_count": 93,
+      "class_counts": {
+        "0": 7,
+        "6": 23,
+        "2": 12,
+        "4": 15,
+        "1": 24,
+        "3": 8,
+        "5": 4
+      },
+      "vector_sha256": "eb0b264e71dc761c7ac84609497dd73da8ffdd15f3658529bc6757af011c8290",
+      "fit_sha256": "68878b8784b9fdc84e2d9c2f49c0f762401ee37553e7e536afba8d885c337805"
+    },
+    "historical_V1_r0": {
+      "train_count": 93,
+      "class_counts": {
+        "0": 7,
+        "6": 23,
+        "2": 12,
+        "4": 15,
+        "1": 24,
+        "3": 8,
+        "5": 4
+      },
+      "vector_sha256": "eb0b264e71dc761c7ac84609497dd73da8ffdd15f3658529bc6757af011c8290",
+      "fit_sha256": "68878b8784b9fdc84e2d9c2f49c0f762401ee37553e7e536afba8d885c337805"
+    },
+    "historical_V1_r1_v1": {
+      "train_count": 78,
+      "class_counts": {
+        "0": 6,
+        "6": 19,
+        "2": 10,
+        "4": 8,
+        "1": 23,
+        "3": 8,
+        "5": 4
+      },
+      "vector_sha256": "b59b1213025b6e4687b2f3fbf4d8af95fe6c6a834d3bd00255c53a4eec9d7ceb",
+      "fit_sha256": "fa0e85dd48d76f8f3dfd3128813f9ccb618bfaf1b3c778e7ab28baff08eb941d"
+    },
+    "historical_Expanded_V1": {
+      "train_count": 79,
+      "class_counts": {
+        "6": 21,
+        "2": 11,
+        "1": 24,
+        "3": 8,
+        "5": 4,
+        "4": 6,
+        "0": 5
+      },
+      "vector_sha256": "b07b8bfd736aef9c96c1f24b53784f1be92e9980b4673ef925bcc3df477b4a19",
+      "fit_sha256": "20d4e02182ea69efcb5a8b76fbdf0cdbe11080dc4c005ad3ecbb5f4146e45fe1"
+    }
+  },
+  "unique_specs": 15,
+  "expected_seed_fits": 150,
+  "reusable_seed_fits": 40,
+  "maximum_new_fits": 110,
+  "contract": {
+    "version": "sara.gcn.final_cora_ce.v1",
+    "cohort": "Sensitivity140",
+    "mask": "natural",
+    "loss": "ce",
+    "PS": false,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "config": {
+      "loss": "ce",
+      "node_count": 2708,
+      "num_classes": 7,
+      "epochs": 30,
+      "hidden_dimension": 64,
+      "num_layers": 2,
+      "dropout": 0.5,
+      "learning_rate": 0.01,
+      "weight_decay": 0.0005,
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "strict_historical": true
+    },
+    "validation": null,
+    "early_stopping": false,
+    "checkpoint": "last epoch30",
+    "test": "fixed2568 complement ALL140, historically observed, not independent",
+    "features": "original frozen x/edge bytes; no normalization; encoder receipt unavailable",
+    "confidence": "CE adapter uses unit-loss sentinel100; NOT imputed model confidence",
+    "dedup": "exact effective graph/test/train IDs/classes/unit weights/config/runtime; seed separate",
+    "WCE": "NOT_SCHEDULED_BLOCKED_COMMON_CONFIDENCE: Lite switches lack authentic confidence",
+    "resources": {
+      "device": "cpu",
+      "threads": 1,
+      "maximum_new_fits": 160,
+      "wall_seconds": 7200
+    },
+    "failure": "durable intent; halt on error/uncertain fit; never automatically repeat",
+    "limitations": [
+      "LIMITED_PROVENANCE_EXPLORATORY",
+      "EXPLORATORY_NOT_INDEPENDENT"
+    ]
+  }
+}

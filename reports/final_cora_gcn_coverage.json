@@ -1,0 +1,12 @@
+{
+  "training_freeze_sha256": "4c022a209098db9f6526b1e399156fdfdb647c43d632d0d5d7e23a2223500e3f",
+  "schema": "sara.gcn.final.training_freeze.v1",
+  "package_sha256": "d3eaca9ce2e87f98d73af6d7664a80ac377b297fe252ba7911b6ee24693eca7e",
+  "approval_sha256": "31ee42791d4b02a82eb0a0a400f193cf6184d21ef5dba13f615e3afbcf39921d",
+  "status": "COMPLETE_VERIFIED_GT_NOT_OPENED",
+  "status_counts": {
+    "EXECUTED_VERIFIED": 110,
+    "VERIFIED_EXISTING": 40
+  },
+  "new_fit_duration_seconds": 99.4759999999078
+}
