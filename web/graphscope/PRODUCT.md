@@ -17,4 +17,4 @@ Static React/TypeScript atlas. Full verified topology and research evidence rema
 User-selected autumn scientific palette: petroleum and terracotta primary colors, gold focus accent. Avoid repetitive cards, decorative labels and artificial execution activity. Agents means scientific SARA responsibilities, not development agents.
 
 ## Evidence on Hand
-Pinned public atlas and full topology. Repository source for R0/R1/R2, rich verification, persistence, L2 review and downstream plans. The public research snapshot is older than current implementation.
+Pinned public atlas and full topology. Repository source for R0/R1/R2, rich verification, persistence, L2 review and downstream plans. The historical node evidence snapshot remains separate from the final 13 Nov sixteen-arm aggregate benchmark. Selected SARA-Core is Router-only; owner-local vectors require explicit checksum-admitted import. Saved replay and unexecuted mask inspection never run research code.

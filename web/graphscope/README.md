@@ -1,4 +1,4 @@
-# GraphScope v2
+# GraphScope v3 — SARA-Core workbench
 
 A static, evidence-led research atlas for LLM-GNN / SARA. React, TypeScript,
 Vite and Cytoscape; system serif/sans fonts, CSS tokens and native SVG charts.
@@ -20,18 +20,45 @@ command works when pnpm is not on PATH:
 node node_modules/vite/bin/vite.js --host 127.0.0.1
 ```
 
-This Windows environment has Node on PATH but no npm/pnpm command on PATH.
-Its bundled package manager can be called as:
-
-```powershell
-node C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\node_modules\pnpm\bin\pnpm.cjs dev
-```
-
 The development server binds loopback. Production preview: `pnpm build`,
 then `pnpm preview`; default preview URL is `http://127.0.0.1:4173/LLM-GNN/`.
 Hash routes preserve section, selected global node ID and experiment condition.
 
-## Pages and interactions
+
+## Current workflows
+
+- Overview defaults to selected exploratory SARA-Core74.1005% vs current Narrative72.4377%;103/140labels. Scientific limitations remain explicit.
+- Graph Explorer loads all2708nodes/5278edges with pinned topology-only structural positions;Full/Evidence scopes,1/2-hop ego,global-ID search,keyboard/node-list fallback,neighbors,focus/reset,scope/full/evidence degrees and sanitized IDs/edges download. Hover and selection use genuine edges. Resize preserves viewport.
+- SARA-Core Workflow shows graph/text,matched annotations,R1-v1 rank,KEEP103/WITHHOLD37,and frozen GCN/evaluation. Stage buttons reveal contracts. Research Extensions separately describes SARA-3/Agent roles and actual Lite aggregate actions.
+- Experiments:16final CE arms,15distinct specs,raw diagnostics separate,2–4arm compare,seed0–9,paired differences,CSVdownload,vector/mask/spec/source hashes. Historical WCE74.3769% has a separate loss contract. Older studies remain in Archive.
+- Node Inspector preserves October samples and adds current frozen label/mask trace only after explicit local owner import. No current sample receipts or per-node risk reasons are invented.
+- Replay & What-if selects a real saved arm/seed. What-if removes only existing owner-imported mask IDs,shows set differences and downloads an **UNEXECUTED** manifest without accuracy/F1 or execution permission. Reset restores frozen source;public mode explicitly lacks mask IDs.
+
+Public build contains no new private vectors,raw verifier bodies,GT,features or checkpoints. Owner import stays in tab memory;clear or reload removes it. Preparation from repo root (requires exact pinned private GT-free manifest):
+
+```powershell
+.venv/Scripts/python.exe web/graphscope/scripts/export_benchmark.py --owner
+```
+
+Without `--owner`,only aggregate public output and its pin are written. Checked-in public JSON builds without private files. Layout refresh from this directory: `node scripts/export-layout.mjs`;review both digest/data diffs. Never change scientific source pins merely to accept a conflict.
+
+Checks from this directory:
+
+```sh
+pnpm typecheck
+pnpm test
+python -m unittest discover -s tests -p 'test_*.py' -v
+pnpm build
+pnpm audit
+```
+
+Optional reproducible browser QA on Windows with existing Edge: `npm install --prefix .qa/browser --no-save --ignore-scripts playwright@1.56.1`,start `pnpm preview --port 4175 --strictPort`,then `node scripts/browser-qa.mjs`. It uses a fresh headless profile,local owner fixture only,and writes ignored screenshots/results under `.qa/v3`. Missing private owner input blocks that part of browser QA;do not synthesize it. Unit tests requiring private original artifacts explicitly skip on clean CI.
+
+See [method contract](docs/GRAPH_SCOPE_SARA_CORE_CONTRACT.md),[schema](docs/EXPERIMENT_DATA_SCHEMA.md),[QA](docs/GRAPH_SCOPE_UX_QA.md),[verification and criterion status](docs/GRAPH_SCOPE_VERIFICATION.md).
+
+CI `graphscope-checks.yml` validates frontend without publication on main pushes. The existing Pages workflow remains manual and must not be dispatched without separate publication approval. A private repository does not establish a private Pages site or Pages eligibility. Only sanitized dist is a potential publication artifact.
+
+## Historical pages retained in Archive
 
 - **Overview:** research question, paper context, recorded graph, pipeline and
   Primary CE/noPS results; links into the atlas.
@@ -77,7 +104,7 @@ the website. `RECOVERED_EXACT` denotes recovered source-byte hash matches.
 session. Adapter/UI code is `RECONSTRUCTED`. Calculated seed means/SDs reproduce
 statistics from saved values; no LLM or GCN experiment is reproduced here.
 
-The topology is partial. Missing edges are not inferred. Source-reported degree
+The recorded research evidence topology is partial; the separately admitted Full Graph is complete for the original project variant. Missing evidence edges are not inferred. Source-reported degree
 and displayed degree are separate. Canonical titles are unavailable; excerpts
 are never split into inferred titles. The research-subgraph exporter does not open the original graph tensor;
 its graph identity follows pinned source records. Full-topology recovery independently
@@ -96,7 +123,7 @@ not a calibrated probability. GCN snapshots never enter verifier preview inputs.
 
 Missing data: PageRank2 source cohort/results; canonical titles; context-node
 article text and LLM annotations; genuine verifier/arbitration/abstention outputs;
-SARA GCN outcomes; checkpoint weights, probabilities and original graph tensor in the public bundle. Full sanitized topology is available separately.
+node-level current SARA GCN outcomes; checkpoint weights, probabilities and original graph tensor in the public bundle. Full sanitized topology is available separately.
 
 The foundational paper and supplied proposal were inspected as PDF text, alongside
 `docs/SCIENTIFIC_PROTOCOL.md`. Published method, proposal, historical protocol and

@@ -1,0 +1,29 @@
+name: GraphScope checks (no publication)
+on:
+  push:
+    branches: [main]
+    paths: ['web/graphscope/**', 'reports/final_cora_gcn_*', 'reports/six_arm_metrics.csv', 'reports/sara_lite_*', 'reports/gcn_missing_experiments_results.csv', '.github/workflows/graphscope-checks.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web/graphscope
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm install --global pnpm@11.25.0
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - run: pnpm build
+      - run: pnpm audit --audit-level high

@@ -1,0 +1,10 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {structuralLayout} from '../src/graph-layout.ts';
+import {TOPOLOGY_SHA256} from '../src/topology-pin.ts';
+import assert from 'node:assert/strict';
+const bytes=readFileSync('public/data/full-topology.json');const sha=b=>createHash('sha256').update(b).digest('hex');assert.equal(sha(bytes),TOPOLOGY_SHA256);
+const t=JSON.parse(bytes),start=performance.now();const layout=structuralLayout(t.nodes,t.edges);
+const output=JSON.stringify({schema:'graphscope.layout.v1',topologySHA:TOPOLOGY_SHA256,algorithm:'bounded-structural-partition-spring-v1',...layout})+'\n';
+writeFileSync('public/data/layout.v1.json',output);writeFileSync('src/layout-pin.ts',`export const LAYOUT_SHA256 = '${sha(output)}';\n`);
+console.log(`PASS: ${layout.positions.length} positions; ${layout.componentCount} connected components; ${(performance.now()-start).toFixed(1)}ms offline layout generation`);

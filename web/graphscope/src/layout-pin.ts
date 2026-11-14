@@ -1,0 +1,1 @@
+export const LAYOUT_SHA256 = '8ae888f1ede0124706f1b62f39edaffd8599deac5548e68e047b59a76bb02e97';

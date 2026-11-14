@@ -1,5 +1,25 @@
 # Project state
 
+## GraphScope SARA-Core workbench — 2026-11-14
+
+- UI-only milestone on existing main; baseline commit748ae95. Existing historical
+  atlas and research modules preserved; unrelated narrative preflight edits excluded.
+- Final16arms/15specs,110new+40reused fits wired to pinned aggregate export;
+  CE/noPS separated from historicalWCE. Selected exploratory SARA-Core retains103
+  unchanged Narrative labels and withholds37;Agent/Lite extension separately shown.
+- Full authentic2708/5278 graph uses pinned topology-only structural layout;
+  full/evidence/ego scopes,global ID selection,neighbor inspector and export.
+- Owner-local GT-free vector/confidence import stays in tab memory,never public
+  dist. Saved replay/2–4arm compare/seed0..9 and unexecuted mask manifests work.
+- Local checks:28Node+8Python tests,typecheck/build/dist allowlist,audit0;
+  three-size browser journeys and screenshots;independent review. No API/training/GT
+  decoding or public deployment. New CI only checks;publication workflow remains manual.
+- Per-node current samples/risk terms/checkpoint predictions are unavailable;
+  assistive-technology and controlled before/after baseline QA remain blocked.
+  Details:web/graphscope/docs/GRAPH_SCOPE_VERIFICATION.md and checklist status.
+- GitHub commit/push/readback/CI outcome belongs to the delivery report;this state
+  entry predates its own commit. No independent Drive backup performed.
+
 ## Final Cora downstream CE benchmark — 2026-11-13
 
 - Owner explicitly authorized local training and separately accepted limited
